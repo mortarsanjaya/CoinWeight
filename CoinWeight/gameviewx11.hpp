@@ -9,6 +9,11 @@
 #ifndef gameviewx11_hpp
 #define gameviewx11_hpp
 
-#include <stdio.h>
+#include <iostream>
+#include <memory>
+
+class GameViewX11 {
+	
+};
 
 #endif
