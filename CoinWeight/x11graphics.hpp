@@ -24,11 +24,11 @@ class X11Graphics {
 public:
 	X11Graphics();
 	~X11Graphics();
-	
 	enum {White=0, Black, Red, Green, Blue, Gold};
+	static const int defaultFGColor = Black;
 	
 	void drawString(int x_pos, int y_pos, const std::string &msg);
-	void fillCircle(int x_pos, int y_pos, unsigned int radius);
+	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
 };
 
 #endif

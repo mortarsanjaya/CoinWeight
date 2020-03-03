@@ -50,7 +50,7 @@ X11Graphics::X11Graphics() {
 		colours[i] = xcolour.pixel;
 	}
 
-	XSetForeground(display, gc, colours[Black]);
+	XSetForeground(display, gc, colours[defaultFGColor]);
 
 	XSizeHints hints;
 	hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
@@ -77,9 +77,9 @@ void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 	XFlush(display);
 }
 
-void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius) {
-	XSetForeground(display, gc, colours[Gold]);
+void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {
+	XSetForeground(display, gc, colours[color]);
 	XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
-	XSetForeground(display, gc, colours[Black]);
+	XSetForeground(display, gc, colours[defaultFGColor]);
 	XFlush(display);
 }
