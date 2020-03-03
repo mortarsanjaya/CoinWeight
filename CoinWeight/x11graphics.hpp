@@ -25,7 +25,10 @@ public:
 	X11Graphics();
 	~X11Graphics();
 	
-	enum {White=0, Black, Red, Green, Blue};
+	enum {White=0, Black, Red, Green, Blue, Gold};
+	
+	void drawString(std::string &msg);
+	void drawCircle(int x_pos, int y_pos, unsigned int radius);
 };
 
 #endif

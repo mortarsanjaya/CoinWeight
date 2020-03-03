@@ -10,6 +10,7 @@
 #include <iostream>
 #include <unistd.h>
 
+//*************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics() {
 	int width = 600;
 	int height = 600;
@@ -36,9 +37,9 @@ X11Graphics::X11Graphics() {
 	XColor xcolour;
 	Colormap cmap;
 
-	const size_t numColours = 5;
+	const size_t numColours = 6;
 	char color_vals[numColours][10] = {
-		"white", "black", "red", "green", "blue"
+		"white", "black", "red", "green", "blue", "gold"
 	};
 
 	cmap = DefaultColormap(display, DefaultScreen(display));
@@ -61,13 +62,24 @@ X11Graphics::X11Graphics() {
 	XFlush(display);
 	
 	sleep(1);
-	
-	// std::string msg = "History:";
-	// XDrawString(display, window, gc, 20, 20, msg.c_str(), msg.length());
-	// XFlush(display);
 }
 
 X11Graphics::~X11Graphics() {
 	XFreeGC(display, gc);
 	XCloseDisplay(display);
+}
+
+
+
+//*************************************************************** Drawing functions
+void X11Graphics::drawString(std::string &msg) {
+	XDrawString(display, window, gc, 20, 20, msg.c_str(), msg.length());
+	XFlush(display);
+}
+
+void X11Graphics::drawCircle(int x_pos, int y_pos, unsigned int radius) {
+	XSetForeground(display, gc, colours[Gold]);
+	XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
+	XSetForeground(display, gc, colours[Black]);
+	XFlush(display);
 }
