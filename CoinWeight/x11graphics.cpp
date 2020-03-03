@@ -38,8 +38,7 @@ X11Graphics::X11Graphics() {
 
 	const size_t numColours = 5;
 	char color_vals[numColours][10] = {
-		"white", "black", "red",
-		"green", "blue"
+		"white", "black", "red", "green", "blue"
 	};
 
 	cmap = DefaultColormap(display, DefaultScreen(display));
@@ -63,9 +62,9 @@ X11Graphics::X11Graphics() {
 	
 	sleep(1);
 	
-	std::string msg = "History:";
-	XDrawString(display, window, gc, 20, 20, msg.c_str(), msg.length());
-	XFlush(display);
+	// std::string msg = "History:";
+	// XDrawString(display, window, gc, 20, 20, msg.c_str(), msg.length());
+	// XFlush(display);
 }
 
 X11Graphics::~X11Graphics() {
