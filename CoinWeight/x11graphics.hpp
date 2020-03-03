@@ -27,8 +27,8 @@ public:
 	
 	enum {White=0, Black, Red, Green, Blue, Gold};
 	
-	void drawString(std::string &msg);
-	void drawCircle(int x_pos, int y_pos, unsigned int radius);
+	void drawString(int x_pos, int y_pos, const std::string &msg);
+	void fillCircle(int x_pos, int y_pos, unsigned int radius);
 };
 
 #endif

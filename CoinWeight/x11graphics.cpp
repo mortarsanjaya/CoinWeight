@@ -72,14 +72,14 @@ X11Graphics::~X11Graphics() {
 
 
 //*************************************************************** Drawing functions
-void X11Graphics::drawString(std::string &msg) {
-	XDrawString(display, window, gc, 20, 20, msg.c_str(), msg.length());
+void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
+	XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
 	XFlush(display);
 }
 
-void X11Graphics::drawCircle(int x_pos, int y_pos, unsigned int radius) {
+void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius) {
 	XSetForeground(display, gc, colours[Gold]);
-	XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
+	XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
 	XSetForeground(display, gc, colours[Black]);
 	XFlush(display);
 }
