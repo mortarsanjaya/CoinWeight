@@ -58,6 +58,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8607519B240F0C6E007A96E5 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				866FC82D2409EF9600B3740D /* x11graphics.cpp */,
+				866FC82E2409EF9600B3740D /* x11graphics.hpp */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
 		866FC8302409F74D00B3740D /* Coin Set */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,8 +130,7 @@
 				866FC8302409F74D00B3740D /* Coin Set */,
 				866FC8312409F75A00B3740D /* Game (2 fake coins only) */,
 				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
-				866FC82D2409EF9600B3740D /* x11graphics.cpp */,
-				866FC82E2409EF9600B3740D /* x11graphics.hpp */,
+				8607519B240F0C6E007A96E5 /* Graphics */,
 			);
 			path = CoinWeight;
 			sourceTree = "<group>";
