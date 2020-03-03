@@ -22,7 +22,7 @@ class X11Graphics {
 	unsigned long colours[10];
 	
 public:
-	X11Graphics(const Game &game);
+	X11Graphics();
 	~X11Graphics();
 	
 	enum {White=0, Black, Red, Green, Blue};

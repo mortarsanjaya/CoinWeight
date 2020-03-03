@@ -10,7 +10,7 @@
 #include <iostream>
 #include <unistd.h>
 
-X11Graphics::X11Graphics(const Game &game) {
+X11Graphics::X11Graphics() {
 	int width = 600;
 	int height = 600;
 

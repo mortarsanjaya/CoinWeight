@@ -47,7 +47,7 @@ int main() {
 	}
 	
 	Game game(numOfCoins, std::move(player), level);
-	X11Graphics x11graphics(game);
+	X11Graphics x11graphics();
 
 	cout << "Game starts!\n";
 	
