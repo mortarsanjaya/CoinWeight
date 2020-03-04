@@ -11,8 +11,9 @@
 
 #include <iostream>
 #include <memory>
+#include "gameview.hpp"
 
-class GameViewX11 {
+class GameViewX11 : public GameView {
 	
 };
 
