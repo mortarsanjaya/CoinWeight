@@ -12,9 +12,13 @@
 #include <iostream>
 #include <memory>
 #include "gameview.hpp"
+#include "x11graphics.hpp"
 
 class GameViewX11 : public GameView {
-	
+	X11Graphics core_graphics;
+
+public:
+    GameViewX11();
 };
 
 #endif
