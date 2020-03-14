@@ -10,6 +10,8 @@
 		8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
 		860751A2240F2844007A96E5 /* gameview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860751A0240F2844007A96E5 /* gameview.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
+		867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; };
+		867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		869C4BD82401BDCD00C3DE84 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* game.cpp */; };
 		869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD92401BF6500C3DE84 /* weighing.hpp */; };
 		869C4BDD2401C10600C3DE84 /* human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BDB2401C10600C3DE84 /* human.cpp */; };
@@ -20,6 +22,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		867EFB2F24160C3A004C43A3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86A9AB8E2400AF50002AB0CF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,6 +51,8 @@
 		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
 		866FC82D2409EF9600B3740D /* x11graphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = x11graphics.cpp; sourceTree = "<group>"; };
 		866FC82E2409EF9600B3740D /* x11graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = x11graphics.hpp; sourceTree = "<group>"; };
+		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
+		867EFB2624160B46004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		869C4BD62401BDCD00C3DE84 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		869C4BD72401BDCD00C3DE84 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
 		869C4BD92401BF6500C3DE84 /* weighing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = weighing.hpp; sourceTree = "<group>"; };
@@ -58,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +129,15 @@
 			name = "Player Types";
 			sourceTree = "<group>";
 		};
+		867EFB2324160820004C43A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				867EFB2624160B46004C43A3 /* SDL2.framework */,
+				867EFB2424160820004C43A3 /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		869C4BE424048E4700C3DE84 /* Players */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +153,7 @@
 			children = (
 				86A9AB922400AF50002AB0CF /* CoinWeight */,
 				86A9AB912400AF50002AB0CF /* Products */,
+				867EFB2324160820004C43A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +189,7 @@
 				86A9AB8C2400AF50002AB0CF /* Sources */,
 				86A9AB8D2400AF50002AB0CF /* Frameworks */,
 				86A9AB8E2400AF50002AB0CF /* CopyFiles */,
+				867EFB2F24160C3A004C43A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -339,6 +366,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				"HEADER_SEARCH_PATHS[arch=*]" = /opt/X11/include;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-I",
@@ -355,6 +386,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
