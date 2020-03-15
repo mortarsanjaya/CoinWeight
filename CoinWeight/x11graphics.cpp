@@ -12,8 +12,8 @@
 
 //*************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics(std::string windowName) {
-	const int width = 500;
-	const int height = 300;
+	const int width = 600;
+	const int height = 600;
 
 	display = XOpenDisplay(nullptr);
 	if (display == nullptr) throw X11GraphicsFailure("Cannot open display");
