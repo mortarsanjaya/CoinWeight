@@ -14,6 +14,7 @@
 #include <X11/Xos.h>
 #include <string>
 #include <vector>
+#include "exception.hpp"
 
 class X11Graphics {
 	Display *display;
@@ -32,6 +33,10 @@ public:
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
 };
 
-class X11GraphicsFailure{};
+class X11GraphicsFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    X11GraphicsFailure(std::string coreMessage);
+};
 
 #endif

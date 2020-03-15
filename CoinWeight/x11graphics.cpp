@@ -74,9 +74,17 @@ void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 }
 
 void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > Max) throw X11GraphicsFailure{};
+    if (color > Max) throw X11GraphicsFailure("Invalid color");
 	XSetForeground(display, gc, colors[color]);
 	XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
 	XSetForeground(display, gc, colors[defaultFGColor]);
 	XFlush(display);
+}
+
+
+
+//*************************************************************** Drawing functions
+X11GraphicsFailure::X11GraphicsFailure(std::string coreMessage) : Exception{coreMessage} {}
+const std::string X11GraphicsFailure::headerMessage() const {
+    return "X11Graphics: ";
 }
