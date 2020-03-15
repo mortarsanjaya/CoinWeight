@@ -13,6 +13,7 @@
 #include "human.hpp"
 #include "computerhard.hpp"
 #include "x11graphics.hpp"
+#include "gameviewx11.hpp"
 
 using namespace std;
 
@@ -47,17 +48,23 @@ int main() {
 	}
 	
 	Game game(numOfCoins, std::move(player), level);
-	// X11Graphics x11graphics{};
-	// x11graphics.fillCircle(20, 20, 10);
+ 
+    try {
+        GameViewX11 gameviewx11(numOfCoins);
+        cout << "Game starts!\n";
+        
+        cout << "There are up to " << game.maxNumOfWeighings()
+            << " weighings available to determine the fake coins.\n";
+            
+        bool isWeigh = true;
+        while (isWeigh) {
+            isWeigh = game.move();
+        }
+        return 0;
+    } catch (Exception &e) {
+        cout << e.fullMessage() << endl;
+        return 1;
+    }
 
-	cout << "Game starts!\n";
 	
-	cout << "There are up to " << game.maxNumOfWeighings()
-		<< " weighings available to determine the fake coins.\n";
-		
-	bool isWeigh = true;
-	while (isWeigh) {
-		isWeigh = game.move();
-	}
-	return 0;
 }

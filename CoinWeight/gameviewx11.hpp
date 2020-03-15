@@ -14,11 +14,11 @@
 #include "gameview.hpp"
 #include "x11graphics.hpp"
 
-class GameViewX11 : public GameView {
-	X11Graphics core_graphics;
+class GameViewX11 {
+	X11Graphics coreGraphics;
 
 public:
-    GameViewX11();
+    GameViewX11(int numOfCoins);
 };
 
 #endif

@@ -24,10 +24,18 @@ class X11Graphics {
     std::vector<unsigned long> colors;
 	
 public:
-	X11Graphics();
+	X11Graphics(std::string windowName = "");
 	~X11Graphics();
-	enum {White=0, Black, Red, Green, Blue, Gold, Max = Gold};
-	static const int defaultFGColor = White;
+	enum {
+        White=0,
+        Black,
+        Red,
+        Green,
+        Blue,
+        Gold,
+        Max = Gold
+    };
+	static const int defaultFGColor = Blue;
 	
 	void drawString(int x_pos, int y_pos, const std::string &msg);
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);

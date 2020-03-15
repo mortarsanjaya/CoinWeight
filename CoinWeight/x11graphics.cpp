@@ -11,15 +11,12 @@
 #include <unistd.h>
 
 //*************************************************************** Constructors and Destructor
-X11Graphics::X11Graphics() {
-	int width = 1000;
-	int height = 1000;
+X11Graphics::X11Graphics(std::string windowName) {
+	const int width = 600;
+	const int height = 600;
 
 	display = XOpenDisplay(nullptr);
-	if (display == nullptr) {
-		std::cerr << "Cannot open display" << std::endl;
-		exit(1);
-	}
+	if (display == nullptr) throw X11GraphicsFailure("Cannot open display");
 	
 	screen = XDefaultScreen(display);
 	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 0, 0,
@@ -27,6 +24,8 @@ X11Graphics::X11Graphics() {
 		
 	XSelectInput(display, window, KeyPressMask | KeyReleaseMask |
         ButtonPressMask | ButtonReleaseMask);
+        
+    XStoreName(display, window, windowName.c_str());
 
 	gc = XCreateGC(display, window, 0, 0);
 
@@ -41,7 +40,9 @@ X11Graphics::X11Graphics() {
 	cmap = DefaultColormap(display, DefaultScreen(display));
 	
 	for(unsigned int i = 0; i < numColours; ++i) {
-		XParseColor(display, cmap, color_vals[i].c_str(), &xcolor);
+		if (XParseColor(display, cmap, color_vals[i].c_str(), &xcolor) == 0) {
+            throw X11GraphicsFailure("Cannot parse color");
+        }
 		XAllocColor(display, cmap, &xcolor);
         colors.emplace_back(xcolor.pixel);
 	}
@@ -86,5 +87,5 @@ void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int colo
 //*************************************************************** Drawing functions
 X11GraphicsFailure::X11GraphicsFailure(std::string coreMessage) : Exception{coreMessage} {}
 const std::string X11GraphicsFailure::headerMessage() const {
-    return "X11Graphics: ";
+    return "X11 Graphics Failure: ";
 }
