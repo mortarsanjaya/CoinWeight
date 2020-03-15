@@ -12,8 +12,8 @@
 
 //*************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics(std::string windowName) {
-	const int width = 600;
-	const int height = 600;
+	const int width = 500;
+	const int height = 300;
 
 	display = XOpenDisplay(nullptr);
 	if (display == nullptr) throw X11GraphicsFailure("Cannot open display");
@@ -51,8 +51,12 @@ X11Graphics::X11Graphics(std::string windowName) {
 
 	XSizeHints hints;
 	hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
-	hints.height = hints.base_height = hints.min_height = hints.max_height = height;
-	hints.width = hints.base_width = hints.min_width = hints.max_width = width;
+	hints.height = hints.base_height = height;
+    hints.min_height = height;
+    hints.max_height = height;
+	hints.width = hints.base_width = width;
+    hints.min_width = width;
+    hints.max_width = width;
 	XSetNormalHints(display, window, &hints);
 
 	XMapRaised(display, window);
@@ -72,6 +76,14 @@ X11Graphics::~X11Graphics() {
 void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 	XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
 	XFlush(display);
+}
+
+void X11Graphics::drawCircle(int x_pos, int y_pos, unsigned int radius, int color) {
+    if (color > Max) throw X11GraphicsFailure("Invalid color");
+    XSetForeground(display, gc, colors[color]);
+    XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
+    XSetForeground(display, gc, colors[defaultFGColor]);
+    XFlush(display);
 }
 
 void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {

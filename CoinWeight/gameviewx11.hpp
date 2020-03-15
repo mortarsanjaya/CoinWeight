@@ -13,9 +13,12 @@
 #include <memory>
 #include "gameview.hpp"
 #include "x11graphics.hpp"
+#include <string>
 
 class GameViewX11 {
 	X11Graphics coreGraphics;
+    void drawCoin(int x_pos, int y_pos, size_t coinIndex);
+    static const int coinRadius = 20;
 
 public:
     GameViewX11(int numOfCoins);
