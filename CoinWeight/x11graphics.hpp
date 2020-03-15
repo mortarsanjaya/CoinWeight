@@ -1,5 +1,5 @@
 //
-//  graphics.hpp
+//  x11graphics.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-02-28.
@@ -11,8 +11,9 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
-
-#include "game.hpp"
+#include <X11/Xos.h>
+#include <string>
+#include <vector>
 
 class X11Graphics {
 	Display *display;

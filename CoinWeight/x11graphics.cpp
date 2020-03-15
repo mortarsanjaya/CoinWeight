@@ -1,5 +1,5 @@
 //
-//  graphics.cpp
+//  x11graphics.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-02-28.
@@ -12,8 +12,8 @@
 
 //*************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics() {
-	int width = 600;
-	int height = 600;
+	int width = 1000;
+	int height = 1000;
 
 	display = XOpenDisplay(nullptr);
 	if (display == nullptr) {
@@ -22,19 +22,15 @@ X11Graphics::X11Graphics() {
 	}
 	
 	screen = XDefaultScreen(display);
-	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 10, 10,
+	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 0, 0,
 		width, height, 1, XBlackPixel(display, screen), XWhitePixel(display, screen));
 		
-	XSelectInput(display, window, ExposureMask | KeyPressMask);
+	XSelectInput(display, window, KeyPressMask | KeyReleaseMask |
+        ButtonPressMask | ButtonReleaseMask);
 
-	Pixmap pix = XCreatePixmap(
-		display, window, width, height,
-		DefaultDepth(display, DefaultScreen(display))
-	);
+	gc = XCreateGC(display, window, 0, 0);
 
-	gc = XCreateGC(display, pix, 0, 0);
-
-	XColor xcolour;
+	XColor xcolor;
 	Colormap cmap;
 
 	const size_t numColours = 6;
@@ -45,9 +41,9 @@ X11Graphics::X11Graphics() {
 	cmap = DefaultColormap(display, DefaultScreen(display));
 	
 	for(unsigned int i = 0; i < numColours; ++i) {
-		XParseColor(display, cmap, color_vals[i], &xcolour);
-		XAllocColor(display, cmap, &xcolour);
-		colours[i] = xcolour.pixel;
+		XParseColor(display, cmap, color_vals[i], &xcolor);
+		XAllocColor(display, cmap, &xcolor);
+		colours[i] = xcolor.pixel;
 	}
 
 	XSetForeground(display, gc, colours[defaultFGColor]);
