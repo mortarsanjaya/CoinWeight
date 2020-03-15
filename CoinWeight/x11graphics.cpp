@@ -5,7 +5,7 @@
 //  Created by Gian Cordana Sanjaya on 2020-02-28.
 //  Copyright © 2020 -. All rights reserved.
 //
-
+/*
 #include "x11graphics.hpp"
 #include <iostream>
 #include <unistd.h>
@@ -83,3 +83,4 @@ void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int colo
 	XSetForeground(display, gc, colours[defaultFGColor]);
 	XFlush(display);
 }
+*/

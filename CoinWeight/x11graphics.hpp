@@ -5,7 +5,7 @@
 //  Created by Gian Cordana Sanjaya on 2020-02-28.
 //  Copyright © 2020 -. All rights reserved.
 //
-
+/*
 #ifndef graphics_hpp
 #define graphics_hpp
 
@@ -31,4 +31,4 @@ public:
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
 };
 
-#endif
+#endif*/

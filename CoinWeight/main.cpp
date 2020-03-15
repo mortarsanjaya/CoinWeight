@@ -13,11 +13,12 @@
 #include "human.hpp"
 #include "computerhard.hpp"
 #include "x11graphics.hpp"
+#include "sdlgraphics.hpp"
 
 using namespace std;
 
 int main() {
-
+/*
 	cout << "You are playing a coin weight game.\n";
 	cout << "Number of coins: ";
 	int numOfCoins;
@@ -35,6 +36,11 @@ int main() {
 	std::string playerType;
 	cin >> playerType;
 	cout << "\n";
+    */
+    
+    SDLGraphics *graphics = new SDLGraphics();
+    graphics->showTitleScreen();
+    
 	
 	std::unique_ptr<Player> player;
 	if (playerType == "Human") {
@@ -47,8 +53,8 @@ int main() {
 	}
 	
 	Game game(numOfCoins, std::move(player), level);
-	// X11Graphics x11graphics{};
-	// x11graphics.fillCircle(20, 20, 10);
+	/*X11Graphics x11graphics{};
+	x11graphics.fillCircle(20, 20, 10, 1);*/
 
 	cout << "Game starts!\n";
 	
