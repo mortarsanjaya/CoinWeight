@@ -10,6 +10,7 @@
 		40D74312241D8B0200147088 /* sdlgraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40D74310241D8B0200147088 /* sdlgraphics.cpp */; };
 		8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
 		860751A2240F2844007A96E5 /* gameview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860751A0240F2844007A96E5 /* gameview.cpp */; };
+		866BE31A241DE19D00DDD242 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
 		867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; };
 		867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -52,6 +53,8 @@
 		8607519D240F0EAE007A96E5 /* gameviewx11.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameviewx11.hpp; sourceTree = "<group>"; };
 		860751A0240F2844007A96E5 /* gameview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameview.cpp; sourceTree = "<group>"; };
 		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
+		866BE318241DE19D00DDD242 /* exception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
+		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
 		866FC82D2409EF9600B3740D /* x11graphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = x11graphics.cpp; sourceTree = "<group>"; };
 		866FC82E2409EF9600B3740D /* x11graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = x11graphics.hpp; sourceTree = "<group>"; };
 		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
@@ -103,6 +106,15 @@
 				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
 			);
 			name = "Game View";
+			sourceTree = "<group>";
+		};
+		866BE31B241DE1A800DDD242 /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				866BE318241DE19D00DDD242 /* exception.cpp */,
+				866BE319241DE19D00DDD242 /* exception.hpp */,
+			);
+			name = Exceptions;
 			sourceTree = "<group>";
 		};
 		866FC8302409F74D00B3740D /* Coin Set */ = {
@@ -180,6 +192,7 @@
 				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				8607519B240F0C6E007A96E5 /* Graphics */,
+				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
 			sourceTree = "<group>";
@@ -252,6 +265,7 @@
 				8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */,
 				40D74312241D8B0200147088 /* sdlgraphics.cpp in Sources */,
 				866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */,
+				866BE31A241DE19D00DDD242 /* exception.cpp in Sources */,
 				869C4BD82401BDCD00C3DE84 /* game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

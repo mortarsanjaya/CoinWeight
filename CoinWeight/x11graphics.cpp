@@ -1,5 +1,5 @@
 //
-//  graphics.cpp
+//  x11graphics.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-02-28.
@@ -12,8 +12,8 @@
 
 //*************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics() {
-	int width = 600;
-	int height = 600;
+	int width = 1000;
+	int height = 1000;
 
 	display = XOpenDisplay(nullptr);
 	if (display == nullptr) {
@@ -22,35 +22,31 @@ X11Graphics::X11Graphics() {
 	}
 	
 	screen = XDefaultScreen(display);
-	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 10, 10,
+	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 0, 0,
 		width, height, 1, XBlackPixel(display, screen), XWhitePixel(display, screen));
 		
-	XSelectInput(display, window, ExposureMask | KeyPressMask);
+	XSelectInput(display, window, KeyPressMask | KeyReleaseMask |
+        ButtonPressMask | ButtonReleaseMask);
 
-	Pixmap pix = XCreatePixmap(
-		display, window, width, height,
-		DefaultDepth(display, DefaultScreen(display))
-	);
+	gc = XCreateGC(display, window, 0, 0);
 
-	gc = XCreateGC(display, pix, 0, 0);
-
-	XColor xcolour;
+	XColor xcolor;
 	Colormap cmap;
 
-	const size_t numColours = 6;
-	char color_vals[numColours][10] = {
+	const size_t numColours = Max + 1;
+    std::vector<std::string> color_vals = {
 		"white", "black", "red", "green", "blue", "gold"
 	};
 
 	cmap = DefaultColormap(display, DefaultScreen(display));
 	
 	for(unsigned int i = 0; i < numColours; ++i) {
-		XParseColor(display, cmap, color_vals[i], &xcolour);
-		XAllocColor(display, cmap, &xcolour);
-		colours[i] = xcolour.pixel;
+		XParseColor(display, cmap, color_vals[i].c_str(), &xcolor);
+		XAllocColor(display, cmap, &xcolor);
+        colors.emplace_back(xcolor.pixel);
 	}
 
-	XSetForeground(display, gc, colours[defaultFGColor]);
+	XSetForeground(display, gc, colors[defaultFGColor]);
 
 	XSizeHints hints;
 	hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
@@ -78,9 +74,10 @@ void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 }
 
 void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {
-	XSetForeground(display, gc, colours[color]);
+    if (color > Max) throw X11GraphicsFailure{};
+	XSetForeground(display, gc, colors[color]);
 	XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
-	XSetForeground(display, gc, colours[defaultFGColor]);
+	XSetForeground(display, gc, colors[defaultFGColor]);
 	XFlush(display);
 }
 */
