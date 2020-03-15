@@ -33,20 +33,20 @@ X11Graphics::X11Graphics() {
 	XColor xcolor;
 	Colormap cmap;
 
-	const size_t numColours = 6;
-	char color_vals[numColours][10] = {
+	const size_t numColours = Max + 1;
+    std::vector<std::string> color_vals = {
 		"white", "black", "red", "green", "blue", "gold"
 	};
 
 	cmap = DefaultColormap(display, DefaultScreen(display));
 	
 	for(unsigned int i = 0; i < numColours; ++i) {
-		XParseColor(display, cmap, color_vals[i], &xcolor);
+		XParseColor(display, cmap, color_vals[i].c_str(), &xcolor);
 		XAllocColor(display, cmap, &xcolor);
-		colours[i] = xcolor.pixel;
+        colors.emplace_back(xcolor.pixel);
 	}
 
-	XSetForeground(display, gc, colours[defaultFGColor]);
+	XSetForeground(display, gc, colors[defaultFGColor]);
 
 	XSizeHints hints;
 	hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
@@ -74,8 +74,9 @@ void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 }
 
 void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {
-	XSetForeground(display, gc, colours[color]);
+    if (color > Max) throw X11GraphicsFailure{};
+	XSetForeground(display, gc, colors[color]);
 	XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
-	XSetForeground(display, gc, colours[defaultFGColor]);
+	XSetForeground(display, gc, colors[defaultFGColor]);
 	XFlush(display);
 }

@@ -20,16 +20,18 @@ class X11Graphics {
 	Window window;
 	int screen;
 	GC gc;
-	unsigned long colours[10];
+    std::vector<unsigned long> colors;
 	
 public:
 	X11Graphics();
 	~X11Graphics();
-	enum {White=0, Black, Red, Green, Blue, Gold};
-	static const int defaultFGColor = Black;
+	enum {White=0, Black, Red, Green, Blue, Gold, Max = Gold};
+	static const int defaultFGColor = White;
 	
 	void drawString(int x_pos, int y_pos, const std::string &msg);
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
 };
+
+class X11GraphicsFailure{};
 
 #endif
