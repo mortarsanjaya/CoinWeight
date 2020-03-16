@@ -9,19 +9,23 @@
 #ifndef gameviewx11_hpp
 #define gameviewx11_hpp
 
-#include <iostream>
 #include <memory>
-#include "gameview.hpp"
+#include "game.hpp"
 #include "x11graphics.hpp"
 #include <string>
 
 class GameViewX11 {
 	X11Graphics coreGraphics;
     void drawCoin(int x_pos, int y_pos, size_t coinIndex);
-    static const int coinRadius = 20;
+    static const int coinRadius = 30;
 
 public:
-    GameViewX11(int numOfCoins);
+    GameViewX11();
+    void drawMainPage();
+    void play();
+    void gotoInstructions();
+    
+    
 };
 
 #endif

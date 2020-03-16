@@ -27,6 +27,9 @@ private:
 	std::unique_ptr<Player> player;
 	Level level;
 	size_t numOfWeighingsCap;
+ 
+    // maximum number of comparisons, to initialize the cap
+    static const size_t maxComparisons(size_t numOfCoins, Level level);
 	
 public:
 	Game(int numOfCoins, std::unique_ptr<Player> player, Level level);
@@ -40,9 +43,6 @@ public:
 	void compareWeight();
 	void guessFakes();
 	const bool move();
-	
-	// maximum number of comparisons
-	static const size_t maxComparisons(size_t numOfCoins, Level level);
 };
 
 std::istream &operator>>(std::istream &in, Game::Level &level);

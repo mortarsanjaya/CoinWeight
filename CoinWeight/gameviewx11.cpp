@@ -7,20 +7,56 @@
 //
 
 #include "gameviewx11.hpp"
+#include <iostream>
 
-GameViewX11::GameViewX11(int numOfCoins) : coreGraphics{"CoinWeight"} {
-    coreGraphics.drawString(200, 200, "Coin Weighting");
-    coreGraphics.drawString(200, 300, "Play");
-    coreGraphics.drawString(200, 400, "Instructions");
-    
-    drawCoin(0, 0, 0);
+GameViewX11::GameViewX11() : coreGraphics{"CoinWeight"} {
+    drawMainPage();
 }
 
 //******************************************************************************
-
 void GameViewX11::drawCoin(int x_pos, int y_pos, size_t coinIndex) {
     coreGraphics.drawCircle(x_pos, y_pos, coinRadius, X11Graphics::Black);
     coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold);
     // The index for drawing starts at 1, not 0, to avoid confusion
     coreGraphics.drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
+
+void GameViewX11::drawMainPage() {
+    coreGraphics.drawString(200, 200, "Coin Weighting");
+    coreGraphics.drawString(200, 300, "Play");
+    coreGraphics.drawString(200, 400, "Instructions");
+}
+
+void GameViewX11::play() {
+    coreGraphics.clear();
+    int numOfCoins;
+    while (true) {
+        coreGraphics.drawString(200, 300, "Enter number of coins (greater than 2): ");
+        std::cin >> numOfCoins;
+        if (numOfCoins > 2) break;
+        coreGraphics.clear();
+        coreGraphics.drawString(200, 300, "You didn't put a good number of coins.");
+        sleep(2);
+    }
+    
+    coreGraphics.clear();
+    coreGraphics.drawString(10, 10, "History");
+    
+    coreGraphics.drawString(300, 100, "Weigh");
+    coreGraphics.drawString(300, 150, "Guess");
+    
+    for (int i = 0; i < numOfCoins; ++i) {
+        drawCoin(200 + 2 * coinRadius * (i % 10), 200 + 2 * coinRadius * (i / 10), i);
+    }
+    
+    sleep(1);
+}
+
+void GameViewX11::gotoInstructions() {
+    coreGraphics.clear();
+    sleep(5);
+    drawMainPage();
+}
+
+
+

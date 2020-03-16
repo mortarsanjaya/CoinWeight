@@ -12,7 +12,10 @@
 #include <iostream>
 
 class GameView {
-
+public:
+    GameViewX11(int numOfCoins);
+    void play();
+    void gotoInstructions();
 };
 
-#endif /* gameview_hpp */
+#endif
