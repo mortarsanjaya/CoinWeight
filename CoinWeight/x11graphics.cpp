@@ -73,6 +73,11 @@ X11Graphics::~X11Graphics() {
 
 
 //*************************************************************** Drawing functions
+void X11Graphics::clear() {
+    XClearWindow(display, window);
+    XFlush(display);
+}
+
 void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 	XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
 	XFlush(display);
@@ -96,7 +101,7 @@ void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int colo
 
 
 
-//*************************************************************** Drawing functions
+//*************************************************************** Graphics failure exception
 X11GraphicsFailure::X11GraphicsFailure(std::string coreMessage) : Exception{coreMessage} {}
 const std::string X11GraphicsFailure::headerMessage() const {
     return "X11 Graphics Failure: ";
