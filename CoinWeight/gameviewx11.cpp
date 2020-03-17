@@ -29,10 +29,13 @@ void GameViewX11::drawMainScreen() {
 
 void GameViewX11::drawPlayScreen1() {
     coreGraphics.clear();
-    coreGraphics.drawString(200, 300, "Enter number of coins: ");
-    coreGraphics.drawString(200, 320, "Enter difficulty: ");
-    coreGraphics.drawString(200, 340, "Enter mode: ");
-    sleep(1);
+    coreGraphics.drawString(200, 310, "Enter number of coins: ");
+    coreGraphics.drawString(200, 330, "Enter difficulty: ");
+    coreGraphics.drawString(200, 350, "Enter mode: ");
+    
+    coreGraphics.drawKeyboardInputWindow(400, 300, 100, 20);
+    coreGraphics.drawKeyboardInputWindow(400, 320, 100, 20);
+    coreGraphics.drawKeyboardInputWindow(400, 340, 100, 20);
 }
 
 void GameViewX11::drawInstructionScreen() {
@@ -50,7 +53,10 @@ void GameViewX11::drawPlayScreen2(int numOfCoins) {
     for (int i = 0; i < numOfCoins; ++i) {
         drawCoin(200 + 2 * coinRadius * (i % 10), 200 + 2 * coinRadius * (i / 10), i);
     }
-    
-    sleep(1);
 }
 
+/*
+char GameViewX11::readKeyboardInput() {
+    return coreGraphics.readKeyboardInput();
+}
+*/

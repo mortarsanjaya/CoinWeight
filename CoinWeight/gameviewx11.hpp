@@ -15,7 +15,10 @@
 #include <string>
 
 class GameViewX11 {
+public:
 	X11Graphics coreGraphics;
+ 
+ private:
     void drawCoin(int x_pos, int y_pos, size_t coinIndex);
     static const int coinRadius = 30;
 
@@ -26,6 +29,7 @@ public:
     void drawInstructionScreen();
     void drawPlayScreen2(int numOfCoins);
     
+    // char readKeyboardInput();
 };
 
 #endif

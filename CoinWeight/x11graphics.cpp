@@ -58,11 +58,11 @@ X11Graphics::X11Graphics(std::string windowName) {
     hints.min_width = width;
     hints.max_width = width;
 	XSetNormalHints(display, window, &hints);
-
+    
+    sleep(1);
+    
 	XMapRaised(display, window);
 	XFlush(display);
-	
-	sleep(1);
 }
 
 X11Graphics::~X11Graphics() {
@@ -98,6 +98,27 @@ void X11Graphics::fillCircle(int x_pos, int y_pos, unsigned int radius, int colo
 	XSetForeground(display, gc, colors[defaultFGColor]);
 	XFlush(display);
 }
+
+void X11Graphics::drawRectangle(int x_pos, int y_pos, int width, int height) {
+    XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);
+    XDrawLine(display, window, gc, x_pos, y_pos, x_pos, y_pos + height);
+    XDrawLine(display, window, gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
+    XDrawLine(display, window, gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
+    XFlush(display);
+}
+
+void X11Graphics::drawKeyboardInputWindow(int x_pos, int y_pos, int width, int height) {
+    drawRectangle(x_pos, y_pos, width, height);
+}
+
+/*
+char X11Graphics::readKeyboardInput() {
+    do { XNextEvent(display, &event); } while (event.type != KeyPress);
+    do { XNextEvent(display, &event); } while (event.type != KeyRelease);
+    return event.xkey.keycode;
+}
+*/
+
 
 
 
