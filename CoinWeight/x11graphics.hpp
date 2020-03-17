@@ -41,6 +41,7 @@ public:
 	void drawString(int x_pos, int y_pos, const std::string &msg);
     void drawCircle(int x_pos, int y_pos, unsigned int radius, int color);
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
+    void drawKeyboardInputWindow(int x_pos, int y_pos, int height, int width);
 };
 
 class X11GraphicsFailure : public Exception {

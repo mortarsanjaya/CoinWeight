@@ -10,7 +10,7 @@
 #include <iostream>
 
 GameViewX11::GameViewX11() : coreGraphics{"CoinWeight"} {
-    drawMainPage();
+    drawMainScreen();
 }
 
 //******************************************************************************
@@ -21,24 +21,26 @@ void GameViewX11::drawCoin(int x_pos, int y_pos, size_t coinIndex) {
     coreGraphics.drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
 
-void GameViewX11::drawMainPage() {
+void GameViewX11::drawMainScreen() {
     coreGraphics.drawString(200, 200, "Coin Weighting");
     coreGraphics.drawString(200, 300, "Play");
     coreGraphics.drawString(200, 400, "Instructions");
 }
 
-void GameViewX11::play() {
+void GameViewX11::drawPlayScreen1() {
     coreGraphics.clear();
-    int numOfCoins;
-    while (true) {
-        coreGraphics.drawString(200, 300, "Enter number of coins (greater than 2): ");
-        std::cin >> numOfCoins;
-        if (numOfCoins > 2) break;
-        coreGraphics.clear();
-        coreGraphics.drawString(200, 300, "You didn't put a good number of coins.");
-        sleep(2);
-    }
-    
+    coreGraphics.drawString(200, 300, "Enter number of coins: ");
+    coreGraphics.drawString(200, 320, "Enter difficulty: ");
+    coreGraphics.drawString(200, 340, "Enter mode: ");
+    sleep(1);
+}
+
+void GameViewX11::drawInstructionScreen() {
+    coreGraphics.clear();
+    // ...
+}
+
+void GameViewX11::drawPlayScreen2(int numOfCoins) {
     coreGraphics.clear();
     coreGraphics.drawString(10, 10, "History");
     
@@ -51,12 +53,4 @@ void GameViewX11::play() {
     
     sleep(1);
 }
-
-void GameViewX11::gotoInstructions() {
-    coreGraphics.clear();
-    sleep(5);
-    drawMainPage();
-}
-
-
 

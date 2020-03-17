@@ -13,7 +13,7 @@
 
 class GameView {
 public:
-    GameViewX11(int numOfCoins);
+    GameView();
     void play();
     void gotoInstructions();
 };

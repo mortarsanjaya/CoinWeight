@@ -21,10 +21,10 @@ class GameViewX11 {
 
 public:
     GameViewX11();
-    void drawMainPage();
-    void play();
-    void gotoInstructions();
-    
+    void drawMainScreen();
+    void drawPlayScreen1();
+    void drawInstructionScreen();
+    void drawPlayScreen2(int numOfCoins);
     
 };
 
