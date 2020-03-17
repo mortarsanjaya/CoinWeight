@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
-		860751A2240F2844007A96E5 /* gameview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 860751A0240F2844007A96E5 /* gameview.cpp */; };
 		866BE31A241DE19D00DDD242 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		866BE31E241F1FB400DDD242 /* gamecontrollerx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE31C241F1FB400DDD242 /* gamecontrollerx11.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
@@ -49,7 +48,6 @@
 /* Begin PBXFileReference section */
 		8607519C240F0EAE007A96E5 /* gameviewx11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameviewx11.cpp; sourceTree = "<group>"; };
 		8607519D240F0EAE007A96E5 /* gameviewx11.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameviewx11.hpp; sourceTree = "<group>"; };
-		860751A0240F2844007A96E5 /* gameview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameview.cpp; sourceTree = "<group>"; };
 		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
 		866BE318241DE19D00DDD242 /* exception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 		8607519F240F0EBE007A96E5 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
-				860751A0240F2844007A96E5 /* gameview.cpp */,
 				860751A1240F2844007A96E5 /* gameview.hpp */,
 				8607519C240F0EAE007A96E5 /* gameviewx11.cpp */,
 				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
@@ -265,7 +262,6 @@
 			files = (
 				869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */,
 				869C4BDD2401C10600C3DE84 /* human.cpp in Sources */,
-				860751A2240F2844007A96E5 /* gameview.cpp in Sources */,
 				86A9AB942400AF50002AB0CF /* main.cpp in Sources */,
 				869C4BE22402EE0C00C3DE84 /* computerhard.cpp in Sources */,
 				86A9AB9C2400B26D002AB0CF /* coinset.cpp in Sources */,
