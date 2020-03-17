@@ -9,10 +9,13 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
-#include <iostream>
-
 class GameView {
-
+public:
+    GameView() = default;
+    virtual void drawMainScreen() = 0;
+    virtual void drawPlayScreen1() = 0;
+    virtual void drawInstructionScreen() = 0;
+    virtual void drawPlayScreen2(int numOfCoins) = 0;
 };
 
-#endif /* gameview_hpp */
+#endif
