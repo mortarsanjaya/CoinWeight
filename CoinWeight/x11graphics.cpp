@@ -59,8 +59,6 @@ X11Graphics::X11Graphics(std::string windowName) {
     hints.max_width = width;
 	XSetNormalHints(display, window, &hints);
     
-    sleep(1);
-    
 	XMapRaised(display, window);
 	XFlush(display);
 }

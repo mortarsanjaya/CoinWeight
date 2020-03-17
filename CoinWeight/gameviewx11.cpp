@@ -9,9 +9,7 @@
 #include "gameviewx11.hpp"
 #include <iostream>
 
-GameViewX11::GameViewX11() : coreGraphics{"CoinWeight"} {
-    drawMainScreen();
-}
+GameViewX11::GameViewX11() : coreGraphics{"CoinWeight"} {}
 
 //******************************************************************************
 void GameViewX11::drawCoin(int x_pos, int y_pos, size_t coinIndex) {
@@ -29,9 +27,9 @@ void GameViewX11::drawMainScreen() {
 
 void GameViewX11::drawPlayScreen1() {
     coreGraphics.clear();
-    coreGraphics.drawString(200, 310, "Enter number of coins: ");
-    coreGraphics.drawString(200, 330, "Enter difficulty: ");
-    coreGraphics.drawString(200, 350, "Enter mode: ");
+    coreGraphics.drawString(200, 315, "Enter number of coins: ");
+    coreGraphics.drawString(200, 335, "Enter difficulty: ");
+    coreGraphics.drawString(200, 355, "Enter mode: ");
     
     coreGraphics.drawKeyboardInputWindow(400, 300, 100, 20);
     coreGraphics.drawKeyboardInputWindow(400, 320, 100, 20);
