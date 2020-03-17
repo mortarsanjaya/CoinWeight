@@ -12,7 +12,7 @@
 #include <iostream>
 
 class GameView {
-
+    
 };
 
 #endif /* gameview_hpp */

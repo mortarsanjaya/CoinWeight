@@ -11,10 +11,9 @@
 
 #include <iostream>
 #include <memory>
-#include "gameview.hpp"
 #include "x11graphics.hpp"
 
-class GameViewX11 : public GameView {
+class GameViewX11 {
 	//X11Graphics core_graphics;
 
 public:

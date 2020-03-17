@@ -14,10 +14,15 @@
 #include "computerhard.hpp"
 #include "x11graphics.hpp"
 #include "sdlgraphics.hpp"
+#include "gamecontrollersdl.hpp"
 
 using namespace std;
 
 int main() {
+    Game game;
+    std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
+    GameControllerSDL gameController(&game);
+    
 /*
 	cout << "You are playing a coin weight game.\n";
 	cout << "Number of coins: ";
@@ -36,8 +41,12 @@ int main() {
 	std::string playerType;
 	cin >> playerType;
 	cout << "\n";
-    */
     
+    
+    // model
+    Game game;
+    
+    // view
     SDLGraphics *graphics = new SDLGraphics();
     graphics->showTitleScreen();
     
@@ -53,8 +62,6 @@ int main() {
 	}
 	
 	Game game(numOfCoins, std::move(player), level);
-	/*X11Graphics x11graphics{};
-	x11graphics.fillCircle(20, 20, 10, 1);*/
 
 	cout << "Game starts!\n";
 	
@@ -64,6 +71,6 @@ int main() {
 	bool isWeigh = true;
 	while (isWeigh) {
 		isWeigh = game.move();
-	}
+	}*/
 	return 0;
 }

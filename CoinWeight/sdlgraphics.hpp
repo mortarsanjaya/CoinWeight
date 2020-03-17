@@ -17,8 +17,8 @@ class SDLGraphics {
     
 public:
     SDLGraphics();
-    void showTitleScreen();
-    
+    void showText(std::string text, int x, int y, bool selected = false);
+    void showInput()
 };
 
 #endif /* sdlgraphics_hpp */

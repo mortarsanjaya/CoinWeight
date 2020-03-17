@@ -34,4 +34,4 @@ public:
 
 class X11GraphicsFailure{};
 
-#endif
+#endif*/
