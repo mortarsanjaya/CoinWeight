@@ -17,8 +17,13 @@ class SDLGraphics {
     
 public:
     SDLGraphics();
-    void showText(std::string text, int x, int y, bool selected = false);
-    void showInput()
+    void drawText(std::string text, int x, int y, bool selected = false);
+    void drawInputBox(std::string text, int x, int y, bool selected = false);
+    void drawCoin(std::string coinNumber, int x, int y, bool selected = false);
+    void drawRectangle(int x, int y, int width, int height, int red, int green, int blue);
+    void drawButton(std::string text, int x, int y, bool selected = false);
+    void drawScale(int tilt, int leftCoinsCount, int rightCoinsCount);
+    // tilt: -1 for left heavy, 0 for neutral, 1 for right heavy (maybe enum class is better)
 };
 
 #endif /* sdlgraphics_hpp */

@@ -10,16 +10,20 @@
 #define gameviewsdl_hpp
 
 #include "sdlgraphics.hpp"
+#include "gameview.hpp"
 
-class GameViewSDL {
+class GameViewSDL : public GameView {
     SDLGraphics coreGraphics;
-    SDL_TimerID timer;
-    bool done;
     
     static const int callbackDelay = 30;
     
 public:
     GameViewSDL();
+    
+    virtual void drawMainScreen() override;
+    virtual void drawPlayScreen1() override;
+    virtual void drawInstructionScreen() override;
+    virtual void drawPlayScreen2(int numOfCoins) override;
 };
 
 #endif /* gameviewsdl_hpp */

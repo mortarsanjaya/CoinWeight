@@ -8,6 +8,4 @@
 
 #include "gameviewsdl.hpp"
 
-GameViewSDL::GameViewSDL() : coreGraphics() {
-    timer = SDL_AddTimer(callbackDelay, <#SDL_TimerCallback callback#>, <#void *param#>)
-}
+GameViewSDL::GameViewSDL() : coreGraphics() {}

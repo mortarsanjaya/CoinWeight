@@ -41,12 +41,6 @@ const size_t Game::maxComparisons(size_t numOfCoins, Game::Level level) {
 
 
 //***************************************************** Constructor
-Game::Game() {
-    setOfCoins = nullptr;
-    player = nullptr;
-    level = Level::Medium;
-}
-
 Game::Game(int numOfCoins, std::unique_ptr<Player> player, Level level) :
 	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)),
 	player(std::move(player)),
@@ -86,16 +80,6 @@ const bool Game::move() {
 	if (isWeigh) { compareWeight(); }
 	else guessFakes();
 	return isWeigh;
-}
-
-void Game::initializeNumCoins(int numOfCoins) {
-    setOfCoins = std::make_unique<CoinSet>(numOfCoins, 2);
-    player = std::make_unique<Human>(numOfCoins, 2);
-}
-
-void Game::initializeLevel(Level level) {
-    this->level = level;
-    numOfWeighingsCap = maxComparisons(numOfCoins(), level);
 }
 
 

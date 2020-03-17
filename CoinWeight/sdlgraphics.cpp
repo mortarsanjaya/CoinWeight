@@ -31,11 +31,4 @@ SDLGraphics::SDLGraphics() {
         SDL_Log("Unable to create renderer: %s", SDL_GetError());
         throw SDLException("Unable to create renderer.");
     }
-    /*
-    SDL_Surface *s;
-    
-    s = SDL_CreateRGBSurface(0, 800, 600, 32, 0, 0, 0, 0);
-
-    // Filling the surface with red color.
-    SDL_FillRect(s, NULL, SDL_MapRGB(s->format, 255, 0, 0));*/
 }

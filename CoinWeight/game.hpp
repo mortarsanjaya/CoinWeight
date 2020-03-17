@@ -27,12 +27,10 @@ public:
 private:
 	std::unique_ptr<CoinSet> setOfCoins;
 	std::unique_ptr<Player> player;
-    std::unique_ptr<GameViewSDL> gameView;
 	Level level;
 	size_t numOfWeighingsCap;
 	
 public:
-    Game();
 	Game(int numOfCoins, std::unique_ptr<Player> player, Level level);
 	
 	// "Field accessors"
@@ -44,11 +42,6 @@ public:
 	void compareWeight();
 	void guessFakes();
 	const bool move();
-    
-    void initializeNumCoins(int numOfCoins);
-    void initializeLevel(Level level);
-    void quit();
-    void onKeyPress(SDL_Keycode keyCode);
 	
 	// maximum number of comparisons
 	static const size_t maxComparisons(size_t numOfCoins, Level level);

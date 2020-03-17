@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "game.hpp"
+#include "gameengine.hpp"
 #include "human.hpp"
 #include "computerhard.hpp"
 #include "x11graphics.hpp"
@@ -19,9 +19,10 @@
 using namespace std;
 
 int main() {
-    Game game;
     std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
-    GameControllerSDL gameController(&game);
+    GameEngine gameEngine(std::move(gameView));
+    GameControllerSDL gameController(&gameEngine);
+    gameController.startEventLoop();
     
 /*
 	cout << "You are playing a coin weight game.\n";
@@ -41,15 +42,6 @@ int main() {
 	std::string playerType;
 	cin >> playerType;
 	cout << "\n";
-    
-    
-    // model
-    Game game;
-    
-    // view
-    SDLGraphics *graphics = new SDLGraphics();
-    graphics->showTitleScreen();
-    
 	
 	std::unique_ptr<Player> player;
 	if (playerType == "Human") {
