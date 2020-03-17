@@ -9,7 +9,7 @@
 #include "gameviewx11.hpp"
 #include <iostream>
 
-GameViewX11::GameViewX11() : coreGraphics{"CoinWeight"} {}
+GameViewX11::GameViewX11() : GameView{}, coreGraphics{"CoinWeight"} {}
 
 //******************************************************************************
 void GameViewX11::drawCoin(int x_pos, int y_pos, size_t coinIndex) {

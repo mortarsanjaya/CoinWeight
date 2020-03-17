@@ -11,10 +11,11 @@
 
 #include <memory>
 #include "game.hpp"
+#include "gameview.hpp"
 #include "x11graphics.hpp"
 #include <string>
 
-class GameViewX11 {
+class GameViewX11 : GameView {
 public:
 	X11Graphics coreGraphics;
  
@@ -24,10 +25,10 @@ public:
 
 public:
     GameViewX11();
-    void drawMainScreen();
-    void drawPlayScreen1();
-    void drawInstructionScreen();
-    void drawPlayScreen2(int numOfCoins);
+    void drawMainScreen() override;
+    void drawPlayScreen1() override;
+    void drawInstructionScreen() override;
+    void drawPlayScreen2(int numOfCoins) override;
     
     // char readKeyboardInput();
 };
