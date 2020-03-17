@@ -9,8 +9,6 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
-#include <iostream>
-
 class GameView {
 public:
     GameView() = default;
