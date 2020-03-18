@@ -152,10 +152,10 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
+				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
 				869C4BE424048E4700C3DE84 /* Players */,
 				866FC8302409F74D00B3740D /* Coin Set */,
 				866FC8312409F75A00B3740D /* Game (2 fake coins only) */,
-				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
