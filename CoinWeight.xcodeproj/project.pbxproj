@@ -11,8 +11,6 @@
 		866BE31A241DE19D00DDD242 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		866BE31E241F1FB400DDD242 /* gamecontrollerx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE31C241F1FB400DDD242 /* gamecontrollerx11.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
-		867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; };
-		867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		869C4BD82401BDCD00C3DE84 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* game.cpp */; };
 		869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD92401BF6500C3DE84 /* weighing.hpp */; };
 		869C4BDD2401C10600C3DE84 /* human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BDB2401C10600C3DE84 /* human.cpp */; };
@@ -23,17 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		867EFB2F24160C3A004C43A3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		86A9AB8E2400AF50002AB0CF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,20 +64,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8607519B240F0C6E007A96E5 /* Graphics */ = {
+		8607519B240F0C6E007A96E5 /* Core Graphics */ = {
 			isa = PBXGroup;
 			children = (
 				866FC82D2409EF9600B3740D /* x11graphics.cpp */,
 				866FC82E2409EF9600B3740D /* x11graphics.hpp */,
 			);
-			name = Graphics;
+			name = "Core Graphics";
 			sourceTree = "<group>";
 		};
 		8607519F240F0EBE007A96E5 /* Game View */ = {
@@ -190,13 +176,13 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
+				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
 				869C4BE424048E4700C3DE84 /* Players */,
 				866FC8302409F74D00B3740D /* Coin Set */,
 				866FC8312409F75A00B3740D /* Game (2 fake coins only) */,
-				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				866BE31F241F1FC100DDD242 /* Controller */,
-				8607519B240F0C6E007A96E5 /* Graphics */,
+				8607519B240F0C6E007A96E5 /* Core Graphics */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
@@ -212,7 +198,6 @@
 				86A9AB8C2400AF50002AB0CF /* Sources */,
 				86A9AB8D2400AF50002AB0CF /* Frameworks */,
 				86A9AB8E2400AF50002AB0CF /* CopyFiles */,
-				867EFB2F24160C3A004C43A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
