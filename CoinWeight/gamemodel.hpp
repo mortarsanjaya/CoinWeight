@@ -33,19 +33,23 @@ class GameModel {
     
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
-    // NULL if the player is a human
     Page page;
-    /*
-        State for selection:
-        0 for no select
-        1 for group 1
-        2 for group 2
-    */
     std::vector<int> coinStates;
-    /* For Game Over Page: 0 if lose, 1 if win */
     int pageHighlight;
     std::unique_ptr<GameOption> gameOption;
     
+    /*
+        computer is set to NULL if the player is a Human
+        coinStates: a coin's state is:
+            0, if it is not in any group
+            1, if it is in group 1
+            2, if it is in group 2
+        pageHighlight:
+            If Page is Main or Game Option, either 0, 1, 2 based on
+                which button to highlight
+            If Page is Game Play, indicates which coin is being highlighted
+            If Page is Game Over, 0 indicates loss, 1 indicate win
+    */
     
     
 public:
