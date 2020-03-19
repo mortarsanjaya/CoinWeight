@@ -22,67 +22,35 @@ GameModel::GameSettings::GameSettings(size_t numOfCoins, GameCore::Level level, 
 
 
 //***************************************************** Private methods
-/*
-    If current page is Main:
-        press RETURN to go to page highlighted
-    If current page is Instruction or Credit:
-        press RETURN to go to Main
-    If current page is Game Option:
-        press RETURN to start game
-        ...
-    If current page is Game Play:
-        ...
-    If current page is Game Over:
-        press RETURN to go to Main
-*/
-void GameModel::updatePage(char inp) {
-    switch (page) {
-        case Page::Main:
-            if (inp == '\n') {
-                switch (pageHighlight) {
-                    case 0:     page = Page::GameOption;        break;
-                    case 1:     page = Page::Instruction;       break;
-                    case 2:     page = Page::Credit;            break;
-                    default:    throw;
-                }
-            }
-            break;
-            
-        case Page::Instruction:
-        case Page::Credit:
-            if (inp == '\n') {
-                page = Page::Main;
-            }
-            break;
-            
-        case Page::GameOption:
-            if (inp == '\n') {
-                page = Page::GamePlay;
-                gameCore = std::make_unique<GameCore>(gameSettings.numOfCoins, gameSettings.level);
-                if (!gameSettings.isHuman) {
-                    computer = std::make_unique<ComputerHard>(gameSettings.numOfCoins);
-                }
-                coinStates = std::vector<int>(gameSettings.numOfCoins, CoinState::NoSelect);
-                pageHighlight = 0;
-            }
-            break;
-            
-        case Page::GamePlay:
-            // ...
-            break;
-            
-        case Page::GameOver:
-            if (inp == '\n') {
-                page = Page::Main;
-                pageHighlight = 0;
-                gameCore.reset();
-                computer.reset();
-                coinStates.clear();
-            }
-            break;
-    }
+void GameModel::updateFromMainPage(Input inp) {
+    
 }
 
+void GameModel::updateFromInstructionPage(Input inp) {
+
+}
+
+void GameModel::updateFromCreditPage(Input inp) {
+    
+}
+
+void GameModel::updateFromGameOptionPage(Input inp) {
+    
+}
+
+void GameModel::updateFromGamePlayPage(Input inp) {
+
+}
+
+void GameModel::updateFromGameOverPage(Input inp) {
+    if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
+        page = Page::Main;
+        gameCore.reset();
+        computer.reset();
+        coinStates.clear();
+        pageHighlight = 0;
+    }
+}
 
 
 //***************************************************** Public methods
@@ -113,9 +81,13 @@ void GameModel::updateView(GameView &gameView) {
 }
 
 void GameModel::updatePage(Input inp) {
-    switch (inp.inputType()) {
-        case Input::Type::Char:     updatePage(inp.whatChar());    break;
-        case Input::Type::Arrow:    updatePage(inp.whatArrow());   break;
+    switch (page) {
+        case Page::Main:            updateFromMainPage(inp);           break;
+        case Page::Instruction:     updateFromInstructionPage(inp);    break;
+        case Page::Credit:          updateFromCreditPage(inp);         break;
+        case Page::GameOption:      updateFromGameOptionPage(inp);     break;
+        case Page::GamePlay:        updateFromGamePlayPage(inp);       break;
+        case Page::GameOver:        updateFromGameOverPage(inp);       break;
     }
 }
 
