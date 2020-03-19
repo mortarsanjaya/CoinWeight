@@ -11,20 +11,30 @@
 
 #include <memory>
 #include "game.hpp"
+#include "player.hpp"
 #include "gameview.hpp"
 
 class GameModel {
-public:
-    enum class State {
+    enum class Page {
         MainPage,
         InstructionPage,
         CreditPage,
-        GamePage
+        OptionSelectPage,   // Num of coins, Difficulty, Human/Computer
+        GamePage,           // Coins, just coins, color depends
+        EndScreenPage       // You win! You lose!
     };
     
-private:
+    enum class CoinState {
+        Scale1,
+        Scale2,
+        NotSelected
+    };
+    
     std::unique_ptr<Game> game;
-    State state;
+    Page page;
+    std::vector<CoinState> coinStates;  // Selection
+    int pageOptionHighlight;
+    
     
 public:
     GameModel();

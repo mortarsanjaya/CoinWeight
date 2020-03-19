@@ -8,11 +8,11 @@
 
 #include "gamemodel.hpp"
 
-GameModel::GameModel() : game{}, state{State::MainPage} {}
+GameModel::GameModel() : game{}, page{Page::MainPage}, coinStates{}, pageOptionHighlight{}, isHuman{} {}
 
 void GameModel::update(GameView &gameview) {
     /*
-    switch (state) {
+    switch (page) {
         
     }
     */

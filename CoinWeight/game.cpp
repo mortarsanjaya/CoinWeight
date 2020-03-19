@@ -26,7 +26,7 @@ template <size_t n> const size_t log_ceil(size_t k) {
 const size_t Game::maxComparisons(size_t numOfCoins, Game::Level level) {
 	switch (level) {
 		case Game::Level::Easy:
-			return 3 * log_ceil<3>(numOfCoins) + 3;
+			return numOfCoins;
 		case Game::Level::Medium:
 			return 2 * log_ceil<3>(numOfCoins) + 3;
 		case Game::Level::Hard:
