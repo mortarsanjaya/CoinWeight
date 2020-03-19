@@ -9,7 +9,6 @@
 #ifndef gamecore_hpp
 #define gamecore_hpp
 
-#include <iostream>
 #include <vector>
 #include <map>
 #include <memory>
@@ -62,7 +61,5 @@ public:
     // Convert a level to a string
     static const std::string levelToString(const Level level);
 };
-
-std::istream &operator>>(std::istream &in, GameCore::Level &level);
 
 #endif

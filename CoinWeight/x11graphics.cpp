@@ -107,7 +107,7 @@ void X11Graphics::drawRectangle(int x_pos, int y_pos, int width, int height) {
 
 
 
-//*************************************************************** Graphics failure exception
+//*************************************************************** X11 Graphics Failure
 X11GraphicsFailure::X11GraphicsFailure(std::string coreMessage) : Exception{coreMessage} {}
 const std::string X11GraphicsFailure::headerMessage() const {
     return "X11 Graphics Failure: ";

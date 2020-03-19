@@ -88,28 +88,3 @@ const int GameCore::guessFakeCoins(const std::vector<size_t> &guess) const {
 const std::string GameCore::levelToString(const GameCore::Level level) {
     return levelToStringConversionTable.at(level);
 }
-
-
-
-//***************************************************** Input operator
-std::istream &operator>>(std::istream &in, GameCore::Level &level) {
-	std::string lvString;
-	while (true) {
-		in >> lvString;
-		if (lvString == "Easy") {
-			level = GameCore::Level::Easy;
-			break;
-		} else if (lvString == "Medium") {
-			level = GameCore::Level::Medium;
-			break;
-		} else if (lvString == "Hard") {
-			level = GameCore::Level::Hard;
-			break;
-		} else if (lvString == "Insane") {
-			level = GameCore::Level::Insane;
-			break;
-		}
-	}
-	return in;
-}
-

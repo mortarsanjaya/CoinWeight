@@ -78,7 +78,7 @@ const int CoinSet::guessFakes(std::vector<size_t> guess) const {
 
 
 
-//***************************************************** Coin Set Failure Exception
+//***************************************************** Coin Set Failure
 CoinSetFailure::CoinSetFailure(std::string message) : Exception{message} {}
 const std::string CoinSetFailure::headerMessage() const {
     return "Coin Set";

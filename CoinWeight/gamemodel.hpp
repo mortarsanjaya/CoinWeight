@@ -43,6 +43,8 @@ class GameModel {
     
     enum CoinState { NoSelect = 0, Group1 = 1, Group2 = 2 };
     
+    //*****************************************************
+    
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
     Page page;
@@ -59,6 +61,8 @@ class GameModel {
             If Page is Game Over, 0 indicates loss, 1 indicates win
     */
     
+    //*****************************************************
+    
     // Updates game page based on input
     // More documentation on gamemodel.cpp
     void updatePage(char inp);
@@ -73,6 +77,9 @@ public:
     void updatePage(Input inp);
 };
 
+
+
+//***************************************************** Game Model Failure
 class GameModelFailure : public Exception {
     const std::string headerMessage() const override;
 public:

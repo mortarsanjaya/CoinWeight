@@ -46,6 +46,9 @@ public:
     void drawRectangle(int x_pos, int y_pos, int height, int width);
 };
 
+
+
+//***************************************************** X11 Graphics Failure
 class X11GraphicsFailure : public Exception {
     const std::string headerMessage() const override;
 public:

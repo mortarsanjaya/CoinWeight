@@ -49,6 +49,7 @@ public:
 
 
 
+//***************************************************** Coin Set Failure
 class CoinSetFailure : public Exception {
     const std::string headerMessage() const override;
 public:
