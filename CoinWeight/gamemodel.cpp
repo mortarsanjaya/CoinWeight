@@ -14,7 +14,7 @@ GameModel::GameModel() : gameCore{}, computer{}, page{Page::Main},
 
 
 
-//***************************************************** Public methods
+//***************************************************** Private methods
 void GameModel::updateView(GameView &gameView) {
     switch (page) {
         case Page::Main:
@@ -32,12 +32,55 @@ void GameModel::updateView(GameView &gameView) {
             break;
         case Page::GamePlay:
             if (gameCore == nullptr) throw GameModelFailure{"Game failed to initiate."};
-            gameView.drawGamePlayScreen(gameCore->numOfCoins(), coinStates, gameCore->gameHistory());
+            gameView.drawGamePlayScreen(coinStates, gameCore->gameHistory());
         case Page::GameOver:
             gameView.drawGameOverScreen();
             break;
     }
 }
+
+// If current page is Instruction, Credit, or Game Over:
+//   press RETURN to return to Main
+// If current page is Main:
+//   press UP/DOWN to scroll options
+//   press RETURN to go to page highlighted
+// If current page is Game Option:
+//   press UP/DOWN to scroll options
+//   press RETURN to start game
+//   press LEFT/RIGHT to change game parameters
+// If current page is Game Play:
+//   ...
+void GameModel::updatePage(char inp) {
+    switch (page) {
+        case Page::Instruction:
+        case Page::Credit:
+        case Page::GameOver:
+            if (inp == '\n') {
+                page = Page::Main;
+                pageHighlight = 0;
+            }
+            break;
+        
+        case Page::Main:
+            if (inp == '^[[A') {
+                
+            }
+            break;
+            
+        case Page::GameOption:
+            // ...
+            break;
+            
+        case Page::GamePlay:
+            // ...
+            break;
+    }
+}
+
+
+
+//***************************************************** Public methods
+
 
 
 

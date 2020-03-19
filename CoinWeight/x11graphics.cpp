@@ -105,19 +105,6 @@ void X11Graphics::drawRectangle(int x_pos, int y_pos, int width, int height) {
     XFlush(display);
 }
 
-void X11Graphics::drawKeyboardInputWindow(int x_pos, int y_pos, int width, int height) {
-    drawRectangle(x_pos, y_pos, width, height);
-}
-
-/*
-char X11Graphics::readKeyboardInput() {
-    do { XNextEvent(display, &event); } while (event.type != KeyPress);
-    do { XNextEvent(display, &event); } while (event.type != KeyRelease);
-    return event.xkey.keycode;
-}
-*/
-
-
 
 
 //*************************************************************** Graphics failure exception

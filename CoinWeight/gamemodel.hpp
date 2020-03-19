@@ -25,14 +25,6 @@ class GameModel {
         GameOver     // You win! You lose!
     };
     
-    /*
-    enum CoinState {
-        NotSelected,
-        Scale1,
-        Scale2
-    };
-    */
-    
     struct GameOption {
         size_t numOfCoins;
         GameCore::Level level;
@@ -40,17 +32,28 @@ class GameModel {
     };
     
     std::unique_ptr<GameCore> gameCore;
-    std::unique_ptr<Computer> computer; // NULL if the player is a human
+    std::unique_ptr<Computer> computer;
+    // NULL if the player is a human
     Page page;
-    std::vector<int> coinStates;  // Selection
+    /*
+        State for selection:
+        0 for no select
+        1 for group 1
+        2 for group 2
+    */
+    std::vector<int> coinStates;
     int pageHighlight;
     std::unique_ptr<GameOption> gameOption;
     
-public:
-    GameModel();
+    // Updates the game view
     void updateView(GameView &gameView);
     
+    // Updates game page based on input
+    // More documentation on gamemodel.cpp
     void updatePage(char inp);
+    
+public:
+    GameModel();
 };
 
 class GameModelFailure : public Exception {

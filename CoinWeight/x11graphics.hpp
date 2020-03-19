@@ -24,7 +24,6 @@ class X11Graphics {
     XEvent event;
     std::vector<unsigned long> colors;
     
-    void drawRectangle(int x_pos, int y_pos, int height, int width);
 	
 public:
 	X11Graphics(std::string windowName = "");
@@ -44,9 +43,7 @@ public:
 	void drawString(int x_pos, int y_pos, const std::string &msg);
     void drawCircle(int x_pos, int y_pos, unsigned int radius, int color);
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
-    void drawKeyboardInputWindow(int x_pos, int y_pos, int width, int height);
-    
-    // char readKeyboardInput();
+    void drawRectangle(int x_pos, int y_pos, int height, int width);
 };
 
 class X11GraphicsFailure : public Exception {
