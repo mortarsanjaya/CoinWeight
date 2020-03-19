@@ -42,8 +42,21 @@ class GameModel {
         2 for group 2
     */
     std::vector<int> coinStates;
+    /* For Game Over Page: 0 if lose, 1 if win */
     int pageHighlight;
     std::unique_ptr<GameOption> gameOption;
+    
+    
+    
+public:
+    GameModel();
+    
+    enum class KeyboardArrowInput {
+        Up,
+        Down,
+        Left,
+        Right
+    };
     
     // Updates the game view
     void updateView(GameView &gameView);
@@ -51,9 +64,7 @@ class GameModel {
     // Updates game page based on input
     // More documentation on gamemodel.cpp
     void updatePage(char inp);
-    
-public:
-    GameModel();
+    void updatePage(KeyboardArrowInput inp);
 };
 
 class GameModelFailure : public Exception {
