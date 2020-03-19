@@ -24,12 +24,14 @@ public:
 
 public:
     GameViewX11();
-    void drawMainScreen(int screenOption) override;
+    void drawMainScreen(int screenHighlight) override;
     void drawInstructionScreen() override;
     void drawCreditScreen() override;
-    void drawOptionSelectScreen() override;
-    void drawGameScreen(int numOfCoins) override;
-    void drawEndScreen() override;
+    void drawGameOptionScreen(int screenHighlight, int numOfCoins,
+            std::string gameLevel, bool isHuman) override;
+    void drawGamePlayScreen(int numOfCoins, std::vector<int> coinStates,
+            std::vector<std::pair<Weighing, int>> gameHistory) override;
+    void drawGameOverScreen() override;
     
     char readKeyboardInput();
 };
