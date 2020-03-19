@@ -36,7 +36,6 @@ class GameModel {
     std::vector<CoinState> coinStates;  // Selection
     int pageOptionHighlight;
     
-    
 public:
     GameModel();
     void updateView(GameView &gameview);

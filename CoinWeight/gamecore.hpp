@@ -47,7 +47,7 @@ public:
     // Throws if the counter's value is 0
     const int compareWeight(const Weighing &weighing);
     
-    // Returns 2 for guesses that does not make sens
+    // Returns 2 for guesses that does not make sense
     // Example: Number of coins != 2, Out of bound index
     // Otherwise, returns 0 for correct guesses and -1 for incorrect ones
     const int guessFakeCoins(const std::vector<size_t> &guess) const;
