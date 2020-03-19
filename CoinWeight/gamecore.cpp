@@ -8,7 +8,7 @@
 
 #include "gamecore.hpp"
 
-//***************************************************** Helper function
+//***************************************************** Helper functions
 // Computes ceiling(log_n k)
 template <size_t n> const size_t log_ceil(size_t k) {
 	if (k == 0) exit(100);
