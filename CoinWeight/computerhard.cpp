@@ -417,20 +417,3 @@ const std::vector<size_t> ComputerHard::pickGuesses() const {
 		return state->partition[0];
 	}
 }
-
-void ComputerHard::afterGuess(const int guessResult) const {
-	switch (guessResult) {
-		case 0:
-			std::cout << "I am a pro. :)" << std::endl;
-			std::cout << "Total number of weighings done: " << numOfWeighings() << std::endl;
-			break;
-		case 1:
-			std::cout << "Oops. :(" << std::endl;
-			exit(30);
-			break;
-		case 2:
-			std::cout << "\u3057\u307e\u3063\u305f..." << std::endl;
-			exit(30);
-			break;
-	}
-}

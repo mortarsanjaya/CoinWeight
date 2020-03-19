@@ -9,10 +9,10 @@
 #ifndef computerhard_hpp
 #define computerhard_hpp
 
-#include "player.hpp"
+#include "computer.hpp"
 #include <memory>
 
-class ComputerHard : public Player {
+class ComputerHard : public Computer {
 
 	// States and strategy: How the results are handled
 	struct State {
@@ -31,11 +31,9 @@ class ComputerHard : public Player {
 	const Strategy formStrategy();
 	
 	// Overriding functions
-	bool determineStrategy() override;
 	const Weighing pickToWeigh() const override;
 	void afterWeigh(int weighResult) override;
 	const std::vector<size_t> pickGuesses() const override;
-	void afterGuess(int guessResult) const override;
 	
 public:
 	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins);
