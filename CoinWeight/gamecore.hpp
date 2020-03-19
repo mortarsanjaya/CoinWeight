@@ -11,8 +11,10 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <memory>
 #include <utility>
+#include <string>
 #include "coinset.hpp"
 #include "weighing.hpp"
 
@@ -30,6 +32,9 @@ private:
  
     // maximum number of comparisons, to initialize the cap
     static const size_t maxComparisons(size_t numOfCoins, Level level);
+    
+    // Conversion table from a level to a string
+    static const std::map<Level, std::string> levelToStringConversionTable;
 	
 public:
 	GameCore(int numOfCoins, Level level);
@@ -51,6 +56,9 @@ public:
     // Example: Number of coins != 2, Out of bound index
     // Otherwise, returns 0 for correct guesses and -1 for incorrect ones
     const int guessFakeCoins(const std::vector<size_t> &guess) const;
+    
+    // Convert a level to a string
+    static const std::string levelToString(const Level level);
 };
 
 std::istream &operator>>(std::istream &in, GameCore::Level &level);

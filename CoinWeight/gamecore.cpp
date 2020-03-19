@@ -20,6 +20,19 @@ template <size_t n> const size_t log_ceil(size_t k) {
 	return res;
 }
 
+
+
+//***************************************************** Private static const variable
+const std::map<GameCore::Level, std::string> GameCore::levelToStringConversionTable {
+    {GameCore::Level::Easy,   "Easy"},
+    {GameCore::Level::Medium, "Medium"},
+    {GameCore::Level::Hard,   "Hard"},
+    {GameCore::Level::Insane, "Insane"}
+};
+
+
+
+//***************************************************** Private static method
 const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) {
 	switch (level) {
 		case GameCore::Level::Easy:
@@ -66,6 +79,10 @@ const int GameCore::compareWeight(const Weighing &weighing) {
 
 const int GameCore::guessFakeCoins(const std::vector<size_t> &guess) const {
     return setOfCoins->guessFakes(guess);
+}
+
+const std::string GameCore::levelToString(const GameCore::Level level) {
+    return levelToStringConversionTable.at(level);
 }
 
 
