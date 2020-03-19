@@ -13,6 +13,7 @@
 #include "gamecore.hpp"
 #include "computer.hpp"
 #include "gameview.hpp"
+#include "input.hpp"
 #include "exception.hpp"
 
 class GameModel {
@@ -58,23 +59,18 @@ class GameModel {
             If Page is Game Over, 0 indicates loss, 1 indicates win
     */
     
+    // Updates game page based on input
+    // More documentation on gamemodel.cpp
+    void updatePage(char inp);
+    void updatePage(Input::Arrow inp);
+    
 public:
     GameModel();
-    
-    enum class KeyboardArrowInput {
-        Up,
-        Down,
-        Left,
-        Right
-    };
     
     // Updates the game view
     void updateView(GameView &gameView);
     
-    // Updates game page based on input
-    // More documentation on gamemodel.cpp
-    void updatePage(char inp);
-    void updatePage(KeyboardArrowInput inp);
+    void updatePage(Input inp);
 };
 
 class GameModelFailure : public Exception {

@@ -11,6 +11,7 @@
 		866BE31A241DE19D00DDD242 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		866BE31E241F1FB400DDD242 /* gamecontrollerx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE31C241F1FB400DDD242 /* gamecontrollerx11.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
+		869BBCD524241BDD0002CDED /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869BBCD424241BDD0002CDED /* input.cpp */; };
 		869C4BD82401BDCD00C3DE84 /* gamecore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* gamecore.cpp */; };
 		869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD92401BF6500C3DE84 /* weighing.hpp */; };
 		869C4BE22402EE0C00C3DE84 /* computerhard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BE02402EE0C00C3DE84 /* computerhard.cpp */; };
@@ -44,6 +45,8 @@
 		866FC82E2409EF9600B3740D /* x11graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = x11graphics.hpp; sourceTree = "<group>"; };
 		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
 		867EFB2624160B46004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		869BBCD12424182D0002CDED /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
+		869BBCD424241BDD0002CDED /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		869C4BD62401BDCD00C3DE84 /* gamecore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecore.cpp; sourceTree = "<group>"; };
 		869C4BD72401BDCD00C3DE84 /* gamecore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecore.hpp; sourceTree = "<group>"; };
 		869C4BD92401BF6500C3DE84 /* weighing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = weighing.hpp; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 				860751A1240F2844007A96E5 /* gameview.hpp */,
 				8607519C240F0EAE007A96E5 /* gameviewx11.cpp */,
 				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
+				8607519B240F0C6E007A96E5 /* Core Graphics */,
 			);
 			name = "Game View";
 			sourceTree = "<group>";
@@ -174,10 +178,11 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
+				869BBCD12424182D0002CDED /* input.hpp */,
+				869BBCD424241BDD0002CDED /* input.cpp */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				866BE31F241F1FC100DDD242 /* Game Controller */,
-				8607519B240F0C6E007A96E5 /* Core Graphics */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
@@ -255,6 +260,7 @@
 			files = (
 				869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */,
 				86D9C9DE2421AA8A00FEB2B4 /* gamemodel.cpp in Sources */,
+				869BBCD524241BDD0002CDED /* input.cpp in Sources */,
 				86A9AB942400AF50002AB0CF /* main.cpp in Sources */,
 				869C4BE22402EE0C00C3DE84 /* computerhard.cpp in Sources */,
 				86A9AB9C2400B26D002AB0CF /* coinset.cpp in Sources */,

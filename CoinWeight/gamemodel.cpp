@@ -21,31 +21,7 @@ GameModel::GameSettings::GameSettings(size_t numOfCoins, GameCore::Level level, 
 
 
 
-//***************************************************** Public methods
-void GameModel::updateView(GameView &gameView) {
-    switch (page) {
-        case Page::Main:
-            gameView.drawMainScreen(pageHighlight);
-            break;
-        case Page::Instruction:
-            gameView.drawInstructionScreen();
-            break;
-        case Page::Credit:
-            gameView.drawCreditScreen();
-            break;
-        case Page::GameOption:
-            gameView.drawGameOptionScreen(pageHighlight, gameSettings.numOfCoins,
-                GameCore::levelToString(gameSettings.level), gameSettings.isHuman);
-            break;
-        case Page::GamePlay:
-            gameView.drawGamePlayScreen(coinStates, gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap(), gameCore->gameHistory());
-        case Page::GameOver:
-            gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
-            break;
-    }
-}
-
+//***************************************************** Private methods
 /*
     If current page is Main:
         press RETURN to go to page highlighted
@@ -104,12 +80,44 @@ void GameModel::updatePage(char inp) {
                 coinStates.clear();
             }
             break;
-        
-        
-            
-        
     }
 }
+
+
+
+//***************************************************** Public methods
+void GameModel::updateView(GameView &gameView) {
+    switch (page) {
+        case Page::Main:
+            gameView.drawMainScreen(pageHighlight);
+            break;
+        case Page::Instruction:
+            gameView.drawInstructionScreen();
+            break;
+        case Page::Credit:
+            gameView.drawCreditScreen();
+            break;
+        case Page::GameOption:
+            gameView.drawGameOptionScreen(pageHighlight, gameSettings.numOfCoins,
+                GameCore::levelToString(gameSettings.level), gameSettings.isHuman);
+            break;
+        case Page::GamePlay:
+            gameView.drawGamePlayScreen(coinStates, gameCore->numOfWeighingsLeft(),
+                gameCore->numOfWeighingsCap(), gameCore->gameHistory());
+        case Page::GameOver:
+            gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
+                gameCore->numOfWeighingsCap());
+            break;
+    }
+}
+
+void GameModel::updatePage(Input inp) {
+    switch (inp.inputType()) {
+        case Input::Type::Char:     updatePage(inp.whatChar());    break;
+        case Input::Type::Arrow:    updatePage(inp.whatArrow());   break;
+    }
+}
+
 
 
 //***************************************************** Game Model Failure
