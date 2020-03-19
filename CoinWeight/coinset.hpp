@@ -14,7 +14,7 @@
 #include "weighing.hpp"
 #include "exception.hpp"
 
-// Fake coins are lighter thhan real coins
+// Fake coins are lighter than real coins
 class CoinSet {
 	// Set to true if the coin is real and false if the coin is fake
 	std::vector<bool> coins;
