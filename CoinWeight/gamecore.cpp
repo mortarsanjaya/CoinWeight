@@ -67,6 +67,9 @@ const std::vector<std::pair<Weighing, int>> GameCore::gameHistory() const {
     return history;
 }
 const size_t GameCore::numOfWeighingsLeft() const { return numOfWeighingsCounter; }
+const size_t GameCore::numOfWeighingsCap() const {
+    return maxComparisons(setOfCoins->size(), level);
+}
 
 
 

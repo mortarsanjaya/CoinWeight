@@ -45,6 +45,7 @@ public:
     const Level gameLevel() const;
     const std::vector<std::pair<Weighing, int>> gameHistory() const;
 	const size_t numOfWeighingsLeft() const;
+    const size_t numOfWeighingsCap() const;
  
     // Returns 1 if the first set is heavier than the second set
     // Returns 0 if the first set is as heavy as the second set

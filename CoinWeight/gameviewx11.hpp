@@ -26,9 +26,9 @@ public:
     void drawCreditScreen() override;
     void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
             std::string gameLevel, bool isHuman) override;
-    void drawGamePlayScreen(std::vector<int> coinStates,
-            std::vector<std::pair<Weighing, int>> gameHistory) override;
-    void drawGameOverScreen(bool isWin) override;
+    void drawGamePlayScreen(std::vector<int> coinStates, size_t numOfComparisonsLeft,
+            size_t numOfComparisonsCap, std::vector<std::pair<Weighing, int>> gameHistory) override;
+    void drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) override;
 };
 
 #endif

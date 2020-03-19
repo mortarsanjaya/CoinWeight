@@ -16,8 +16,8 @@ GameViewX11::GameViewX11() : GameView{}, coreGraphics{"CoinWeight"} {}
 
 //***************************************************** Private methods
 void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
-    const int x_pos = 50 * (1 + coinIndex % 10);
-    const int y_pos = 50 * (1 + coinIndex / 10);
+    const int x_pos = 200 * (1 + coinIndex % 10);
+    const int y_pos = 200 * (1 + coinIndex / 10);
     switch (coinState) {
         case 0: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold); break;
         case 1: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red); break;
@@ -79,24 +79,28 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
         50, stringHeight);
 }
 
-void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates,
-    std::vector<std::pair<Weighing, int>> gameHistory)
+void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates, size_t numOfComparisonsLeft,
+    size_t numOfComparisonsCap, std::vector<std::pair<Weighing, int>> gameHistory)
 {
     coreGraphics.clear();
     
     for (size_t i = 0; i < coinStates.size(); ++i) {
         drawCoin(coinStates[i], i);
     }
+    
+    const std::string numOfCompLeftStr = std::to_string(numOfComparisonsLeft);
+    const std::string numOfCompCapStr = std::to_string(numOfComparisonsCap);
+    coreGraphics.drawString(30, 30, "Number of comparisons remaining: " + numOfCompLeftStr + " out of " + numOfCompCapStr);
+    coreGraphics.drawString(30, 100, "History:");
+    
 }
 
-void GameViewX11::drawGameOverScreen(bool isWin) {
+void GameViewX11::drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) {
     coreGraphics.clear();
     
     if (isWin) { coreGraphics.drawString(300, 200, "You Win!"); }
     else { coreGraphics.drawString(300, 200, "You Lose :("); }
-    /*
     coreGraphics.drawString(300, 300,
-        "Number of comparisons: " + std::to_string(numOfComparisons) +
-        " out of " + std::to_string(maxNumOfComparisons));
-        */
+        "Number of comparisons left: " + std::to_string(numOfComparisonsLeft) +
+        " out of " + std::to_string(numOfComparisonsCap));
 }
