@@ -16,6 +16,12 @@
 #include "exception.hpp"
 
 class GameModel {
+    /*
+        Page Transition table:
+            Main -> Instruction, Credit, Game Option
+            Instruction, Credit -> Main
+            Game Option -> Game Play -> Game Over -> Main
+    */
     enum class Page {
         Main,
         Instruction,
@@ -25,32 +31,32 @@ class GameModel {
         GameOver     // You win! You lose!
     };
     
-    struct GameOption {
+    struct GameSettings {
         size_t numOfCoins;
         GameCore::Level level;
         bool isHuman;
+        
+        GameSettings(size_t numOfCoins = 13, GameCore::Level level =
+            GameCore::Level::Hard, bool isHuman = true);
     };
+    
+    enum CoinState { NoSelect = 0, Group1 = 1, Group2 = 2 };
     
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
     Page page;
     std::vector<int> coinStates;
     int pageHighlight;
-    std::unique_ptr<GameOption> gameOption;
+    GameSettings gameSettings;
     
     /*
         computer is set to NULL if the player is a Human
-        coinStates: a coin's state is:
-            0, if it is not in any group
-            1, if it is in group 1
-            2, if it is in group 2
         pageHighlight:
             If Page is Main or Game Option, either 0, 1, 2 based on
                 which button to highlight
             If Page is Game Play, indicates which coin is being highlighted
             If Page is Game Over, 0 indicates loss, 1 indicate win
     */
-    
     
 public:
     GameModel();

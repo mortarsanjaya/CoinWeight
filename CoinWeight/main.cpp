@@ -21,7 +21,16 @@ int main() {
     coinStates[12] = 1;
     coinStates[20] = 2;
     std::vector<std::pair<Weighing, int>> gameHistory;
-    gameView->drawGamePlayScreen(coinStates, gameHistory);
+    gameView->drawCreditScreen();
     int x;
     cin >> x;
 }
+
+/*
+    README
+    Game Model components pretty much done
+    The Game Model itself is far from done, I'd say
+    Game View is also quite far from done
+    However, looking at the design (and the fact that we're not
+        time-pressured, this is not the biggest issue)
+*/

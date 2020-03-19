@@ -7,10 +7,17 @@
 //
 
 #include "gamemodel.hpp"
+#include "computerhard.hpp"
 
 //***************************************************** Constructor
 GameModel::GameModel() : gameCore{}, computer{}, page{Page::Main},
-    coinStates{}, pageHighlight{}, gameOption{} {}
+    coinStates{}, pageHighlight{}, gameSettings{} {}
+    
+
+
+//***************************************************** Game Settings Constructor
+GameModel::GameSettings::GameSettings(size_t numOfCoins, GameCore::Level level, bool isHuman) :
+    numOfCoins{numOfCoins}, level{level}, isHuman{isHuman} {}
 
 
 
@@ -27,12 +34,10 @@ void GameModel::updateView(GameView &gameView) {
             gameView.drawCreditScreen();
             break;
         case Page::GameOption:
-            if (gameOption == nullptr) throw GameModelFailure{"Game Options failed to initiate."};
-            gameView.drawGameOptionScreen(pageHighlight, gameOption->numOfCoins,
-                GameCore::levelToString(gameOption->level), gameOption->isHuman);
+            gameView.drawGameOptionScreen(pageHighlight, gameSettings.numOfCoins,
+                GameCore::levelToString(gameSettings.level), gameSettings.isHuman);
             break;
         case Page::GamePlay:
-            if (gameCore == nullptr) throw GameModelFailure{"Game failed to initiate."};
             gameView.drawGamePlayScreen(coinStates, gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap(), gameCore->gameHistory());
         case Page::GameOver:
@@ -45,17 +50,25 @@ void GameModel::updateView(GameView &gameView) {
     If current page is Main:
         press RETURN to go to page highlighted
     If current page is Instruction or Credit:
-        press RETURN to return to Main
+        press RETURN to go to Main
     If current page is Game Option:
         press RETURN to start game
+        ...
     If current page is Game Play:
         ...
+    If current page is Game Over:
+        press RETURN to go to Main
 */
 void GameModel::updatePage(char inp) {
     switch (page) {
         case Page::Main:
             if (inp == '\n') {
-            
+                switch (pageHighlight) {
+                    case 0:     page = Page::GameOption;        break;
+                    case 1:     page = Page::Instruction;       break;
+                    case 2:     page = Page::Credit;            break;
+                    default:    throw;
+                }
             }
             break;
             
@@ -63,8 +76,23 @@ void GameModel::updatePage(char inp) {
         case Page::Credit:
             if (inp == '\n') {
                 page = Page::Main;
+            }
+            break;
+            
+        case Page::GameOption:
+            if (inp == '\n') {
+                page = Page::GamePlay;
+                gameCore = std::make_unique<GameCore>(gameSettings.numOfCoins, gameSettings.level);
+                if (!gameSettings.isHuman) {
+                    computer = std::make_unique<ComputerHard>(gameSettings.numOfCoins);
+                }
+                coinStates = std::vector<int>(gameSettings.numOfCoins, CoinState::NoSelect);
                 pageHighlight = 0;
             }
+            break;
+            
+        case Page::GamePlay:
+            // ...
             break;
             
         case Page::GameOver:
@@ -79,23 +107,9 @@ void GameModel::updatePage(char inp) {
         
         
             
-        case Page::GameOption:
-            if (inp == '\n') {
-                
-            }
-            break;
-            
-        case Page::GamePlay:
-            // ...
-            break;
+        
     }
 }
-
-
-
-//***************************************************** Public methods
-
-
 
 
 //***************************************************** Game Model Failure

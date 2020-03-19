@@ -36,7 +36,7 @@ class ComputerHard : public Computer {
 	const std::vector<size_t> pickGuesses() const override;
 	
 public:
-	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins);
+	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);
 	~ComputerHard();
 };
 
