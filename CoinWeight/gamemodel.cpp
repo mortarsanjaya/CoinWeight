@@ -8,13 +8,13 @@
 
 #include "gamemodel.hpp"
 
-//******************************************************** Constructor
+//***************************************************** Constructor
 GameModel::GameModel() : gamecore{}, computer{}, page{Page::MainPage},
     coinStates{}, pageOptionHighlight{} {}
 
 
 
-//******************************************************** Public methods
+//***************************************************** Public methods
 void GameModel::updateView(GameView &gameview) {
     
 }

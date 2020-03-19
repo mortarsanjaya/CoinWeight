@@ -102,9 +102,9 @@ ComputerHard::State::State(size_t numOfCoins) :
 
 
 
-//***************************************************** Constructor(s) and Destructor
+//***************************************************** Constructor and Destructor
 ComputerHard::ComputerHard(size_t numOfCoins, size_t numOfFakeCoins) :
-	Player(numOfCoins, numOfFakeCoins),
+	Computer(numOfCoins, numOfFakeCoins),
 	state(std::make_unique<State>(numOfCoins)),
 	strategy(Strategy::NoStrategy)
 {}
@@ -233,11 +233,6 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 
 
 //***************************************************** Overriding functions
-bool ComputerHard::determineStrategy() {
-	strategy = formStrategy();
-	return (strategy != Strategy::Guess);
-}
-
 const Weighing ComputerHard::pickToWeigh() const {
 	return Weighing{state->partition[0], state->partition[1]};
 }

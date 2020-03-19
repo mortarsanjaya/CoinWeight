@@ -24,10 +24,10 @@ public:
 
 public:
     GameViewX11();
-    void drawMainScreen() override;
+    void drawMainScreen(int screenOption) override;
     void drawInstructionScreen() override;
     void drawCreditScreen() override;
-    void drawOptinSelectScreen() override;
+    void drawOptionSelectScreen() override;
     void drawGameScreen(int numOfCoins) override;
     void drawEndScreen() override;
     

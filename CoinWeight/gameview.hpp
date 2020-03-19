@@ -9,15 +9,21 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
+#include <vector>
+#include <utility>
+#include "weighing.hpp"
+
 class GameView {
 public:
     GameView() = default;
-    virtual void drawMainScreen() = 0;
+    virtual void drawMainScreen(int screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
-    virtual void drawOptionSelectScreen() = 0;
-    virtual void drawGameScreen(int numOfCoins) = 0;
-    virtual void drawEndScreen() = 0;
+    virtual void drawGameOptionScreen(int screenHighlight, int numOfCoins,
+                    std::string gameLevel, bool isHuman) = 0;
+    virtual void drawGamePlayScreen(int numOfCoins, std::vector<int> coinStates,
+                    std::vector<std::pair<Weighing, int>> gameHistory) = 0;
+    virtual void drawGameOverScreen() = 0;
 };
 
 #endif

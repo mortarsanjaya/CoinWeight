@@ -12,7 +12,7 @@
 
 
 
-//***************************************************** Constructors
+//***************************************************** Constructor
 CoinSet::CoinSet(int numOfCoins, int numOfFakeCoins) :
 	coins(numOfCoins, true),
 	numOfFakeCoins(numOfFakeCoins)
@@ -78,7 +78,7 @@ const int CoinSet::guessFakes(std::vector<size_t> guess) const {
 
 
 
-//***************************************************** CoinSetFail
+//***************************************************** Coin Set Failure Exception
 CoinSetFailure::CoinSetFailure(std::string message) : Exception{message} {}
 const std::string CoinSetFailure::headerMessage() const {
     return "Coin Set";
