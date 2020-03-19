@@ -28,7 +28,7 @@ public:
             std::string gameLevel, bool isHuman) override;
     void drawGamePlayScreen(std::vector<int> coinStates,
             std::vector<std::pair<Weighing, int>> gameHistory) override;
-    void drawGameOverScreen(bool isWin, int numOfComparisons, int maxNumOfComparisons) override;
+    void drawGameOverScreen(bool isWin) override;
 };
 
 #endif

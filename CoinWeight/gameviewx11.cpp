@@ -89,12 +89,14 @@ void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates,
     }
 }
 
-void GameViewX11::drawGameOverScreen(bool isWin, int numOfComparisons, int maxNumOfComparisons) {
+void GameViewX11::drawGameOverScreen(bool isWin) {
     coreGraphics.clear();
     
     if (isWin) { coreGraphics.drawString(300, 200, "You Win!"); }
     else { coreGraphics.drawString(300, 200, "You Lose :("); }
+    /*
     coreGraphics.drawString(300, 300,
         "Number of comparisons: " + std::to_string(numOfComparisons) +
         " out of " + std::to_string(maxNumOfComparisons));
+        */
 }

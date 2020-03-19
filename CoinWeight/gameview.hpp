@@ -23,8 +23,7 @@ public:
                     std::string gameLevel, bool isHuman) = 0;
     virtual void drawGamePlayScreen(std::vector<int> coinStates,
                     std::vector<std::pair<Weighing, int>> gameHistory) = 0;
-    virtual void drawGameOverScreen(bool isWin, int numOfComparisons,
-    int maxNumOfComparisons) = 0;
+    virtual void drawGameOverScreen(bool isWin) = 0;
 };
 
 #endif

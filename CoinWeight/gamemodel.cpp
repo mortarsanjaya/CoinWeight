@@ -34,7 +34,7 @@ void GameModel::updateView(GameView &gameView) {
             if (gameCore == nullptr) throw GameModelFailure{"Game failed to initiate."};
             gameView.drawGamePlayScreen(coinStates, gameCore->gameHistory());
         case Page::GameOver:
-            gameView.drawGameOverScreen();
+            gameView.drawGameOverScreen(pageHighlight);
             break;
     }
 }
