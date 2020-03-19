@@ -40,24 +40,24 @@ void GameViewX11::drawMainScreen(int screenHighlight) {
     coreGraphics.drawString(300, 300 + 2 * stringHeight, "Instructions");
     coreGraphics.drawString(300, 300 + 3 * stringHeight, "Credits");
     
-    coreGraphics.drawRectangle(300, 300 + screenHighlight * stringHeight,
-        stringHeight, 50);
+    coreGraphics.drawRectangle(295, 305 + screenHighlight * stringHeight,
+        50, stringHeight);
 }
 
 void GameViewX11::drawInstructionScreen() {
     coreGraphics.clear();
     // TO BE FILLED WITH INSTRUCTIONS
     sleep(1);
-    coreGraphics.drawString(300, 520, "Return");
-    coreGraphics.drawRectangle(300, 500, 20, 50);
+    coreGraphics.drawString(305, 515, "Return");
+    coreGraphics.drawRectangle(300, 500, 50, 20);
 }
 
 void GameViewX11::drawCreditScreen() {
     coreGraphics.clear();
     // TO BE FILLED WITH CREDITS
     sleep(1);
-    coreGraphics.drawString(300, 520, "Return");
-    coreGraphics.drawRectangle(300, 500, 20, 50);
+    coreGraphics.drawString(305, 515, "Return");
+    coreGraphics.drawRectangle(300, 500, 50, 20);
 }
 
 void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
@@ -71,12 +71,12 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
     coreGraphics.drawString(300, 300 + 2 * stringHeight, "Level:");
     coreGraphics.drawString(300, 300 + 3 * stringHeight, "Mode:");
     
-    coreGraphics.drawString(400, 300 + stringHeight, std::to_string(numOfCoins));
-    coreGraphics.drawString(400, 300 + 2 * stringHeight, gameLevel);
-    coreGraphics.drawString(400, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer");
+    coreGraphics.drawString(405, 300 + stringHeight, std::to_string(numOfCoins));
+    coreGraphics.drawString(405, 300 + 2 * stringHeight, gameLevel);
+    coreGraphics.drawString(405, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer");
     
-    coreGraphics.drawRectangle(400, 300 + screenHighlight * stringHeight,
-        stringHeight, 50);
+    coreGraphics.drawRectangle(400, 305 + screenHighlight * stringHeight,
+        50, stringHeight);
 }
 
 void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates,
