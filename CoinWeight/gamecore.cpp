@@ -1,5 +1,5 @@
 //
-//  game.cpp
+//  gamecore.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-02-22.
@@ -57,7 +57,16 @@ const size_t GameCore::numOfWeighingsLeft() const { return numOfWeighingsCounter
 
 
 //***************************************************** Other public methods
-// ...
+const int GameCore::compareWeight(const Weighing &weighing) {
+    if (numOfWeighingsCounter == 0) throw "Oops. You run out of comparisons.";
+    const int result = setOfCoins->compareWeight(weighing);
+    history.emplace_back(weighing, result);
+    return result;
+}
+
+const int GameCore::guessFakeCoins(const std::vector<size_t> &guess) const {
+    return setOfCoins->guessFakes(guess);
+}
 
 
 
