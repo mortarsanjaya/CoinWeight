@@ -104,6 +104,7 @@ void GameModel::updateView(GameView &gameView) {
         case Page::GamePlay:
             gameView.drawGamePlayScreen(coinStates, gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap(), gameCore->gameHistory());
+            break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap());
