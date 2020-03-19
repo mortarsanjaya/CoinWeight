@@ -1,18 +1,18 @@
 //
-//  gameengine.hpp
+//  gamemodel.hpp
 //  CoinWeight
 //
 //  Created by Jamie Sebastian on 17/03/20.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameengine_hpp
-#define gameengine_hpp
+#ifndef gamemodel_hpp
+#define gamemodel_hpp
 
 #include "game.hpp"
 #include "gameview.hpp"
 
-class GameEngine {
+class GameModel {
     enum class GamePhase { Start, Instruction, Credits, OptionSelection, Gameplay, EndScreen };
     enum class CoinState { Scale1, Scale2, NotSelected };
     
@@ -27,7 +27,8 @@ class GameEngine {
         Instruction     -> Return
         Credits         -> Return
         OptionSelection -> Number of Coins Input, Level Input, Continue (vertical layout)
-        Gameplay        -> Weigh, Guess, each coin (weigh, guess vertical layout, below are coins in a rectangle)
+        Gameplay        -> Weigh, Guess, History, each coin
+                    (weigh, guess vertical layout, history to the right of weigh, below are coins in a rectangle)
         EndScreen       -> Play Again, Quit (vertical layout)
      
      options is resized every game phase change
@@ -40,9 +41,10 @@ class GameEngine {
     std::vector<std::vector<std::string>> options;
     
 public:
-    GameEngine(std::unique_ptr<GameViewSDL> gameView);
+    GameModel(std::unique_ptr<GameViewSDL> gameView);
+    void updateGameView();
     void quit();
     void onKeyPress(SDL_Keycode keyCode);
 };
 
-#endif /* gameengine_hpp */
+#endif /* gamemodel_hpp */

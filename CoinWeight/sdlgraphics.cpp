@@ -32,3 +32,25 @@ SDLGraphics::SDLGraphics() {
         throw SDLException("Unable to create renderer.");
     }
 }
+    
+void SDLGraphics::drawText(std::string text, int x, int y, bool selected) {
+    
+}
+    
+void SDLGraphics::drawInputBox(std::string text, int x, int y, bool selected) {
+    
+}
+void SDLGraphics::drawCoin(std::string coinNumber, int x, int y, bool selected) {
+    
+}
+void SDLGraphics::drawRectangle(int x, int y, int width, int height, int red, int green, int blue) {
+    
+}
+
+void SDLGraphics::drawButton(std::string text, int x, int y, bool selected) {
+    
+}
+
+void SDLGraphics::drawScale(int tilt, int leftCoinsCount, int rightCoinsCount) {
+    
+}

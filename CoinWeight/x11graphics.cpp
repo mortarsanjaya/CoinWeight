@@ -10,7 +10,7 @@
 #include <iostream>
 #include <unistd.h>
 
-//*************************************************************** Constructors and Destructor
+// *************************************************************** Constructors and Destructor
 X11Graphics::X11Graphics() {
 	int width = 1000;
 	int height = 1000;
@@ -67,7 +67,7 @@ X11Graphics::~X11Graphics() {
 
 
 
-//*************************************************************** Drawing functions
+// *************************************************************** Drawing functions
 void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
 	XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
 	XFlush(display);
