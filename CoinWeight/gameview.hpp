@@ -13,9 +13,11 @@ class GameView {
 public:
     GameView() = default;
     virtual void drawMainScreen() = 0;
-    virtual void drawPlayScreen1() = 0;
     virtual void drawInstructionScreen() = 0;
-    virtual void drawPlayScreen2(int numOfCoins) = 0;
+    virtual void drawCreditScreen() = 0;
+    virtual void drawOptionSelectScreen() = 0;
+    virtual void drawGameScreen(int numOfCoins) = 0;
+    virtual void drawEndScreen() = 0;
 };
 
 #endif

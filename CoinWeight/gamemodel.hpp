@@ -19,9 +19,9 @@ class GameModel {
         MainPage,
         InstructionPage,
         CreditPage,
-        OptionSelectPage,   // Num of coins, Difficulty, Human/Computer
-        GamePage,           // Coins, just coins, color depends
-        EndScreenPage       // You win! You lose!
+        OptionSelectPage,  // Num of coins, Difficulty, Human/Computer
+        GamePage,          // Coins, just coins, color depends
+        EndPage            // You win! You lose!
     };
     
     enum class CoinState {

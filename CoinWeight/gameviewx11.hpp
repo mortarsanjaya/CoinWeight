@@ -10,7 +10,6 @@
 #define gameviewx11_hpp
 
 #include <memory>
-#include "game.hpp"
 #include "gameview.hpp"
 #include "x11graphics.hpp"
 #include <string>
@@ -26,11 +25,13 @@ public:
 public:
     GameViewX11();
     void drawMainScreen() override;
-    void drawPlayScreen1() override;
     void drawInstructionScreen() override;
-    void drawPlayScreen2(int numOfCoins) override;
+    void drawCreditScreen() override;
+    void drawOptinSelectScreen() override;
+    void drawGameScreen(int numOfCoins) override;
+    void drawEndScreen() override;
     
-    // char readKeyboardInput();
+    char readKeyboardInput();
 };
 
 #endif
