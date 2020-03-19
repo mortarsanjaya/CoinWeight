@@ -10,8 +10,8 @@
 #define gamemodel_hpp
 
 #include <memory>
-#include "game.hpp"
-#include "player.hpp"
+#include "gamecore.hpp"
+#include "computer.hpp"
 #include "gameview.hpp"
 
 class GameModel {
@@ -30,7 +30,8 @@ class GameModel {
         NotSelected
     };
     
-    std::unique_ptr<Game> game;
+    std::unique_ptr<GameCore> gamecore;
+    std::unique_ptr<Computer> computer; // NULL if the player is a human
     Page page;
     std::vector<CoinState> coinStates;  // Selection
     int pageOptionHighlight;

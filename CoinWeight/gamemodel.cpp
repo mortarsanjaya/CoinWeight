@@ -8,7 +8,8 @@
 
 #include "gamemodel.hpp"
 
-GameModel::GameModel() : game{}, page{Page::MainPage}, coinStates{}, pageOptionHighlight{}, isHuman{} {}
+GameModel::GameModel() : gamecore{}, computer{}, page{Page::MainPage},
+    coinStates{}, pageOptionHighlight{} {}
 
 void GameModel::update(GameView &gameview) {
     /*
