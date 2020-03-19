@@ -55,7 +55,7 @@ class GameModel {
             If Page is Main or Game Option, either 0, 1, 2 based on
                 which button to highlight
             If Page is Game Play, indicates which coin is being highlighted
-            If Page is Game Over, 0 indicates loss, 1 indicate win
+            If Page is Game Over, 0 indicates loss, 1 indicates win
     */
     
 public:
