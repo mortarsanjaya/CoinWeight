@@ -45,9 +45,9 @@ class GameModel {
     
     //*****************************************************
     
+    Page page;
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
-    Page page;
     std::vector<int> coinStates;
     int pageHighlight;
     GameSettings gameSettings;
@@ -63,10 +63,12 @@ class GameModel {
     
     //*****************************************************
     
-    // Updates game page based on input
-    // More documentation on gamemodel.cpp
-    void updatePage(char inp);
-    void updatePage(Input::Arrow inp);
+    void updateFromMainPage(Input inp);
+    void updateFromInstructionPage(Input inp);
+    void updateFromCreditPage(Input inp);
+    void updateFromGameOptionPage(Input inp);
+    void updateFromGamePlayPage(Input inp);
+    void updateFromGameOverPage(Input inp);
     
 public:
     GameModel();
