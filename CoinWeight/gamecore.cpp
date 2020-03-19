@@ -62,6 +62,7 @@ GameCore::GameCore(int numOfCoins, Level level) :
 //***************************************************** Field accessors
 const size_t GameCore::numOfCoins() const { return setOfCoins->size(); }
 const size_t GameCore::numOfFakes() const { return setOfCoins->numOfFakes(); }
+const GameCore::Level GameCore::gameLevel() const { return level; }
 const std::vector<std::pair<Weighing, int>> GameCore::gameHistory() const {
     return history;
 }

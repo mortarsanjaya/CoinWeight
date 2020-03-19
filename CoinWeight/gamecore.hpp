@@ -42,6 +42,7 @@ public:
 	// Field accessors
 	const size_t numOfCoins() const;
 	const size_t numOfFakes() const;
+    const Level gameLevel() const;
     const std::vector<std::pair<Weighing, int>> gameHistory() const;
 	const size_t numOfWeighingsLeft() const;
  

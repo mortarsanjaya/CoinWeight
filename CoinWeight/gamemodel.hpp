@@ -13,34 +13,50 @@
 #include "gamecore.hpp"
 #include "computer.hpp"
 #include "gameview.hpp"
+#include "exception.hpp"
 
 class GameModel {
     enum class Page {
-        MainPage,
-        InstructionPage,
-        CreditPage,
-        GameOptionPage,  // Num of coins, Difficulty, Human/Computer
-        GamePlayPage,    // Coins, just coins, color depends
-        GameOverPage     // You win! You lose!
+        Main,
+        Instruction,
+        Credit,
+        GameOption,  // Num of coins, Difficulty, Human/Computer
+        GamePlay,    // Coins, just coins, color depends
+        GameOver     // You win! You lose!
     };
     
+    /*
     enum CoinState {
-        Scale1 = 0,
-        Scale2,
-        NotSelected
+        NotSelected,
+        Scale1,
+        Scale2
+    };
+    */
+    
+    struct GameOption {
+        int numOfCoins;
+        GameCore::Level level;
+        bool isHuman;
     };
     
-    std::unique_ptr<GameCore> gamecore;
+    std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer; // NULL if the player is a human
     Page page;
-    std::vector<CoinState> coinStates;  // Selection
-    int pageOptionHighlight;
+    std::vector<int> coinStates;  // Selection
+    int pageHighlight;
+    std::unique_ptr<GameOption> gameOption;
     
 public:
     GameModel();
-    void updateView(GameView &gameview);
+    void updateView(GameView &gameView);
     
     void updatePage(char inp);
+};
+
+class GameModelFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    GameModelFailure(std::string coreMessage);
 };
 
 #endif
