@@ -147,6 +147,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		869BBCD624241CD90002CDED /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				869BBCD12424182D0002CDED /* input.hpp */,
+				869BBCD424241BDD0002CDED /* input.cpp */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
 		869C4BE424048E4700C3DE84 /* Computer */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,11 +187,10 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
-				869BBCD12424182D0002CDED /* input.hpp */,
-				869BBCD424241BDD0002CDED /* input.cpp */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				866BE31F241F1FC100DDD242 /* Game Controller */,
+				869BBCD624241CD90002CDED /* Input */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
