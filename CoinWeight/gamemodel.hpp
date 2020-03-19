@@ -34,7 +34,7 @@ class GameModel {
     */
     
     struct GameOption {
-        int numOfCoins;
+        size_t numOfCoins;
         GameCore::Level level;
         bool isHuman;
     };
