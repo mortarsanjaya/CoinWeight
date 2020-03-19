@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include "weighing.hpp"
+#include "exception.hpp"
 
 // Fake coins are lighter thhan real coins
 class CoinSet {
@@ -48,12 +49,10 @@ public:
 
 
 
-class CoinSetFail {
-	std::string message;
-	
+class CoinSetFailure : public Exception {
+    const std::string headerMessage() const override;
 public:
-	CoinSetFail(std::string message);
-	const std::string &what() const;
+	CoinSetFailure(std::string message);
 };
 
 #endif

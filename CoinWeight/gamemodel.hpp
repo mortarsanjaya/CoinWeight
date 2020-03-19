@@ -39,7 +39,9 @@ class GameModel {
     
 public:
     GameModel();
-    void update(GameView &gameview);
+    void updateView(GameView &gameview);
+    
+    void updatePage(char inp);
 };
 
 #endif

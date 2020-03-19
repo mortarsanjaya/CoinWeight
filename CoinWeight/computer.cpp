@@ -8,7 +8,7 @@
 
 #include "computer.hpp"
 
-//***************************************************** Constructor(s) and Destructors
+//***************************************************** Constructor(s) and Destructor
 Computer::Computer(size_t coinSetSize, size_t numOfFakes) :
 	coinSetSize(coinSetSize),
 	numOfFakes(numOfFakes)

@@ -8,13 +8,14 @@
 
 #include "gamemodel.hpp"
 
+//******************************************************** Constructor
 GameModel::GameModel() : gamecore{}, computer{}, page{Page::MainPage},
     coinStates{}, pageOptionHighlight{} {}
 
-void GameModel::update(GameView &gameview) {
-    /*
-    switch (page) {
-        
-    }
-    */
+
+
+//******************************************************** Public methods
+void GameModel::updateView(GameView &gameview) {
+    
 }
+

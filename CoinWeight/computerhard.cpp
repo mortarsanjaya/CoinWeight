@@ -72,8 +72,6 @@ template <size_t n> const size_t first_digit_base(const size_t k) {
 
 
 //***************************************************** State and Strategy
-
-
 enum class ComputerHard::State::Type {
 	ZeroInfo,		// Partition consists of one set, all possibilities remain
 	OneVsOne,		// Partition consists of two sets, each one fake coins

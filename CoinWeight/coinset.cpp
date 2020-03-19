@@ -12,13 +12,13 @@
 
 
 
-//***************************************************** Constructor
+//***************************************************** Constructors
 CoinSet::CoinSet(int numOfCoins, int numOfFakeCoins) :
 	coins(numOfCoins, true),
 	numOfFakeCoins(numOfFakeCoins)
 {
 	if (numOfFakeCoins < 0 || numOfFakeCoins > numOfCoins) {
-		throw CoinSetFail("Bad number of fake coins: " +
+		throw CoinSetFailure("Bad number of fake coins: " +
 							std::to_string(numOfFakeCoins) +
 							" out of " + std::to_string(numOfCoins));
 	}
@@ -79,5 +79,7 @@ const int CoinSet::guessFakes(std::vector<size_t> guess) const {
 
 
 //***************************************************** CoinSetFail
-CoinSetFail::CoinSetFail(std::string message) : message{message} {}
-const std::string &CoinSetFail::what() const { return message; }
+CoinSetFailure::CoinSetFailure(std::string message) : Exception{message} {}
+const std::string CoinSetFailure::headerMessage() const {
+    return "Coin Set";
+}
