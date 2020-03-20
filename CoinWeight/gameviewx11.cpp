@@ -110,7 +110,12 @@ void GameViewX11::drawGamePlayScreen(
     }
 }
 
-void GameViewX11::drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) {
+void GameViewX11::drawGameOverScreen(
+    bool isWin,
+    size_t numOfComparisonsLeft,
+    size_t numOfComparisonsCap,
+    std::vector<size_t> finalGuess)
+{
     coreGraphics.clear();
     
     if (isWin) { coreGraphics.drawString(300, 200, "You Win!"); }
@@ -118,4 +123,10 @@ void GameViewX11::drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, si
     coreGraphics.drawString(300, 300,
         "Number of comparisons left: " + std::to_string(numOfComparisonsLeft) +
         " out of " + std::to_string(numOfComparisonsCap));
+    coreGraphics.drawString(300, 400, "Final guess: ");
+    std::string guessStr;
+    for (size_t n : finalGuess) {
+        guessStr += (std::to_string(n) + " ");
+    }
+    coreGraphics.drawString(300, 420, guessStr);
 }

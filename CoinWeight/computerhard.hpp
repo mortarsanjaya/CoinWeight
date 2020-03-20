@@ -27,13 +27,12 @@ class ComputerHard : public Computer {
 	std::unique_ptr<State> state;
 	Strategy strategy;
 	
-	// Modifies partition so it is ready for guessing or weighing
-	const Strategy formStrategy();
-	
-	// Overriding functions
+    // Overriding functions
+	void beforeWeigh() override;
 	const Weighing pickToWeigh() const override;
 	void afterWeigh(int weighResult) override;
 	const std::vector<size_t> pickGuesses() const override;
+    const bool readyToGuess() const override;
 	
 public:
 	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);

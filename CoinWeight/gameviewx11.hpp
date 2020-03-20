@@ -13,6 +13,7 @@
 #include "gameview.hpp"
 #include "x11graphics.hpp"
 #include <string>
+#include <vector>
 
 class GameViewX11 : public GameView {
 	X11Graphics coreGraphics;
@@ -33,7 +34,11 @@ public:
         size_t numOfComparisonsCap,
         std::vector<std::pair<Weighing, int>> gameHistory
         ) override;
-    void drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) override;
+    void drawGameOverScreen(
+        bool isWin,
+        size_t numOfComparisonsLeft,
+        size_t numOfComparisonsCap,
+        std::vector<size_t> finalGuess) override;
 };
 
 #endif

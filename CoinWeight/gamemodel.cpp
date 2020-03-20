@@ -8,6 +8,7 @@
 
 #include "gamemodel.hpp"
 #include "computerhard.hpp"
+#include <unistd.h>
 
 //***************************************************** Constructor
 GameModel::GameModel() : gameCore{}, computer{}, page{Page::Main},
@@ -179,6 +180,13 @@ void GameModel::updateGamePlayPage(char inp) {
 
 
 void GameModel::compareWeight() {
+    if (computer != nullptr) {
+        computer->beforeWeigh();
+        const Weighing compWeigh = computer->pickToWeigh();
+        for (size_t n : compWeigh.leftGroup) { coinStates[n] = 1; }
+        for (size_t n : compWeigh.rightGroup) { coinStates[n] = 2; }
+    }
+    
     Weighing weighing;
     for (int i = 0; i < coinStates.size(); ++i) {
         if (coinStates[i] == 1) {
@@ -188,18 +196,27 @@ void GameModel::compareWeight() {
         }
         coinStates[i] = 0;
     }
+    
     pageHighlight = 0;
     int weighingResult = gameCore->compareWeight(weighing);
+    if (computer != nullptr) {
+        computer->afterWeigh(weighingResult);
+    }
 }
 
 void GameModel::guessFakeCoins() {
-    std::vector<size_t> guess;
+    if (computer != nullptr) {
+        const std::vector<size_t> compGuess = computer->pickGuesses();
+        for (size_t n : compGuess) { coinStates[n] = 1; }
+    }
+    
     for (int i = 0; i < coinStates.size(); ++i) {
         if (coinStates[i] == 1) {
-            guess.push_back(i);
+            finalGuess.push_back(i);
         }
     }
-    int guessResult = gameCore->guessFakeCoins(guess);
+    
+    int guessResult = gameCore->guessFakeCoins(finalGuess);
     pageHighlight = guessResult;
 }
 
@@ -230,7 +247,8 @@ void GameModel::updateView(GameView &gameView) {
             break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap());
+                gameCore->numOfWeighingsCap(),
+                finalGuess);
             break;
     }
 }
@@ -272,18 +290,27 @@ void GameModel::processInput(Input inp) {
             break;
             
         case Page::GamePlay:
-            switch (inp.inputType()) {
-                case Input::Type::Char:
-                    if (inp.whatChar() == 'g') {
-                        guessFakeCoins();
-                        switchFromGamePlayPage();
-                    } else {
-                        updateGamePlayPage(inp.whatChar());
-                    }
-                    break;
-                case Input::Type::Arrow:
-                    updateGamePlayPage(inp.whatArrow());
-                    break;
+            if (computer == nullptr) {
+                switch (inp.inputType()) {
+                    case Input::Type::Char:
+                        if (inp.whatChar() == 'g') {
+                            guessFakeCoins();
+                            switchFromGamePlayPage();
+                        } else {
+                            updateGamePlayPage(inp.whatChar());
+                        }
+                        break;
+                    case Input::Type::Arrow:
+                        updateGamePlayPage(inp.whatArrow());
+                        break;
+                }
+            } else if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
+                if (gameCore->numOfWeighingsLeft() != 0 && !computer->readyToGuess()) {
+                    updateGamePlayPage('w');
+                } else {
+                    guessFakeCoins();
+                    switchFromGamePlayPage();
+                }
             }
             break;
             

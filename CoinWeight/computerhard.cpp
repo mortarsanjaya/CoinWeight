@@ -113,7 +113,7 @@ ComputerHard::~ComputerHard() {}
 
 
 //***************************************************** Non-overriding functions
-const ComputerHard::Strategy ComputerHard::formStrategy() {
+void ComputerHard::beforeWeigh() {
 
 	auto splitLastToThree = [this](const size_t twoSetSize) -> void {
 		std::vector<size_t> backSet = state->partition.back();
@@ -139,7 +139,7 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 			size_t setSize = state->partition[0].size();
 			if (setSize == 2) {
 				readyToSendMove();
-				return Strategy::Guess;
+				strategy = Strategy::Guess;
 			}
 			// Small case removed
 			
@@ -148,15 +148,17 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 				splitLastToThree(pairSize);
 				
 				readyToSendMove();
-				return Strategy::Split2;
+				strategy = Strategy::Split2;
 			} else {
 				const size_t pairSize = (state->partition[0].size() + 1) / 3;
 				splitLastToThree(pairSize);
 				
 				readyToSendMove();
-				return Strategy::Split3Step1;
+				strategy = Strategy::Split3Step1;
 			}
+            break;
 		}
+        
 		case State::Type::OneVsOne:
 		// Partition consists of two sets, where the second set is always set to
 		//	 size greater than one if possible
@@ -166,16 +168,18 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 			
 			if (state->partition[1].size() == 1) {
 				readyToSendMove();
-				return Strategy::Guess;
+				strategy = Strategy::Guess;
 			} else {
 				const size_t pairSize = (state->partition[1].size() + 2) / 3;
 				splitLastToThree(pairSize);
 				std::swap(state->partition[0], state->partition[2]);
 				
 				readyToSendMove();
-				return Strategy::OneVsOne;
+				strategy = Strategy::OneVsOne;
 			}
+            break;
 		}
+        
 		case State::Type::Split3Case1:
 		// Partition consists of three sets, first two set is of equal size
 		// Either this first two contains one fake coin each, or the third one contains two fake coins
@@ -200,8 +204,10 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 			std::swap(state->partition[2], state->partition[1]);
 			
 			readyToSendMove();
-			return Strategy::Split3Step2Case1;
+			strategy = Strategy::Split3Step2Case1;
+            break;
 		}
+        
 		case State::Type::Split3Case2:
 		// Partition consists of two sets, where the first set contains at least one fake coin
 		// Change into a set of two, last set for the "remainder" coin (if any)
@@ -223,8 +229,10 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
 			state->partition.push_back(lastBit);
 			
 			readyToSendMove();
-			return Strategy::Split3Step2Case2;
+			strategy = Strategy::Split3Step2Case2;
+            break;
 		}
+        
 		default: // Should not happen
 			throw;
 	}
@@ -404,9 +412,27 @@ void ComputerHard::afterWeigh(const int weighResult) {
 }
 
 const std::vector<size_t> ComputerHard::pickGuesses() const {
+    std::vector<size_t> guess;
+    for (std::vector<size_t> single_partition : state->partition) {
+        for (size_t element : single_partition) {
+            guess.push_back(element);
+        }
+    }
+    return guess;
+    /*
 	if (state->partition.size() == 2) {
 		return std::vector<size_t>{state->partition[0][0], state->partition[1][0]};
 	} else {
 		return state->partition[0];
 	}
+    */
+}
+
+const bool ComputerHard::readyToGuess() const {
+    switch (state->partition.size()) {
+        case 1:     return (state->partition[0].size() == 2);
+        case 2:     return (state->partition[0].size() == 1 &&
+                            state->partition[1].size() == 1);
+        default:    return false;
+    }
 }

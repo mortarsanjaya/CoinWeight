@@ -51,6 +51,7 @@ class GameModel {
     std::vector<int> coinStates;
     int pageHighlight;
     GameSettings gameSettings;
+    std::vector<size_t> finalGuess;
     
     /*
         computer is set to NULL if the player is a Human
