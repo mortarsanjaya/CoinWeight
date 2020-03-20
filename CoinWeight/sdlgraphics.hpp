@@ -10,10 +10,12 @@
 #define sdlgraphics_hpp
 
 #include "SDL2/SDL.h"
+#include <string>
 
 class SDLGraphics {
     SDL_Window *window;
     SDL_Renderer *renderer;
+    SDL_Surface *surface;
     
 public:
     SDLGraphics();

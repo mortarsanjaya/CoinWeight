@@ -10,14 +10,13 @@
 #define gamecontrollersdl_hpp
 
 #include "SDL2/SDL.h"
-#include "gameengine.hpp"
+#include "gamemodel.hpp"
 
 class GameControllerSDL {
     SDL_Event event;
-    GameEngine *gameEngine;
     
 public:
-    GameControllerSDL(GameEngine *gameEngine);
+    GameControllerSDL();
     void startEventLoop();
 };
 

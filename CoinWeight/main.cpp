@@ -9,7 +9,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "gameengine.hpp"
+#include "gamemodel.hpp"
 #include "human.hpp"
 #include "computerhard.hpp"
 #include "x11graphics.hpp"
@@ -19,50 +19,13 @@
 using namespace std;
 
 int main() {
-    std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
-    GameEngine gameEngine(std::move(gameView));
-    GameControllerSDL gameController(&gameEngine);
-    gameController.startEventLoop();
+    //std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
+    //GameModel gameModel(std::move(gameView));
+    //GameControllerSDL gameController(&gameEngine);
+    //gameController.startEventLoop();
+    SDLGraphics graphics;
     
-/*
-	cout << "You are playing a coin weight game.\n";
-	cout << "Number of coins: ";
-	int numOfCoins;
-	cin >> numOfCoins;
-	cout << "\n";
-	
-	cout << "Number of fake coins: 2\n";
-	
-	cout << "Difficulty: ";
-	Game::Level level;
-	cin >> level;
-	cout << "\n";
-	
-	cout << "Please enter the player's type (Human or Computer): ";
-	std::string playerType;
-	cin >> playerType;
-	cout << "\n";
-	
-	std::unique_ptr<Player> player;
-	if (playerType == "Human") {
-		player = std::make_unique<Human>(numOfCoins, 2);
-	} else if (playerType == "Computer") {
-		player = std::make_unique<ComputerHard>(numOfCoins, 2);
-	} else {
-		cerr << "WHAT?" << endl;
-		return 1;
-	}
-	
-	Game game(numOfCoins, std::move(player), level);
-
-	cout << "Game starts!\n";
-	
-	cout << "There are up to " << game.maxNumOfWeighings()
-		<< " weighings available to determine the fake coins.\n";
-		
-	bool isWeigh = true;
-	while (isWeigh) {
-		isWeigh = game.move();
-	}*/
+    graphics.drawText("mytext", 50, 50);
+    SDL_Delay(5000);
 	return 0;
 }

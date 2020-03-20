@@ -8,18 +8,17 @@
 
 #include "gamecontrollersdl.hpp"
 
-GameControllerSDL::GameControllerSDL(GameEngine *gameEngine) {
-    this->gameEngine = gameEngine;
+GameControllerSDL::GameControllerSDL() {
 }
 
 void GameControllerSDL::startEventLoop() {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
-                gameEngine->onKeyPress(event.key.keysym.sym);
+                //gameEngine->onKeyPress(event.key.keysym.sym);
                 break;
             case SDL_QUIT:
-                gameEngine->quit();
+                //gameEngine->quit();
                 break;
         }
     }

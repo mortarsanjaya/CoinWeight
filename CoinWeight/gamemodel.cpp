@@ -8,4 +8,4 @@
 
 #include "gamemodel.hpp"
 
-GameModel::GameModel(std::unique_ptr<GameViewSDL> gameView) : gameView(std::move(gameView)) {}
+//GameModel::GameModel(std::unique_ptr<GameViewSDL> gameView) : gameView(std::move(gameView)) {}

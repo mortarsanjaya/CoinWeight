@@ -6,7 +6,7 @@
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "game.hpp"
+#include "gamecore.hpp"
 
 #include "human.hpp"
 #include "computerhard.hpp"
@@ -23,15 +23,15 @@ template <size_t n> const size_t log_ceil(size_t k) {
 	return res;
 }
 
-const size_t Game::maxComparisons(size_t numOfCoins, Game::Level level) {
+const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) {
 	switch (level) {
-		case Game::Level::Easy:
+		case GameCore::Level::Easy:
 			return 3 * log_ceil<3>(numOfCoins) + 3;
-		case Game::Level::Medium:
+		case GameCore::Level::Medium:
 			return 2 * log_ceil<3>(numOfCoins) + 3;
-		case Game::Level::Hard:
+		case GameCore::Level::Hard:
 			return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
-		case Game::Level::Insane:
+		case GameCore::Level::Insane:
 			return log_ceil<3>((numOfCoins * (numOfCoins - 1)) / 2);
 		default:
 			throw;
@@ -41,7 +41,7 @@ const size_t Game::maxComparisons(size_t numOfCoins, Game::Level level) {
 
 
 //***************************************************** Constructor
-Game::Game(int numOfCoins, std::unique_ptr<Player> player, Level level) :
+GameCore::GameCore(int numOfCoins, std::unique_ptr<Player> player, Level level) :
 	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)),
 	player(std::move(player)),
 	level(level),
@@ -51,28 +51,28 @@ Game::Game(int numOfCoins, std::unique_ptr<Player> player, Level level) :
 
 
 //***************************************************** "Field accessors"
-const size_t Game::numOfCoins() const { return setOfCoins->size(); }
-const size_t Game::numOfFakes() const { return setOfCoins->numOfFakes(); }
-const size_t Game::maxNumOfWeighings() const { return numOfWeighingsCap; }
+const size_t GameCore::numOfCoins() const { return setOfCoins->size(); }
+const size_t GameCore::numOfFakes() const { return setOfCoins->numOfFakes(); }
+const size_t GameCore::maxNumOfWeighings() const { return numOfWeighingsCap; }
 
 
 
 //***************************************************** Public methods
-void Game::compareWeight() {
+void GameCore::compareWeight() {
 	const Weighing &weighing = player->pickToWeigh();
 	const int weighResult = setOfCoins->compareWeight(weighing);
 	player->addToHistory(weighing, weighResult);
 	player->afterWeigh(weighResult);
 }
 
-void Game::guessFakes() {
+void GameCore::guessFakes() {
 	std::vector<size_t> guess = player->pickGuesses();
 	int guessResult = setOfCoins->guessFakes(guess);
 	player->afterGuess(guessResult);
 	player->clearHistory();
 }
 
-const bool Game::move() {
+const bool GameCore::move() {
 	// Initialize by deducing if weighing is allowed, then determine strategy
 	bool isWeigh = (player->numOfWeighings() < maxNumOfWeighings());
 	if (isWeigh) { isWeigh = player->determineStrategy(); }
@@ -85,21 +85,21 @@ const bool Game::move() {
 
 
 //***************************************************** Input operator
-std::istream &operator>>(std::istream &in, Game::Level &level) {
+std::istream &operator>>(std::istream &in, GameCore::Level &level) {
 	std::string lvString;
 	while (true) {
 		in >> lvString;
 		if (lvString == "Easy") {
-			level = Game::Level::Easy;
+			level = GameCore::Level::Easy;
 			break;
 		} else if (lvString == "Medium") {
-			level = Game::Level::Medium;
+			level = GameCore::Level::Medium;
 			break;
 		} else if (lvString == "Hard") {
-			level = Game::Level::Hard;
+			level = GameCore::Level::Hard;
 			break;
 		} else if (lvString == "Insane") {
-			level = Game::Level::Insane;
+			level = GameCore::Level::Insane;
 			break;
 		}
 	}

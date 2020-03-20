@@ -20,7 +20,7 @@
 
 
 // Only supports 2-fake-coins game currently
-class Game {
+class GameCore {
 public:
 	enum class Level { Easy, Medium, Hard, Insane };
 	
@@ -31,7 +31,7 @@ private:
 	size_t numOfWeighingsCap;
 	
 public:
-	Game(int numOfCoins, std::unique_ptr<Player> player, Level level);
+	GameCore(int numOfCoins, std::unique_ptr<Player> player, Level level);
 	
 	// "Field accessors"
 	const size_t numOfCoins() const;
@@ -47,6 +47,6 @@ public:
 	static const size_t maxComparisons(size_t numOfCoins, Level level);
 };
 
-std::istream &operator>>(std::istream &in, Game::Level &level);
+std::istream &operator>>(std::istream &in, GameCore::Level &level);
 
 #endif

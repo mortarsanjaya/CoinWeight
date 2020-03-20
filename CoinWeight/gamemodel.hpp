@@ -9,42 +9,72 @@
 #ifndef gamemodel_hpp
 #define gamemodel_hpp
 
-#include "game.hpp"
+#include <memory>
+#include "gamecore.hpp"
+#include "computer.hpp"
 #include "gameview.hpp"
+#include "exception.hpp"
 
 class GameModel {
-    enum class GamePhase { Start, Instruction, Credits, OptionSelection, Gameplay, EndScreen };
-    enum class CoinState { Scale1, Scale2, NotSelected };
+    enum class Page {
+        Main,
+        Instruction,
+        Credit,
+        GameOption,  // Num of coins, Difficulty, Human/Computer
+        GamePlay,    // Coins, just coins, color depends
+        GameOver     // You win! You lose!
+    };
     
-    std::unique_ptr<Game> game;
-    std::unique_ptr<GameViewSDL> gameView;
-    GamePhase gamePhase;
-    std::vector<CoinState> coinStates;
-    std::string currentInputText;
+    struct GameOption {
+        size_t numOfCoins;
+        GameCore::Level level;
+        bool isHuman;
+    };
+    
+    std::unique_ptr<GameCore> gameCore;
+    std::unique_ptr<Computer> computer;
+    Page page;
+    std::vector<int> coinStates;
+    int pageHighlight;
+    std::unique_ptr<GameOption> gameOption;
+    
     /*
-     options:
-        Start           -> Play, Instructions, Credits (vertical layout)
-        Instruction     -> Return
-        Credits         -> Return
-        OptionSelection -> Number of Coins Input, Level Input, Continue (vertical layout)
-        Gameplay        -> Weigh, Guess, History, each coin
-                    (weigh, guess vertical layout, history to the right of weigh, below are coins in a rectangle)
-        EndScreen       -> Play Again, Quit (vertical layout)
-     
-     options is resized every game phase change
-     
-     selectionX, selectionY indicates indexes of options that store the current selected option
-        changes according to keyboard presses
-        edge case: only can select a coin with a NotSelected CoinState
+        computer is set to NULL if the player is a Human
+        coinStates: a coin's state is:
+            0, if it is not in any group
+            1, if it is in group 1
+            2, if it is in group 2
+        pageHighlight:
+            If Page is Main or Game Option, either 0, 1, 2 based on
+                which button to highlight
+            If Page is Game Play, indicates which coin is being highlighted
+            If Page is Game Over, 0 indicates loss, 1 indicate win
     */
-    int selectionX, selectionY;
-    std::vector<std::vector<std::string>> options;
+    
     
 public:
-    GameModel(std::unique_ptr<GameViewSDL> gameView);
-    void updateGameView();
-    void quit();
-    void onKeyPress(SDL_Keycode keyCode);
+    GameModel();
+    
+    enum class KeyboardArrowInput {
+        Up,
+        Down,
+        Left,
+        Right
+    };
+    
+    // Updates the game view
+    void updateView(GameView &gameView);
+    
+    // Updates game page based on input
+    // More documentation on gamemodel.cpp
+    void updatePage(char inp);
+    void updatePage(KeyboardArrowInput inp);
 };
 
-#endif /* gamemodel_hpp */
+class GameModelFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    GameModelFailure(std::string coreMessage);
+};
+
+#endif

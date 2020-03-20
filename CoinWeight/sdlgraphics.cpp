@@ -10,6 +10,7 @@
 #include <string>
 #include "sdlgraphics.hpp"
 #include "sdlexception.hpp"
+#include "SDL2_ttf/SDL_ttf.h"
 
 SDLGraphics::SDLGraphics() {
     // Initialize everything
@@ -25,6 +26,12 @@ SDLGraphics::SDLGraphics() {
         throw SDLException("Unable to create window.");
     }
     
+    surface = SDL_GetWindowSurface(window);
+    if (surface == nullptr) {
+        SDL_Log("Unable to get window surface: %s", SDL_GetError());
+        throw SDLException("Unable to get surface.");
+    }
+    
     // Create a Renderer
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (renderer == nullptr) {
@@ -34,7 +41,22 @@ SDLGraphics::SDLGraphics() {
 }
     
 void SDLGraphics::drawText(std::string text, int x, int y, bool selected) {
+    TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+    SDL_Color White = {255, 255, 255};
+
+    SDL_Surface* surfaceMessage = TTF_RenderText_Solid(Sans, text.c_str(), White);
+
+    SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+
+    SDL_Rect Message_rect; //create a rect
+    Message_rect.x = x;  //controls the rect's x coordinate
+    Message_rect.y = y; // controls the rect's y coordinte
+    Message_rect.w = 100; // controls the width of the rect
+    Message_rect.h = 100; // controls the height of the rect
+
+    SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
     
+    SDL_RenderPresent(renderer);
 }
     
 void SDLGraphics::drawInputBox(std::string text, int x, int y, bool selected) {
