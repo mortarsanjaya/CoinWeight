@@ -17,7 +17,7 @@ class Computer {
 	size_t numOfFakes;
 	
 public:
-	Computer(size_t coinSetSize, size_t numOfFakes);
+	Computer(size_t coinSetSize, size_t numOfFakes = 2);
 	virtual ~Computer();
 	
 	// Accessor functions
