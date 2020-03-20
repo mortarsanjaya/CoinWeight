@@ -61,6 +61,8 @@ X11Graphics::X11Graphics(std::string windowName) {
     
 	XMapRaised(display, window);
 	XFlush(display);
+ 
+    sleep(1);
 }
 
 X11Graphics::~X11Graphics() {
