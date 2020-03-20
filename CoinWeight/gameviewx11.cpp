@@ -16,8 +16,8 @@ GameViewX11::GameViewX11() : GameView{}, coreGraphics{"CoinWeight"} {}
 
 //***************************************************** Private methods
 void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
-    const int x_pos = 200 * (1 + coinIndex % 10);
-    const int y_pos = 200 * (1 + coinIndex / 10);
+    const int x_pos = 200 + 50 * (coinIndex % 10);
+    const int y_pos = 200 + 50 * (coinIndex / 10);
     switch (coinState) {
         case 0: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold); break;
         case 1: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red); break;
@@ -79,8 +79,12 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
         50, stringHeight);
 }
 
-void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates, size_t numOfComparisonsLeft,
-    size_t numOfComparisonsCap, std::vector<std::pair<Weighing, int>> gameHistory)
+void GameViewX11::drawGamePlayScreen(
+    std::vector<int> coinStates,
+    int highlightedCoin,
+    size_t numOfComparisonsLeft,
+    size_t numOfComparisonsCap,
+    std::vector<std::pair<Weighing, int>> gameHistory)
 {
     coreGraphics.clear();
     
@@ -92,7 +96,14 @@ void GameViewX11::drawGamePlayScreen(std::vector<int> coinStates, size_t numOfCo
     const std::string numOfCompCapStr = std::to_string(numOfComparisonsCap);
     coreGraphics.drawString(30, 30, "Number of comparisons remaining: " + numOfCompLeftStr + " out of " + numOfCompCapStr);
     coreGraphics.drawString(30, 100, "History:");
+    const int x_pos = 194 + 50 * (highlightedCoin % 10);
+    const int y_pos = 188 + 50 * (highlightedCoin / 10);
+    coreGraphics.drawCircle(x_pos, y_pos, 15, coreGraphics.Black);
     
+    // HISTORY...
+    if (!gameHistory.empty()) {
+        coreGraphics.drawString(30, 110, std::to_string(gameHistory.back().second));
+    }
 }
 
 void GameViewX11::drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) {

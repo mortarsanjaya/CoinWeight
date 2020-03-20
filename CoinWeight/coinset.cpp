@@ -71,9 +71,9 @@ const int CoinSet::guessFakes(std::vector<size_t> guess) const {
 	}
 	// Otherwise, valid guess; check correctness
 	for (int i = 0; i < guess.size(); ++i) {
-		if (coins[guess[i]]) return 1; // wrong guess
+		if (coins[guess[i]]) return 0; // wrong guess
 	}
-	return 0;
+	return 1;
 }
 
 

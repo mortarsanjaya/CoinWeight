@@ -63,12 +63,23 @@ class GameModel {
     
     //*****************************************************
     
-    void updateFromMainPage(Input inp);
-    void updateFromInstructionPage(Input inp);
-    void updateFromCreditPage(Input inp);
-    void updateFromGameOptionPage(Input inp);
-    void updateFromGamePlayPage(Input inp);
-    void updateFromGameOverPage(Input inp);
+    // Switching pages, including necessary cleanups and setups
+    void switchFromMainPage();
+    void switchFromInstructionPage();
+    void switchFromCreditPage();
+    void switchFromGameOptionPage();
+    void switchFromGamePlayPage();
+    void switchFromGameOverPage();
+    
+    // Updates current page
+    void updateMainPage(Input::Arrow inp);
+    void updateGameOptionPage(Input::Arrow inp);
+    void updateGamePlayPage(Input::Arrow inp);
+    void updateGamePlayPage(char inp);
+    
+    // Execute moves in game
+    void compareWeight();
+    void guessFakeCoins();
     
 public:
     GameModel();
@@ -76,7 +87,8 @@ public:
     // Updates the game view
     void updateView(GameView &gameView);
     
-    void updatePage(Input inp);
+    // Process an input
+    void processInput(Input inp);
 };
 
 

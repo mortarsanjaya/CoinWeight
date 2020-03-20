@@ -16,5 +16,5 @@ Input::Input(Arrow inp) : arrowInp{inp}, type{Type::Arrow} {}
 
 //***************************************************** Public methods
 const Input::Type Input::inputType() const { return type; }
-const char whatChar() const { return charInp; }
-const Input::Arrow whatArrow() const { return arrowInp; }
+const char Input::whatChar() const { return charInp; }
+const Input::Arrow Input::whatArrow() const { return arrowInp; }

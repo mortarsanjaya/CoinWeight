@@ -107,6 +107,7 @@
 			children = (
 				866BE31C241F1FB400DDD242 /* gamecontrollerx11.cpp */,
 				866BE31D241F1FB400DDD242 /* gamecontrollerx11.hpp */,
+				869BBCD624241CD90002CDED /* Input */,
 			);
 			name = "Game Controller";
 			sourceTree = "<group>";
@@ -190,7 +191,6 @@
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				866BE31F241F1FC100DDD242 /* Game Controller */,
-				869BBCD624241CD90002CDED /* Input */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;

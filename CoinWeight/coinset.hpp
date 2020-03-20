@@ -40,8 +40,8 @@ public:
 	//       O(1) if the two sets have different sizes
 	const int compareWeight(const Weighing &weighing) const;
 	
-	// Returns 0 if the player made a correct guess
-	// Returns 1 if the player made a valid but wrong guess
+	// Returns 1 if the player made a correct guess
+	// Returns 0 if the player made a valid but wrong guess
 	// Returns 2 if the player made an invalid guess
 	// time: O(k log k), where k = number of fake coins
 	const int guessFakes(std::vector<size_t> guess) const;

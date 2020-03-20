@@ -14,7 +14,7 @@
 #include "x11graphics.hpp"
 #include <string>
 
-class GameViewX11 : GameView {
+class GameViewX11 : public GameView {
 	X11Graphics coreGraphics;
     void drawCoin(int coinState, size_t coinIndex);
     static const int coinRadius = 30;
@@ -26,8 +26,13 @@ public:
     void drawCreditScreen() override;
     void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
             std::string gameLevel, bool isHuman) override;
-    void drawGamePlayScreen(std::vector<int> coinStates, size_t numOfComparisonsLeft,
-            size_t numOfComparisonsCap, std::vector<std::pair<Weighing, int>> gameHistory) override;
+    void drawGamePlayScreen(
+        std::vector<int> coinStates,
+        int highlightedCoin,
+        size_t numOfComparisonsLeft,
+        size_t numOfComparisonsCap,
+        std::vector<std::pair<Weighing, int>> gameHistory
+        ) override;
     void drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft, size_t numOfComparisonsCap) override;
 };
 

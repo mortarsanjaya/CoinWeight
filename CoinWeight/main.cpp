@@ -11,19 +11,37 @@
 #include <string>
 #include "gamemodel.hpp"
 #include "gameviewx11.hpp"
+#include "input.hpp"
 
 using namespace std;
 
 int main() {
-    unique_ptr<GameViewX11> gameView = make_unique<GameViewX11>();
-    sleep(2);
-    std::vector<int> coinStates(39, 0);
-    coinStates[12] = 1;
-    coinStates[20] = 2;
-    std::vector<std::pair<Weighing, int>> gameHistory;
-    gameView->drawCreditScreen();
-    int x;
-    cin >> x;
+    std::unique_ptr<GameModel> gameModel;
+    std::unique_ptr<GameViewX11> gameView;
+    gameModel = make_unique<GameModel>();
+    gameView = make_unique<GameViewX11>();
+    sleep(1);
+    gameModel->updateView(*gameView);
+    sleep(1);
+    while (true) {
+        std::string s;
+        cin >> s;
+        if (cin.fail()) break;
+        Input inp(s[0]);
+        if (s[0] == 'n') {
+            inp = Input('\n');
+        } else if (s[0] == 'u') {
+            inp = Input(Input::Arrow::Up);
+        } else if (s[0] == 'j') {
+            inp = Input(Input::Arrow::Down);
+        } else if (s[0] == 'h') {
+            inp = Input(Input::Arrow::Left);
+        } else if (s[0] == 'k') {
+            inp = Input(Input::Arrow::Right);
+        }
+        gameModel->processInput(inp);
+        gameModel->updateView(*gameView);
+    }
 }
 
 /*

@@ -78,6 +78,7 @@ const int GameCore::compareWeight(const Weighing &weighing) {
     if (numOfWeighingsCounter == 0) throw "Oops. You run out of comparisons.";
     const int result = setOfCoins->compareWeight(weighing);
     history.emplace_back(weighing, result);
+    --numOfWeighingsCounter;
     return result;
 }
 
