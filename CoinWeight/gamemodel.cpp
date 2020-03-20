@@ -167,7 +167,9 @@ void GameModel::updateGamePlayPage(char inp) {
             coinStates[pageHighlight] = CoinState::Group2;
             break;
         case 'w':
-            compareWeight();
+            if (gameCore->numOfWeighingsLeft() != 0) {
+                compareWeight();
+            }
             break;
         default:
             break;

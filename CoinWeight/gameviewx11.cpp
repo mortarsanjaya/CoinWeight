@@ -94,7 +94,11 @@ void GameViewX11::drawGamePlayScreen(
     
     const std::string numOfCompLeftStr = std::to_string(numOfComparisonsLeft);
     const std::string numOfCompCapStr = std::to_string(numOfComparisonsCap);
-    coreGraphics.drawString(30, 30, "Number of comparisons remaining: " + numOfCompLeftStr + " out of " + numOfCompCapStr);
+    coreGraphics.drawString(30, 30, "Number of comparisons remaining: " + numOfCompLeftStr +
+                                    " out of " + numOfCompCapStr);
+    if (numOfComparisonsLeft == 0) {
+        coreGraphics.drawString(30, 50, "No more comparisons!");
+    }
     coreGraphics.drawString(30, 100, "History:");
     const int x_pos = 194 + 50 * (highlightedCoin % 10);
     const int y_pos = 188 + 50 * (highlightedCoin / 10);
