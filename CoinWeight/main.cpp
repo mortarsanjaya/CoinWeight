@@ -20,9 +20,7 @@ int main() {
     std::unique_ptr<GameViewX11> gameView;
     gameModel = make_unique<GameModel>();
     gameView = make_unique<GameViewX11>();
-    sleep(1);
     gameModel->updateView(*gameView);
-    sleep(1);
     while (true) {
         std::string s;
         cin >> s;
