@@ -12,6 +12,7 @@
 #include <vector>
 #include <utility>
 #include "weighing.hpp"
+#include "input.hpp"
 
 class GameView {
 public:
@@ -34,6 +35,8 @@ public:
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
         std::vector<size_t> finalGuess) = 0;
+    virtual void receiveInput() = 0;
+    virtual const Input lastInput() const = 0;
 };
 
 #endif
