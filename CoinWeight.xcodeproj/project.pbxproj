@@ -70,22 +70,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8607519B240F0C6E007A96E5 /* Core Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				866FC82D2409EF9600B3740D /* x11graphics.cpp */,
-				866FC82E2409EF9600B3740D /* x11graphics.hpp */,
-			);
-			name = "Core Graphics";
-			sourceTree = "<group>";
-		};
 		8607519F240F0EBE007A96E5 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
 				860751A1240F2844007A96E5 /* gameview.hpp */,
-				8607519C240F0EAE007A96E5 /* gameviewx11.cpp */,
-				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
-				8607519B240F0C6E007A96E5 /* Core Graphics */,
+				86980C062425E101001C8481 /* X11 */,
 			);
 			name = "Game View";
 			sourceTree = "<group>";
@@ -141,6 +130,17 @@
 				867EFB2424160820004C43A3 /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		86980C062425E101001C8481 /* X11 */ = {
+			isa = PBXGroup;
+			children = (
+				8607519C240F0EAE007A96E5 /* gameviewx11.cpp */,
+				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
+				866FC82E2409EF9600B3740D /* x11graphics.hpp */,
+				866FC82D2409EF9600B3740D /* x11graphics.cpp */,
+			);
+			name = X11;
 			sourceTree = "<group>";
 		};
 		869BBCD624241CD90002CDED /* Input */ = {
