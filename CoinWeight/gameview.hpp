@@ -17,11 +17,14 @@
 class GameView {
 public:
     GameView() = default;
+    
+    // Drawing functions
     virtual void drawMainScreen(int screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
     virtual void drawGameOptionScreen(
-        int screenHighlight, size_t numOfCoins,
+        int screenHighlight,
+        size_t numOfCoins,
         std::string gameLevel,
         bool isHuman) = 0;
     virtual void drawGamePlayScreen(
@@ -35,6 +38,8 @@ public:
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
         std::vector<size_t> finalGuess) = 0;
+        
+    // Input handling functions
     virtual void receiveInput() = 0;
     virtual const Input lastInput() const = 0;
 };
