@@ -15,17 +15,19 @@
 #include "x11graphics.hpp"
 #include "sdlgraphics.hpp"
 #include "gamecontrollersdl.hpp"
+#include "input.hpp"
 
 using namespace std;
 
 int main() {
-    //std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
+    std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
     //GameModel gameModel(std::move(gameView));
     //GameControllerSDL gameController(&gameEngine);
     //gameController.startEventLoop();
-    SDLGraphics graphics;
-    
-    graphics.drawText("mytext", 50, 50);
-    SDL_Delay(5000);
+    while (true) {
+        gameView->receiveInput();
+        gameView->lastInput();
+        gameView->drawMainScreen(1);
+    }
 	return 0;
 }
