@@ -126,7 +126,7 @@ void GameViewX11::drawGameOverScreen(
     coreGraphics.drawString(300, 400, "Final guess: ");
     std::string guessStr;
     for (size_t n : finalGuess) {
-        guessStr += (std::to_string(n) + " ");
+        guessStr += (std::to_string(n + 1) + " ");
     }
     coreGraphics.drawString(300, 420, guessStr);
 }
@@ -138,7 +138,18 @@ void GameViewX11::receiveInput() {
 const Input GameViewX11::lastInput() const {
     XEvent event = coreGraphics.lastInput();
     if (event.type == KeyPress) {
-        
+        switch (XLookupKeysym(&event.xkey, 0)) {
+            case XK_1:          return Input('1');
+            case XK_2:          return Input('2');
+            case XK_w:          return Input('w');
+            case XK_g:          return Input('g');
+            case XK_Return:     return Input('\n');
+            case XK_Left:       return Input(Input::Arrow::Left);
+            case XK_Right:      return Input(Input::Arrow::Right);
+            case XK_Up:         return Input(Input::Arrow::Up);
+            case XK_Down:       return Input(Input::Arrow::Down);
+            default:            return Input();
+        }
     } else {
         return Input();
     }

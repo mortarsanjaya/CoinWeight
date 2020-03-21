@@ -139,7 +139,7 @@ void GameModel::updateGamePlayPage(Input::Arrow inp) {
             }
             break;
         case Input::Arrow::Down:
-            if (pageHighlight <= coinStates.size() - coinsPerRow) {
+            if (pageHighlight < coinStates.size() - coinsPerRow) {
                 pageHighlight += coinsPerRow;
             }
             break;
