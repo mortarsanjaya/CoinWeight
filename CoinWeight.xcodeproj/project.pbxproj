@@ -88,14 +88,6 @@
 			name = Exceptions;
 			sourceTree = "<group>";
 		};
-		866BE31F241F1FC100DDD242 /* Game Controller */ = {
-			isa = PBXGroup;
-			children = (
-				869BBCD624241CD90002CDED /* Input */,
-			);
-			name = "Game Controller";
-			sourceTree = "<group>";
-		};
 		866FC8302409F74D00B3740D /* Coin Set */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,9 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
+				869BBCD624241CD90002CDED /* Input */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				8607519F240F0EBE007A96E5 /* Game View */,
-				866BE31F241F1FC100DDD242 /* Game Controller */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
