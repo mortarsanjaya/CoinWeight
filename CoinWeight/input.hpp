@@ -16,19 +16,20 @@
 */
 class Input {
 public:
-    enum class Type { Char, Arrow };
+    enum class Type { Unknown , Char, Arrow };
     enum class Arrow { Up, Down, Left, Right };
     
 private:
+    Type type;
     union {
         char charInp;
         Arrow arrowInp;
     };
-    Type type;
     
 public:
     Input(char inp);
     Input(Arrow inp);
+    Input();
     const Type inputType() const;
     const char whatChar() const;
     const Arrow whatArrow() const;

@@ -44,6 +44,9 @@ public:
     void drawCircle(int x_pos, int y_pos, unsigned int radius, int color);
 	void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
     void drawRectangle(int x_pos, int y_pos, int height, int width);
+    
+    void receiveInput();
+    const XEvent lastInput() const;
 };
 
 

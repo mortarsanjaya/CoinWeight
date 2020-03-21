@@ -130,3 +130,16 @@ void GameViewX11::drawGameOverScreen(
     }
     coreGraphics.drawString(300, 420, guessStr);
 }
+
+void GameViewX11::receiveInput() {
+    coreGraphics.receiveInput();
+}
+
+const Input GameViewX11::lastInput() const {
+    XEvent event = coreGraphics.lastInput();
+    if (event.type == KeyPress) {
+        
+    } else {
+        return Input();
+    }
+}

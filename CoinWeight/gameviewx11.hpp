@@ -39,6 +39,8 @@ public:
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
         std::vector<size_t> finalGuess) override;
+    void receiveInput() override;
+    const Input lastInput() const override;
 };
 
 #endif

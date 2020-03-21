@@ -22,8 +22,7 @@ X11Graphics::X11Graphics(std::string windowName) {
 	window = XCreateSimpleWindow(display, XRootWindow(display, screen), 0, 0,
 		width, height, 1, XBlackPixel(display, screen), XWhitePixel(display, screen));
 		
-	XSelectInput(display, window, KeyPressMask | KeyReleaseMask |
-        ButtonPressMask | ButtonReleaseMask);
+	XSelectInput(display, window, KeyPressMask);
         
     XStoreName(display, window, windowName.c_str());
 
@@ -107,6 +106,13 @@ void X11Graphics::drawRectangle(int x_pos, int y_pos, int width, int height) {
     XFlush(display);
 }
 
+void X11Graphics::receiveInput() {
+    XNextEvent(display, &event);
+}
+
+const XEvent X11Graphics::lastInput() const {
+    return event;
+}
 
 
 //*************************************************************** X11 Graphics Failure

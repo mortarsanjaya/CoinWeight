@@ -9,9 +9,9 @@
 #include "input.hpp"
 
 //***************************************************** Constructor
-Input::Input(char inp) : charInp{inp}, type{Type::Char} {}
-Input::Input(Arrow inp) : arrowInp{inp}, type{Type::Arrow} {}
-
+Input::Input(char inp) : type{Type::Char}, charInp{inp} {}
+Input::Input(Arrow inp) : type{Type::Arrow}, arrowInp{inp} {}
+Input::Input() : type{Type::Unknown} {}
 
 
 //***************************************************** Public methods
