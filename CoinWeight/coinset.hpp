@@ -12,8 +12,9 @@
 #include <vector>
 #include <string>
 #include "weighing.hpp"
+#include "exception.hpp"
 
-// Fake coins are lighter thhan real coins
+// Fake coins are lighter than real coins
 class CoinSet {
 	// Set to true if the coin is real and false if the coin is fake
 	std::vector<bool> coins;
@@ -39,8 +40,8 @@ public:
 	//       O(1) if the two sets have different sizes
 	const int compareWeight(const Weighing &weighing) const;
 	
-	// Returns 0 if the player made a correct guess
-	// Returns 1 if the player made a valid but wrong guess
+	// Returns 1 if the player made a correct guess
+	// Returns 0 if the player made a valid but wrong guess
 	// Returns 2 if the player made an invalid guess
 	// time: O(k log k), where k = number of fake coins
 	const int guessFakes(std::vector<size_t> guess) const;
@@ -48,12 +49,11 @@ public:
 
 
 
-class CoinSetFail {
-	std::string message;
-	
+//***************************************************** Coin Set Failure
+class CoinSetFailure : public Exception {
+    const std::string headerMessage() const override;
 public:
-	CoinSetFail(std::string message);
-	const std::string &what() const;
+	CoinSetFailure(std::string message);
 };
 
 #endif

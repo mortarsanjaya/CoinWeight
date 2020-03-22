@@ -16,7 +16,7 @@ class Exception {
     virtual const std::string headerMessage() const = 0;
     
 public:
-    Exception(std::string message);
+    Exception(std::string coreMessage);
     const std::string fullMessage() const;
 };
 

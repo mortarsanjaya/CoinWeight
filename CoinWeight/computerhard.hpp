@@ -9,10 +9,10 @@
 #ifndef computerhard_hpp
 #define computerhard_hpp
 
-#include "player.hpp"
+#include "computer.hpp"
 #include <memory>
 
-class ComputerHard : public Player {
+class ComputerHard : public Computer {
 
 	// States and strategy: How the results are handled
 	struct State {
@@ -27,18 +27,15 @@ class ComputerHard : public Player {
 	std::unique_ptr<State> state;
 	Strategy strategy;
 	
-	// Modifies partition so it is ready for guessing or weighing
-	const Strategy formStrategy();
-	
-	// Overriding functions
-	bool determineStrategy() override;
+    // Overriding functions
+	void beforeWeigh() override;
 	const Weighing pickToWeigh() const override;
 	void afterWeigh(int weighResult) override;
 	const std::vector<size_t> pickGuesses() const override;
-	void afterGuess(int guessResult) const override;
+    const bool readyToGuess() const override;
 	
 public:
-	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins);
+	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);
 	~ComputerHard();
 };
 
