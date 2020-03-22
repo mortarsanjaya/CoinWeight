@@ -103,6 +103,7 @@
 			children = (
 				869C4BD62401BDCD00C3DE84 /* gamecore.cpp */,
 				869C4BD72401BDCD00C3DE84 /* gamecore.hpp */,
+				866FC8302409F74D00B3740D /* Coin Set */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -177,12 +178,9 @@
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
 				869C4BD92401BF6500C3DE84 /* weighing.hpp */,
-				869C4BE424048E4700C3DE84 /* Computer */,
-				866FC8302409F74D00B3740D /* Coin Set */,
-				866FC8312409F75A00B3740D /* Game Core */,
-				869BBCD624241CD90002CDED /* Input */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				8607519F240F0EBE007A96E5 /* Game View */,
+				869BBCD624241CD90002CDED /* Input */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
 			);
 			path = CoinWeight;
@@ -193,6 +191,8 @@
 			children = (
 				86D9C9DC2421AA8A00FEB2B4 /* gamemodel.cpp */,
 				86D9C9DD2421AA8A00FEB2B4 /* gamemodel.hpp */,
+				866FC8312409F75A00B3740D /* Game Core */,
+				869C4BE424048E4700C3DE84 /* Computer */,
 			);
 			name = "Game Model";
 			sourceTree = "<group>";

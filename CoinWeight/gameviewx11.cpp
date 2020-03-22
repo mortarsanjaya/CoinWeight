@@ -139,6 +139,7 @@ const Input GameViewX11::lastInput() const {
     XEvent event = coreGraphics.lastInput();
     if (event.type == KeyPress) {
         switch (XLookupKeysym(&event.xkey, 0)) {
+            case XK_0:          return Input('0');
             case XK_1:          return Input('1');
             case XK_2:          return Input('2');
             case XK_w:          return Input('w');
