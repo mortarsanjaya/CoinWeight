@@ -106,11 +106,11 @@ void X11Graphics::drawRectangle(int x_pos, int y_pos, int width, int height) {
     XFlush(display);
 }
 
-void X11Graphics::nextEvent() {
+void X11Graphics::receiveInput() {
     XNextEvent(display, &event);
 }
 
-const XEvent X11Graphics::getLatestEvent() const {
+const XEvent X11Graphics::lastInput() const {
     return event;
 }
 

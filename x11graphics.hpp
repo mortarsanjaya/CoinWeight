@@ -6,8 +6,8 @@
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef graphics_hpp
-#define graphics_hpp
+#ifndef x11graphics_hpp
+#define x11graphics_hpp
 
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -37,7 +37,7 @@ public:
         Gold,
         Max = Gold
     };
-    static const int defaultFGColor = White;
+    static const int defaultFGColor = Black;
     
     // Drawing functions
     void drawString(int x_pos, int y_pos, const std::string &msg);
@@ -49,8 +49,8 @@ public:
     void clear();
     
     // Functions for events
-    void nextEvent();
-    const XEvent getLatestEvent() const;
+    void receiveInput();
+    const XEvent lastInput() const;
 };
 
 
