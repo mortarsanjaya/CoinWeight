@@ -32,7 +32,7 @@ public:
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<std::pair<Weighing, int>> gameHistory
+        std::vector<Record> gameHistory
         ) override;
     void drawGameOverScreen(
         bool isWin,

@@ -63,9 +63,6 @@ GameCore::GameCore(int numOfCoins, Level level) :
 const size_t GameCore::numOfCoins() const { return setOfCoins->size(); }
 const size_t GameCore::numOfFakes() const { return setOfCoins->numOfFakes(); }
 const GameCore::Level GameCore::gameLevel() const { return level; }
-const std::vector<std::pair<Weighing, int>> GameCore::gameHistory() const {
-    return history;
-}
 const size_t GameCore::numOfWeighingsLeft() const { return numOfWeighingsCounter; }
 const size_t GameCore::numOfWeighingsCap() const {
     return maxComparisons(setOfCoins->size(), level);
@@ -77,7 +74,6 @@ const size_t GameCore::numOfWeighingsCap() const {
 const int GameCore::compareWeight(const Weighing &weighing) {
     if (numOfWeighingsCounter == 0) throw "Oops. You run out of comparisons.";
     const int result = setOfCoins->compareWeight(weighing);
-    history.emplace_back(weighing, result);
     --numOfWeighingsCounter;
     return result;
 }

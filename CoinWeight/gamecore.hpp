@@ -26,7 +26,6 @@ public:
 private:
 	std::unique_ptr<CoinSet> setOfCoins;
 	Level level;
-    std::vector<std::pair<Weighing, int>> history;
 	size_t numOfWeighingsCounter;
  
     // maximum number of comparisons, to initialize the cap
@@ -42,7 +41,6 @@ public:
 	const size_t numOfCoins() const;
 	const size_t numOfFakes() const;
     const Level gameLevel() const;
-    const std::vector<std::pair<Weighing, int>> gameHistory() const;
 	const size_t numOfWeighingsLeft() const;
     const size_t numOfWeighingsCap() const;
  

@@ -15,6 +15,7 @@
 #include "gameview.hpp"
 #include "input.hpp"
 #include "exception.hpp"
+#include "record.hpp"
 
 class GameModel {
     /*
@@ -50,6 +51,7 @@ class GameModel {
     std::unique_ptr<Computer> computer;
     std::vector<int> coinStates;
     int pageHighlight;
+    std::vector<Record> history;
     GameSettings gameSettings;
     std::vector<size_t> finalGuess;
     
@@ -85,11 +87,15 @@ class GameModel {
 public:
     GameModel();
     
+    // Accessor function
+    const std::vector<Record> gameHistory() const;
+    
     // Updates the game view
     void updateView(GameView &gameView);
     
     // Process an input
     void processInput(Input inp);
+
 };
 
 

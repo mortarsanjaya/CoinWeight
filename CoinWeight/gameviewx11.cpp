@@ -84,7 +84,7 @@ void GameViewX11::drawGamePlayScreen(
     int highlightedCoin,
     size_t numOfComparisonsLeft,
     size_t numOfComparisonsCap,
-    std::vector<std::pair<Weighing, int>> gameHistory)
+    std::vector<Record> gameHistory)
 {
     coreGraphics.clear();
     
@@ -106,7 +106,7 @@ void GameViewX11::drawGamePlayScreen(
     
     // HISTORY...
     if (!gameHistory.empty()) {
-        coreGraphics.drawString(30, 110, std::to_string(gameHistory.back().second));
+        coreGraphics.drawString(30, 110, std::to_string(gameHistory.back().result()));
     }
 }
 

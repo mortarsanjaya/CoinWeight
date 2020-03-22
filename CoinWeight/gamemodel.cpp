@@ -199,6 +199,7 @@ void GameModel::compareWeight() {
     
     pageHighlight = 0;
     int weighingResult = gameCore->compareWeight(weighing);
+    history.emplace_back(weighing, weighingResult);
     if (computer != nullptr) {
         computer->afterWeigh(weighingResult);
     }
@@ -223,6 +224,10 @@ void GameModel::guessFakeCoins() {
 
 
 //***************************************************** Public methods
+const std::vector<Record> GameModel::gameHistory() const {
+    return history;
+}
+
 void GameModel::updateView(GameView &gameView) {
     switch (page) {
         case Page::Main:
@@ -243,7 +248,7 @@ void GameModel::updateView(GameView &gameView) {
                 coinStates, pageHighlight,
                 gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap(),
-                gameCore->gameHistory());
+                gameHistory());
             break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),

@@ -11,7 +11,7 @@
 
 #include <vector>
 #include <utility>
-#include "weighing.hpp"
+#include "record.hpp"
 #include "input.hpp"
 
 class GameView {
@@ -32,7 +32,7 @@ public:
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<std::pair<Weighing, int>> gameHistory) = 0;
+        std::vector<Record> gameHistory) = 0;
     virtual void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
