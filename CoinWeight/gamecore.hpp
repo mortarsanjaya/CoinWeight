@@ -21,7 +21,7 @@
 // Only supports 2-fake-coins game currently
 class GameCore {
 public:
-	enum class Level { Easy, Medium, Hard, Insane };
+	enum class Level { Easy, Medium, Hard };
 	
 private:
 	std::unique_ptr<CoinSet> setOfCoins;

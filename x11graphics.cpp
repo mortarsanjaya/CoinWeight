@@ -33,7 +33,7 @@ X11Graphics::X11Graphics(std::string windowName) {
 
     const size_t numColours = Max + 1;
     std::vector<std::string> color_vals = {
-        "white", "black", "red", "green", "blue", "gold"
+        "white", "black", "red", "blue", "gold"
     };
 
     cmap = DefaultColormap(display, DefaultScreen(display));

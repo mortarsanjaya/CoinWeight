@@ -26,8 +26,7 @@ template <size_t n> const size_t log_ceil(size_t k) {
 const std::map<GameCore::Level, std::string> GameCore::levelToStringConversionTable {
     {GameCore::Level::Easy,   "Easy"},
     {GameCore::Level::Medium, "Medium"},
-    {GameCore::Level::Hard,   "Hard"},
-    {GameCore::Level::Insane, "Insane"}
+    {GameCore::Level::Hard,   "Hard"}
 };
 
 
@@ -41,8 +40,6 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) 
 			return 2 * log_ceil<3>(numOfCoins) + 3;
 		case GameCore::Level::Hard:
 			return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
-		case GameCore::Level::Insane:
-			return log_ceil<3>((numOfCoins * (numOfCoins - 1)) / 2);
 		default:
 			throw;
 	}

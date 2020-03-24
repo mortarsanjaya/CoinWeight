@@ -17,6 +17,7 @@
 
 class GameViewX11 : public GameView {
 	X11Graphics coreGraphics;
+    // std::unique_ptr<X11Graphics> historyWindow;
     void drawCoin(int coinState, size_t coinIndex);
     static const int coinRadius = 30;
 

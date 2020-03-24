@@ -32,7 +32,6 @@ public:
         White=0,
         Black,
         Red,
-        Green,
         Blue,
         Gold,
         Max = Gold

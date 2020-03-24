@@ -91,9 +91,6 @@ void GameModel::updateGameOptionPage(Input::Arrow inp) {
                         case GameCore::Level::Hard:
                             gameSettings.level = GameCore::Level::Medium;
                             break;
-                        case GameCore::Level::Insane:
-                            gameSettings.level = GameCore::Level::Hard;
-                            break;
                     }
                     break;
                 case 2:
@@ -115,10 +112,7 @@ void GameModel::updateGameOptionPage(Input::Arrow inp) {
                             gameSettings.level = GameCore::Level::Hard;
                             break;
                         case GameCore::Level::Hard:
-                            gameSettings.level = GameCore::Level::Insane;
-                            break;
-                        case GameCore::Level::Insane:
-                            gameSettings.level = GameCore::Level::Insane;
+                            gameSettings.level = GameCore::Level::Hard;
                             break;
                     }
                     break;
