@@ -8,6 +8,17 @@
 
 #include "record.hpp"
 
-Record::Record(Weighing weighing, int result) : comparedWeight{weighing}, weighResult{result} {}
-const Weighing Record::weighing() { return comparedWeight; }
-const int Record::result() { return weighResult; }
+//***************************************************** Constructor
+Record::Record(CoinStates weighStates, int weighResult) :
+    weighStates{weighStates}, weighResult{weighResult} {}
+
+
+
+//***************************************************** Field accessors
+const CoinStates Record::coinStates() const {
+    return weighStates;
+}
+
+const int Record::result() const {
+    return weighResult;
+}

@@ -49,18 +49,28 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) 
 
 //***************************************************** Constructor
 GameCore::GameCore(int numOfCoins, Level level) :
-	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)),
-	level(level),
-	numOfWeighingsCounter(maxComparisons(numOfCoins, level))
-{}
+	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)), level(level),
+	numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 	
 
 
 //***************************************************** Field accessors
-const size_t GameCore::numOfCoins() const { return setOfCoins->size(); }
-const size_t GameCore::numOfFakes() const { return setOfCoins->numOfFakes(); }
-const GameCore::Level GameCore::gameLevel() const { return level; }
-const size_t GameCore::numOfWeighingsLeft() const { return numOfWeighingsCounter; }
+const size_t GameCore::numOfCoins() const {
+    return setOfCoins->size();
+}
+
+const size_t GameCore::numOfFakes() const {
+    return setOfCoins->numOfFakes();
+}
+
+const GameCore::Level GameCore::gameLevel() const {
+    return level;
+}
+
+const size_t GameCore::numOfWeighingsLeft() const {
+    return numOfWeighingsCounter;
+}
+
 const size_t GameCore::numOfWeighingsCap() const {
     return maxComparisons(setOfCoins->size(), level);
 }
@@ -68,17 +78,29 @@ const size_t GameCore::numOfWeighingsCap() const {
 
 
 //***************************************************** Other public methods
-const int GameCore::compareWeight(const Weighing &weighing) {
-    if (numOfWeighingsCounter == 0) throw "Oops. You run out of comparisons.";
+const int GameCore::compareWeight(const CoinStates &weighing) {
+    if (numOfWeighingsCounter == 0) {
+        throw GameCoreFailure("No more comparisons.");
+    }
     const int result = setOfCoins->compareWeight(weighing);
     --numOfWeighingsCounter;
     return result;
 }
 
-const int GameCore::guessFakeCoins(const std::vector<size_t> &guess) const {
-    return setOfCoins->guessFakes(guess);
+const bool GameCore::guessFakeCoins(const CoinStates &guess) const {
+    return setOfCoins->guessFakeCoins(guess);
 }
 
 const std::string GameCore::levelToString(const GameCore::Level level) {
     return levelToStringConversionTable.at(level);
+}
+
+
+
+//***************************************************** Game Core Failure
+GameCoreFailure::GameCoreFailure(std::string coreMessage) :
+    Exception(coreMessage) {}
+
+const std::string GameCoreFailure::headerMessage() const {
+    return "Game Core: ";
 }

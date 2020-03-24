@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CoinWeight.xcodeproj">
+      location = "group:/Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/x11graphics.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/x11graphics.hpp">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

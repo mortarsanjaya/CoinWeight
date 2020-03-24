@@ -12,13 +12,10 @@
 #include <vector>
 #include <map>
 #include <memory>
-#include <utility>
 #include <string>
 #include "coinset.hpp"
-#include "weighing.hpp"
+#include "coinstates.hpp"
 
-
-// Only supports 2-fake-coins game currently
 class GameCore {
 public:
 	enum class Level { Easy, Medium, Hard };
@@ -44,20 +41,20 @@ public:
 	const size_t numOfWeighingsLeft() const;
     const size_t numOfWeighingsCap() const;
  
-    // Returns 1 if the first set is heavier than the second set
-    // Returns 0 if the first set is as heavy as the second set
-    // Returns -1 if the first set is lighter than the second set
     // Also adds to the history and decrements weighing counter
     // Throws if the counter's value is 0
-    const int compareWeight(const Weighing &weighing);
+    const int compareWeight(const CoinStates &weighing);
     
-    // Returns 2 for guesses that does not make sense
-    // Example: Number of coins != 2, Out of bound index
-    // Otherwise, returns 1 for correct guesses and 0 for incorrect ones
-    const int guessFakeCoins(const std::vector<size_t> &guess) const;
+    const bool guessFakeCoins(const CoinStates &guess) const;
     
     // Convert a level to a string
     static const std::string levelToString(const Level level);
+};
+
+class GameCoreFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    GameCoreFailure(std::string coreMessage);
 };
 
 #endif

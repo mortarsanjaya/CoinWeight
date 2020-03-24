@@ -19,9 +19,18 @@ void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
     const int x_pos = 200 + 50 * (coinIndex % 10);
     const int y_pos = 200 + 50 * (coinIndex / 10);
     switch (coinState) {
-        case 0: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold); break;
-        case 1: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red); break;
-        case 2: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Blue); break;
+        case CoinStates::NoSelect:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold);
+            break;
+        case CoinStates::LeftGroup:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red);
+            break;
+        case CoinStates::RightGroup:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Blue);
+            break;
+        case CoinStates::Guess:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::White);
+            break;
         default: throw;
     }
     coreGraphics.drawCircle(x_pos, y_pos, coinRadius, X11Graphics::Black);
@@ -80,7 +89,7 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
 }
 
 void GameViewX11::drawGamePlayScreen(
-    std::vector<int> coinStates,
+    CoinStates coinStates,
     int highlightedCoin,
     size_t numOfComparisonsLeft,
     size_t numOfComparisonsCap,
@@ -89,7 +98,7 @@ void GameViewX11::drawGamePlayScreen(
     coreGraphics.clear();
     
     for (size_t i = 0; i < coinStates.size(); ++i) {
-        drawCoin(coinStates[i], i);
+        drawCoin(coinStates.at(i), i);
     }
     
     const std::string numOfCompLeftStr = std::to_string(numOfComparisonsLeft);
@@ -114,7 +123,7 @@ void GameViewX11::drawGameOverScreen(
     bool isWin,
     size_t numOfComparisonsLeft,
     size_t numOfComparisonsCap,
-    std::vector<size_t> finalGuess)
+    CoinStates finalGuess)
 {
     coreGraphics.clear();
     
@@ -123,12 +132,14 @@ void GameViewX11::drawGameOverScreen(
     coreGraphics.drawString(300, 300,
         "Number of comparisons left: " + std::to_string(numOfComparisonsLeft) +
         " out of " + std::to_string(numOfComparisonsCap));
+    /*
     coreGraphics.drawString(300, 400, "Final guess: ");
     std::string guessStr;
     for (size_t n : finalGuess) {
         guessStr += (std::to_string(n + 1) + " ");
     }
     coreGraphics.drawString(300, 420, guessStr);
+    */
 }
 
 void GameViewX11::receiveInput() {
@@ -142,6 +153,7 @@ const Input GameViewX11::lastInput() const {
             case XK_0:          return Input('0');
             case XK_1:          return Input('1');
             case XK_2:          return Input('2');
+            case XK_3:          return Input('3');
             case XK_w:          return Input('w');
             case XK_g:          return Input('g');
             case XK_Return:     return Input('\n');

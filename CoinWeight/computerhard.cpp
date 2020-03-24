@@ -7,9 +7,6 @@
 //
 
 #include "computerhard.hpp"
-#include <vector>
-
-#include <iostream>
 
 /*
 Separate documentation for states and strategies (sadly needed):
@@ -241,8 +238,17 @@ void ComputerHard::beforeWeigh() {
 
 
 //***************************************************** Overriding functions
-const Weighing ComputerHard::pickToWeigh() const {
-	return Weighing{state->partition[0], state->partition[1]};
+const CoinStates ComputerHard::pickToWeigh() const {
+    CoinStates weightStates(numOfCoins());
+    for (size_t leftGroupIndex : state->partition.at(0)) {
+        weightStates[leftGroupIndex] = CoinStates::LeftGroup;
+    }
+    
+    for (size_t rightGroupIndex : state->partition.at(1)) {
+        weightStates[rightGroupIndex] = CoinStates::RightGroup;
+    }
+    
+	return weightStates;
 }
 
 void ComputerHard::afterWeigh(const int weighResult) {
@@ -411,21 +417,14 @@ void ComputerHard::afterWeigh(const int weighResult) {
 	strategy = Strategy::NoStrategy;
 }
 
-const std::vector<size_t> ComputerHard::pickGuesses() const {
-    std::vector<size_t> guess;
+const CoinStates ComputerHard::pickToGuess() const {
+    CoinStates guessStates(numOfCoins());
     for (std::vector<size_t> single_partition : state->partition) {
         for (size_t element : single_partition) {
-            guess.push_back(element);
+            guessStates[element] = CoinStates::Guess;
         }
     }
-    return guess;
-    /*
-	if (state->partition.size() == 2) {
-		return std::vector<size_t>{state->partition[0][0], state->partition[1][0]};
-	} else {
-		return state->partition[0];
-	}
-    */
+    return guessStates;
 }
 
 const bool ComputerHard::readyToGuess() const {

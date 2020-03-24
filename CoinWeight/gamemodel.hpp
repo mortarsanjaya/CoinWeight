@@ -14,6 +14,7 @@
 #include "computer.hpp"
 #include "gameview.hpp"
 #include "input.hpp"
+#include "coinstates.hpp"
 #include "exception.hpp"
 #include "record.hpp"
 
@@ -42,18 +43,15 @@ class GameModel {
             GameCore::Level::Hard, bool isHuman = true);
     };
     
-    enum CoinState { NoSelect = 0, Group1 = 1, Group2 = 2 };
-    
     //*****************************************************
     
     Page page;
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
-    std::vector<int> coinStates;
+    std::unique_ptr<CoinStates> coinStates;
     int pageHighlight;
     std::vector<Record> history;
     GameSettings gameSettings;
-    std::vector<size_t> finalGuess;
     
     /*
         computer is set to NULL if the player is a Human

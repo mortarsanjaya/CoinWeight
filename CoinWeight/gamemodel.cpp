@@ -31,15 +31,21 @@ void GameModel::switchFromMainPage() {
     }
 }
 
-void GameModel::switchFromInstructionPage() { page = Page::Main; }
-void GameModel::switchFromCreditPage() { page = Page::Main; }
+void GameModel::switchFromInstructionPage() {
+    page = Page::Main;
+}
+
+void GameModel::switchFromCreditPage() {
+    page = Page::Main;
+}
+
 void GameModel::switchFromGameOptionPage() {
     page = Page::GamePlay;
     gameCore = std::make_unique<GameCore>(gameSettings.numOfCoins, gameSettings.level);
     if (!gameSettings.isHuman) {
         computer = std::make_unique<ComputerHard>(gameSettings.numOfCoins);
     }
-    coinStates = std::vector<int>(gameSettings.numOfCoins, 0);
+    coinStates = std::make_unique<CoinStates>(gameSettings.numOfCoins);
 }
 
 void GameModel::switchFromGamePlayPage() {
@@ -50,17 +56,21 @@ void GameModel::switchFromGameOverPage() {
     page = Page::Main;
     gameCore.reset();
     computer.reset();
-    coinStates.clear();
+    coinStates.reset();
     pageHighlight = 0;
 }
 
 void GameModel::updateMainPage(Input::Arrow inp) {
     switch (inp) {
         case Input::Arrow::Up:
-            if (pageHighlight > 0) { --pageHighlight; }
+            if (pageHighlight > 0) {
+                --pageHighlight;
+            }
             break;
         case Input::Arrow::Down:
-            if (pageHighlight < 2) { ++pageHighlight; }
+            if (pageHighlight < 2) {
+                ++pageHighlight;
+            }
             break;
         default:
             break;
@@ -70,15 +80,21 @@ void GameModel::updateMainPage(Input::Arrow inp) {
 void GameModel::updateGameOptionPage(Input::Arrow inp) {
     switch (inp) {
         case Input::Arrow::Up:
-            if (pageHighlight > 0) { --pageHighlight; }
+            if (pageHighlight > 0) {
+                --pageHighlight;
+            }
             break;
         case Input::Arrow::Down:
-            if (pageHighlight < 2) { ++pageHighlight; }
+            if (pageHighlight < 2) {
+                ++pageHighlight;
+            }
             break;
         case Input::Arrow::Left:
             switch (pageHighlight) {
                 case 0:
-                    if (gameSettings.numOfCoins > 2) { --gameSettings.numOfCoins; }
+                    if (gameSettings.numOfCoins > 2) {
+                        --gameSettings.numOfCoins;
+                    }
                     break;
                 case 1:
                     switch (gameSettings.level) {
@@ -101,7 +117,9 @@ void GameModel::updateGameOptionPage(Input::Arrow inp) {
         case Input::Arrow::Right:
             switch (pageHighlight) {
                 case 0:
-                    if (gameSettings.numOfCoins < 100) { ++gameSettings.numOfCoins; }
+                    if (gameSettings.numOfCoins < 120) {
+                        ++gameSettings.numOfCoins;
+                    }
                     break;
                 case 1:
                     switch (gameSettings.level) {
@@ -133,7 +151,7 @@ void GameModel::updateGamePlayPage(Input::Arrow inp) {
             }
             break;
         case Input::Arrow::Down:
-            if (pageHighlight < coinStates.size() - coinsPerRow) {
+            if (pageHighlight < coinStates->size() - coinsPerRow) {
                 pageHighlight += coinsPerRow;
             }
             break;
@@ -143,7 +161,9 @@ void GameModel::updateGamePlayPage(Input::Arrow inp) {
             }
             break;
         case Input::Arrow::Right:
-            if (pageHighlight % coinsPerRow < coinsPerRow - 1 && pageHighlight + 1 < coinStates.size()) {
+            if ((pageHighlight % coinsPerRow < coinsPerRow - 1) &&
+                (pageHighlight + 1 < coinStates->size()))
+            {
                 ++pageHighlight;
             }
             break;
@@ -153,13 +173,16 @@ void GameModel::updateGamePlayPage(Input::Arrow inp) {
 void GameModel::updateGamePlayPage(char inp) {
     switch (inp) {
         case '0':
-            coinStates[pageHighlight] = CoinState::NoSelect;
+            (*coinStates)[pageHighlight] = CoinStates::NoSelect;
             break;
         case '1':
-            coinStates[pageHighlight] = CoinState::Group1;
+            (*coinStates)[pageHighlight] = CoinStates::LeftGroup;
             break;
         case '2':
-            coinStates[pageHighlight] = CoinState::Group2;
+            (*coinStates)[pageHighlight] = CoinStates::RightGroup;
+            break;
+        case '3':
+            (*coinStates)[pageHighlight] = CoinStates::Guess;
             break;
         case 'w':
             if (gameCore->numOfWeighingsLeft() != 0) {
@@ -176,42 +199,25 @@ void GameModel::updateGamePlayPage(char inp) {
 void GameModel::compareWeight() {
     if (computer != nullptr) {
         computer->beforeWeigh();
-        const Weighing compWeigh = computer->pickToWeigh();
-        for (size_t n : compWeigh.leftGroup) { coinStates[n] = 1; }
-        for (size_t n : compWeigh.rightGroup) { coinStates[n] = 2; }
+        *coinStates = computer->pickToGuess();
     }
     
-    Weighing weighing;
-    for (int i = 0; i < coinStates.size(); ++i) {
-        if (coinStates[i] == 1) {
-            weighing.leftGroup.push_back(i);
-        } else if (coinStates[i] == 2) {
-            weighing.rightGroup.push_back(i);
-        }
-        coinStates[i] = 0;
-    }
-    
+    int weighingResult = gameCore->compareWeight(*coinStates);
+    history.emplace_back(*coinStates, weighingResult);
     pageHighlight = 0;
-    int weighingResult = gameCore->compareWeight(weighing);
-    history.emplace_back(weighing, weighingResult);
     if (computer != nullptr) {
         computer->afterWeigh(weighingResult);
     }
+    
+    *coinStates = CoinStates(coinStates->size());
 }
 
 void GameModel::guessFakeCoins() {
     if (computer != nullptr) {
-        const std::vector<size_t> compGuess = computer->pickGuesses();
-        for (size_t n : compGuess) { coinStates[n] = 1; }
+        *coinStates = computer->pickToGuess();
     }
     
-    for (int i = 0; i < coinStates.size(); ++i) {
-        if (coinStates[i] == 1) {
-            finalGuess.push_back(i);
-        }
-    }
-    
-    int guessResult = gameCore->guessFakeCoins(finalGuess);
+    int guessResult = gameCore->guessFakeCoins(*coinStates);
     pageHighlight = guessResult;
 }
 
@@ -239,15 +245,14 @@ void GameModel::updateView(GameView &gameView) {
             break;
         case Page::GamePlay:
             gameView.drawGamePlayScreen(
-                coinStates, pageHighlight,
+                *coinStates, pageHighlight,
                 gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap(),
                 gameHistory());
             break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap(),
-                finalGuess);
+                gameCore->numOfWeighingsCap(), *coinStates);
             break;
     }
 }

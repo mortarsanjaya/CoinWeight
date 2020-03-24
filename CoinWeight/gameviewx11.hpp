@@ -9,11 +9,11 @@
 #ifndef gameviewx11_hpp
 #define gameviewx11_hpp
 
+#include <vector>
 #include <memory>
+#include <string>
 #include "gameview.hpp"
 #include "x11graphics.hpp"
-#include <string>
-#include <vector>
 
 class GameViewX11 : public GameView {
 	X11Graphics coreGraphics;
@@ -29,7 +29,7 @@ public:
     void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
             std::string gameLevel, bool isHuman) override;
     void drawGamePlayScreen(
-        std::vector<int> coinStates,
+        CoinStates coinStates,
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
@@ -39,7 +39,7 @@ public:
         bool isWin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<size_t> finalGuess) override;
+        CoinStates finalGuess) override;
     void receiveInput() override;
     const Input lastInput() const override;
 };

@@ -10,6 +10,7 @@
 #define computerhard_hpp
 
 #include "computer.hpp"
+#include <vector>
 #include <memory>
 
 class ComputerHard : public Computer {
@@ -19,6 +20,7 @@ class ComputerHard : public Computer {
 		std::vector<std::vector<size_t>> partition;
 		enum class Type;
 		Type type;
+        
 		State(size_t numOfCoins);
 	};
 	
@@ -29,9 +31,9 @@ class ComputerHard : public Computer {
 	
     // Overriding functions
 	void beforeWeigh() override;
-	const Weighing pickToWeigh() const override;
+	const CoinStates pickToWeigh() const override;
 	void afterWeigh(int weighResult) override;
-	const std::vector<size_t> pickGuesses() const override;
+	const CoinStates pickToGuess() const override;
     const bool readyToGuess() const override;
 	
 public:

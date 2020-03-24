@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <utility>
+#include "coinstates.hpp"
 #include "record.hpp"
 #include "input.hpp"
 
@@ -28,7 +29,7 @@ public:
         std::string gameLevel,
         bool isHuman) = 0;
     virtual void drawGamePlayScreen(
-        std::vector<int> coinStates,
+        CoinStates coinStates,
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
@@ -37,7 +38,7 @@ public:
         bool isWin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<size_t> finalGuess) = 0;
+        CoinStates finalGuess) = 0;
         
     // Input handling functions
     virtual void receiveInput() = 0;
