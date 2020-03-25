@@ -258,7 +258,6 @@ void GameModel::updateView(GameView &gameView) {
 }
 
 void GameModel::processInput(Input inp) {
-    if (inp.inputType() == Input::Type::Unknown) return;
     switch (page) {
         case Page::Main:
             switch (inp.inputType()) {
@@ -267,6 +266,8 @@ void GameModel::processInput(Input inp) {
                     break;
                 case Input::Type::Arrow:
                     updateMainPage(inp.whatArrow());
+                    break;
+                case Input::Type::Unknown:
                     break;
             }
             break;
@@ -291,6 +292,8 @@ void GameModel::processInput(Input inp) {
                 case Input::Type::Arrow:
                     updateGameOptionPage(inp.whatArrow());
                     break;
+                case Input::Type::Unknown:
+                    break;
             }
             break;
             
@@ -307,6 +310,8 @@ void GameModel::processInput(Input inp) {
                         break;
                     case Input::Type::Arrow:
                         updateGamePlayPage(inp.whatArrow());
+                        break;
+                    case Input::Type::Unknown:
                         break;
                 }
             } else if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
