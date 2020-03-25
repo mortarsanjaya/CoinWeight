@@ -258,6 +258,7 @@ void GameModel::updateView(GameView &gameView) {
 }
 
 void GameModel::processInput(Input inp) {
+    if (inp.inputType() == Input::Type::Unknown) return;
     switch (page) {
         case Page::Main:
             switch (inp.inputType()) {
