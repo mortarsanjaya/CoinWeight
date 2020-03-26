@@ -252,7 +252,7 @@ void GameModel::updateView(GameView &gameView) {
             break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap(), *coinStates);
+                gameCore->numOfWeighingsCap());
             break;
     }
 }

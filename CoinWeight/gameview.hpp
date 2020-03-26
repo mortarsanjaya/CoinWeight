@@ -37,8 +37,7 @@ public:
     virtual void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        CoinStates finalGuess) = 0;
+        size_t numOfComparisonsCap) = 0;
         
     // Input handling functions
     virtual void receiveInput() = 0;

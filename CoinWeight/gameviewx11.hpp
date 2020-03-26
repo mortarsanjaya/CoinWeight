@@ -38,8 +38,7 @@ public:
     void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        CoinStates finalGuess) override;
+        size_t numOfComparisonsCap) override;
     void receiveInput() override;
     const Input lastInput() const override;
 };

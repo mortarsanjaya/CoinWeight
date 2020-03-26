@@ -29,7 +29,7 @@ void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
             coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Blue);
             break;
         case CoinStates::Guess:
-            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::White);
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Green);
             break;
         default: throw;
     }
@@ -122,8 +122,7 @@ void GameViewX11::drawGamePlayScreen(
 void GameViewX11::drawGameOverScreen(
     bool isWin,
     size_t numOfComparisonsLeft,
-    size_t numOfComparisonsCap,
-    CoinStates finalGuess)
+    size_t numOfComparisonsCap)
 {
     coreGraphics.clear();
     

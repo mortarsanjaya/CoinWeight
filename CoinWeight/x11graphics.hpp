@@ -29,14 +29,14 @@ public:
     X11Graphics(std::string windowName = "");
     ~X11Graphics();
     enum {
-        White = 0,
-        Black,
+        Black = 0,
         Red,
         Blue,
+        Green,
         Gold
     };
     
-    static const int defaultFGColor = Blue;
+    static const int defaultFGColor = Black;
     
     // Drawing functions
     void drawString(int x_pos, int y_pos, const std::string &msg);
