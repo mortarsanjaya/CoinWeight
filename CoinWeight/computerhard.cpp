@@ -251,12 +251,12 @@ const CoinStates ComputerHard::pickToWeigh() const {
 	return weightStates;
 }
 
-void ComputerHard::afterWeigh(const int weighResult) {
+void ComputerHard::afterWeigh(const WeighResult weighResult) {
 	switch (strategy) {
 	
 		case Strategy::Split2:
 			switch (weighResult) {
-				case 1:
+				case WeighResult::LeftHeavy:
 				{
 					std::vector<size_t> remainderSet = state->partition.back();
 					state->partition[1].insert(state->partition[1].end(),
@@ -266,13 +266,13 @@ void ComputerHard::afterWeigh(const int weighResult) {
 					state->type = State::Type::ZeroInfo;
 					break;
 				}
-				case 0:
+				case WeighResult::Balance:
 				{
 					state->partition.pop_back();
 					state->type = State::Type::OneVsOne;
 					break;
 				}
-				case -1:
+				case WeighResult::RightHeavy:
 				{
 					std::vector<size_t> remainderSet = state->partition.back();
 					state->partition[0].insert(state->partition[0].end(),
@@ -289,18 +289,18 @@ void ComputerHard::afterWeigh(const int weighResult) {
 			
 		case Strategy::Split3Step1:
 			switch (weighResult) {
-				case 1:
+				case WeighResult::LeftHeavy:
 				{
 					state->partition.erase(state->partition.begin());
 					state->type = State::Type::Split3Case2;
 					break;
 				}
-				case 0:
+				case WeighResult::Balance:
 				{
 					state->type = State::Type::Split3Case1;
 					break;
 				}
-				case -1:
+				case WeighResult::RightHeavy:
 				{
 					state->partition.erase(state->partition.begin() + 1);
 					state->type = State::Type::Split3Case2;
@@ -313,19 +313,19 @@ void ComputerHard::afterWeigh(const int weighResult) {
 			
 		case Strategy::OneVsOne:
 			switch (weighResult) {
-				case 1:
+				case WeighResult::LeftHeavy:
 				{
 					state->partition.pop_back();
 					state->partition.erase(state->partition.begin());
 					break;
 				}
-				case 0:
+				case WeighResult::Balance:
 				{
 					state->partition.erase(state->partition.begin() + 1);
 					state->partition.erase(state->partition.begin());
 					break;
 				}
-				case -1:
+				case WeighResult::RightHeavy:
 				{
 					state->partition.pop_back();
 					state->partition.erase(state->partition.begin() + 1);
@@ -342,7 +342,7 @@ void ComputerHard::afterWeigh(const int weighResult) {
 			
 		case Strategy::Split3Step2Case1:
 			switch (weighResult) {
-				case 1:
+				case WeighResult::LeftHeavy:
 				{
 					if ((state->partition.back().size() == 1) &&
 						(state->partition[2].size() == state->partition[0].size()))
@@ -357,7 +357,7 @@ void ComputerHard::afterWeigh(const int weighResult) {
 					state->type = State::Type::ZeroInfo;
 					break;
 				}
-				case 0:
+				case WeighResult::Balance:
 				// The whole set must consist 3q + 2 coins for this to happen
 				{
 					state->partition.erase(state->partition.begin() + 1);
@@ -366,7 +366,7 @@ void ComputerHard::afterWeigh(const int weighResult) {
 					state->type = State::Type::OneVsOne;
 					break;
 				}
-				case -1:
+				case WeighResult::RightHeavy:
 				{
 					state->partition.pop_back();
 					state->partition.erase(state->partition.begin() + 1);
@@ -380,7 +380,7 @@ void ComputerHard::afterWeigh(const int weighResult) {
 			
 		case Strategy::Split3Step2Case2:
 			switch (weighResult) {
-				case 1:
+				case WeighResult::LeftHeavy:
 				// That means the remainder coin must belong to the first set and is fake...
 				{
 					state->partition.erase(state->partition.begin());
@@ -388,13 +388,13 @@ void ComputerHard::afterWeigh(const int weighResult) {
 					state->type = State::Type::OneVsOne;
 					break;
 				}
-				case 0:
+				case WeighResult::Balance:
 				{
 					state->partition.pop_back();
 					state->type = State::Type::OneVsOne;
 					break;
 				}
-				case -1:
+				case WeighResult::RightHeavy:
 				{
 					state->partition.erase(state->partition.begin() + 1);
 					if (state->partition.back().size() == 1) {

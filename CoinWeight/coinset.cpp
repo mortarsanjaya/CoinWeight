@@ -45,7 +45,7 @@ const size_t CoinSet::numOfFakes() const {
 
 
 //***************************************************** Public methods
-const int CoinSet::compareWeight(const CoinStates &weighing) const {
+const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     int leftGroupSize = 0;
     int rightGroupSize = 0;
     int leftGroupNumOfFakes = 0;
@@ -70,7 +70,7 @@ const int CoinSet::compareWeight(const CoinStates &weighing) const {
         return WeighResult::RightHeavy;
     } else if (leftGroupNumOfFakes > rightGroupNumOfFakes) {
         return WeighResult::RightHeavy;
-    } else if (leftGroupNumOfFakes > rightGroupNumOfFakes) {
+    } else if (leftGroupNumOfFakes < rightGroupNumOfFakes) {
         return WeighResult::LeftHeavy;
     } else {
         return WeighResult::Balance;

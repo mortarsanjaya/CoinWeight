@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include "coinstates.hpp"
+#include "weighresult.hpp"
 #include "exception.hpp"
 
 // Fake coins are lighter than real coins
@@ -30,8 +31,7 @@ public:
 	const size_t numOfFakes() const;
 	
 	// Game functions and corresponding enums
-    enum WeighResult { LeftHeavy = 1, Balance = 0, RightHeavy = -1 };
-	const int compareWeight(const CoinStates &weighing) const;
+	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const bool guessFakeCoins(const CoinStates &guess) const;
 };
 

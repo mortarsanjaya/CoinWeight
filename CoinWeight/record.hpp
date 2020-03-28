@@ -10,16 +10,17 @@
 #define record_hpp
 
 #include "coinstates.hpp"
+#include "weighresult.hpp"
 
 class Record {
     CoinStates weighStates;
-    int weighResult;
+    WeighResult weighResult;
     
 public:
-    Record(CoinStates weighStates, int weighResult);
+    Record(CoinStates weighStates, WeighResult weighResult);
     // Accessor functions
     const CoinStates coinStates() const;
-    const int result() const;
+    const WeighResult result() const;
 };
 
 #endif

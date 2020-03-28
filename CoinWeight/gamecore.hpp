@@ -15,6 +15,7 @@
 #include <string>
 #include "coinset.hpp"
 #include "coinstates.hpp"
+#include "weighresult.hpp"
 
 class GameCore {
 public:
@@ -43,7 +44,7 @@ public:
  
     // Also adds to the history and decrements weighing counter
     // Throws if the counter's value is 0
-    const int compareWeight(const CoinStates &weighing);
+    const WeighResult compareWeight(const CoinStates &weighing);
     
     const bool guessFakeCoins(const CoinStates &guess) const;
     

@@ -42,6 +42,7 @@ void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
 //***************************************************** Public methods
 void GameViewX11::drawMainScreen(int screenHighlight) {
     const int stringHeight = 20;
+    const int fontWidth = 6;
     coreGraphics.clear();
     
     coreGraphics.drawString(300, 50, "Coin Weight");
@@ -50,7 +51,7 @@ void GameViewX11::drawMainScreen(int screenHighlight) {
     coreGraphics.drawString(300, 300 + 3 * stringHeight, "Credits");
     
     coreGraphics.drawRectangle(295, 305 + screenHighlight * stringHeight,
-        50, stringHeight);
+        4 * fontWidth + 10, stringHeight);
 }
 
 void GameViewX11::drawInstructionScreen() {
@@ -115,7 +116,7 @@ void GameViewX11::drawGamePlayScreen(
     
     // HISTORY...
     if (!gameHistory.empty()) {
-        coreGraphics.drawString(30, 110, std::to_string(gameHistory.back().result()));
+        coreGraphics.drawString(30, 110, toString(gameHistory.back().result()));
     }
 }
 

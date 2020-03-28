@@ -56,6 +56,7 @@ void GameModel::switchFromGameOverPage() {
     page = Page::Main;
     gameCore.reset();
     computer.reset();
+    history.clear();
     coinStates.reset();
     pageHighlight = 0;
 }
@@ -199,10 +200,10 @@ void GameModel::updateGamePlayPage(char inp) {
 void GameModel::compareWeight() {
     if (computer != nullptr) {
         computer->beforeWeigh();
-        *coinStates = computer->pickToGuess();
+        *coinStates = computer->pickToWeigh();
     }
     
-    int weighingResult = gameCore->compareWeight(*coinStates);
+    WeighResult weighingResult = gameCore->compareWeight(*coinStates);
     history.emplace_back(*coinStates, weighingResult);
     pageHighlight = 0;
     if (computer != nullptr) {

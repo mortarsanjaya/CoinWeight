@@ -78,11 +78,11 @@ const size_t GameCore::numOfWeighingsCap() const {
 
 
 //***************************************************** Other public methods
-const int GameCore::compareWeight(const CoinStates &weighing) {
+const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
         throw GameCoreFailure("No more comparisons.");
     }
-    const int result = setOfCoins->compareWeight(weighing);
+    const WeighResult result = setOfCoins->compareWeight(weighing);
     --numOfWeighingsCounter;
     return result;
 }

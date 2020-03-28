@@ -32,7 +32,7 @@ class ComputerHard : public Computer {
     // Overriding functions
 	void beforeWeigh() override;
 	const CoinStates pickToWeigh() const override;
-	void afterWeigh(int weighResult) override;
+	void afterWeigh(const WeighResult weighResult) override;
 	const CoinStates pickToGuess() const override;
     const bool readyToGuess() const override;
 	

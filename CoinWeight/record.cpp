@@ -9,7 +9,7 @@
 #include "record.hpp"
 
 //***************************************************** Constructor
-Record::Record(CoinStates weighStates, int weighResult) :
+Record::Record(CoinStates weighStates, WeighResult weighResult) :
     weighStates{weighStates}, weighResult{weighResult} {}
 
 
@@ -19,6 +19,6 @@ const CoinStates Record::coinStates() const {
     return weighStates;
 }
 
-const int Record::result() const {
+const WeighResult Record::result() const {
     return weighResult;
 }
