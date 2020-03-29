@@ -46,6 +46,7 @@ void GameModel::switchFromGameOptionPage() {
         computer = std::make_unique<ComputerHard>(gameSettings.numOfCoins);
     }
     coinStates = std::make_unique<CoinStates>(gameSettings.numOfCoins);
+    pageHighlight = 0;
 }
 
 void GameModel::switchFromGamePlayPage(bool isOver) {
