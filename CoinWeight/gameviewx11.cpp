@@ -94,7 +94,7 @@ void GameViewX11::drawGamePlayScreen(
     int highlightedCoin,
     size_t numOfComparisonsLeft,
     size_t numOfComparisonsCap,
-    std::vector<Record> gameHistory)
+    WeighResult lastWeighResult)
 {
     coreGraphics.clear();
     
@@ -109,14 +109,13 @@ void GameViewX11::drawGamePlayScreen(
     if (numOfComparisonsLeft == 0) {
         coreGraphics.drawString(30, 50, "No more comparisons!");
     }
-    coreGraphics.drawString(30, 100, "History:");
+    coreGraphics.drawString(30, 100, "Result of last move:");
     const int x_pos = 194 + 50 * (highlightedCoin % 10);
     const int y_pos = 188 + 50 * (highlightedCoin / 10);
     coreGraphics.drawCircle(x_pos, y_pos, 15, coreGraphics.Black);
     
-    // HISTORY...
-    if (!gameHistory.empty()) {
-        coreGraphics.drawString(30, 110, toString(gameHistory.back().result()));
+    if (numOfComparisonsLeft != numOfComparisonsCap) {
+        coreGraphics.drawString(30, 120, toString(lastWeighResult));
     }
 }
 
@@ -142,6 +141,24 @@ void GameViewX11::drawGameOverScreen(
     */
 }
 
+void GameViewX11::drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex)
+{
+    coreGraphics.clear();
+    
+    coreGraphics.drawString(300, 30, "History");
+    if (gameHistory.empty()) {
+        coreGraphics.drawString(300, 200, "You have not made any moves.");
+    } else {
+        coreGraphics.drawString(300, 50, "Move " + std::to_string(historyIndex) + ".");
+        for (size_t i = 0; i < gameHistory[historyIndex].coinStates().size(); ++i) {
+            drawCoin(gameHistory[historyIndex].coinStates().at(i), i);
+        }
+        coreGraphics.drawString(30, 120, toString(gameHistory[historyIndex].result()));
+    }
+}
+
 void GameViewX11::receiveInput() {
     coreGraphics.receiveInput();
 }
@@ -156,6 +173,7 @@ const Input GameViewX11::lastInput() const {
             case XK_3:          return Input('3');
             case XK_w:          return Input('w');
             case XK_g:          return Input('g');
+            case XK_h:          return Input('h');
             case XK_Return:     return Input('\n');
             case XK_Left:       return Input(Input::Arrow::Left);
             case XK_Right:      return Input(Input::Arrow::Right);

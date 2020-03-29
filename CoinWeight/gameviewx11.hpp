@@ -34,12 +34,16 @@ public:
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<Record> gameHistory
+        WeighResult lastWeighResult
         ) override;
     void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap) override;
+    void drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex) override;
+    
     void receiveInput() override;
     const Input lastInput() const override;
 };

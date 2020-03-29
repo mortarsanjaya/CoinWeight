@@ -11,35 +11,28 @@
 #include <algorithm>
 
 //***************************************************** Constructor
-CoinSet::CoinSet(int numOfCoins, int numOfFakeCoins) :
-	coins(numOfCoins, true), numOfFakeCoins(numOfFakeCoins)
-{
-	if (numOfFakeCoins < 0 || numOfFakeCoins > numOfCoins) {
+CoinSet::CoinSet(int numOfCoins) : coins(numOfCoins, true) {
+	if (numOfFakeCoins > numOfCoins) {
 		throw CoinSetFailure("Bad number of fake coins.");
 	}
-
-	std::vector<size_t> fake_coins_position(0);
-	for (size_t i = 0; i < numOfFakeCoins; ++i) {
-		std::random_device seed;
-		size_t one_fake_pos = seed() % (numOfCoins - i);
-		for (size_t &prev_fake_pos : fake_coins_position) {
-			if (prev_fake_pos > one_fake_pos) break;
-			++one_fake_pos;
-		}
-		fake_coins_position.push_back(one_fake_pos);
-		coins[one_fake_pos] = false;
-	}
+ 
+    for (size_t i = 0; i < numOfFakeCoins; ++i) {
+        coins[i] = false;
+    }
+    
+    std::shuffle(coins.begin(), coins.end(), std::random_device{});
 }
+
+
+
+//***************************************************** Static constants
+const size_t CoinSet::numOfFakeCoins = 2;
 
 
 
 //***************************************************** Field accessors
 const size_t CoinSet::size() const {
     return coins.size();
-}
-
-const size_t CoinSet::numOfFakes() const {
-    return numOfFakeCoins;
 }
 
 

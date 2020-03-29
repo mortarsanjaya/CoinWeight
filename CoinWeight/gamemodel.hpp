@@ -31,7 +31,8 @@ class GameModel {
         Credit,
         GameOption,  // Num of coins, Difficulty, Human/Computer
         GamePlay,    // Coins, just coins, color depends
-        GameOver     // You win! You lose!
+        GameOver,    // You win! You lose!
+        GameHistory
     };
     
     struct GameSettings {
@@ -69,14 +70,16 @@ class GameModel {
     void switchFromInstructionPage();
     void switchFromCreditPage();
     void switchFromGameOptionPage();
-    void switchFromGamePlayPage();
+    void switchFromGamePlayPage(bool isOver = true);
     void switchFromGameOverPage();
+    void switchFromGameHistoryPage();
     
     // Updates current page
     void updateMainPage(Input::Arrow inp);
     void updateGameOptionPage(Input::Arrow inp);
     void updateGamePlayPage(Input::Arrow inp);
     void updateGamePlayPage(char inp);
+    void updateGameHistoryPage(Input::Arrow inp);
     
     // Execute moves in game
     void compareWeight();

@@ -14,6 +14,7 @@
 #include "coinstates.hpp"
 #include "record.hpp"
 #include "input.hpp"
+#include "weighresult.hpp"
 
 class GameView {
 public:
@@ -33,11 +34,14 @@ public:
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<Record> gameHistory) = 0;
+        WeighResult lastWeighResult) = 0;
     virtual void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap) = 0;
+    virtual void drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex) = 0;
         
     // Input handling functions
     virtual void receiveInput() = 0;

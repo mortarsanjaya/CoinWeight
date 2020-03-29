@@ -49,7 +49,7 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) 
 
 //***************************************************** Constructor
 GameCore::GameCore(int numOfCoins, Level level) :
-	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)), level(level),
+	setOfCoins(std::make_unique<CoinSet>(numOfCoins)) , level(level),
 	numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 	
 
@@ -60,7 +60,7 @@ const size_t GameCore::numOfCoins() const {
 }
 
 const size_t GameCore::numOfFakes() const {
-    return setOfCoins->numOfFakes();
+    return setOfCoins->numOfFakeCoins;
 }
 
 const GameCore::Level GameCore::gameLevel() const {

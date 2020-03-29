@@ -22,7 +22,7 @@ GameModel::GameSettings::GameSettings(size_t numOfCoins, GameCore::Level level, 
 
 
 
-//***************************************************** Private methods
+//***************************************************** Page switch functions
 void GameModel::switchFromMainPage() {
     switch (pageHighlight) {
         case 0:     page = Page::GameOption;     break;
@@ -48,8 +48,13 @@ void GameModel::switchFromGameOptionPage() {
     coinStates = std::make_unique<CoinStates>(gameSettings.numOfCoins);
 }
 
-void GameModel::switchFromGamePlayPage() {
-    page = Page::GameOver;
+void GameModel::switchFromGamePlayPage(bool isOver) {
+    if (isOver) {
+        page = Page::GameOver;
+    } else {
+        page = Page::GameHistory;
+        pageHighlight = 0;
+    }
 }
 
 void GameModel::switchFromGameOverPage() {
@@ -61,6 +66,13 @@ void GameModel::switchFromGameOverPage() {
     pageHighlight = 0;
 }
 
+void GameModel::switchFromGameHistoryPage() {
+    page = Page::GamePlay;
+    pageHighlight = 0;
+}
+
+
+//***************************************************** Page update function
 void GameModel::updateMainPage(Input::Arrow inp) {
     switch (inp) {
         case Input::Arrow::Up:
@@ -195,8 +207,27 @@ void GameModel::updateGamePlayPage(char inp) {
     }
 }
 
+void GameModel::updateGameHistoryPage(Input::Arrow inp) {
+    switch (inp) {
+        case Input::Arrow::Up:
+        case Input::Arrow::Down:
+            break;
+        case Input::Arrow::Left:
+            if (pageHighlight > 0) {
+                --pageHighlight;
+            }
+            break;
+        case Input::Arrow::Right:
+            if (pageHighlight < history.size() - 1) {
+                ++pageHighlight;
+            }
+            break;
+    }
+}
 
 
+
+//***************************************************** Game core function
 void GameModel::compareWeight() {
     if (computer != nullptr) {
         computer->beforeWeigh();
@@ -249,11 +280,15 @@ void GameModel::updateView(GameView &gameView) {
                 *coinStates, pageHighlight,
                 gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap(),
-                gameHistory());
+                (gameHistory().empty() ? WeighResult::Balance :
+                    gameHistory().back().result()));
             break;
         case Page::GameOver:
             gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
                 gameCore->numOfWeighingsCap());
+            break;
+        case Page::GameHistory:
+            gameView.drawGameHistoryScreen(history, pageHighlight);
             break;
     }
 }
@@ -305,6 +340,8 @@ void GameModel::processInput(Input inp) {
                         if (inp.whatChar() == 'g') {
                             guessFakeCoins();
                             switchFromGamePlayPage();
+                        } else if (inp.whatChar() == 'h') {
+                            switchFromGamePlayPage(false);
                         } else {
                             updateGamePlayPage(inp.whatChar());
                         }
@@ -315,12 +352,16 @@ void GameModel::processInput(Input inp) {
                     case Input::Type::Unknown:
                         break;
                 }
-            } else if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
-                if (gameCore->numOfWeighingsLeft() != 0 && !computer->readyToGuess()) {
-                    updateGamePlayPage('w');
-                } else {
-                    guessFakeCoins();
-                    switchFromGamePlayPage();
+            } else if (inp.inputType() == Input::Type::Char) {
+                if (inp.whatChar() == '\n') {
+                    if (gameCore->numOfWeighingsLeft() != 0 && !computer->readyToGuess()) {
+                        updateGamePlayPage('w');
+                    } else {
+                        guessFakeCoins();
+                        switchFromGamePlayPage();
+                    }
+                } else if (inp.whatChar() == 'h') {
+                    switchFromGamePlayPage(false);
                 }
             }
             break;
@@ -328,6 +369,21 @@ void GameModel::processInput(Input inp) {
         case Page::GameOver:
             if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
                 switchFromGameOverPage();
+            }
+            break;
+            
+        case Page::GameHistory:
+            switch (inp.inputType()) {
+                case Input::Type::Unknown:
+                    break;
+                case Input::Type::Char:
+                    if (inp.whatChar() == '\n') {
+                        switchFromGameHistoryPage();
+                    }
+                    break;
+                case Input::Type::Arrow:
+                    updateGameHistoryPage(inp.whatArrow());
+                    break;
             }
             break;
     }

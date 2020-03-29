@@ -10,27 +10,25 @@
 #define coinset_hpp
 
 #include <vector>
-#include <string>
 #include "coinstates.hpp"
 #include "weighresult.hpp"
 #include "exception.hpp"
 
-// Fake coins are lighter than real coins
 class CoinSet {
-
-	// Set to true if the coin is real and false if the coin is fake
+    // Fake coins are lighter than real coins and denoted by [false]
 	std::vector<bool> coins;
-	size_t numOfFakeCoins;
 
 public:
-	// Constructors
-	CoinSet(int numOfCoins, int numOfFakeCoins = 2);
+    // Constructor
+	CoinSet(int numOfCoins);
+    
+    // Static constant
+	static const size_t numOfFakeCoins;
 	
-	// Field accessors
+    // Field accessor
 	const size_t size() const;
-	const size_t numOfFakes() const;
 	
-	// Game functions and corresponding enums
+	// Game functions
 	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const bool guessFakeCoins(const CoinStates &guess) const;
 };

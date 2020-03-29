@@ -13,8 +13,8 @@ const std::string toString(const WeighResult weighResult) {
         case WeighResult::Balance:
             return "Both sets have the same weight.";
         case WeighResult::LeftHeavy:
-            return "Left set is heavier.";
+            return "Red set is heavier.";
         case WeighResult::RightHeavy:
-            return "Right set is heavier.";
+            return "Blue set is heavier.";
     }
 }
