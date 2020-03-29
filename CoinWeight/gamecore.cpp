@@ -26,8 +26,7 @@ template <size_t n> const size_t log_ceil(size_t k) {
 const std::map<GameCore::Level, std::string> GameCore::levelToStringConversionTable {
     {GameCore::Level::Easy,   "Easy"},
     {GameCore::Level::Medium, "Medium"},
-    {GameCore::Level::Hard,   "Hard"},
-    {GameCore::Level::Insane, "Insane"}
+    {GameCore::Level::Hard,   "Hard"}
 };
 
 
@@ -41,8 +40,6 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) 
 			return 2 * log_ceil<3>(numOfCoins) + 3;
 		case GameCore::Level::Hard:
 			return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
-		case GameCore::Level::Insane:
-			return log_ceil<3>((numOfCoins * (numOfCoins - 1)) / 2);
 		default:
 			throw;
 	}
@@ -52,21 +49,28 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) 
 
 //***************************************************** Constructor
 GameCore::GameCore(int numOfCoins, Level level) :
-	setOfCoins(std::make_unique<CoinSet>(numOfCoins, 2)),
-	level(level),
-	numOfWeighingsCounter(maxComparisons(numOfCoins, level))
-{}
+	setOfCoins(std::make_unique<CoinSet>(numOfCoins)) , level(level),
+	numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 	
 
 
 //***************************************************** Field accessors
-const size_t GameCore::numOfCoins() const { return setOfCoins->size(); }
-const size_t GameCore::numOfFakes() const { return setOfCoins->numOfFakes(); }
-const GameCore::Level GameCore::gameLevel() const { return level; }
-const std::vector<std::pair<Weighing, int>> GameCore::gameHistory() const {
-    return history;
+const size_t GameCore::numOfCoins() const {
+    return setOfCoins->size();
 }
-const size_t GameCore::numOfWeighingsLeft() const { return numOfWeighingsCounter; }
+
+const size_t GameCore::numOfFakes() const {
+    return setOfCoins->numOfFakeCoins;
+}
+
+const GameCore::Level GameCore::gameLevel() const {
+    return level;
+}
+
+const size_t GameCore::numOfWeighingsLeft() const {
+    return numOfWeighingsCounter;
+}
+
 const size_t GameCore::numOfWeighingsCap() const {
     return maxComparisons(setOfCoins->size(), level);
 }
@@ -74,18 +78,29 @@ const size_t GameCore::numOfWeighingsCap() const {
 
 
 //***************************************************** Other public methods
-const int GameCore::compareWeight(const Weighing &weighing) {
-    if (numOfWeighingsCounter == 0) throw "Oops. You run out of comparisons.";
-    const int result = setOfCoins->compareWeight(weighing);
-    history.emplace_back(weighing, result);
+const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
+    if (numOfWeighingsCounter == 0) {
+        throw GameCoreFailure("No more comparisons.");
+    }
+    const WeighResult result = setOfCoins->compareWeight(weighing);
     --numOfWeighingsCounter;
     return result;
 }
 
-const int GameCore::guessFakeCoins(const std::vector<size_t> &guess) const {
-    return setOfCoins->guessFakes(guess);
+const bool GameCore::guessFakeCoins(const CoinStates &guess) const {
+    return setOfCoins->guessFakeCoins(guess);
 }
 
 const std::string GameCore::levelToString(const GameCore::Level level) {
     return levelToStringConversionTable.at(level);
+}
+
+
+
+//***************************************************** Game Core Failure
+GameCoreFailure::GameCoreFailure(std::string coreMessage) :
+    Exception(coreMessage) {}
+
+const std::string GameCoreFailure::headerMessage() const {
+    return "Game Core: ";
 }

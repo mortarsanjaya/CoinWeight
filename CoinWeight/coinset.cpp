@@ -10,76 +10,95 @@
 #include <random>
 #include <algorithm>
 
-
-
 //***************************************************** Constructor
-CoinSet::CoinSet(int numOfCoins, int numOfFakeCoins) :
-	coins(numOfCoins, true),
-	numOfFakeCoins(numOfFakeCoins)
-{
-	if (numOfFakeCoins < 0 || numOfFakeCoins > numOfCoins) {
-		throw CoinSetFailure("Bad number of fake coins: " +
-							std::to_string(numOfFakeCoins) +
-							" out of " + std::to_string(numOfCoins));
+CoinSet::CoinSet(int numOfCoins) : coins(numOfCoins, true) {
+	if (numOfFakeCoins > numOfCoins) {
+		throw CoinSetFailure("Bad number of fake coins.");
 	}
-
-	std::vector<size_t> fake_coins_position(0);
-	for (size_t i = 0; i < numOfFakeCoins; ++i) {
-		std::random_device seed;
-		size_t one_fake_pos = seed() % (numOfCoins - i);
-		for (size_t &prev_fake_pos : fake_coins_position) {
-			if (prev_fake_pos > one_fake_pos) break;
-			++one_fake_pos;
-		}
-		fake_coins_position.push_back(one_fake_pos);
-		coins[one_fake_pos] = false;
-	}
+ 
+    for (size_t i = 0; i < numOfFakeCoins; ++i) {
+        coins[i] = false;
+    }
+    
+    std::shuffle(coins.begin(), coins.end(), std::random_device{});
 }
+
+
+
+//***************************************************** Static constants
+const size_t CoinSet::numOfFakeCoins = 2;
 
 
 
 //***************************************************** Field accessors
-const size_t CoinSet::size() const { return coins.size(); }
-const size_t CoinSet::numOfFakes() const { return numOfFakeCoins; }
+const size_t CoinSet::size() const {
+    return coins.size();
+}
 
 
 
 //***************************************************** Public methods
-const int CoinSet::compareWeight(const Weighing &weighing) const {
-	auto weight1 = weighing.leftGroup;
-	auto weight2 = weighing.rightGroup;
-	if (weight1.size() > weight2.size()) return 1;
-	if (weight1.size() < weight2.size()) return -1;
-	// Number of fake coins in the first set - second set
-	int diffOfFakeCoins = 0;
-	for (size_t i = 0; i < weight1.size(); ++i) {
-		if (!coins[weight1[i]]) ++diffOfFakeCoins;
-		if (!coins[weight2[i]]) --diffOfFakeCoins;
-	}
-	
-	if (diffOfFakeCoins > 0) return -1;
-	if (diffOfFakeCoins < 0) return 1;
-	return 0;
+const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
+    int leftGroupSize = 0;
+    int rightGroupSize = 0;
+    int leftGroupNumOfFakes = 0;
+    int rightGroupNumOfFakes = 0;
+    for (size_t i = 0; i < weighing.size(); ++i) {
+        if (weighing.at(i) == CoinStates::LeftGroup) {
+            ++leftGroupSize;
+            if (!coins.at(i)) {
+               ++leftGroupNumOfFakes;
+            }
+        } else if (weighing.at(i) == CoinStates::RightGroup) {
+            ++rightGroupSize;
+            if (!coins.at(i)) {
+               ++rightGroupNumOfFakes;
+            }
+        }
+    }
+    
+    if (leftGroupSize > rightGroupSize) {
+        return WeighResult::LeftHeavy;
+    } else if (leftGroupSize < rightGroupSize) {
+        return WeighResult::RightHeavy;
+    } else if (leftGroupNumOfFakes > rightGroupNumOfFakes) {
+        return WeighResult::RightHeavy;
+    } else if (leftGroupNumOfFakes < rightGroupNumOfFakes) {
+        return WeighResult::LeftHeavy;
+    } else {
+        return WeighResult::Balance;
+    }
 }
 
-const int CoinSet::guessFakes(std::vector<size_t> guess) const {
-	if (guess.size() != numOfFakeCoins) return 2; // wrong number of coins to guess
-	std::sort(guess.begin(), guess.end());
+const bool CoinSet::guessFakeCoins(const CoinStates &guess) const {
 	for (int i = 0; i < guess.size(); ++i) {
-		if (guess[i] >= coins.size()) return 2; // index out of bound; invalid
-		if (i < guess.size() - 1 && guess[i] == guess[i + 1]) return 2; // duplicate guess; invalid
+        switch (guess.at(i)) {
+            case CoinStates::LeftGroup :
+            case CoinStates::RightGroup :
+                throw CoinSetFailure("Invalid guess.");
+                break;
+            case CoinStates::NoSelect :
+                if (!coins.at(i)) {
+                    return false;
+                }
+                break;
+            case CoinStates::Guess :
+                if (coins.at(i)) {
+                    return false;
+                }
+                break;
+        }
 	}
-	// Otherwise, valid guess; check correctness
-	for (int i = 0; i < guess.size(); ++i) {
-		if (coins[guess[i]]) return 0; // wrong guess
-	}
-	return 1;
+    
+    return true;
 }
 
 
 
 //***************************************************** Coin Set Failure
-CoinSetFailure::CoinSetFailure(std::string message) : Exception{message} {}
+CoinSetFailure::CoinSetFailure(std::string coreMessage) :
+    Exception{coreMessage} {}
+    
 const std::string CoinSetFailure::headerMessage() const {
-    return "Coin Set";
+    return "Coin Set: ";
 }

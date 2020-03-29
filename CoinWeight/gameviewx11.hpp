@@ -9,15 +9,17 @@
 #ifndef gameviewx11_hpp
 #define gameviewx11_hpp
 
+#include <vector>
 #include <memory>
+#include <string>
 #include "gameview.hpp"
 #include "x11graphics.hpp"
-#include <string>
-#include <vector>
 
 class GameViewX11 : public GameView {
 	X11Graphics coreGraphics;
+    // std::unique_ptr<X11Graphics> historyWindow;
     void drawCoin(int coinState, size_t coinIndex);
+    void drawString(int x_pos, int y_pos, const std::string &msg, bool boxed);
     static const int coinRadius = 30;
 
 public:
@@ -28,17 +30,20 @@ public:
     void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
             std::string gameLevel, bool isHuman) override;
     void drawGamePlayScreen(
-        std::vector<int> coinStates,
+        CoinStates coinStates,
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<std::pair<Weighing, int>> gameHistory
+        WeighResult lastWeighResult
         ) override;
     void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        std::vector<size_t> finalGuess) override;
+        size_t numOfComparisonsCap) override;
+    void drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex) override;
+    
     void receiveInput() override;
     const Input lastInput() const override;
 };

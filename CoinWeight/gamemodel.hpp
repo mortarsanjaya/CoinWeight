@@ -14,7 +14,9 @@
 #include "computer.hpp"
 #include "gameview.hpp"
 #include "input.hpp"
+#include "coinstates.hpp"
 #include "exception.hpp"
+#include "record.hpp"
 
 class GameModel {
     /*
@@ -29,7 +31,8 @@ class GameModel {
         Credit,
         GameOption,  // Num of coins, Difficulty, Human/Computer
         GamePlay,    // Coins, just coins, color depends
-        GameOver     // You win! You lose!
+        GameOver,    // You win! You lose!
+        GameHistory
     };
     
     struct GameSettings {
@@ -41,17 +44,15 @@ class GameModel {
             GameCore::Level::Hard, bool isHuman = true);
     };
     
-    enum CoinState { NoSelect = 0, Group1 = 1, Group2 = 2 };
-    
     //*****************************************************
     
     Page page;
     std::unique_ptr<GameCore> gameCore;
     std::unique_ptr<Computer> computer;
-    std::vector<int> coinStates;
+    std::unique_ptr<CoinStates> coinStates;
     int pageHighlight;
+    std::vector<Record> history;
     GameSettings gameSettings;
-    std::vector<size_t> finalGuess;
     
     /*
         computer is set to NULL if the player is a Human
@@ -69,14 +70,16 @@ class GameModel {
     void switchFromInstructionPage();
     void switchFromCreditPage();
     void switchFromGameOptionPage();
-    void switchFromGamePlayPage();
+    void switchFromGamePlayPage(bool isOver = true);
     void switchFromGameOverPage();
+    void switchFromGameHistoryPage();
     
     // Updates current page
     void updateMainPage(Input::Arrow inp);
     void updateGameOptionPage(Input::Arrow inp);
     void updateGamePlayPage(Input::Arrow inp);
     void updateGamePlayPage(char inp);
+    void updateGameHistoryPage(Input::Arrow inp);
     
     // Execute moves in game
     void compareWeight();
@@ -85,11 +88,15 @@ class GameModel {
 public:
     GameModel();
     
+    // Accessor function
+    const std::vector<Record> gameHistory() const;
+    
     // Updates the game view
     void updateView(GameView &gameView);
     
     // Process an input
     void processInput(Input inp);
+
 };
 
 

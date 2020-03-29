@@ -19,9 +19,18 @@ void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
     const int x_pos = 200 + 50 * (coinIndex % 10);
     const int y_pos = 200 + 50 * (coinIndex / 10);
     switch (coinState) {
-        case 0: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold); break;
-        case 1: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red); break;
-        case 2: coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Blue); break;
+        case CoinStates::NoSelect:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Gold);
+            break;
+        case CoinStates::LeftGroup:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Red);
+            break;
+        case CoinStates::RightGroup:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Blue);
+            break;
+        case CoinStates::Guess:
+            coreGraphics.fillCircle(x_pos, y_pos, coinRadius, X11Graphics::Green);
+            break;
         default: throw;
     }
     coreGraphics.drawCircle(x_pos, y_pos, coinRadius, X11Graphics::Black);
@@ -33,6 +42,7 @@ void GameViewX11::drawCoin(int coinState, size_t coinIndex) {
 //***************************************************** Public methods
 void GameViewX11::drawMainScreen(int screenHighlight) {
     const int stringHeight = 20;
+    const int fontWidth = 6;
     coreGraphics.clear();
     
     coreGraphics.drawString(300, 50, "Coin Weight");
@@ -41,7 +51,7 @@ void GameViewX11::drawMainScreen(int screenHighlight) {
     coreGraphics.drawString(300, 300 + 3 * stringHeight, "Credits");
     
     coreGraphics.drawRectangle(295, 305 + screenHighlight * stringHeight,
-        50, stringHeight);
+        4 * fontWidth + 10, stringHeight);
 }
 
 void GameViewX11::drawInstructionScreen() {
@@ -80,16 +90,16 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
 }
 
 void GameViewX11::drawGamePlayScreen(
-    std::vector<int> coinStates,
+    CoinStates coinStates,
     int highlightedCoin,
     size_t numOfComparisonsLeft,
     size_t numOfComparisonsCap,
-    std::vector<std::pair<Weighing, int>> gameHistory)
+    WeighResult lastWeighResult)
 {
     coreGraphics.clear();
     
     for (size_t i = 0; i < coinStates.size(); ++i) {
-        drawCoin(coinStates[i], i);
+        drawCoin(coinStates.at(i), i);
     }
     
     const std::string numOfCompLeftStr = std::to_string(numOfComparisonsLeft);
@@ -99,22 +109,20 @@ void GameViewX11::drawGamePlayScreen(
     if (numOfComparisonsLeft == 0) {
         coreGraphics.drawString(30, 50, "No more comparisons!");
     }
-    coreGraphics.drawString(30, 100, "History:");
+    coreGraphics.drawString(30, 100, "Result of last move:");
     const int x_pos = 194 + 50 * (highlightedCoin % 10);
     const int y_pos = 188 + 50 * (highlightedCoin / 10);
     coreGraphics.drawCircle(x_pos, y_pos, 15, coreGraphics.Black);
     
-    // HISTORY...
-    if (!gameHistory.empty()) {
-        coreGraphics.drawString(30, 110, std::to_string(gameHistory.back().second));
+    if (numOfComparisonsLeft != numOfComparisonsCap) {
+        coreGraphics.drawString(30, 120, toString(lastWeighResult));
     }
 }
 
 void GameViewX11::drawGameOverScreen(
     bool isWin,
     size_t numOfComparisonsLeft,
-    size_t numOfComparisonsCap,
-    std::vector<size_t> finalGuess)
+    size_t numOfComparisonsCap)
 {
     coreGraphics.clear();
     
@@ -123,12 +131,32 @@ void GameViewX11::drawGameOverScreen(
     coreGraphics.drawString(300, 300,
         "Number of comparisons left: " + std::to_string(numOfComparisonsLeft) +
         " out of " + std::to_string(numOfComparisonsCap));
+    /*
     coreGraphics.drawString(300, 400, "Final guess: ");
     std::string guessStr;
     for (size_t n : finalGuess) {
         guessStr += (std::to_string(n + 1) + " ");
     }
     coreGraphics.drawString(300, 420, guessStr);
+    */
+}
+
+void GameViewX11::drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex)
+{
+    coreGraphics.clear();
+    
+    coreGraphics.drawString(300, 30, "History");
+    if (gameHistory.empty()) {
+        coreGraphics.drawString(300, 200, "You have not made any moves.");
+    } else {
+        coreGraphics.drawString(300, 50, "Move " + std::to_string(historyIndex) + ".");
+        for (size_t i = 0; i < gameHistory[historyIndex].coinStates().size(); ++i) {
+            drawCoin(gameHistory[historyIndex].coinStates().at(i), i);
+        }
+        coreGraphics.drawString(30, 120, toString(gameHistory[historyIndex].result()));
+    }
 }
 
 void GameViewX11::receiveInput() {
@@ -139,10 +167,13 @@ const Input GameViewX11::lastInput() const {
     XEvent event = coreGraphics.lastInput();
     if (event.type == KeyPress) {
         switch (XLookupKeysym(&event.xkey, 0)) {
+            case XK_0:          return Input('0');
             case XK_1:          return Input('1');
             case XK_2:          return Input('2');
+            case XK_3:          return Input('3');
             case XK_w:          return Input('w');
             case XK_g:          return Input('g');
+            case XK_h:          return Input('h');
             case XK_Return:     return Input('\n');
             case XK_Left:       return Input(Input::Arrow::Left);
             case XK_Right:      return Input(Input::Arrow::Right);

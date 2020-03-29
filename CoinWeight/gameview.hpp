@@ -11,8 +11,10 @@
 
 #include <vector>
 #include <utility>
-#include "weighing.hpp"
+#include "coinstates.hpp"
+#include "record.hpp"
 #include "input.hpp"
+#include "weighresult.hpp"
 
 class GameView {
 public:
@@ -28,16 +30,18 @@ public:
         std::string gameLevel,
         bool isHuman) = 0;
     virtual void drawGamePlayScreen(
-        std::vector<int> coinStates,
+        CoinStates coinStates,
         int highlightedCoin,
         size_t numOfComparisonsLeft,
         size_t numOfComparisonsCap,
-        std::vector<std::pair<Weighing, int>> gameHistory) = 0;
+        WeighResult lastWeighResult) = 0;
     virtual void drawGameOverScreen(
         bool isWin,
         size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        std::vector<size_t> finalGuess) = 0;
+        size_t numOfComparisonsCap) = 0;
+    virtual void drawGameHistoryScreen(
+        std::vector<Record> gameHistory,
+        size_t historyIndex) = 0;
         
     // Input handling functions
     virtual void receiveInput() = 0;
