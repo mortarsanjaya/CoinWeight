@@ -1,4 +1,5 @@
 # CoinWeight
 
-The master branch is still a mess. I am working on huge refactoring on another branch.
-Core functionalities are overall okay but the view are still messed up.
+A coin weighing game with n >= 2 coins and 2 fake coins.
+
+Note: The project is still on development and will see some changes, especially in x11 interface.
