@@ -46,12 +46,9 @@ void GameViewX11::drawMainScreen(int screenHighlight) {
     coreGraphics.clear();
     
     coreGraphics.drawString(300, 50, "Coin Weight");
-    coreGraphics.drawString(300, 300 + stringHeight, "Play");
-    coreGraphics.drawString(300, 300 + 2 * stringHeight, "Instructions");
-    coreGraphics.drawString(300, 300 + 3 * stringHeight, "Credits");
-    
-    coreGraphics.drawRectangle(295, 305 + screenHighlight * stringHeight,
-        4 * fontWidth + 10, stringHeight);
+    coreGraphics.drawString(300, 300 + stringHeight, "Play", screenHighlight == 0);
+    coreGraphics.drawString(300, 300 + 2 * stringHeight, "Instructions", screenHighlight == 1);
+    coreGraphics.drawString(300, 300 + 3 * stringHeight, "Credits", screenHighlight == 2);
 }
 
 void GameViewX11::drawInstructionScreen() {
@@ -133,12 +130,9 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
     coreGraphics.drawString(300, 300 + 2 * stringHeight, "Level:");
     coreGraphics.drawString(300, 300 + 3 * stringHeight, "Mode:");
     
-    coreGraphics.drawString(405, 300 + stringHeight, std::to_string(numOfCoins));
-    coreGraphics.drawString(405, 300 + 2 * stringHeight, gameLevel);
-    coreGraphics.drawString(405, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer");
-    
-    coreGraphics.drawRectangle(400, 305 + screenHighlight * stringHeight,
-        50, stringHeight);
+    coreGraphics.drawString(405, 300 + stringHeight, std::to_string(numOfCoins), screenHighlight == 0);
+    coreGraphics.drawString(405, 300 + 2 * stringHeight, gameLevel, screenHighlight == 1);
+    coreGraphics.drawString(405, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer", screenHighlight == 2);
 }
 
 void GameViewX11::drawGamePlayScreen(

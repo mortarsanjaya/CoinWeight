@@ -16,16 +16,18 @@ X11Graphics::X11Graphics(std::string windowName) {
     const int height = 800;
 
     display = XOpenDisplay(nullptr);
-    if (display == nullptr) throw X11GraphicsFailure("Cannot open display");
+    if (display == nullptr) {
+        throw X11GraphicsFailure("Cannot open display");
+    }
     
     screen = XDefaultScreen(display);
     window = XCreateSimpleWindow(display, XRootWindow(display, screen), 0, 0,
         width, height, 1, XBlackPixel(display, screen), XWhitePixel(display, screen));
         
     XSelectInput(display, window, KeyPressMask);
-        
+    
     XStoreName(display, window, windowName.c_str());
-
+    
     gc = XCreateGC(display, window, 0, 0);
 
     XColor xcolor;
@@ -34,10 +36,10 @@ X11Graphics::X11Graphics(std::string windowName) {
     std::vector<std::string> colorVals = {
         "black", "red", "blue", "green", "gold"
     };
-
+    
     cmap = DefaultColormap(display, DefaultScreen(display));
     
-    for(unsigned int i = 0; i < colorVals.size(); ++i) {
+    for (unsigned int i = 0; i < colorVals.size(); ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
             throw X11GraphicsFailure("Cannot parse color");
         }
@@ -48,7 +50,7 @@ X11Graphics::X11Graphics(std::string windowName) {
     XSetForeground(display, gc, colors[defaultFGColor]);
 
     XSizeHints hints;
-    hints.flags = (USPosition | PSize | PMinSize | PMaxSize );
+    hints.flags = (USPosition | PSize | PMinSize | PMaxSize);
     hints.height = hints.base_height = height;
     hints.min_height = height;
     hints.max_height = height;
@@ -76,8 +78,14 @@ void X11Graphics::clear() {
     XFlush(display);
 }
 
-void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg) {
+void X11Graphics::drawString(int x_pos, int y_pos, const std::string &msg, bool boxed) {
     XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
+    if (boxed) {
+        const int border_dist = font_width;
+        drawRectangle(x_pos - font_width, y_pos - font_height - font_width,
+            font_width * msg.length() + 2 * border_dist,
+            font_height + 2 * font_width);
+    }
     XFlush(display);
 }
 
