@@ -9,9 +9,22 @@
 #ifndef gamecontroller_hpp
 #define gamecontroller_hpp
 
+#include <memory>
+#include "gamemodel.hpp"
+#include "gameview.hpp"
+
 class GameController {
-public:
+    std::unique_ptr<GameModel> model;
+    std::unique_ptr<GameView> view;
     
+    // Arrow input handling
+    void onArrowInputUp();
+    void onArrowInputDown();
+    void onArrowInputLeft();
+    void onArrowInputRight();
+
+public:
+    GameController();
 };
 
 #endif

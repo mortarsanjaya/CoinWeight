@@ -11,383 +11,280 @@
 #include <unistd.h>
 
 //***************************************************** Constructor
-GameModel::GameModel() : gameCore{}, computer{}, page{Page::Main},
-    coinStates{}, pageHighlight{}, gameSettings{} {}
-    
-
-
-//***************************************************** Game Settings Constructor
-GameModel::GameSettings::GameSettings(size_t numOfCoins, GameCore::Level level, bool isHuman) :
-    numOfCoins{numOfCoins}, level{level}, isHuman{isHuman} {}
+GameModel::GameModel() :
+    screen(), settings(), gameCore(), coinStates(),
+    computer(), coinHighlight(), history() {}
 
 
 
-//***************************************************** Page switch functions
-void GameModel::switchFromMainPage() {
-    switch (pageHighlight) {
-        case 0:     page = Page::GameOption;     break;
-        case 1:     page = Page::Instruction;    break;
-        case 2:     page = Page::Credit;         break;
+//***************************************************** Field accessors
+const GameScreen::Page GameModel::currentScreen() const {
+    return screen.currentScreen();
+}
+
+const int GameModel::screenHighlight() const {
+    return screen.currentHighlight();
+}
+
+const int GameModel::gameSize() const {
+    return settings.gameSize();
+}
+
+const GameLevel GameModel::gameLevel() const {
+    return settings.gameLevel();
+}
+
+const bool GameModel::isHumanMode() const {
+    return settings.isHumanMode();
+}
+
+const CoinStates GameModel::currentCoinStates() const {
+    return *coinStates;
+}
+
+const int GameModel::hightlightedCoinIndex() const {
+    return coinHighlight;
+}
+
+const size_t GameModel::currentHistoryIndex() const {
+    return history.currentIndex();
+}
+
+const Record GameModel::currentRecord() const {
+    return history.getRecord();
+}
+
+const bool GameModel::isHistoryEmpty() const {
+    return history.empty();
+}
+
+
+
+//***************************************************** Screen transitions
+//**** Helper
+void GameModel::goFromMainScreen() {
+    switch (screenHighlight()) {
+        case 0:
+            screen.transition(GameScreen::Page::GameOption);
+            break;
+        case 1:
+            screen.transition(GameScreen::Page::Instruction);
+            break;
+        case 2:
+            screen.transition(GameScreen::Page::Credit);
+            break;
+        default:
+            throw GameModelFailure("Game Screen Highlight out of range.");
     }
 }
 
-void GameModel::switchFromInstructionPage() {
-    page = Page::Main;
+void GameModel::backToMainScreen() {
+    screen.transition(GameScreen::Page::Main);
 }
 
-void GameModel::switchFromCreditPage() {
-    page = Page::Main;
-}
-
-void GameModel::switchFromGameOptionPage() {
-    page = Page::GamePlay;
-    gameCore = std::make_unique<GameCore>(gameSettings.numOfCoins, gameSettings.level);
-    if (!gameSettings.isHuman) {
-        computer = std::make_unique<ComputerHard>(gameSettings.numOfCoins);
-    }
-    coinStates = std::make_unique<CoinStates>(gameSettings.numOfCoins);
-    pageHighlight = 0;
-}
-
-void GameModel::switchFromGamePlayPage(bool isOver) {
-    if (isOver) {
-        page = Page::GameOver;
+void GameModel::gameStart() {
+    gameCore = std::make_unique<GameCore>(settings.gameSize(), settings.gameLevel());
+    coinStates = std::make_unique<CoinStates>(settings.gameSize());
+    if (isHumanMode()) {
+        screen.transition(GameScreen::Page::GamePlayHuman);
     } else {
-        page = Page::GameHistory;
-        pageHighlight = 0;
+        computer = std::make_unique<ComputerHard>(settings.gameSize());
+        screen.transition(GameScreen::Page::GamePlayComputer);
     }
 }
 
-void GameModel::switchFromGameOverPage() {
-    page = Page::Main;
+void GameModel::gameOver() {
+    screen.transition(GameScreen::Page::GameOver);
+    coinHighlight = 0;
+}
+
+//**** Main
+void GameModel::screenTransition() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+            goFromMainScreen();
+            break;
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+            backToMainScreen();
+            break;
+        case GameScreen::Page::GameOption:
+            gameStart();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+        case GameScreen::Page::GamePlayComputer:
+            gameOver();
+            break;
+        case GameScreen::Page::GameOver:
+            gameCleanUp();
+            backToMainScreen();
+            break;
+    }
+}
+
+void GameModel::gameCleanUp() {
     gameCore.reset();
+    coinStates.reset();
     computer.reset();
     history.clear();
-    coinStates.reset();
-    pageHighlight = 0;
-}
-
-void GameModel::switchFromGameHistoryPage() {
-    page = Page::GamePlay;
-    pageHighlight = 0;
 }
 
 
-//***************************************************** Page update function
-void GameModel::updateMainPage(Input::Arrow inp) {
-    switch (inp) {
-        case Input::Arrow::Up:
-            if (pageHighlight > 0) {
-                --pageHighlight;
-            }
+
+//***************************************************** Screen highlight manipulation
+void GameModel::incrementScreenHighlight() {
+    screen.incrementHighlight();
+}
+
+void GameModel::decrementScreenHighlight() {
+    screen.decrementHighlight();
+}
+
+
+
+//***************************************************** Settings manipulation
+//**** Helper
+void GameModel::increaseNumOfCoins() {
+    settings.increaseGameSize();
+}
+
+void GameModel::decreaseNumOfCoins() {
+    settings.decreaseGameSize();
+}
+
+void GameModel::increaseLevel() {
+    settings.increaseDifficulty();
+}
+
+void GameModel::decreaseLevel() {
+    settings.decreaseDifficulty();
+}
+
+void GameModel::switchMode() {
+    settings.switchMode();
+}
+
+//**** Main
+void GameModel::incrementSettings() {
+    switch (screenHighlight()) {
+        case 0:
+            increaseNumOfCoins();
             break;
-        case Input::Arrow::Down:
-            if (pageHighlight < 2) {
-                ++pageHighlight;
-            }
+        case 1:
+            increaseLevel();
+            break;
+        case 2:
+            switchMode();
             break;
         default:
-            break;
+            throw GameModelFailure("Game Screen Highlight out of range.");
     }
 }
 
-void GameModel::updateGameOptionPage(Input::Arrow inp) {
-    switch (inp) {
-        case Input::Arrow::Up:
-            if (pageHighlight > 0) {
-                --pageHighlight;
-            }
+void GameModel::decrementSettings() {
+    switch (screenHighlight()) {
+        case 0:
+            decreaseNumOfCoins();
             break;
-        case Input::Arrow::Down:
-            if (pageHighlight < 2) {
-                ++pageHighlight;
-            }
+        case 1:
+            decreaseLevel();
             break;
-        case Input::Arrow::Left:
-            switch (pageHighlight) {
-                case 0:
-                    if (gameSettings.numOfCoins > 2) {
-                        --gameSettings.numOfCoins;
-                    }
-                    break;
-                case 1:
-                    switch (gameSettings.level) {
-                        case GameCore::Level::Easy:
-                            gameSettings.level = GameCore::Level::Easy;
-                            break;
-                        case GameCore::Level::Medium:
-                            gameSettings.level = GameCore::Level::Easy;
-                            break;
-                        case GameCore::Level::Hard:
-                            gameSettings.level = GameCore::Level::Medium;
-                            break;
-                    }
-                    break;
-                case 2:
-                    gameSettings.isHuman = !gameSettings.isHuman;
-                    break;
-            }
-            break;
-        case Input::Arrow::Right:
-            switch (pageHighlight) {
-                case 0:
-                    if (gameSettings.numOfCoins < 120) {
-                        ++gameSettings.numOfCoins;
-                    }
-                    break;
-                case 1:
-                    switch (gameSettings.level) {
-                        case GameCore::Level::Easy:
-                            gameSettings.level = GameCore::Level::Medium;
-                            break;
-                        case GameCore::Level::Medium:
-                            gameSettings.level = GameCore::Level::Hard;
-                            break;
-                        case GameCore::Level::Hard:
-                            gameSettings.level = GameCore::Level::Hard;
-                            break;
-                    }
-                    break;
-                case 2:
-                    gameSettings.isHuman = !gameSettings.isHuman;
-                    break;
-            }
-            break;
-    }
-}
-
-void GameModel::updateGamePlayPage(Input::Arrow inp) {
-    const int coinsPerRow = 10;
-    switch (inp) {
-        case Input::Arrow::Up:
-            if (pageHighlight >= coinsPerRow) {
-                pageHighlight -= coinsPerRow;
-            }
-            break;
-        case Input::Arrow::Down:
-            if (pageHighlight < coinStates->size() - coinsPerRow) {
-                pageHighlight += coinsPerRow;
-            }
-            break;
-        case Input::Arrow::Left:
-            if (pageHighlight % coinsPerRow > 0) {
-                --pageHighlight;
-            }
-            break;
-        case Input::Arrow::Right:
-            if ((pageHighlight % coinsPerRow < coinsPerRow - 1) &&
-                (pageHighlight + 1 < coinStates->size()))
-            {
-                ++pageHighlight;
-            }
-            break;
-    }
-}
-
-void GameModel::updateGamePlayPage(char inp) {
-    switch (inp) {
-        case '0':
-            (*coinStates)[pageHighlight] = CoinStates::NoSelect;
-            break;
-        case '1':
-            (*coinStates)[pageHighlight] = CoinStates::LeftGroup;
-            break;
-        case '2':
-            (*coinStates)[pageHighlight] = CoinStates::RightGroup;
-            break;
-        case '3':
-            (*coinStates)[pageHighlight] = CoinStates::Guess;
-            break;
-        case 'w':
-            if (gameCore->numOfWeighingsLeft() != 0) {
-                compareWeight();
-            }
+        case 2:
+            switchMode();
             break;
         default:
-            break;
-    }
-}
-
-void GameModel::updateGameHistoryPage(Input::Arrow inp) {
-    switch (inp) {
-        case Input::Arrow::Up:
-        case Input::Arrow::Down:
-            break;
-        case Input::Arrow::Left:
-            if (pageHighlight > 0) {
-                --pageHighlight;
-            }
-            break;
-        case Input::Arrow::Right:
-            if (pageHighlight < history.size() - 1) {
-                ++pageHighlight;
-            }
-            break;
+            throw GameModelFailure("Game Screen Highlight out of range.");
     }
 }
 
 
 
-//***************************************************** Game core function
-void GameModel::compareWeight() {
-    if (computer != nullptr) {
+//***************************************************** Coin highlight manipulation
+const bool GameModel::isOnCoinHighlight() const {
+    if (currentScreen() != GameScreen::Page::GamePlayHuman) {
+        return false;
+    } else {
+        return (screenHighlight() == 0);
+    }
+}
+
+void GameModel::moveCoinHighlightUp() {
+    if (screenHighlight() != 0) {
+        decrementScreenHighlight();
+    } else if (coinHighlight >= coinsPerRow) {
+        coinHighlight -= coinsPerRow;
+    }
+}
+
+void GameModel::moveCoinHighlightDown() {
+    if (coinHighlight < gameSize() - coinsPerRow) {
+        coinHighlight += coinsPerRow;
+    } else {
+        incrementScreenHighlight();
+    }
+}
+
+void GameModel::moveCoinHighlightLeft() {
+    if (coinHighlight % coinsPerRow > 0) {
+        --coinHighlight;
+    }
+}
+
+void GameModel::moveCoinHighlightRight() {
+    if (coinHighlight % coinsPerRow < coinsPerRow - 1) {
+        ++coinHighlight;
+    }
+}
+
+
+
+//***************************************************** Coin states manipulation
+void GameModel::setStateOfCoin(CoinStates::Value state) {
+    (*coinStates)[coinHighlight] = state;
+}
+
+void GameModel::computerSetup() {
+    if (isHumanMode()) {
+        throw GameModelFailure("Computer setup failed: Not computer mode.");
+    }
+    
+    if (computer->readyToGuess()) {
+        *coinStates = computer->pickToGuess();
+    } else {
         computer->beforeWeigh();
         *coinStates = computer->pickToWeigh();
     }
-    
-    WeighResult weighingResult = gameCore->compareWeight(*coinStates);
-    history.emplace_back(*coinStates, weighingResult);
-    pageHighlight = 0;
-    if (computer != nullptr) {
-        computer->afterWeigh(weighingResult);
-    }
-    
-    *coinStates = CoinStates(coinStates->size());
-}
-
-void GameModel::guessFakeCoins() {
-    if (computer != nullptr) {
-        *coinStates = computer->pickToGuess();
-    }
-    
-    int guessResult = gameCore->guessFakeCoins(*coinStates);
-    pageHighlight = guessResult;
 }
 
 
 
-//***************************************************** Public methods
-const std::vector<Record> GameModel::gameHistory() const {
-    return history;
-}
-
-void GameModel::updateView(GameView &gameView) {
-    switch (page) {
-        case Page::Main:
-            gameView.drawMainScreen(pageHighlight);
-            break;
-        case Page::Instruction:
-            gameView.drawInstructionScreen();
-            break;
-        case Page::Credit:
-            gameView.drawCreditScreen();
-            break;
-        case Page::GameOption:
-            gameView.drawGameOptionScreen(pageHighlight, gameSettings.numOfCoins,
-                GameCore::levelToString(gameSettings.level), gameSettings.isHuman);
-            break;
-        case Page::GamePlay:
-            gameView.drawGamePlayScreen(
-                *coinStates, pageHighlight,
-                gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap(),
-                (gameHistory().empty() ? WeighResult::Balance :
-                    gameHistory().back().result()));
-            break;
-        case Page::GameOver:
-            gameView.drawGameOverScreen(pageHighlight, gameCore->numOfWeighingsLeft(),
-                gameCore->numOfWeighingsCap());
-            break;
-        case Page::GameHistory:
-            gameView.drawGameHistoryScreen(history, pageHighlight);
-            break;
+//***************************************************** Game operations
+void GameModel::compareWeight() {
+    const WeighResult weighResult = gameCore->compareWeight(*coinStates);
+    if (!isHumanMode()) {
+        computer->afterWeigh(weighResult);
+    }
+    coinStates->resetStates();
+    coinHighlight = 0;
+    history.addRecord(*coinStates, weighResult);
+    if (!isHumanMode()) {
+        computerSetup();
     }
 }
 
-void GameModel::processInput(Input inp) {
-    switch (page) {
-        case Page::Main:
-            switch (inp.inputType()) {
-                case Input::Type::Char:
-                    if (inp.whatChar() == '\n') { switchFromMainPage(); }
-                    break;
-                case Input::Type::Arrow:
-                    updateMainPage(inp.whatArrow());
-                    break;
-                case Input::Type::Unknown:
-                    break;
-            }
-            break;
-            
-        case Page::Instruction:
-            if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
-                switchFromInstructionPage();
-            }
-            break;
-            
-        case Page::Credit:
-            if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
-                switchFromCreditPage();
-            }
-            break;
-            
-        case Page::GameOption:
-            switch (inp.inputType()) {
-                case Input::Type::Char:
-                    if (inp.whatChar() == '\n') { switchFromGameOptionPage(); }
-                    break;
-                case Input::Type::Arrow:
-                    updateGameOptionPage(inp.whatArrow());
-                    break;
-                case Input::Type::Unknown:
-                    break;
-            }
-            break;
-            
-        case Page::GamePlay:
-            if (computer == nullptr) {
-                switch (inp.inputType()) {
-                    case Input::Type::Char:
-                        if (inp.whatChar() == 'g') {
-                            guessFakeCoins();
-                            switchFromGamePlayPage();
-                        } else if (inp.whatChar() == 'h') {
-                            switchFromGamePlayPage(false);
-                        } else {
-                            updateGamePlayPage(inp.whatChar());
-                        }
-                        break;
-                    case Input::Type::Arrow:
-                        updateGamePlayPage(inp.whatArrow());
-                        break;
-                    case Input::Type::Unknown:
-                        break;
-                }
-            } else if (inp.inputType() == Input::Type::Char) {
-                if (inp.whatChar() == '\n') {
-                    if (gameCore->numOfWeighingsLeft() != 0 && !computer->readyToGuess()) {
-                        updateGamePlayPage('w');
-                    } else {
-                        guessFakeCoins();
-                        switchFromGamePlayPage();
-                    }
-                } else if (inp.whatChar() == 'h') {
-                    switchFromGamePlayPage(false);
-                }
-            }
-            break;
-            
-        case Page::GameOver:
-            if (inp.inputType() == Input::Type::Char && inp.whatChar() == '\n') {
-                switchFromGameOverPage();
-            }
-            break;
-            
-        case Page::GameHistory:
-            switch (inp.inputType()) {
-                case Input::Type::Unknown:
-                    break;
-                case Input::Type::Char:
-                    if (inp.whatChar() == '\n') {
-                        switchFromGameHistoryPage();
-                    }
-                    break;
-                case Input::Type::Arrow:
-                    updateGameHistoryPage(inp.whatArrow());
-                    break;
-            }
-            break;
-    }
+const bool GameModel::guessFakeCoins() const {
+    return gameCore->guessFakeCoins(*coinStates);
+}
+
+
+
+//***************************************************** History index manipulation
+void GameModel::historyIncrementIndex() {
+    history.incrementIndex();
+}
+
+void GameModel::historyDecrementIndex() {
+    history.decrementIndex();
 }
 
 

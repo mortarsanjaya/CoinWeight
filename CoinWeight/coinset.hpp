@@ -15,22 +15,19 @@
 #include "exception.hpp"
 
 class CoinSet {
-    // Fake coins are lighter than real coins and denoted by [false]
+    // Fake coins are lighter than real coins and are denoted by [false]
 	std::vector<bool> coins;
 
 public:
-    // Constructor
 	CoinSet(int numOfCoins);
     
-    // Static constant
-	static const size_t numOfFakeCoins;
-	
-    // Field accessor
 	const size_t size() const;
 	
-	// Game functions
+	// Game operations
 	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const bool guessFakeCoins(const CoinStates &guess) const;
+ 
+	static const size_t numOfFakeCoins;
 };
 
 

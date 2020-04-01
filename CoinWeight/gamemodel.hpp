@@ -10,93 +10,86 @@
 #define gamemodel_hpp
 
 #include <memory>
+#include "gamescreen.hpp"
+#include "gamesettings.hpp"
 #include "gamecore.hpp"
-#include "computer.hpp"
-#include "gameview.hpp"
-#include "input.hpp"
 #include "coinstates.hpp"
+#include "computer.hpp"
+#include "history.hpp"
 #include "exception.hpp"
-#include "record.hpp"
 
 class GameModel {
-    /*
-        Page Transition table:
-            Main -> Instruction, Credit, Game Option
-            Instruction, Credit -> Main
-            Game Option -> Game Play -> Game Over -> Main
-    */
-    enum class Page {
-        Main,
-        Instruction,
-        Credit,
-        GameOption,  // Num of coins, Difficulty, Human/Computer
-        GamePlay,    // Coins, just coins, color depends
-        GameOver,    // You win! You lose!
-        GameHistory
-    };
-    
-    struct GameSettings {
-        size_t numOfCoins;
-        GameCore::Level level;
-        bool isHuman;
-        
-        GameSettings(size_t numOfCoins = 13, GameCore::Level level =
-            GameCore::Level::Hard, bool isHuman = true);
-    };
-    
-    //*****************************************************
-    
-    Page page;
+    GameScreen screen;
+    GameSettings settings;
     std::unique_ptr<GameCore> gameCore;
-    std::unique_ptr<Computer> computer;
     std::unique_ptr<CoinStates> coinStates;
-    int pageHighlight;
-    std::vector<Record> history;
-    GameSettings gameSettings;
+    std::unique_ptr<Computer> computer;
+    int coinHighlight;
+    History history;
     
-    /*
-        computer is set to NULL if the player is a Human
-        pageHighlight:
-            If Page is Main or Game Option, either 0, 1, 2 based on
-                which button to highlight
-            If Page is Game Play, indicates which coin is being highlighted
-            If Page is Game Over, 0 indicates loss, 1 indicates win
-    */
+    // Not sure how I should put it right now
+    static const int coinsPerRow = 10;
     
-    //*****************************************************
+    // Screen transitions helper functions
+    void goFromMainScreen();
+    void backToMainScreen();
+    void gameStart();
+    void gameOver();
+    void gameCleanUp(); // Clean-up after game over
     
-    // Switching pages, including necessary cleanups and setups
-    void switchFromMainPage();
-    void switchFromInstructionPage();
-    void switchFromCreditPage();
-    void switchFromGameOptionPage();
-    void switchFromGamePlayPage(bool isOver = true);
-    void switchFromGameOverPage();
-    void switchFromGameHistoryPage();
+    // Settings manipulation helper functions
+    void increaseNumOfCoins();
+    void decreaseNumOfCoins();
+    void increaseLevel();
+    void decreaseLevel();
+    void switchMode();
     
-    // Updates current page
-    void updateMainPage(Input::Arrow inp);
-    void updateGameOptionPage(Input::Arrow inp);
-    void updateGamePlayPage(Input::Arrow inp);
-    void updateGamePlayPage(char inp);
-    void updateGameHistoryPage(Input::Arrow inp);
-    
-    // Execute moves in game
-    void compareWeight();
-    void guessFakeCoins();
-    
+    // Computer setup for coin states
+    void computerSetup();
+
 public:
     GameModel();
     
-    // Accessor function
-    const std::vector<Record> gameHistory() const;
-    
-    // Updates the game view
-    void updateView(GameView &gameView);
-    
-    // Process an input
-    void processInput(Input inp);
+    const GameScreen::Page currentScreen() const;
+    const int screenHighlight() const;
+    const int gameSize() const;
+    const GameLevel gameLevel() const;
+    const bool isHumanMode() const;
+    const CoinStates currentCoinStates() const;
+    const int hightlightedCoinIndex() const;
+    const size_t currentHistoryIndex() const;
+    const Record currentRecord() const; // Never call when history is empty
+    const bool isHistoryEmpty() const;
 
+    void screenTransition();
+    
+    // Screen highlight manipulation
+    void incrementScreenHighlight();
+    void decrementScreenHighlight();
+    
+    // Settings manipulation
+    void incrementSettings();
+    void decrementSettings();
+    
+    // Coin highlight manipulation
+    // For movng down, delegate to screen highlight move if coin is at bottom row.
+    // For moving up, delegate to screen highlight if at either weigh or guess highlight.
+    const bool isOnCoinHighlight() const;
+    void moveCoinHighlightUp();
+    void moveCoinHighlightDown();
+    void moveCoinHighlightLeft();
+    void moveCoinHighlightRight();
+    
+    // Coin states manipulation
+    void setStateOfCoin(CoinStates::Value state);
+    
+    // Game operations
+    void compareWeight();
+    const bool guessFakeCoins() const;
+    
+    // History index manipulation
+    void historyIncrementIndex();
+    void historyDecrementIndex();
 };
 
 
