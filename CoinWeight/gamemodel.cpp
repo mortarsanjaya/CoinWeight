@@ -17,7 +17,7 @@ GameModel::GameModel() :
 
 
 
-//***************************************************** Field accessors
+//***************************************************** "Field accessors"
 const GameScreen::Page GameModel::currentScreen() const {
     return screen.currentScreen();
 }
@@ -42,6 +42,10 @@ const CoinStates GameModel::currentCoinStates() const {
     return *coinStates;
 }
 
+const bool GameModel::isComputerReadyToGuess() const {
+    return computer->readyToGuess();
+}
+
 const int GameModel::hightlightedCoinIndex() const {
     return coinHighlight;
 }
@@ -56,6 +60,15 @@ const Record GameModel::currentRecord() const {
 
 const bool GameModel::isHistoryEmpty() const {
     return history.empty();
+}
+
+//**** Game core number of weighings
+const size_t GameModel::numOfWeighingsMax() const {
+    return gameCore->numOfWeighingsCap();
+}
+
+const size_t GameModel::numOfWeighingsLeft() const {
+    return gameCore->numOfWeighingsCap();
 }
 
 
@@ -199,39 +212,46 @@ void GameModel::decrementSettings() {
 
 
 
-//***************************************************** Coin highlight manipulation
-const bool GameModel::isOnCoinHighlight() const {
-    if (currentScreen() != GameScreen::Page::GamePlayHuman) {
-        return false;
-    } else {
-        return (screenHighlight() == 0);
-    }
+//***************************************************** Coin highlight border check
+const bool GameModel::isTopMostCoin() const {
+    return (coinHighlight < coinsPerRow);
 }
 
+const bool GameModel::isBottomMostCoin() const {
+    return (coinHighlight >= gameSize() - coinsPerRow);
+}
+
+const bool GameModel::isLeftMostCoin() const {
+    return (coinHighlight % coinsPerRow == 0);
+}
+
+const bool GameModel::isRightMostCoin() const {
+    return (coinHighlight % coinsPerRow == coinsPerRow - 1);
+}
+
+
+
+//***************************************************** Coin highlight manipulation
 void GameModel::moveCoinHighlightUp() {
-    if (screenHighlight() != 0) {
-        decrementScreenHighlight();
-    } else if (coinHighlight >= coinsPerRow) {
+    if (!isTopMostCoin()) {
         coinHighlight -= coinsPerRow;
     }
 }
 
 void GameModel::moveCoinHighlightDown() {
-    if (coinHighlight < gameSize() - coinsPerRow) {
+    if (!isBottomMostCoin()) {
         coinHighlight += coinsPerRow;
-    } else {
-        incrementScreenHighlight();
     }
 }
 
 void GameModel::moveCoinHighlightLeft() {
-    if (coinHighlight % coinsPerRow > 0) {
+    if (!isLeftMostCoin()) {
         --coinHighlight;
     }
 }
 
 void GameModel::moveCoinHighlightRight() {
-    if (coinHighlight % coinsPerRow < coinsPerRow - 1) {
+    if (!isRightMostCoin()) {
         ++coinHighlight;
     }
 }

@@ -20,6 +20,7 @@ class History {
 public:
     History() = default;
     
+    const size_t size() const;
     const size_t currentIndex() const;
     const Record getRecord() const;
     const bool empty() const;

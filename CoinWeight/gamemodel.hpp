@@ -56,10 +56,15 @@ public:
     const GameLevel gameLevel() const;
     const bool isHumanMode() const;
     const CoinStates currentCoinStates() const;
+    const bool isComputerReadyToGuess() const;
     const int hightlightedCoinIndex() const;
     const size_t currentHistoryIndex() const;
     const Record currentRecord() const; // Never call when history is empty
     const bool isHistoryEmpty() const;
+    
+    // Game core number of weighings
+    const size_t numOfWeighingsMax() const;
+    const size_t numOfWeighingsLeft() const;
 
     void screenTransition();
     
@@ -71,10 +76,13 @@ public:
     void incrementSettings();
     void decrementSettings();
     
+    // Determines if coin highlight is in the corresponding border
+    const bool isTopMostCoin() const;
+    const bool isBottomMostCoin() const;
+    const bool isLeftMostCoin() const;
+    const bool isRightMostCoin() const;
+    
     // Coin highlight manipulation
-    // For movng down, delegate to screen highlight move if coin is at bottom row.
-    // For moving up, delegate to screen highlight if at either weigh or guess highlight.
-    const bool isOnCoinHighlight() const;
     void moveCoinHighlightUp();
     void moveCoinHighlightDown();
     void moveCoinHighlightLeft();

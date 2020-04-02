@@ -12,6 +12,7 @@
 #include <memory>
 #include "gamemodel.hpp"
 #include "gameview.hpp"
+#include "input.hpp"
 
 class GameController {
     std::unique_ptr<GameModel> model;
@@ -22,9 +23,20 @@ class GameController {
     void onArrowInputDown();
     void onArrowInputLeft();
     void onArrowInputRight();
+    void onArrowInput(Input::Arrow arrowInp);
+    
+    // Character input handling
+    void onCharInput0();
+    void onCharInput1();
+    void onCharInput2();
+    void onCharInput3();
+    void onCharInput(char charInp);
+    
+    // Update view
+    void updateView();
 
 public:
-    GameController();
+    void onReceivingInput(Input inp);
 };
 
 #endif

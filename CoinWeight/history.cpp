@@ -9,6 +9,10 @@
 #include "history.hpp"
 
 //***************************************************** Field accessors
+const size_t History::size() const {
+    return listOfRecords.size();
+}
+
 const size_t History::currentIndex() const {
     return recordIndex;
 }
