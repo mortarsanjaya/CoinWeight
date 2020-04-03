@@ -24,6 +24,7 @@ class X11Graphics {
     XEvent event;
     std::vector<unsigned long> colors;
     
+    
     // The following numbers are sadly hard-coded
     // Need to find a way to get their value in a better way
     static const int font_width = 6;

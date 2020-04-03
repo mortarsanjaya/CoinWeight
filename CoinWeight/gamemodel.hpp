@@ -58,9 +58,7 @@ public:
     const CoinStates currentCoinStates() const;
     const bool isComputerReadyToGuess() const;
     const int hightlightedCoinIndex() const;
-    const size_t currentHistoryIndex() const;
-    const Record currentRecord() const; // Never call when history is empty
-    const bool isHistoryEmpty() const;
+    const History currentHistory() const;
     
     // Game core number of weighings
     const size_t numOfWeighingsMax() const;

@@ -10,6 +10,7 @@
 
 //***************************************************** Input function
 //**** Arrow
+/*
 void GameController::onArrowInputUp() {
     if (model->isOnCoinHighlight()) {
         model->moveCoinHighlightUp();
@@ -58,6 +59,7 @@ void GameController::onArrowInput(Input::Arrow arrowInp) {
             break;
     }
 }
+*/
 
 //**** Char
 void GameController::onCharInput0() {

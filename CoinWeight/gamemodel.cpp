@@ -50,16 +50,8 @@ const int GameModel::hightlightedCoinIndex() const {
     return coinHighlight;
 }
 
-const size_t GameModel::currentHistoryIndex() const {
-    return history.currentIndex();
-}
-
-const Record GameModel::currentRecord() const {
-    return history.getRecord();
-}
-
-const bool GameModel::isHistoryEmpty() const {
-    return history.empty();
+const History GameModel::currentHistory() const {
+    return history;
 }
 
 //**** Game core number of weighings

@@ -15,4 +15,7 @@
 
 int main() {
     auto gameModel = std::make_unique<GameModel>();
+    auto gameView = std::make_unique<GameViewX11>();
+    gameView->drawCreditScreen();
+    gameView->receiveInput();
 }

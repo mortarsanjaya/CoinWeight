@@ -12,11 +12,27 @@
 #include <vector>
 #include <utility>
 #include "coinstates.hpp"
-#include "record.hpp"
+#include "history.hpp"
 #include "input.hpp"
 #include "weighresult.hpp"
 
 class GameView {
+protected:
+    enum class DrawingWindow { Main, History };
+
+private:
+    // Draw coins
+    virtual void drawCoin(const DrawingWindow drawWindow, const CoinStates::Value coinState,
+        const size_t index) = 0;
+    void drawCoins(const DrawingWindow drawWindow, const CoinStates &coinStates);
+    
+    // Draw history screen
+    virtual void drawHistoryWeighResultText(const WeighResult weighResult) = 0;
+    virtual void drawHistoryIndexText(const size_t index) = 0;
+    void drawRecord(const Record &record);
+    virtual void drawEmptyHistoryScreen() = 0;
+    void drawHistoryScreen(const Record &record, const size_t index);
+    
 public:
     GameView() = default;
     
@@ -24,28 +40,18 @@ public:
     virtual void drawMainScreen(int screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
-    virtual void drawGameOptionScreen(
-        int screenHighlight,
-        size_t numOfCoins,
-        std::string gameLevel,
-        bool isHuman) = 0;
-    virtual void drawGamePlayScreen(
-        CoinStates coinStates,
-        int highlightedCoin,
-        size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        WeighResult lastWeighResult) = 0;
-    virtual void drawGameOverScreen(
-        bool isWin,
-        size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap) = 0;
-    virtual void drawGameHistoryScreen(
-        std::vector<Record> gameHistory,
-        size_t historyIndex) = 0;
+    virtual void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
+        std::string gameLevel, bool isHuman) = 0;
+    virtual void drawGamePlayScreen(CoinStates coinStates, int highlightedCoin,
+        size_t numOfWeighsLeft, size_t numOfWeighsCap, WeighResult lastWeighResult) = 0;
+    virtual void drawGameOverScreen(bool isWin, size_t numOfWeighsLeft,
+        size_t numOfWeighsCap) = 0;
         
+    void drawHistoryScreen(const History &history);
+    
     // Input handling functions
     virtual void receiveInput() = 0;
-    virtual const Input lastInput() const = 0;
+    virtual const Input lastInput() = 0;
 };
 
 #endif
