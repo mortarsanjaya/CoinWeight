@@ -358,7 +358,7 @@ void GameModel::historyDecrementIndex() {
 
 
 //***************************************************** Model logic functions
-void GameModel::moveUp() {
+void GameModel::mainScreenOnUpButton() {
     switch (currentScreen()) {
         case GameScreen::Page::Main:
         case GameScreen::Page::Instruction:
@@ -377,7 +377,7 @@ void GameModel::moveUp() {
     }
 }
 
-void GameModel::moveDown() {
+void GameModel::mainScreenOnDownButton() {
     switch (currentScreen()) {
         case GameScreen::Page::Main:
         case GameScreen::Page::Instruction:
@@ -398,7 +398,7 @@ void GameModel::moveDown() {
     }
 }
 
-void GameModel::moveLeft() {
+void GameModel::mainScreenOnLeftButton() {
     switch (currentScreen()) {
         case GameScreen::Page::Main:
         case GameScreen::Page::Instruction:
@@ -418,7 +418,7 @@ void GameModel::moveLeft() {
     }
 }
 
-void GameModel::moveRight() {
+void GameModel::mainScreenOnRightButton() {
     switch (currentScreen()) {
         case GameScreen::Page::Main:
         case GameScreen::Page::Instruction:
@@ -438,7 +438,7 @@ void GameModel::moveRight() {
     }
 }
 
-void GameModel::onReturnButton() {
+void GameModel::mainScreenOnReturnButton() {
     switch (currentScreen()) {
         case GameScreen::Page::Main:
             goToGameOptionScreen();
@@ -460,6 +460,14 @@ void GameModel::onReturnButton() {
             goToMainScreen();
             break;
     }
+}
+
+void GameModel::historyScreenOnLeftButton() {
+    historyDecrementIndex();
+}
+
+void GameModel::historyScreenOnRightButton() {
+    historyIncrementIndex();
 }
 
 

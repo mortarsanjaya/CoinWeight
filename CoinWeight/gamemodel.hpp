@@ -101,11 +101,13 @@ public:
     void selectCoinToGuess();
     
     // Model logic functions
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    void onReturnButton();
+    void mainScreenOnUpButton();
+    void mainScreenOnDownButton();
+    void mainScreenOnLeftButton();
+    void mainScreenOnRightButton();
+    void mainScreenOnReturnButton();
+    void historyScreenOnLeftButton();
+    void historyScreenOnRightButton();
 };
 
 

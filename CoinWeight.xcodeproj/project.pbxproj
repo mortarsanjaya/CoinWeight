@@ -238,10 +238,10 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
-				861B50DF243094B400262336 /* Game Controller */,
 				861B50D7242F9C3800262336 /* Weigh Result */,
 				86980C15242758EF001C8481 /* Record */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
+				861B50DF243094B400262336 /* Game Controller */,
 				869BBCD624241CD90002CDED /* Input */,
 				8607519F240F0EBE007A96E5 /* Game View */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
