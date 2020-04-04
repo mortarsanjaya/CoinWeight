@@ -19,13 +19,18 @@ class GameController {
     std::unique_ptr<GameView> view;
     
     // Arrow input handling
-    void onArrowInputUp();
-    void onArrowInputDown();
-    void onArrowInputLeft();
-    void onArrowInputRight();
-    void onArrowInput(Input::Arrow arrowInp);
+    void onMainScreenArrowInputUp();
+    void onMainScreenArrowInputDown();
+    void onMainScreenArrowInputLeft();
+    void onMainScreenArrowInputRight();
+    void onMainScreenArrowInput(Input::Arrow arrowInp);
+    void onHistoryScreenArrowInputUp();
+    void onHistoryScreenArrowInputDown();
+    void onHistoryScreenArrowInputLeft();
+    void onHistoryScreenArrowInputRight();
+    void onHistoryScreenArrowInput(Input::Arrow arrowInp);
     
-    // Character input handling
+    // Character input handling (not used by History screen)
     void onCharInput0();
     void onCharInput1();
     void onCharInput2();
@@ -33,10 +38,19 @@ class GameController {
     void onCharInput(char charInp);
     
     // Update view
+    void updateViewOnMainScreen();
+    void updateViewOnInstructionScreen();
+    void updateViewOnCreditScreen();
+    void updateViewOnGameOptionScreen();
+    void updateViewOnGamePlayHumanScreen();
+    void updateViewOnGamePlayComputerScreen();
+    void updateViewOnGameOverScreen();
     void updateView();
 
-public:
     void onReceivingInput(Input inp);
+    
+public:
+    void receiveInput();
 };
 
 #endif

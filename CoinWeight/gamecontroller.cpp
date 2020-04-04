@@ -9,80 +9,91 @@
 #include "gamecontroller.hpp"
 
 //***************************************************** Input function
-//**** Arrow
-/*
-void GameController::onArrowInputUp() {
-    if (model->isOnCoinHighlight()) {
-        model->moveCoinHighlightUp();
-    } else {
-        model->decrementScreenHighlight();
-    }
+//**** Arrow, Main
+void GameController::onMainScreenArrowInputUp() {
+    model->mainScreenOnUpButton();
 }
 
-void GameController::onArrowInputDown() {
-    if (model->isOnCoinHighlight()) {
-        model->moveCoinHighlightDown();
-    } else {
-        model->incrementScreenHighlight();
-    }
+void GameController::onMainScreenArrowInputDown() {
+    model->mainScreenOnDownButton();
 }
 
-void GameController::onArrowInputLeft() {
-    if (model->isOnCoinHighlight()) {
-        model->moveCoinHighlightLeft();
-    } else if (model->currentScreen() == GameScreen::Page::GameOption) {
-        model->decrementScreenHighlight();
-    }
+void GameController::onMainScreenArrowInputLeft() {
+    model->mainScreenOnLeftButton();
 }
 
-void GameController::onArrowInputRight() {
-    if (model->isOnCoinHighlight()) {
-        model->moveCoinHighlightRight();
-    } else if (model->currentScreen() == GameScreen::Page::GameOption) {
-        model->incrementScreenHighlight();
-    }
+void GameController::onMainScreenArrowInputRight() {
+    model->mainScreenOnRightButton();
 }
 
-void GameController::onArrowInput(Input::Arrow arrowInp) {
+void GameController::onMainScreenArrowInput(Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
-            onArrowInputUp();
+            onMainScreenArrowInputUp();
             break;
         case Input::Arrow::Down:
-            onArrowInputDown();
+            onMainScreenArrowInputDown();
             break;
         case Input::Arrow::Left:
-            onArrowInputLeft();
+            onMainScreenArrowInputLeft();
             break;
         case Input::Arrow::Right:
-            onArrowInputRight();
+            onMainScreenArrowInputRight();
             break;
     }
 }
-*/
+
+//**** Arrow, History
+void GameController::onHistoryScreenArrowInputUp() {}
+void GameController::onHistoryScreenArrowInputDown() {}
+
+void GameController::onHistoryScreenArrowInputLeft() {
+    model->historyScreenOnLeftButton();
+}
+
+void GameController::onHistoryScreenArrowInputRight() {
+    model->historyScreenOnRightButton();
+}
+
+void GameController::onHistoryScreenArrowInput(Input::Arrow arrowInp) {
+    switch (arrowInp) {
+        case Input::Arrow::Up:
+            onHistoryScreenArrowInputUp();
+            break;
+        case Input::Arrow::Down:
+            onHistoryScreenArrowInputDown();
+            break;
+        case Input::Arrow::Left:
+            onHistoryScreenArrowInputLeft();
+            break;
+        case Input::Arrow::Right:
+            onHistoryScreenArrowInputRight();
+            break;
+    }
+}
 
 //**** Char
 void GameController::onCharInput0() {
     if (model->currentScreen() == GameScreen::Page::GamePlayHuman) {
-        model->setStateOfCoin(CoinStates::Value::NoSelect);
+        model->deselectCoin();
     }
 }
 
 void GameController::onCharInput1() {
     if (model->currentScreen() == GameScreen::Page::GamePlayHuman) {
-        model->setStateOfCoin(CoinStates::Value::LeftGroup);
+        model->moveCoinToLeftGroup();
     }
 }
 
 void GameController::onCharInput2() {
     if (model->currentScreen() == GameScreen::Page::GamePlayHuman) {
-        model->setStateOfCoin(CoinStates::Value::RightGroup);
+        model->moveCoinToRightGroup();
     }
 }
 
 void GameController::onCharInput3() {
     if (model->currentScreen() == GameScreen::Page::GamePlayHuman) {
-        model->setStateOfCoin(CoinStates::Value::Guess);
+        model->selectCoinToGuess();
     }
 }
 
@@ -107,33 +118,100 @@ void GameController::onCharInput(char charInp) {
 
 
 //***************************************************** Update view
+void GameController::updateViewOnMainScreen() {
+    view->drawMainScreen(model->screenHighlight());
+}
+
+void GameController::updateViewOnInstructionScreen() {
+    view->drawInstructionScreen();
+}
+
+void GameController::updateViewOnCreditScreen() {
+    view->drawCreditScreen();
+}
+
+void GameController::updateViewOnGameOptionScreen() {
+    view->drawGameOptionScreen(model->screenHighlight(), model->gameSize(),
+        toString(model->gameLevel()), model->isHumanMode());
+}
+
+void GameController::updateViewOnGamePlayHumanScreen() {
+    view->drawGamePlayHumanScreen(model->currentCoinStates(), model->screenHighlight(),
+        model->hightlightedCoinIndex(), model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+    view->drawHistoryScreen(model->currentHistory());
+}
+
+void GameController::updateViewOnGamePlayComputerScreen() {
+    view->drawGamePlayComputerScreen(model->currentCoinStates(),
+        model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+    view->drawHistoryScreen(model->currentHistory());
+}
+
+void GameController::updateViewOnGameOverScreen() {
+    const bool isWin = (model->screenHighlight() == 1);
+    view->drawGameOverScreen(isWin, model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+}
+
 void GameController::updateView() {
-    /*
     switch (model->currentScreen()) {
         case GameScreen::Page::Main:
-            view->drawMainScreen(model->screenHighlight());
+            updateViewOnMainScreen();
             break;
         case GameScreen::Page::Instruction:
-            view->drawInstructionScreen();
+            updateViewOnInstructionScreen();
             break;
         case GameScreen::Page::Credit:
-            view->drawCreditScreen();
+            updateViewOnCreditScreen();
             break;
         case GameScreen::Page::GameOption:
-            view->drawGameOptionScreen(model->screenHighlight(), model->gameSize(),
-                toString(model->gameLevel()), model->isHumanMode());
+            updateViewOnGameOptionScreen();
             break;
         case GameScreen::Page::GamePlayHuman:
-            view->drawGamePlayScreen(model->currentCoinStates(), model->hightlightedCoinIndex(),
-                model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+            updateViewOnGamePlayHumanScreen();
             break;
         case GameScreen::Page::GamePlayComputer:
-            view->drawGamePlayScreen(model->currentCoinStates(), model->hightlightedCoinIndex(),
-                model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+            updateViewOnGamePlayComputerScreen();
             break;
         case GameScreen::Page::GameOver:
-            
+            updateViewOnGameOverScreen();
             break;
     }
-    */
+}
+
+
+
+//***************************************************** Input process function
+void GameController::onReceivingInput(Input inp) {
+    switch (inp.sourceScreen()) {
+        case Input::Source::Main:
+            switch (inp.inputType()) {
+                case Input::Type::Unknown:
+                    break;
+                case Input::Type::Char:
+                    onCharInput(inp.whatChar());
+                    break;
+                case Input::Type::Arrow:
+                    onMainScreenArrowInput(inp.whatArrow());
+                    break;
+            }
+            break;
+        case Input::Source::History:
+            switch (inp.inputType()) {
+                case Input::Type::Unknown:
+                case Input::Type::Char:
+                    break;
+                case Input::Type::Arrow:
+                    onHistoryScreenArrowInput(inp.whatArrow());
+                    break;
+            }
+            break;
+    }
+}
+
+
+
+//***************************************************** Main function
+void GameController::receiveInput() {
+    view->receiveInput();
+    onReceivingInput(view->lastInput());
 }
