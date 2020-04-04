@@ -19,8 +19,8 @@ public:
         Credit,
         GameOption,         // Number of coins, Difficulty, Human/Computer mode
         GamePlayHuman,      // Coins, Weigh, Guess
-        GamePlayComputer,   // Next Step
-        GameOver
+        GamePlayComputer,   // Next Step Only
+        GameOver            // Lose, Win
     };
 
 private:
@@ -42,8 +42,9 @@ public:
     void incrementHighlight();
     void decrementHighlight();
     void transition(const Page nextScreen);
-    
-
+        // Throws if current page is not Game Over
+    void playerWins();
+    void playerLoses();
 };
 
 class GameScreenFailure : public Exception {

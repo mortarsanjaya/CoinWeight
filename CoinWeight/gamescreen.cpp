@@ -26,6 +26,34 @@ const int GameScreen::currentHighlight() const {
 
 
 //***************************************************** Modifier functions
+//**** Private
+const int GameScreen::minHighlight() {
+    return 0;
+}
+
+const int GameScreen::maxHighlight() {
+    switch (page) {
+        case Page::Main:
+            return 2;
+        case Page::Instruction:
+            return 0;
+        case Page::Credit:
+            return 0;
+        case Page::GameOption:
+            return 2;
+        case Page::GamePlayHuman:
+            return 2;
+        case Page::GamePlayComputer:
+            return 0;
+        case Page::GameOver:
+            return 1;
+    }
+}
+
+void GameScreen::resetHighlight() {
+    highlight = 0;
+}
+
 //**** Public
 void GameScreen::incrementHighlight() {
     if (highlight < maxHighlight()) {
@@ -44,32 +72,17 @@ void GameScreen::transition(const Page nextScreen) {
     resetHighlight();
 }
 
-
-const int GameScreen::minHighlight() {
-    return 0;
-}
-
-//**** Private
-const int GameScreen::maxHighlight() {
-    switch (page) {
-        case Page::Main:
-            return 2;
-        case Page::Instruction:
-            return 0;
-        case Page::Credit:
-            return 0;
-        case Page::GameOption:
-            return 2;
-        case Page::GamePlayHuman:
-            return 2;
-        case Page::GamePlayComputer:
-            return 0;
-        case Page::GameOver:
-            return 0;
+void GameScreen::playerWins() {
+    if (page != Page::GameOver) {
+        throw GameScreenFailure("Wrong page: Not Game Over");
     }
+    highlight = 1;
 }
 
-void GameScreen::resetHighlight() {
+void GameScreen::playerLoses() {
+    if (page != Page::GameOver) {
+        throw GameScreenFailure("Wrong page: Not Game Over");
+    }
     highlight = 0;
 }
 
