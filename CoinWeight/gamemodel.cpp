@@ -17,6 +17,11 @@ GameModel::GameModel() :
 
 
 
+//***************************************************** Static constants
+const int GameModel::coinsPerRow = 10;
+
+
+
 //***************************************************** "Field accessors"
 const GameScreen::Page GameModel::currentScreen() const {
     return screen.currentScreen();
@@ -65,7 +70,7 @@ const size_t GameModel::numOfWeighingsLeft() const {
 
 
 
-//***************************************************** Screen transitions
+//***************************************************** Screen transition functions
 //**** Helper
 void GameModel::goFromMainScreen() {
     switch (screenHighlight()) {
@@ -83,8 +88,15 @@ void GameModel::goFromMainScreen() {
     }
 }
 
-void GameModel::backToMainScreen() {
+void GameModel::goToMainScreen() {
+    if (currentScreen() == GameScreen::Page::GameOver) {
+        gameCleanUp();
+    }
     screen.transition(GameScreen::Page::Main);
+}
+
+void GameModel::goToGameOptionScreen() {
+    screen.transition(GameScreen::Page::GameOption);
 }
 
 void GameModel::gameStart() {
@@ -95,35 +107,16 @@ void GameModel::gameStart() {
     } else {
         computer = std::make_unique<ComputerHard>(settings.gameSize());
         screen.transition(GameScreen::Page::GamePlayComputer);
+        computerSetup();
     }
 }
 
-void GameModel::gameOver() {
+void GameModel::gameOver(const bool isWin) {
     screen.transition(GameScreen::Page::GameOver);
-    coinHighlight = 0;
-}
-
-//**** Main
-void GameModel::screenTransition() {
-    switch (currentScreen()) {
-        case GameScreen::Page::Main:
-            goFromMainScreen();
-            break;
-        case GameScreen::Page::Instruction:
-        case GameScreen::Page::Credit:
-            backToMainScreen();
-            break;
-        case GameScreen::Page::GameOption:
-            gameStart();
-            break;
-        case GameScreen::Page::GamePlayHuman:
-        case GameScreen::Page::GamePlayComputer:
-            gameOver();
-            break;
-        case GameScreen::Page::GameOver:
-            gameCleanUp();
-            backToMainScreen();
-            break;
+    if (isWin) {
+        coinHighlight = 1;
+    } else {
+        coinHighlight = 0;
     }
 }
 
@@ -132,6 +125,19 @@ void GameModel::gameCleanUp() {
     coinStates.reset();
     computer.reset();
     history.clear();
+}
+
+void GameModel::computerSetup() {
+    if (isHumanMode()) {
+        throw GameModelFailure("Computer setup failed: Not computer mode.");
+    }
+    
+    if (computer->readyToGuess()) {
+        *coinStates = computer->pickToGuess();
+    } else {
+        computer->beforeWeigh();
+        *coinStates = computer->pickToWeigh();
+    }
 }
 
 
@@ -204,7 +210,7 @@ void GameModel::decrementSettings() {
 
 
 
-//***************************************************** Coin highlight border check
+//***************************************************** Coin highlight check
 const bool GameModel::isTopMostCoin() const {
     return (coinHighlight < coinsPerRow);
 }
@@ -219,6 +225,11 @@ const bool GameModel::isLeftMostCoin() const {
 
 const bool GameModel::isRightMostCoin() const {
     return (coinHighlight % coinsPerRow == coinsPerRow - 1);
+}
+
+const bool GameModel::gamePlayHumanOnCoinHighlight() const {
+    return (currentScreen() == GameScreen::Page::GamePlayHuman &&
+            screenHighlight() == 0);
 }
 
 
@@ -251,26 +262,40 @@ void GameModel::moveCoinHighlightRight() {
 
 
 //***************************************************** Coin states manipulation
+//**** Main
 void GameModel::setStateOfCoin(CoinStates::Value state) {
     (*coinStates)[coinHighlight] = state;
 }
 
-void GameModel::computerSetup() {
-    if (isHumanMode()) {
-        throw GameModelFailure("Computer setup failed: Not computer mode.");
+//**** Extension
+void GameModel::deselectCoin() {
+    if (currentScreen() == GameScreen::Page::GamePlayHuman) {
+        setStateOfCoin(CoinStates::Value::NoSelect);
     }
-    
-    if (computer->readyToGuess()) {
-        *coinStates = computer->pickToGuess();
-    } else {
-        computer->beforeWeigh();
-        *coinStates = computer->pickToWeigh();
+}
+
+void GameModel::moveCoinToLeftGroup() {
+    if (currentScreen() == GameScreen::Page::GamePlayHuman) {
+        setStateOfCoin(CoinStates::Value::LeftGroup);
+    }
+}
+
+void GameModel::moveCoinToRightGroup() {
+    if (currentScreen() == GameScreen::Page::GamePlayHuman) {
+        setStateOfCoin(CoinStates::Value::RightGroup);
+    }
+}
+
+void GameModel::selectCoinToGuess() {
+    if (currentScreen() == GameScreen::Page::GamePlayHuman) {
+        setStateOfCoin(CoinStates::Value::Guess);
     }
 }
 
 
 
-//***************************************************** Game operations
+//***************************************************** Game moves operations
+//**** Main
 void GameModel::compareWeight() {
     const WeighResult weighResult = gameCore->compareWeight(*coinStates);
     if (!isHumanMode()) {
@@ -284,8 +309,39 @@ void GameModel::compareWeight() {
     }
 }
 
-const bool GameModel::guessFakeCoins() const {
-    return gameCore->guessFakeCoins(*coinStates);
+void GameModel::guessFakeCoins() {
+    bool result = gameCore->guessFakeCoins(*coinStates);
+    gameOver(result);
+}
+
+//**** Extension
+void GameModel::humanGameMove() {
+    if (currentScreen() != GameScreen::Page::GamePlayHuman) {
+        throw GameModelFailure("Human Game Move Failure: Not a human game.");
+    } else {
+        switch (screenHighlight()) {
+            case 1:
+                compareWeight();
+                break;
+            case 2:
+                guessFakeCoins();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void GameModel::computerGameMove() {
+    if (currentScreen() != GameScreen::Page::GamePlayComputer) {
+        throw GameModelFailure("Computer Game Move Failure: Not a computer game.");
+    } else {
+        if (computer->readyToGuess()) {
+            guessFakeCoins();
+        } else {
+            compareWeight();
+        }
+    }
 }
 
 
@@ -297,6 +353,113 @@ void GameModel::historyIncrementIndex() {
 
 void GameModel::historyDecrementIndex() {
     history.decrementIndex();
+}
+
+
+
+//***************************************************** Model logic functions
+void GameModel::moveUp() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+        case GameScreen::Page::GameOption:
+            decrementScreenHighlight();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            if (gamePlayHumanOnCoinHighlight() && !isTopMostCoin()) {
+                moveCoinHighlightUp();
+            }
+            break;
+        case GameScreen::Page::GamePlayComputer:
+        case GameScreen::Page::GameOver:
+            break;
+    }
+}
+
+void GameModel::moveDown() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+        case GameScreen::Page::GameOption:
+            incrementScreenHighlight();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            if (gamePlayHumanOnCoinHighlight() && !isBottomMostCoin()) {
+                moveCoinHighlightDown();
+            } else {
+                incrementScreenHighlight();
+            }
+            break;
+        case GameScreen::Page::GamePlayComputer:
+        case GameScreen::Page::GameOver:
+            break;
+    }
+}
+
+void GameModel::moveLeft() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+            break;
+        case GameScreen::Page::GameOption:
+            decrementSettings();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            if (gamePlayHumanOnCoinHighlight() && !isLeftMostCoin()) {
+                moveCoinHighlightLeft();
+            }
+            break;
+        case GameScreen::Page::GamePlayComputer:
+        case GameScreen::Page::GameOver:
+            break;
+    }
+}
+
+void GameModel::moveRight() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+            break;
+        case GameScreen::Page::GameOption:
+            incrementSettings();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            if (gamePlayHumanOnCoinHighlight() && !isRightMostCoin()) {
+                moveCoinHighlightRight();
+            }
+            break;
+        case GameScreen::Page::GamePlayComputer:
+        case GameScreen::Page::GameOver:
+            break;
+    }
+}
+
+void GameModel::onReturnButton() {
+    switch (currentScreen()) {
+        case GameScreen::Page::Main:
+            goToGameOptionScreen();
+            break;
+        case GameScreen::Page::Instruction:
+        case GameScreen::Page::Credit:
+            goToMainScreen();
+            break;
+        case GameScreen::Page::GameOption:
+            gameStart();
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            humanGameMove();
+            break;
+        case GameScreen::Page::GamePlayComputer:
+            computerGameMove();
+            break;
+        case GameScreen::Page::GameOver:
+            goToMainScreen();
+            break;
+    }
 }
 
 

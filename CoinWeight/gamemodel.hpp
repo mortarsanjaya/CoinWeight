@@ -28,25 +28,56 @@ class GameModel {
     History history;
     
     // Not sure how I should put it right now
-    static const int coinsPerRow = 10;
+    static const int coinsPerRow;
     
-    // Screen transitions helper functions
+    // Screen transition functions
     void goFromMainScreen();
-    void backToMainScreen();
+    void goToMainScreen();
+    void goToGameOptionScreen();
     void gameStart();
-    void gameOver();
+    void gameOver(const bool isWin);
     void gameCleanUp(); // Clean-up after game over
+    void computerSetup(); // Sets up computer for computer game
     
-    // Settings manipulation helper functions
+    // Settings manipulation (plus helper functions)
     void increaseNumOfCoins();
     void decreaseNumOfCoins();
     void increaseLevel();
     void decreaseLevel();
     void switchMode();
+    void incrementSettings();
+    void decrementSettings();
     
-    // Computer setup for coin states
-    void computerSetup();
-
+    // Screen highlight manipulation
+    void incrementScreenHighlight();
+    void decrementScreenHighlight();
+    
+    // Coin highlight check
+    const bool isTopMostCoin() const;
+    const bool isBottomMostCoin() const;
+    const bool isLeftMostCoin() const;
+    const bool isRightMostCoin() const;
+    const bool gamePlayHumanOnCoinHighlight() const;
+    
+    // Coin highlight manipulation
+    void moveCoinHighlightUp();
+    void moveCoinHighlightDown();
+    void moveCoinHighlightLeft();
+    void moveCoinHighlightRight();
+    
+    // Coin states manipulation
+    void setStateOfCoin(CoinStates::Value state);
+    
+    // Game moves operations
+    void compareWeight();
+    void guessFakeCoins();
+    void humanGameMove();
+    void computerGameMove();
+    
+    // History index manipulation
+    void historyIncrementIndex();
+    void historyDecrementIndex();
+    
 public:
     GameModel();
     
@@ -59,43 +90,22 @@ public:
     const bool isComputerReadyToGuess() const;
     const int hightlightedCoinIndex() const;
     const History currentHistory() const;
-    
     // Game core number of weighings
     const size_t numOfWeighingsMax() const;
     const size_t numOfWeighingsLeft() const;
-
-    void screenTransition();
     
-    // Screen highlight manipulation
-    void incrementScreenHighlight();
-    void decrementScreenHighlight();
+    // Coin states manipulation (extension)
+    void deselectCoin();
+    void moveCoinToLeftGroup();
+    void moveCoinToRightGroup();
+    void selectCoinToGuess();
     
-    // Settings manipulation
-    void incrementSettings();
-    void decrementSettings();
-    
-    // Determines if coin highlight is in the corresponding border
-    const bool isTopMostCoin() const;
-    const bool isBottomMostCoin() const;
-    const bool isLeftMostCoin() const;
-    const bool isRightMostCoin() const;
-    
-    // Coin highlight manipulation
-    void moveCoinHighlightUp();
-    void moveCoinHighlightDown();
-    void moveCoinHighlightLeft();
-    void moveCoinHighlightRight();
-    
-    // Coin states manipulation
-    void setStateOfCoin(CoinStates::Value state);
-    
-    // Game operations
-    void compareWeight();
-    const bool guessFakeCoins() const;
-    
-    // History index manipulation
-    void historyIncrementIndex();
-    void historyDecrementIndex();
+    // Model logic functions
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
+    void onReturnButton();
 };
 
 
