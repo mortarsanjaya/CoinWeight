@@ -16,11 +16,14 @@
 class History {
     std::vector<Record> listOfRecords;
     size_t recordIndex;
+    
+    void resetIndex();
 
 public:
     History() = default;
     
     const size_t size() const;
+    // Current index is calculated in reverse order of record listing
     const size_t currentIndex() const;
     const Record getRecord() const;
     const bool empty() const;

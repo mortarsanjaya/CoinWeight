@@ -31,17 +31,23 @@ const bool History::empty() const {
 
 
 //***************************************************** Modifying functions
+void History::resetIndex() {
+    recordIndex = size() - 1;
+}
+
 void History::addRecord(const Record &record) {
     listOfRecords.push_back(record);
+    resetIndex();
 }
 
 void History::addRecord(const CoinStates &weighStates, const WeighResult &weighResult) {
     listOfRecords.emplace_back(weighStates, weighResult);
+    resetIndex();
 }
 
 void History::clear() {
     listOfRecords.clear();
-    recordIndex = 0;
+    resetIndex();
 }
 
 void History::incrementIndex() {
