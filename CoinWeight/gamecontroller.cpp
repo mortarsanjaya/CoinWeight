@@ -8,6 +8,12 @@
 
 #include "gamecontroller.hpp"
 
+//***************************************************** Constructor
+GameController::GameController(std::unique_ptr<GameModel> model, std::unique_ptr<GameView> view) :
+    model{std::move(model)}, view{std::move(view)} {}
+
+
+
 //***************************************************** Input function
 //**** Arrow, Main
 void GameController::onMainScreenArrowInputUp() {

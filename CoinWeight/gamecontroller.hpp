@@ -50,6 +50,7 @@ class GameController {
     void onReceivingInput(Input inp);
     
 public:
+    GameController(std::unique_ptr<GameModel> model, std::unique_ptr<GameView> view);
     void receiveInput();
 };
 
