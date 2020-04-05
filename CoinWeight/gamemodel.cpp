@@ -51,7 +51,7 @@ const bool GameModel::isComputerReadyToGuess() const {
     return computer->readyToGuess();
 }
 
-const int GameModel::hightlightedCoinIndex() const {
+const int GameModel::highlightedCoinIndex() const {
     return coinHighlight;
 }
 
@@ -65,7 +65,7 @@ const size_t GameModel::numOfWeighingsMax() const {
 }
 
 const size_t GameModel::numOfWeighingsLeft() const {
-    return gameCore->numOfWeighingsCap();
+    return gameCore->numOfWeighingsLeft();
 }
 
 
@@ -114,10 +114,11 @@ void GameModel::gameStart() {
 void GameModel::gameOver(const bool isWin) {
     screen.transition(GameScreen::Page::GameOver);
     if (isWin) {
-        coinHighlight = 1;
+        screen.playerWins();
     } else {
-        coinHighlight = 0;
+        screen.playerLoses();
     }
+    coinHighlight = 0;
 }
 
 void GameModel::gameCleanUp() {
@@ -300,10 +301,13 @@ void GameModel::compareWeight() {
     const WeighResult weighResult = gameCore->compareWeight(*coinStates);
     if (!isHumanMode()) {
         computer->afterWeigh(weighResult);
+        screen.transition(GameScreen::Page::GamePlayComputer);
+    } else {
+        screen.transition(GameScreen::Page::GamePlayHuman);
     }
-    coinStates->resetStates();
     coinHighlight = 0;
     history.addRecord(*coinStates, weighResult);
+    coinStates->resetStates();
     if (!isHumanMode()) {
         computerSetup();
     }
@@ -335,12 +339,10 @@ void GameModel::humanGameMove() {
 void GameModel::computerGameMove() {
     if (currentScreen() != GameScreen::Page::GamePlayComputer) {
         throw GameModelFailure("Computer Game Move Failure: Not a computer game.");
+    } else if (computer->readyToGuess()) {
+        guessFakeCoins();
     } else {
-        if (computer->readyToGuess()) {
-            guessFakeCoins();
-        } else {
-            compareWeight();
-        }
+        compareWeight();
     }
 }
 

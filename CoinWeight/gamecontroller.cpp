@@ -149,7 +149,7 @@ void GameController::updateViewOnGameOptionScreen() {
 
 void GameController::updateViewOnGamePlayHumanScreen() {
     view->drawGamePlayHumanScreen(model->currentCoinStates(), model->screenHighlight(),
-        model->hightlightedCoinIndex(), model->numOfWeighingsLeft(), model->numOfWeighingsMax());
+        model->highlightedCoinIndex(), model->numOfWeighingsLeft(), model->numOfWeighingsMax());
     view->drawHistoryScreen(model->currentHistory());
 }
 

@@ -88,7 +88,7 @@ public:
     const bool isHumanMode() const;
     const CoinStates currentCoinStates() const;
     const bool isComputerReadyToGuess() const;
-    const int hightlightedCoinIndex() const;
+    const int highlightedCoinIndex() const;
     const History currentHistory() const;
     // Game core number of weighings
     const size_t numOfWeighingsMax() const;

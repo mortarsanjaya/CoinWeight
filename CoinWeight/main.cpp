@@ -15,9 +15,7 @@
 #include "input.hpp"
 
 int main() {
-    auto gameModel = std::make_unique<GameModel>();
-    auto gameView = std::make_unique<GameViewX11>();
-    auto gameController = std::make_unique<GameController>(gameModel.release(), gameView.release());
+    auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
     gameController->updateView();
     sleep(1);
     while (true) {
