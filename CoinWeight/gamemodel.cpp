@@ -369,6 +369,8 @@ void GameModel::mainScreenOnUpButton() {
         case GameScreen::Page::GamePlayHuman:
             if (gamePlayHumanOnCoinHighlight() && !isTopMostCoin()) {
                 moveCoinHighlightUp();
+            } else {
+                decrementScreenHighlight();
             }
             break;
         case GameScreen::Page::GamePlayComputer:
