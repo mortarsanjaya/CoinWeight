@@ -63,8 +63,8 @@ GameViewX11::GameViewX11() {
     XSetNormalHints(display, mainWindow, &hints);
     XSetNormalHints(display, historyWindow, &hints);
     
-    XMapRaised(display, mainWindow);
     XMapRaised(display, historyWindow);
+    XMapRaised(display, mainWindow);
     XFlush(display);
  
     sleep(1);
