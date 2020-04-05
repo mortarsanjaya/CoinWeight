@@ -35,6 +35,7 @@ class GameController {
     void onCharInput1();
     void onCharInput2();
     void onCharInput3();
+    void onReturnButton();
     void onCharInput(char charInp);
     
     // Update view
@@ -45,13 +46,14 @@ class GameController {
     void updateViewOnGamePlayHumanScreen();
     void updateViewOnGamePlayComputerScreen();
     void updateViewOnGameOverScreen();
-    void updateView();
+    
 
     void onReceivingInput(Input inp);
     
 public:
-    GameController(std::unique_ptr<GameModel> model, std::unique_ptr<GameView> view);
+    GameController(GameModel *model, GameView *view);
     void receiveInput();
+    void updateView();
 };
 
 #endif

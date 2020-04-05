@@ -9,8 +9,8 @@
 #include "gamecontroller.hpp"
 
 //***************************************************** Constructor
-GameController::GameController(std::unique_ptr<GameModel> model, std::unique_ptr<GameView> view) :
-    model{std::move(model)}, view{std::move(view)} {}
+GameController::GameController(GameModel *model, GameView *view) :
+    model{std::unique_ptr<GameModel>(model)}, view{std::unique_ptr<GameView>(view)} {}
 
 
 
@@ -103,20 +103,26 @@ void GameController::onCharInput3() {
     }
 }
 
+void GameController::onReturnButton() {
+    model->mainScreenOnReturnButton();
+}
+
 void GameController::onCharInput(char charInp) {
     switch (charInp) {
-        case 0:
+        case '0':
             onCharInput0();
             break;
-        case 1:
+        case '1':
             onCharInput1();
             break;
-        case 2:
+        case '2':
             onCharInput2();
             break;
-        case 3:
+        case '3':
             onCharInput3();
             break;
+        case '\n':
+            onReturnButton();
         default:
             break;
     }

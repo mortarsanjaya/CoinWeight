@@ -11,8 +11,11 @@
 
 #include <memory>
 #include <string>
+#include <X11/Xlib.h>
+#include <X11/Xos.h>
+#include <X11/Xutil.h>
 #include "gameview.hpp"
-#include "x11graphics.hpp"
+#include "exception.hpp"
 
 class GameViewX11 : public GameView {
     Display *display;
@@ -23,51 +26,78 @@ class GameViewX11 : public GameView {
     XEvent event;
     std::vector<unsigned long> colors;
     
+    enum { Black, Red, Blue, Green, Gold };
+    
     // The following numbers are sadly hard-coded
     // Need to find a way to get their value in a better way
     static const int font_width = 6;
     static const int font_height = 10;
-    
-    enum {
-        Black = 0,
-        Red,
-        Blue,
-        Green,
-        Gold
-    };
-    
+    static const int circle_full_arc = 360 * 64;
+    // Coin configurations
+    static const int coinRadius = 30;
+    static const int coinDist = 50;
+    static const int coin0XPos = 200;
+    static const int coin0YPos = 200;
+    static const int coinsPerRow = 10;
     static const int defaultFGColor = Black;
     
+    // Basic drawing functions
     void drawString(Window window, int x_pos, int y_pos, const std::string &msg, bool boxed = false);
     void drawCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color);
     void fillCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color);
     void drawRectangle(Window window, int x_pos, int y_pos, int width, int height);
     
+    // Number of weighings text
+    const std::string numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const;
+    
+    // Window to draw
+    const Window windowToDraw(DrawingWindow window) const;
+    
+    // Draw weigh result text
+    void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) override;
+    
+    // Draw coin
     const int coinColor(CoinStates::Value coinState) const;
-    
     void drawCoin(Window window, CoinStates::Value coinState, size_t coinIndex);
-    void drawCoins(Window window, CoinStates coinStates);
+    void drawCoin(DrawingWindow window, CoinStates::Value coinState, size_t coinIndex) override;
     
-    void clear(Window window);
+    // Draw return button
+    void drawReturnButton() override;
     
-    static const int coinRadius = 30;
+    // Game Play screen
+    void drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) override;
+    void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
+    
+    // Game Over screen
+    void drawGameOverEndMessage(const bool isWin) override;
+    void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
+    
+    // History screen
+    void drawHistoryIndexText(const size_t index, const size_t numOfWeighs) override;
+    void drawEmptyHistoryScreen() override;
+    
+    // Clear screen
+    void clearMainScreen();
+    void clearHistoryScreen();
+    void clearScreen(const DrawingWindow window) override;
 
 public:
     GameViewX11();
-    void drawMainScreen(int screenHighlight) override;
+    // Main drawing functions
+    void drawMainScreen(const int screenHighlight) override;
     void drawInstructionScreen() override;
     void drawCreditScreen() override;
-    void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
-            std::string gameLevel, bool isHuman) override;
-    void drawGamePlayScreen(CoinStates coinStates, int highlightedCoin,
-        size_t numOfWeighsLeft, size_t numOfWeighsCap, WeighResult lastWeighResult) override;
-    void drawGameOverScreen(bool isWin, size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap) override;
-
-    void drawGameHistoryScreen(const History &gameHistory) override;
+    void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+            const std::string &gameLevel, const bool isHuman) override;
     
     void receiveInput() override;
     const Input lastInput() override;
+};
+
+class GameViewX11Failure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    GameViewX11Failure(std::string coreMessage);
 };
 
 #endif

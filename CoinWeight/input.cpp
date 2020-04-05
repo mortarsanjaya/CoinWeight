@@ -17,6 +17,7 @@ Input::Input(Source source) :
     source{source}, type{Type::Unknown} {}
 
 
+
 //***************************************************** Public methods
 const Input::Source Input::sourceScreen() const {
     return source;
@@ -38,4 +39,14 @@ const Input::Arrow Input::whatArrow() const {
         throw InputFailure("Input not an arrow.");
     }
     return arrowInp;
+}
+
+
+
+//***************************************************** Input Failure
+InputFailure::InputFailure(std::string coreMessage) :
+    Exception(coreMessage) {}
+    
+const std::string InputFailure::headerMessage() const {
+    return "Input Failure: ";
 }

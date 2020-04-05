@@ -16,7 +16,7 @@ GameViewX11::GameViewX11() {
 
     display = XOpenDisplay(nullptr);
     if (display == nullptr) {
-        throw X11GraphicsFailure("Cannot open display");
+        throw GameViewX11Failure("Cannot open display");
     }
     
     screen = XDefaultScreen(display);
@@ -44,7 +44,7 @@ GameViewX11::GameViewX11() {
     
     for (unsigned int i = 0; i < colorVals.size(); ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
-            throw X11GraphicsFailure("Cannot parse color");
+            throw GameViewX11Failure("Cannot parse color");
         }
         XAllocColor(display, cmap, &xcolor);
         colors.emplace_back(xcolor.pixel);
@@ -73,6 +73,7 @@ GameViewX11::GameViewX11() {
 
 
 //***************************************************** Private methods
+//******************** Basic drawing functions
 void GameViewX11::drawString(Window window, int x_pos, int y_pos, const std::string &msg, bool boxed) {
     XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
     if (boxed) {
@@ -85,17 +86,17 @@ void GameViewX11::drawString(Window window, int x_pos, int y_pos, const std::str
 }
 
 void GameViewX11::drawCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw X11GraphicsFailure("Invalid color");
+    if (color > colors.size()) throw GameViewX11Failure("Invalid color");
     XSetForeground(display, gc, colors[color]);
-    XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
+    XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
     XFlush(display);
 }
 
 void GameViewX11::fillCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw X11GraphicsFailure("Invalid color");
+    if (color > colors.size()) throw GameViewX11Failure("Invalid color");
     XSetForeground(display, gc, colors[color]);
-    XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, 360 * 64);
+    XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
     XFlush(display);
 }
@@ -108,36 +109,115 @@ void GameViewX11::drawRectangle(Window window, int x_pos, int y_pos, int width, 
     XFlush(display);
 }
 
+//******************** Tons of helper functions
+//**** Number of weighings
+const std::string GameViewX11::numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const {
+    std::string numOfWeighsStr = "Number of comparisons remaining: ";
+    numOfWeighsStr += std::to_string(numOfWeighsLeft);
+    numOfWeighsStr += " out of ";
+    numOfWeighsStr += std::to_string(numOfWeighsMax);
+    return numOfWeighsStr;
+}
+
+//**** Window to draw
+const Window GameViewX11::windowToDraw(DrawingWindow window) const {
+    switch (window) {
+        case DrawingWindow::Main:
+            return mainWindow;
+        case DrawingWindow::History:
+            return historyWindow;
+    }
+}
+
+//**** Weigh result
+void GameViewX11::drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) {
+    drawString(windowToDraw(window), 30, 30, toString(weighResult));
+}
+
+//**** Coin
 const int GameViewX11::coinColor(CoinStates::Value coinState) const {
     switch (coinState) {
         case CoinStates::Value::NoSelect:
-            return X11Graphics::Gold;
+            return GameViewX11::Gold;
         case CoinStates::Value::LeftGroup:
-            return X11Graphics::Red;
+            return GameViewX11::Red;
         case CoinStates::Value::RightGroup:
-            return X11Graphics::Blue;
+            return GameViewX11::Blue;
         case CoinStates::Value::Guess:
-            return X11Graphics::Green;
+            return GameViewX11::Green;
     }
 }
 
 void GameViewX11::drawCoin(Window window, CoinStates::Value coinState, size_t coinIndex) {
-    const int x_pos = 200 + 50 * (coinIndex % 10);
-    const int y_pos = 200 + 50 * (coinIndex / 10);
+    const int x_pos = coin0XPos + coinDist * (coinIndex % coinsPerRow);
+    const int y_pos = coin0YPos + coinDist * (coinIndex / coinsPerRow);
     fillCircle(window, x_pos, y_pos, coinRadius, coinColor(coinState));
-    drawCircle(window, x_pos, y_pos, coinRadius, X11Graphics::Black);
+    drawCircle(window, x_pos, y_pos, coinRadius, GameViewX11::Black);
     drawString(window, x_pos, y_pos, std::to_string(coinIndex + 1));
 }
 
-void GameViewX11::drawCoins(Window window, CoinStates coinStates) {
-    for (int i = 0; i < coinStates.size(); ++i) {
-        drawCoin(window, coinStates.at(i), i);
-    }
+void GameViewX11::drawCoin(DrawingWindow window, CoinStates::Value coinState, size_t coinIndex) {
+    drawCoin(windowToDraw(window), coinState, coinIndex);
 }
 
-void GameViewX11::clear(Window window) {
-    XClearWindow(display, window);
+//**** Return button
+void GameViewX11::drawReturnButton() {
+    drawString(mainWindow, 305, 515, "Return", true);
+}
+
+//**** Game Play screen
+void GameViewX11::drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) {
+    const int x_pos = coin0XPos - 6 + coinDist * (coinHighlight % coinsPerRow);
+    const int y_pos = coin0YPos - 12 + coinDist * (coinHighlight / coinsPerRow);
+    drawString(windowToDraw(DrawingWindow::Main), 300, 500, "Weigh", screenHighlight == 1);
+    drawString(windowToDraw(DrawingWindow::Main), 300, 520, "Guess", screenHighlight == 2);
+    if (screenHighlight == 0) {
+        drawCircle(mainWindow, x_pos, y_pos, 15, Black); // magic number :(
+    }
+    
+}
+
+void GameViewX11::drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
+    drawString(mainWindow, 30, 30, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax)); // magic number :(
+}
+
+//**** Game Over screen
+void GameViewX11::drawGameOverEndMessage(const bool isWin) {
+    drawString(mainWindow, 300, 200, isWin ? "You Win!" : "You Lose :(");
+}
+void GameViewX11::drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
+    drawString(mainWindow, 300, 300, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax));
+}
+
+//**** History screen
+void GameViewX11::drawHistoryIndexText(const size_t index, const size_t numOfWeighs) {
+    drawString(historyWindow, 300, 50, "Move " + std::to_string(index + 1) + " out of " + std::to_string(numOfWeighs));
+}
+
+void GameViewX11::drawEmptyHistoryScreen() {
+    drawString(historyWindow, 300, 200, "You have not made any moves.");
+}
+
+//**** Clear screen
+void GameViewX11::clearMainScreen() {
+    XClearWindow(display, mainWindow);
     XFlush(display);
+}
+
+void GameViewX11::clearHistoryScreen() {
+    XClearWindow(display, historyWindow);
+    XFlush(display);
+}
+
+void GameViewX11::clearScreen(const DrawingWindow window) {
+    switch (window) {
+        case GameView::DrawingWindow::Main:
+            clearMainScreen();
+            break;
+        case GameView::DrawingWindow::History:
+            clearHistoryScreen();
+            break;
+    }
 }
 
 
@@ -145,7 +225,7 @@ void GameViewX11::clear(Window window) {
 //***************************************************** Public methods
 void GameViewX11::drawMainScreen(int screenHighlight) {
     const int stringHeight = 20;
-    clear(mainWindow);
+    clearScreen(DrawingWindow::Main);
     
     drawString(mainWindow, 300, 50, "Coin Weight");
     drawString(mainWindow, 300, 300 + stringHeight, "Play", screenHighlight == 0);
@@ -158,7 +238,7 @@ void GameViewX11::drawInstructionScreen() {
     int y_pos = 100;
     const int x_pos_page_instr = 320;
     const int y_pos_incr = 20;
-    clear(mainWindow);
+    clearScreen(DrawingWindow::Main);
     std::vector<std::vector<std::string>> displayStrings;
     
     displayStrings.emplace_back(std::vector<std::string>{
@@ -205,26 +285,22 @@ void GameViewX11::drawInstructionScreen() {
     }
     
     sleep(1);
-    
-    drawString(mainWindow, 305, 515, "Return");
-    drawRectangle(mainWindow, 300, 500, 50, 20);
+    drawReturnButton();
 }
 
 void GameViewX11::drawCreditScreen() {
-    clear(mainWindow);
+    clearScreen(DrawingWindow::Main);
     drawString(mainWindow, 300, 300, "---");
     
     sleep(1);
-    
-    drawString(mainWindow, 305, 515, "Return");
-    drawRectangle(mainWindow, 300, 500, 50, 20);
+    drawReturnButton();
 }
 
-void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
-    std::string gameLevel, bool isHuman)
+void GameViewX11::drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+    const std::string &gameLevel, const bool isHuman)
 {
     const int stringHeight = 20;
-    clear(mainWindow);
+    clearScreen(DrawingWindow::Main);
     
     drawString(mainWindow, 300, 50, "Coin Weight");
     drawString(mainWindow, 300, 300 + stringHeight, "Number of Coins:");
@@ -236,93 +312,41 @@ void GameViewX11::drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
     drawString(mainWindow, 405, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer", screenHighlight == 2);
 }
 
-void GameViewX11::drawGamePlayScreen(
-    CoinStates coinStates,
-    int highlightedCoin,
-    size_t numOfComparisonsLeft,
-    size_t numOfComparisonsCap,
-    WeighResult lastWeighResult)
-{
-    clear(mainWindow);
-    
-    for (size_t i = 0; i < coinStates.size(); ++i) {
-        drawCoin(mainWindow, coinStates.at(i), i);
-    }
-    
-    const std::string numOfCompLeftStr = std::to_string(numOfComparisonsLeft);
-    const std::string numOfCompCapStr = std::to_string(numOfComparisonsCap);
-    drawString(mainWindow, 30, 30, "Number of comparisons remaining: " + numOfCompLeftStr +
-                                    " out of " + numOfCompCapStr);
-    if (numOfComparisonsLeft == 0) {
-        drawString(mainWindow, 30, 50, "No more comparisons!");
-    }
-    drawString(mainWindow, 30, 100, "Result of last move:");
-    const int x_pos = 194 + 50 * (highlightedCoin % 10);
-    const int y_pos = 188 + 50 * (highlightedCoin / 10);
-    drawCircle(mainWindow, x_pos, y_pos, 15, Black);
-    
-    if (numOfComparisonsLeft != numOfComparisonsCap) {
-        drawString(mainWindow, 30, 120, toString(lastWeighResult));
-    }
-}
-
-void GameViewX11::drawGameOverScreen(
-    bool isWin,
-    size_t numOfComparisonsLeft,
-    size_t numOfComparisonsCap)
-{
-    clear(mainWindow);
-    clear(historyWindow);
-    
-    drawString(mainWindow, 300, 200, isWin ? "You Win!" : "You Lose :(");
-    drawString(mainWindow, 300, 300,
-        "Number of comparisons left: " + std::to_string(numOfComparisonsLeft) +
-        " out of " + std::to_string(numOfComparisonsCap));
-    /*
-    coreGraphics.drawString(300, 400, "Final guess: ");
-    std::string guessStr;
-    for (size_t n : finalGuess) {
-        guessStr += (std::to_string(n + 1) + " ");
-    }
-    coreGraphics.drawString(300, 420, guessStr);
-    */
-}
-
-void GameViewX11::drawGameHistoryScreen(const History &gameHistory) {
-    clear(historyWindow);
-    
-    drawString(historyWindow, 300, 30, "History");
-    if (gameHistory.empty()) {
-        drawString(historyWindow, 300, 200, "You have not made any moves.");
-    } else {
-        drawString(historyWindow, 300, 50, "Move " + std::to_string(gameHistory.currentIndex()));
-        drawCoins(historyWindow, gameHistory.getRecord().coinStates());
-        drawString(historyWindow, 30, 120, toString(gameHistory.getRecord().result()));
-    }
-}
-
 void GameViewX11::receiveInput() {
     XNextEvent(display, &event);
 }
 
 const Input GameViewX11::lastInput() {
     if (event.type == KeyPress) {
+        Input::Source source;
+        if (event.xkey.window == mainWindow) {
+            source = Input::Source::Main;
+        } else {
+            source = Input::Source::History;
+        }
         switch (XLookupKeysym(&(event.xkey), 0)) {
-            case XK_0:          return Input('0');
-            case XK_1:          return Input('1');
-            case XK_2:          return Input('2');
-            case XK_3:          return Input('3');
-            case XK_w:          return Input('w');
-            case XK_g:          return Input('g');
-            case XK_h:          return Input('h');
-            case XK_Return:     return Input('\n');
-            case XK_Left:       return Input(Input::Arrow::Left);
-            case XK_Right:      return Input(Input::Arrow::Right);
-            case XK_Up:         return Input(Input::Arrow::Up);
-            case XK_Down:       return Input(Input::Arrow::Down);
-            default:            return Input();
+            case XK_0:          return Input(source, '0');
+            case XK_1:          return Input(source, '1');
+            case XK_2:          return Input(source, '2');
+            case XK_3:          return Input(source, '3');
+            case XK_Return:     return Input(source, '\n');
+            case XK_Left:       return Input(source, Input::Arrow::Left);
+            case XK_Right:      return Input(source, Input::Arrow::Right);
+            case XK_Up:         return Input(source, Input::Arrow::Up);
+            case XK_Down:       return Input(source, Input::Arrow::Down);
+            default:            return Input(source);
         }
     } else {
-        return Input();
+        return Input(Input::Source::Main);
     }
+}
+
+
+
+//***************************************************** Game View X11 Failure
+GameViewX11Failure::GameViewX11Failure(std::string coreMessage) :
+    Exception(coreMessage) {}
+    
+const std::string GameViewX11Failure::headerMessage() const {
+    return "Game View X11 Failure: ";
 }

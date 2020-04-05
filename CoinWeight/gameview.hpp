@@ -21,38 +21,48 @@ protected:
     enum class DrawingWindow { Main, History };
 
 private:
-    // Draw weigh result text
-    virtual void drawWeighResultText(const DrawingWindow drawWindow,
-        const WeighResult weighResult) = 0;
-        
-    // Draw coins
-    virtual void drawCoin(const DrawingWindow drawWindow,
-        const CoinStates::Value coinState, const size_t index) = 0;
-    void drawCoins(const DrawingWindow drawWindow, const CoinStates &coinStates);
+//**** Virtual hook methods
+    // General
+    virtual void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) = 0;
+    virtual void drawCoin(const DrawingWindow window, const CoinStates::Value coinState, const size_t index) = 0;
+    virtual void drawReturnButton() = 0;
     
-    // Draw history screen
+    // Game Play screen
+    virtual void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
+    virtual void drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) = 0;
+        
+    // Game Over screen
+    virtual void drawGameOverEndMessage(const bool isWin) = 0;
+    virtual void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
+    
+    // History screen
     virtual void drawHistoryIndexText(const size_t index, const size_t numOfWeighs) = 0;
-    void drawRecord(const Record &record);
     virtual void drawEmptyHistoryScreen() = 0;
-    void drawHistoryScreen(const Record &record, const size_t index,
-        const size_t numOfWeighs);
+    
+    // Screen clearing
+    virtual void clearScreen(const DrawingWindow window) = 0;
+    
+//**** Private non-virtual methods
+    void drawCoins(const DrawingWindow window, const CoinStates &coinStates);
+    void drawRecord(const Record &record);
+    void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
     
 public:
     GameView() = default;
     virtual ~GameView() = 0;
     
     // Drawing functions
-    virtual void drawMainScreen(int screenHighlight) = 0;
+    virtual void drawMainScreen(const int screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
-    virtual void drawGameOptionScreen(int screenHighlight, size_t numOfCoins,
-        std::string gameLevel, bool isHuman) = 0;
-    virtual void drawGamePlayHumanScreen(CoinStates coinStates, int screenHighlight,
-        int highlightedCoin, size_t numOfWeighsLeft, size_t numOfWeighsCap) = 0;
-    virtual void drawGamePlayComputerScreen(CoinStates coinStates,
-        size_t numOfWeighsLeft, size_t numOfWeighsMax) = 0;
-    virtual void drawGameOverScreen(bool isWin,
-        size_t numOfWeighsLeft, size_t numOfWeighMax) = 0;
+    virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+        const std::string &gameLevel, const bool isHuman) = 0;
+        
+    void drawGamePlayHumanScreen(const CoinStates &coinStates, const int screenHighlight,
+        const int highlightedCoin, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
+    void drawGamePlayComputerScreen(const CoinStates &coinStates,
+        const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
+    void drawGameOverScreen(const bool isWin, const size_t numOfWeighsLeft, const size_t numOfWeighMax);
         
     void drawHistoryScreen(const History &history);
     
