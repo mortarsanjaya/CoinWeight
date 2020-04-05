@@ -101,10 +101,8 @@ ComputerHard::State::State(size_t numOfCoins) :
 
 //***************************************************** Constructor and Destructor
 ComputerHard::ComputerHard(size_t numOfCoins, size_t numOfFakeCoins) :
-	Computer(numOfCoins, numOfFakeCoins),
-	state(std::make_unique<State>(numOfCoins)),
-	strategy(Strategy::NoStrategy)
-{}
+	Computer(numOfCoins), state(std::make_unique<State>(numOfCoins)),
+	strategy(Strategy::NoStrategy) {}
 
 ComputerHard::~ComputerHard() {}
 
@@ -241,11 +239,11 @@ void ComputerHard::beforeWeigh() {
 const CoinStates ComputerHard::pickToWeigh() const {
     CoinStates weightStates(numOfCoins());
     for (size_t leftGroupIndex : state->partition.at(0)) {
-        weightStates[leftGroupIndex] = CoinStates::LeftGroup;
+        weightStates[leftGroupIndex] = CoinStates::Value::LeftGroup;
     }
     
     for (size_t rightGroupIndex : state->partition.at(1)) {
-        weightStates[rightGroupIndex] = CoinStates::RightGroup;
+        weightStates[rightGroupIndex] = CoinStates::Value::RightGroup;
     }
     
 	return weightStates;
@@ -421,7 +419,7 @@ const CoinStates ComputerHard::pickToGuess() const {
     CoinStates guessStates(numOfCoins());
     for (std::vector<size_t> single_partition : state->partition) {
         for (size_t element : single_partition) {
-            guessStates[element] = CoinStates::Guess;
+            guessStates[element] = CoinStates::Value::Guess;
         }
     }
     return guessStates;

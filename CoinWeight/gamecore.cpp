@@ -10,7 +10,7 @@
 
 //***************************************************** Helper functions
 // Computes ceiling(log_n k)
-template <size_t n> const size_t log_ceil(size_t k) {
+template <size_t n> static const size_t log_ceil(size_t k) {
 	if (k == 0) exit(100);
 	size_t res = 0;
 	while (k > 1) {
@@ -22,33 +22,22 @@ template <size_t n> const size_t log_ceil(size_t k) {
 
 
 
-//***************************************************** Private static const variable
-const std::map<GameCore::Level, std::string> GameCore::levelToStringConversionTable {
-    {GameCore::Level::Easy,   "Easy"},
-    {GameCore::Level::Medium, "Medium"},
-    {GameCore::Level::Hard,   "Hard"}
-};
-
-
-
 //***************************************************** Private static method
-const size_t GameCore::maxComparisons(size_t numOfCoins, GameCore::Level level) {
+const size_t GameCore::maxComparisons(size_t numOfCoins, GameLevel level) {
 	switch (level) {
-		case GameCore::Level::Easy:
+		case GameLevel::Easy:
 			return numOfCoins;
-		case GameCore::Level::Medium:
+		case GameLevel::Medium:
 			return 2 * log_ceil<3>(numOfCoins) + 3;
-		case GameCore::Level::Hard:
+		case GameLevel::Hard:
 			return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
-		default:
-			throw;
 	}
 }
 
 
 
 //***************************************************** Constructor
-GameCore::GameCore(int numOfCoins, Level level) :
+GameCore::GameCore(int numOfCoins, GameLevel level) :
 	setOfCoins(std::make_unique<CoinSet>(numOfCoins)) , level(level),
 	numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 	
@@ -59,11 +48,7 @@ const size_t GameCore::numOfCoins() const {
     return setOfCoins->size();
 }
 
-const size_t GameCore::numOfFakes() const {
-    return setOfCoins->numOfFakeCoins;
-}
-
-const GameCore::Level GameCore::gameLevel() const {
+const GameLevel GameCore::gameLevel() const {
     return level;
 }
 
@@ -77,7 +62,7 @@ const size_t GameCore::numOfWeighingsCap() const {
 
 
 
-//***************************************************** Other public methods
+//***************************************************** Game operations
 const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
         throw GameCoreFailure("No more comparisons.");
@@ -89,10 +74,6 @@ const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
 
 const bool GameCore::guessFakeCoins(const CoinStates &guess) const {
     return setOfCoins->guessFakeCoins(guess);
-}
-
-const std::string GameCore::levelToString(const GameCore::Level level) {
-    return levelToStringConversionTable.at(level);
 }
 
 

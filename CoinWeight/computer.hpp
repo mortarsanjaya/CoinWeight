@@ -15,15 +15,12 @@
 
 class Computer {
 	size_t coinSetSize;
-	size_t numOfFakes;
 	
 public:
-	Computer(size_t coinSetSize, size_t numOfFakes = 2);
+	Computer(size_t coinSetSize);
 	virtual ~Computer();
 	
-	// Accessor functions
 	const size_t numOfCoins() const;
-	const size_t numOfFakeCoins() const;
 	
 	// Weighing and guessing process
     virtual void beforeWeigh() = 0;

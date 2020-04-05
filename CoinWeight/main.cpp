@@ -11,19 +11,15 @@
 #include <string>
 #include "gamemodel.hpp"
 #include "gameviewx11.hpp"
+#include "gamecontroller.hpp"
 #include "input.hpp"
 
-using namespace std;
-
 int main() {
-    std::unique_ptr<GameModel> gameModel;
-    std::unique_ptr<GameViewX11> gameView;
-    gameModel = make_unique<GameModel>();
-    gameView = make_unique<GameViewX11>();
-    gameModel->updateView(*gameView);
+    auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
+    gameController->updateView();
+    sleep(1);
     while (true) {
-        gameView->receiveInput();
-        gameModel->processInput(gameView->lastInput());
-        gameModel->updateView(*gameView);
+        gameController->receiveInput();
+        gameController->updateView();
     }
 }

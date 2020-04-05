@@ -9,12 +9,44 @@
 #include "input.hpp"
 
 //***************************************************** Constructor
-Input::Input(char inp) : type{Type::Char}, charInp{inp} {}
-Input::Input(Arrow inp) : type{Type::Arrow}, arrowInp{inp} {}
-Input::Input() : type{Type::Unknown} {}
+Input::Input(Source source, char inp) :
+    source{source}, type{Type::Char}, charInp{inp} {}
+Input::Input(Source source, Arrow inp) :
+    source{source}, type{Type::Arrow}, arrowInp{inp} {}
+Input::Input(Source source) :
+    source{source}, type{Type::Unknown} {}
+
 
 
 //***************************************************** Public methods
-const Input::Type Input::inputType() const { return type; }
-const char Input::whatChar() const { return charInp; }
-const Input::Arrow Input::whatArrow() const { return arrowInp; }
+const Input::Source Input::sourceScreen() const {
+    return source;
+}
+
+const Input::Type Input::inputType() const {
+    return type;
+}
+
+const char Input::whatChar() const {
+    if (inputType() != Type::Char) {
+        throw InputFailure("Input not a character.");
+    }
+    return charInp;
+}
+
+const Input::Arrow Input::whatArrow() const {
+    if (inputType() != Type::Arrow) {
+        throw InputFailure("Input not an arrow.");
+    }
+    return arrowInp;
+}
+
+
+
+//***************************************************** Input Failure
+InputFailure::InputFailure(std::string coreMessage) :
+    Exception(coreMessage) {}
+    
+const std::string InputFailure::headerMessage() const {
+    return "Input Failure: ";
+}

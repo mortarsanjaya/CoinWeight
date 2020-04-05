@@ -14,19 +14,26 @@
 #include "exception.hpp"
 
 class CoinStates {
-    std::vector<int> content;
 public:
-
-    // Constructor
+    enum class Value {
+        NoSelect,
+        LeftGroup,
+        RightGroup,
+        Guess
+    };
+    
+private:
+    std::vector<Value> content;
+    
+public:
     CoinStates(size_t numOfCoins);
     
-    // Field accessors
     const size_t size() const;
-    int &operator[](size_t index);
-    const int at(size_t index, bool check = true) const;
+    Value &operator[](size_t index);
+    const Value at(size_t index) const;
     
-    // enum for coin states
-    enum { NoSelect, LeftGroup, RightGroup, Guess };
+    // Resets all states to NoSelect
+    void resetStates();
 };
 
 class CoinStatesFailure : public Exception {

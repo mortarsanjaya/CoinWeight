@@ -10,7 +10,7 @@
 
 //***************************************************** Constructor
 CoinStates::CoinStates(size_t numOfCoins) :
-    content(numOfCoins, NoSelect) {}
+    content(numOfCoins, Value::NoSelect) {}
 
 
 
@@ -19,15 +19,24 @@ const size_t CoinStates::size() const {
     return content.size();
 }
 
-int &CoinStates::operator[](size_t index) {
+CoinStates::Value &CoinStates::operator[](size_t index) {
     return content[index];
 }
 
-const int CoinStates::at(size_t index, bool check) const {
-    if (check && (content.size() <= index)) {
+const CoinStates::Value CoinStates::at(size_t index) const {
+    if (content.size() <= index) {
         throw CoinStatesFailure("Out of range exception.");
     } else {
         return content[index];
+    }
+}
+
+
+
+//***************************************************** Reset function
+void CoinStates::resetStates() {
+    for (int i = 0; i < content.size(); ++i) {
+        content[i] = Value::NoSelect;
     }
 }
 
