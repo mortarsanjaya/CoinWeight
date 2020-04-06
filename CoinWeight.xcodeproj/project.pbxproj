@@ -10,13 +10,17 @@
 		40CA97D0241DEFA2006D0147 /* gameviewsdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97CE241DEFA2006D0147 /* gameviewsdl.cpp */; };
 		40CA97D3241DF15C006D0147 /* sdlexception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97D1241DF15C006D0147 /* sdlexception.cpp */; };
 		40CA97D7241F1FCB006D0147 /* gamecontrollersdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97D5241F1FCB006D0147 /* gamecontrollersdl.cpp */; };
+		40CA97DD2420A7AE006D0147 /* gamemodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97DB2420A7AE006D0147 /* gamemodel.cpp */; };
+		40CA97E024235217006D0147 /* computer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97DE24235217006D0147 /* computer.cpp */; };
+		40CA97E22425454B006D0147 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CA97E12425454B006D0147 /* SDL2_ttf.framework */; };
+		40CA97E7242596BE006D0147 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CA97E5242596BE006D0147 /* input.cpp */; };
 		40D74312241D8B0200147088 /* sdlgraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40D74310241D8B0200147088 /* sdlgraphics.cpp */; };
 		8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
 		866BE31A241DE19D00DDD242 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866FC82D2409EF9600B3740D /* x11graphics.cpp */; };
 		867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; };
 		867EFB2E24160C3A004C43A3 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		869C4BD82401BDCD00C3DE84 /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* game.cpp */; };
+		869C4BD82401BDCD00C3DE84 /* gamecore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* gamecore.cpp */; };
 		869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD92401BF6500C3DE84 /* weighing.hpp */; };
 		869C4BDD2401C10600C3DE84 /* human.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BDB2401C10600C3DE84 /* human.cpp */; };
 		869C4BE22402EE0C00C3DE84 /* computerhard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BE02402EE0C00C3DE84 /* computerhard.cpp */; };
@@ -55,19 +59,27 @@
 		40CA97D2241DF15C006D0147 /* sdlexception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sdlexception.hpp; sourceTree = "<group>"; };
 		40CA97D5241F1FCB006D0147 /* gamecontrollersdl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecontrollersdl.cpp; sourceTree = "<group>"; };
 		40CA97D6241F1FCB006D0147 /* gamecontrollersdl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecontrollersdl.hpp; sourceTree = "<group>"; };
+		40CA97D824209C69006D0147 /* gameview.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
+		40CA97DB2420A7AE006D0147 /* gamemodel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamemodel.cpp; sourceTree = "<group>"; };
+		40CA97DC2420A7AE006D0147 /* gamemodel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamemodel.hpp; sourceTree = "<group>"; };
+		40CA97DE24235217006D0147 /* computer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computer.cpp; sourceTree = "<group>"; };
+		40CA97DF24235217006D0147 /* computer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computer.hpp; sourceTree = "<group>"; };
+		40CA97E12425454B006D0147 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		40CA97E5242596BE006D0147 /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
+		40CA97E6242596BE006D0147 /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
+		40CA97E92425BC4C006D0147 /* Arial Unicode.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Arial Unicode.ttf"; path = "../../../../../../System/Library/Fonts/Supplemental/Arial Unicode.ttf"; sourceTree = "<group>"; };
 		40D74310241D8B0200147088 /* sdlgraphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sdlgraphics.cpp; sourceTree = "<group>"; };
 		40D74311241D8B0200147088 /* sdlgraphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sdlgraphics.hpp; sourceTree = "<group>"; };
 		8607519C240F0EAE007A96E5 /* gameviewx11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameviewx11.cpp; sourceTree = "<group>"; };
 		8607519D240F0EAE007A96E5 /* gameviewx11.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameviewx11.hpp; sourceTree = "<group>"; };
-		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
 		866BE318241DE19D00DDD242 /* exception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
 		866FC82D2409EF9600B3740D /* x11graphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = x11graphics.cpp; sourceTree = "<group>"; };
 		866FC82E2409EF9600B3740D /* x11graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = x11graphics.hpp; sourceTree = "<group>"; };
 		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
 		867EFB2624160B46004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		869C4BD62401BDCD00C3DE84 /* game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
-		869C4BD72401BDCD00C3DE84 /* game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		869C4BD62401BDCD00C3DE84 /* gamecore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecore.cpp; sourceTree = "<group>"; };
+		869C4BD72401BDCD00C3DE84 /* gamecore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecore.hpp; sourceTree = "<group>"; };
 		869C4BD92401BF6500C3DE84 /* weighing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = weighing.hpp; sourceTree = "<group>"; };
 		869C4BDB2401C10600C3DE84 /* human.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = human.cpp; sourceTree = "<group>"; };
 		869C4BDC2401C10600C3DE84 /* human.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = human.hpp; sourceTree = "<group>"; };
@@ -86,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40CA97E22425454B006D0147 /* SDL2_ttf.framework in Frameworks */,
 				867EFB2D24160C3A004C43A3 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +115,14 @@
 			name = "Game Controller";
 			sourceTree = "<group>";
 		};
+		40CA97E82425BC2B006D0147 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				40CA97E92425BC4C006D0147 /* Arial Unicode.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		8607519B240F0C6E007A96E5 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +137,7 @@
 		8607519F240F0EBE007A96E5 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
-				860751A1240F2844007A96E5 /* gameview.hpp */,
+				40CA97D824209C69006D0147 /* gameview.hpp */,
 				8607519C240F0EAE007A96E5 /* gameviewx11.cpp */,
 				8607519D240F0EAE007A96E5 /* gameviewx11.hpp */,
 				40CA97CE241DEFA2006D0147 /* gameviewsdl.cpp */,
@@ -148,8 +169,10 @@
 		866FC8312409F75A00B3740D /* Game (2 fake coins only) */ = {
 			isa = PBXGroup;
 			children = (
-				869C4BD62401BDCD00C3DE84 /* game.cpp */,
-				869C4BD72401BDCD00C3DE84 /* game.hpp */,
+				869C4BD62401BDCD00C3DE84 /* gamecore.cpp */,
+				869C4BD72401BDCD00C3DE84 /* gamecore.hpp */,
+				40CA97DB2420A7AE006D0147 /* gamemodel.cpp */,
+				40CA97DC2420A7AE006D0147 /* gamemodel.hpp */,
 			);
 			name = "Game (2 fake coins only)";
 			sourceTree = "<group>";
@@ -161,6 +184,8 @@
 				869C4BDC2401C10600C3DE84 /* human.hpp */,
 				869C4BE02402EE0C00C3DE84 /* computerhard.cpp */,
 				869C4BE12402EE0C00C3DE84 /* computerhard.hpp */,
+				40CA97DE24235217006D0147 /* computer.cpp */,
+				40CA97DF24235217006D0147 /* computer.hpp */,
 			);
 			name = "Player Types";
 			sourceTree = "<group>";
@@ -168,6 +193,7 @@
 		867EFB2324160820004C43A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40CA97E12425454B006D0147 /* SDL2_ttf.framework */,
 				867EFB2624160B46004C43A3 /* SDL2.framework */,
 				867EFB2424160820004C43A3 /* SDL2.framework */,
 			);
@@ -204,6 +230,7 @@
 		86A9AB922400AF50002AB0CF /* CoinWeight */ = {
 			isa = PBXGroup;
 			children = (
+				40CA97E82425BC2B006D0147 /* Fonts */,
 				40CA97D4241F1F8C006D0147 /* Game Controller */,
 				86A9AB932400AF50002AB0CF /* main.cpp */,
 				869C4BE424048E4700C3DE84 /* Players */,
@@ -213,6 +240,8 @@
 				8607519F240F0EBE007A96E5 /* Game View */,
 				8607519B240F0C6E007A96E5 /* Graphics */,
 				866BE31B241DE1A800DDD242 /* Exceptions */,
+				40CA97E5242596BE006D0147 /* input.cpp */,
+				40CA97E6242596BE006D0147 /* input.hpp */,
 			);
 			path = CoinWeight;
 			sourceTree = "<group>";
@@ -277,7 +306,9 @@
 			files = (
 				40CA97D0241DEFA2006D0147 /* gameviewsdl.cpp in Sources */,
 				40CA97D7241F1FCB006D0147 /* gamecontrollersdl.cpp in Sources */,
+				40CA97E7242596BE006D0147 /* input.cpp in Sources */,
 				869C4BDA2401BF6500C3DE84 /* weighing.hpp in Sources */,
+				40CA97DD2420A7AE006D0147 /* gamemodel.cpp in Sources */,
 				869C4BDD2401C10600C3DE84 /* human.cpp in Sources */,
 				86A9AB942400AF50002AB0CF /* main.cpp in Sources */,
 				869C4BE22402EE0C00C3DE84 /* computerhard.cpp in Sources */,
@@ -286,9 +317,10 @@
 				8607519E240F0EAE007A96E5 /* gameviewx11.cpp in Sources */,
 				40D74312241D8B0200147088 /* sdlgraphics.cpp in Sources */,
 				866FC82F2409EF9600B3740D /* x11graphics.cpp in Sources */,
+				40CA97E024235217006D0147 /* computer.cpp in Sources */,
 				40CA97D3241DF15C006D0147 /* sdlexception.cpp in Sources */,
 				866BE31A241DE19D00DDD242 /* exception.cpp in Sources */,
-				869C4BD82401BDCD00C3DE84 /* game.cpp in Sources */,
+				869C4BD82401BDCD00C3DE84 /* gamecore.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
