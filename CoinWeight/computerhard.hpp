@@ -10,34 +10,35 @@
 #define computerhard_hpp
 
 #include "computer.hpp"
+#include <vector>
 #include <memory>
 
 class ComputerHard : public Computer {
 
-    // States and strategy: How the results are handled
-    struct State {
-        std::vector<std::vector<size_t>> partition;
-        enum class Type;
-        Type type;
-        State(size_t numOfCoins);
-    };
-    
-    enum class Strategy;
-    
-    std::unique_ptr<State> state;
-    Strategy strategy;
-    
-    // Modifies partition so it is ready for guessing or weighing
-    const Strategy formStrategy();
-    
+	// States and strategy: How the results are handled
+	struct State {
+		std::vector<std::vector<size_t>> partition;
+		enum class Type;
+		Type type;
+        
+		State(size_t numOfCoins);
+	};
+	
+	enum class Strategy;
+	
+	std::unique_ptr<State> state;
+	Strategy strategy;
+	
     // Overriding functions
-    const Weighing pickToWeigh() const override;
-    void afterWeigh(int weighResult) override;
-    const std::vector<size_t> pickGuesses() const override;
-    
+	void beforeWeigh() override;
+	const CoinStates pickToWeigh() const override;
+	void afterWeigh(const WeighResult weighResult) override;
+	const CoinStates pickToGuess() const override;
+    const bool readyToGuess() const override;
+	
 public:
-    ComputerHard(size_t numOfCoins, size_t numOfFakeCoins);
-    ~ComputerHard();
+	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);
+	~ComputerHard();
 };
 
 #endif

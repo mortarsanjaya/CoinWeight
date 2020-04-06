@@ -7,9 +7,6 @@
 //
 
 #include "computerhard.hpp"
-#include <vector>
-
-#include <iostream>
 
 /*
 Separate documentation for states and strategies (sadly needed):
@@ -104,16 +101,14 @@ ComputerHard::State::State(size_t numOfCoins) :
 
 //***************************************************** Constructor and Destructor
 ComputerHard::ComputerHard(size_t numOfCoins, size_t numOfFakeCoins) :
-    Computer(numOfCoins, numOfFakeCoins),
-    state(std::make_unique<State>(numOfCoins)),
-    strategy(Strategy::NoStrategy)
-{}
+	Computer(numOfCoins), state(std::make_unique<State>(numOfCoins)),
+	strategy(Strategy::NoStrategy) {}
 
 ComputerHard::~ComputerHard() {}
 
 
 //***************************************************** Non-overriding functions
-const ComputerHard::Strategy ComputerHard::formStrategy() {
+void ComputerHard::beforeWeigh() {
 
     auto splitLastToThree = [this](const size_t twoSetSize) -> void {
         std::vector<size_t> backSet = state->partition.back();
@@ -129,284 +124,312 @@ const ComputerHard::Strategy ComputerHard::formStrategy() {
         state->type = State::Type::SendingMove;
     };
 
-    switch (state->type) {
-        case State::Type::ZeroInfo:
-        // Partition consists of one set
-        {
-            // Just an extra measure of safety?
-            if (state->partition.size() != 1) exit(202);
-            
-            size_t setSize = state->partition[0].size();
-            if (setSize == 2) {
-                readyToSendMove();
-                return Strategy::Guess;
-            }
-            // Small case removed
-            
-            if (first_digit_base<3>(setSize - 1) == 1) {
-                const size_t pairSize = state->partition[0].size() / 2;
-                splitLastToThree(pairSize);
-                
-                readyToSendMove();
-                return Strategy::Split2;
-            } else {
-                const size_t pairSize = (state->partition[0].size() + 1) / 3;
-                splitLastToThree(pairSize);
-                
-                readyToSendMove();
-                return Strategy::Split3Step1;
-            }
-        }
-        case State::Type::OneVsOne:
-        // Partition consists of two sets, where the second set is always set to
-        //     size greater than one if possible
-        {
-            // Just an extra measure of safety?
-            if (state->partition.size() != 2) exit(203);
-            
-            if (state->partition[1].size() == 1) {
-                readyToSendMove();
-                return Strategy::Guess;
-            } else {
-                const size_t pairSize = (state->partition[1].size() + 2) / 3;
-                splitLastToThree(pairSize);
-                std::swap(state->partition[0], state->partition[2]);
-                
-                readyToSendMove();
-                return Strategy::OneVsOne;
-            }
-        }
-        case State::Type::Split3Case1:
-        // Partition consists of three sets, first two set is of equal size
-        // Either this first two contains one fake coin each, or the third one contains two fake coins
-        // Change into a set of four, last set for the "remainder" coins (only from S1 or S3)
-        // Then, S3 is switched with S2
-        {
-            // Just an extra measure of safety?
-            if (state->partition.size() != 3) exit(204);
-            
-            const size_t twoSetSize = state->partition[0].size();
-            const size_t lastSetSize = state->partition[2].size();
-            std::vector<size_t> lastBit;
-            if (twoSetSize > lastSetSize) {
-                lastBit.push_back(state->partition[0].back());
-                state->partition[0].pop_back();
-            } else if (twoSetSize < lastSetSize) {
-                lastBit.push_back(state->partition[2].back());
-                state->partition[2].pop_back();
-            }
-            
-            state->partition.push_back(lastBit);
-            std::swap(state->partition[2], state->partition[1]);
-            
-            readyToSendMove();
-            return Strategy::Split3Step2Case1;
-        }
-        case State::Type::Split3Case2:
-        // Partition consists of two sets, where the first set contains at least one fake coin
-        // Change into a set of two, last set for the "remainder" coin (if any)
-        {
-            // Just an extra measure of safety?
-            if (state->partition.size() != 2) exit(205);
-            
-            const size_t firstSetSize = state->partition[0].size();
-            const size_t secondSetSize = state->partition[1].size();
-            std::vector<size_t> lastBit;
-            if (firstSetSize > secondSetSize) {
-                lastBit.push_back(state->partition[0].back());
-                state->partition[0].pop_back();
-            } else if (firstSetSize < secondSetSize) {
-                lastBit.push_back(state->partition[1].back());
-                state->partition[1].pop_back();
-            }
+	switch (state->type) {
+		case State::Type::ZeroInfo:
+		// Partition consists of one set
+		{
+			// Just an extra measure of safety?
+			if (state->partition.size() != 1) exit(202);
+			
+			size_t setSize = state->partition[0].size();
+			if (setSize == 2) {
+				readyToSendMove();
+				strategy = Strategy::Guess;
+			}
+			// Small case removed
+			
+			if (first_digit_base<3>(setSize - 1) == 1) {
+				const size_t pairSize = state->partition[0].size() / 2;
+				splitLastToThree(pairSize);
+				
+				readyToSendMove();
+				strategy = Strategy::Split2;
+			} else {
+				const size_t pairSize = (state->partition[0].size() + 1) / 3;
+				splitLastToThree(pairSize);
+				
+				readyToSendMove();
+				strategy = Strategy::Split3Step1;
+			}
+            break;
+		}
+        
+		case State::Type::OneVsOne:
+		// Partition consists of two sets, where the second set is always set to
+		//	 size greater than one if possible
+		{
+			// Just an extra measure of safety?
+			if (state->partition.size() != 2) exit(203);
+			
+			if (state->partition[1].size() == 1) {
+				readyToSendMove();
+				strategy = Strategy::Guess;
+			} else {
+				const size_t pairSize = (state->partition[1].size() + 2) / 3;
+				splitLastToThree(pairSize);
+				std::swap(state->partition[0], state->partition[2]);
+				
+				readyToSendMove();
+				strategy = Strategy::OneVsOne;
+			}
+            break;
+		}
+        
+		case State::Type::Split3Case1:
+		// Partition consists of three sets, first two set is of equal size
+		// Either this first two contains one fake coin each, or the third one contains two fake coins
+		// Change into a set of four, last set for the "remainder" coins (only from S1 or S3)
+		// Then, S3 is switched with S2
+		{
+			// Just an extra measure of safety?
+			if (state->partition.size() != 3) exit(204);
+			
+			const size_t twoSetSize = state->partition[0].size();
+			const size_t lastSetSize = state->partition[2].size();
+			std::vector<size_t> lastBit;
+			if (twoSetSize > lastSetSize) {
+				lastBit.push_back(state->partition[0].back());
+				state->partition[0].pop_back();
+			} else if (twoSetSize < lastSetSize) {
+				lastBit.push_back(state->partition[2].back());
+				state->partition[2].pop_back();
+			}
+			
+			state->partition.push_back(lastBit);
+			std::swap(state->partition[2], state->partition[1]);
+			
+			readyToSendMove();
+			strategy = Strategy::Split3Step2Case1;
+            break;
+		}
+        
+		case State::Type::Split3Case2:
+		// Partition consists of two sets, where the first set contains at least one fake coin
+		// Change into a set of two, last set for the "remainder" coin (if any)
+		{
+			// Just an extra measure of safety?
+			if (state->partition.size() != 2) exit(205);
+			
+			const size_t firstSetSize = state->partition[0].size();
+			const size_t secondSetSize = state->partition[1].size();
+			std::vector<size_t> lastBit;
+			if (firstSetSize > secondSetSize) {
+				lastBit.push_back(state->partition[0].back());
+				state->partition[0].pop_back();
+			} else if (firstSetSize < secondSetSize) {
+				lastBit.push_back(state->partition[1].back());
+				state->partition[1].pop_back();
+			}
 
-            state->partition.push_back(lastBit);
-            
-            readyToSendMove();
-            return Strategy::Split3Step2Case2;
-        }
-        default: // Should not happen
-            throw;
-    }
+			state->partition.push_back(lastBit);
+			
+			readyToSendMove();
+			strategy = Strategy::Split3Step2Case2;
+            break;
+		}
+        
+		default: // Should not happen
+			throw;
+	}
 };
 
 
 
 //***************************************************** Overriding functions
-const Weighing ComputerHard::pickToWeigh() const {
-    return Weighing{state->partition[0], state->partition[1]};
-}
-
-void ComputerHard::afterWeigh(const int weighResult) {
-    switch (strategy) {
-    
-        case Strategy::Split2:
-            switch (weighResult) {
-                case 1:
-                {
-                    std::vector<size_t> remainderSet = state->partition.back();
-                    state->partition[1].insert(state->partition[1].end(),
-                        remainderSet.begin(), remainderSet.end());
-                    state->partition.pop_back();
-                    state->partition.erase(state->partition.begin());
-                    state->type = State::Type::ZeroInfo;
-                    break;
-                }
-                case 0:
-                {
-                    state->partition.pop_back();
-                    state->type = State::Type::OneVsOne;
-                    break;
-                }
-                case -1:
-                {
-                    std::vector<size_t> remainderSet = state->partition.back();
-                    state->partition[0].insert(state->partition[0].end(),
-                        remainderSet.begin(), remainderSet.end());
-                    state->partition.pop_back();
-                    state->partition.pop_back();
-                    state->type = State::Type::ZeroInfo;
-                    break;
-                }
-                default:
-                    throw;
-            }
-            break;
-            
-        case Strategy::Split3Step1:
-            switch (weighResult) {
-                case 1:
-                {
-                    state->partition.erase(state->partition.begin());
-                    state->type = State::Type::Split3Case2;
-                    break;
-                }
-                case 0:
-                {
-                    state->type = State::Type::Split3Case1;
-                    break;
-                }
-                case -1:
-                {
-                    state->partition.erase(state->partition.begin() + 1);
-                    state->type = State::Type::Split3Case2;
-                    break;
-                }
-                default:
-                    throw;
-            }
-            break;
-            
-        case Strategy::OneVsOne:
-            switch (weighResult) {
-                case 1:
-                {
-                    state->partition.pop_back();
-                    state->partition.erase(state->partition.begin());
-                    break;
-                }
-                case 0:
-                {
-                    state->partition.erase(state->partition.begin() + 1);
-                    state->partition.erase(state->partition.begin());
-                    break;
-                }
-                case -1:
-                {
-                    state->partition.pop_back();
-                    state->partition.erase(state->partition.begin() + 1);
-                    break;
-                }
-                default:
-                    throw;
-            }
-            state->type = State::Type::OneVsOne;
-            if (state->partition.back().size() == 1) {
-                std::swap(state->partition[0], state->partition[1]);
-            }
-            break;
-            
-        case Strategy::Split3Step2Case1:
-            switch (weighResult) {
-                case 1:
-                {
-                    if ((state->partition.back().size() == 1) &&
-                        (state->partition[2].size() == state->partition[0].size()))
-                    {
-                        size_t singleton = state->partition.back()[0];
-                        state->partition[1].emplace_back(singleton);
-                    }
-                    
-                    state->partition.pop_back();
-                    state->partition.pop_back();
-                    state->partition.erase(state->partition.begin());
-                    state->type = State::Type::ZeroInfo;
-                    break;
-                }
-                case 0:
-                // The whole set must consist 3q + 2 coins for this to happen
-                {
-                    state->partition.erase(state->partition.begin() + 1);
-                    state->partition.erase(state->partition.begin());
-                    std::swap(state->partition[0], state->partition[1]);
-                    state->type = State::Type::OneVsOne;
-                    break;
-                }
-                case -1:
-                {
-                    state->partition.pop_back();
-                    state->partition.erase(state->partition.begin() + 1);
-                    state->type = State::Type::OneVsOne;
-                    break;
-                }
-                default:
-                    throw;
-            }
-            break;
-            
-        case Strategy::Split3Step2Case2:
-            switch (weighResult) {
-                case 1:
-                // That means the remainder coin must belong to the first set and is fake...
-                {
-                    state->partition.erase(state->partition.begin());
-                    std::swap(state->partition[0], state->partition[1]);
-                    state->type = State::Type::OneVsOne;
-                    break;
-                }
-                case 0:
-                {
-                    state->partition.pop_back();
-                    state->type = State::Type::OneVsOne;
-                    break;
-                }
-                case -1:
-                {
-                    state->partition.erase(state->partition.begin() + 1);
-                    if (state->partition.back().size() == 1) {
-                        size_t singleton = state->partition.back()[0];
-                        state->partition[0].emplace_back(singleton);
-                    }
-                    state->partition.pop_back();
-                    state->type = State::Type::ZeroInfo;
-                    break;
-                }
-                default:
-                    throw;
-            }
-            break;
-            
-        default:
-            throw;
+const CoinStates ComputerHard::pickToWeigh() const {
+    CoinStates weightStates(numOfCoins());
+    for (size_t leftGroupIndex : state->partition.at(0)) {
+        weightStates[leftGroupIndex] = CoinStates::Value::LeftGroup;
     }
     
-    strategy = Strategy::NoStrategy;
+    for (size_t rightGroupIndex : state->partition.at(1)) {
+        weightStates[rightGroupIndex] = CoinStates::Value::RightGroup;
+    }
+    
+	return weightStates;
 }
 
-const std::vector<size_t> ComputerHard::pickGuesses() const {
-    if (state->partition.size() == 2) {
-        return std::vector<size_t>{state->partition[0][0], state->partition[1][0]};
-    } else {
-        return state->partition[0];
+void ComputerHard::afterWeigh(const WeighResult weighResult) {
+	switch (strategy) {
+	
+		case Strategy::Split2:
+			switch (weighResult) {
+				case WeighResult::LeftHeavy:
+				{
+					std::vector<size_t> remainderSet = state->partition.back();
+					state->partition[1].insert(state->partition[1].end(),
+						remainderSet.begin(), remainderSet.end());
+					state->partition.pop_back();
+					state->partition.erase(state->partition.begin());
+					state->type = State::Type::ZeroInfo;
+					break;
+				}
+				case WeighResult::Balance:
+				{
+					state->partition.pop_back();
+					state->type = State::Type::OneVsOne;
+					break;
+				}
+				case WeighResult::RightHeavy:
+				{
+					std::vector<size_t> remainderSet = state->partition.back();
+					state->partition[0].insert(state->partition[0].end(),
+						remainderSet.begin(), remainderSet.end());
+					state->partition.pop_back();
+					state->partition.pop_back();
+					state->type = State::Type::ZeroInfo;
+					break;
+				}
+				default:
+					throw;
+			}
+			break;
+			
+		case Strategy::Split3Step1:
+			switch (weighResult) {
+				case WeighResult::LeftHeavy:
+				{
+					state->partition.erase(state->partition.begin());
+					state->type = State::Type::Split3Case2;
+					break;
+				}
+				case WeighResult::Balance:
+				{
+					state->type = State::Type::Split3Case1;
+					break;
+				}
+				case WeighResult::RightHeavy:
+				{
+					state->partition.erase(state->partition.begin() + 1);
+					state->type = State::Type::Split3Case2;
+					break;
+				}
+				default:
+					throw;
+			}
+			break;
+			
+		case Strategy::OneVsOne:
+			switch (weighResult) {
+				case WeighResult::LeftHeavy:
+				{
+					state->partition.pop_back();
+					state->partition.erase(state->partition.begin());
+					break;
+				}
+				case WeighResult::Balance:
+				{
+					state->partition.erase(state->partition.begin() + 1);
+					state->partition.erase(state->partition.begin());
+					break;
+				}
+				case WeighResult::RightHeavy:
+				{
+					state->partition.pop_back();
+					state->partition.erase(state->partition.begin() + 1);
+					break;
+				}
+				default:
+					throw;
+			}
+			state->type = State::Type::OneVsOne;
+			if (state->partition.back().size() == 1) {
+				std::swap(state->partition[0], state->partition[1]);
+			}
+			break;
+			
+		case Strategy::Split3Step2Case1:
+			switch (weighResult) {
+				case WeighResult::LeftHeavy:
+				{
+					if ((state->partition.back().size() == 1) &&
+						(state->partition[2].size() == state->partition[0].size()))
+					{
+						size_t singleton = state->partition.back()[0];
+						state->partition[1].emplace_back(singleton);
+					}
+					
+					state->partition.pop_back();
+					state->partition.pop_back();
+					state->partition.erase(state->partition.begin());
+					state->type = State::Type::ZeroInfo;
+					break;
+				}
+				case WeighResult::Balance:
+				// The whole set must consist 3q + 2 coins for this to happen
+				{
+					state->partition.erase(state->partition.begin() + 1);
+					state->partition.erase(state->partition.begin());
+					std::swap(state->partition[0], state->partition[1]);
+					state->type = State::Type::OneVsOne;
+					break;
+				}
+				case WeighResult::RightHeavy:
+				{
+					state->partition.pop_back();
+					state->partition.erase(state->partition.begin() + 1);
+					state->type = State::Type::OneVsOne;
+					break;
+				}
+				default:
+					throw;
+			}
+			break;
+			
+		case Strategy::Split3Step2Case2:
+			switch (weighResult) {
+				case WeighResult::LeftHeavy:
+				// That means the remainder coin must belong to the first set and is fake...
+				{
+					state->partition.erase(state->partition.begin());
+					std::swap(state->partition[0], state->partition[1]);
+					state->type = State::Type::OneVsOne;
+					break;
+				}
+				case WeighResult::Balance:
+				{
+					state->partition.pop_back();
+					state->type = State::Type::OneVsOne;
+					break;
+				}
+				case WeighResult::RightHeavy:
+				{
+					state->partition.erase(state->partition.begin() + 1);
+					if (state->partition.back().size() == 1) {
+						size_t singleton = state->partition.back()[0];
+						state->partition[0].emplace_back(singleton);
+					}
+					state->partition.pop_back();
+					state->type = State::Type::ZeroInfo;
+					break;
+				}
+				default:
+					throw;
+			}
+			break;
+			
+		default:
+			throw;
+	}
+	
+	strategy = Strategy::NoStrategy;
+}
+
+const CoinStates ComputerHard::pickToGuess() const {
+    CoinStates guessStates(numOfCoins());
+    for (std::vector<size_t> single_partition : state->partition) {
+        for (size_t element : single_partition) {
+            guessStates[element] = CoinStates::Value::Guess;
+        }
+    }
+    return guessStates;
+}
+
+const bool ComputerHard::readyToGuess() const {
+    switch (state->partition.size()) {
+        case 1:     return (state->partition[0].size() == 2);
+        case 2:     return (state->partition[0].size() == 1 &&
+                            state->partition[1].size() == 1);
+        default:    return false;
     }
 }

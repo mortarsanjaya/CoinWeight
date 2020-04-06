@@ -1,4 +1,3 @@
-
 //
 //  computer.cpp
 //  CoinWeight
@@ -10,15 +9,14 @@
 #include "computer.hpp"
 
 //***************************************************** Constructor and Destructor
-Computer::Computer(size_t coinSetSize, size_t numOfFakes) :
-    coinSetSize(coinSetSize),
-    numOfFakes(numOfFakes)
-{}
-
+Computer::Computer(size_t coinSetSize) :
+	coinSetSize(coinSetSize) {}
+    
 Computer::~Computer() {}
 
 
 
 //***************************************************** Field accessors
-const size_t Computer::numOfCoins() const { return coinSetSize; }
-const size_t Computer::numOfFakeCoins() const { return numOfFakes; }
+const size_t Computer::numOfCoins() const {
+    return coinSetSize;
+}

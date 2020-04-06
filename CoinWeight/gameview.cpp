@@ -1,0 +1,75 @@
+//
+//  gameview.cpp
+//  CoinWeight
+//
+//  Created by Gian Cordana Sanjaya on 2020-04-03.
+//  Copyright © 2020 -. All rights reserved.
+//
+
+#include "gameview.hpp"
+
+//***************************************************** Destructor
+GameView::~GameView() {}
+
+
+
+//***************************************************** Non-virtual private methods
+//**** Draw coins
+void GameView::drawCoins(const DrawingWindow window, const CoinStates &coinStates) {
+    for (size_t i = 0; i < coinStates.size(); ++i) {
+        drawCoin(window, coinStates.at(i), i);
+    }
+}
+
+//**** Draw record
+void GameView::drawRecord(const Record &record) {
+    drawCoins(DrawingWindow::History, record.coinStates());
+    drawWeighResultText(DrawingWindow::History, record.result());
+}
+
+//**** Draw history screen, non-empty case
+void GameView::drawHistoryScreen(const Record &record,
+    const size_t index, const size_t numOfWeighs)
+{
+    drawRecord(record);
+    drawHistoryIndexText(index, numOfWeighs);
+}
+
+
+
+//***************************************************** Public methods
+void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates,
+    const int screenHighlight, const int highlightedCoin,
+    const size_t numOfWeighsLeft, const size_t numOfWeighsMax)
+{
+    clearScreen(DrawingWindow::Main);
+    drawCoins(DrawingWindow::Main, coinStates);
+    drawGamePlayNumOfWeighs(numOfWeighsLeft, numOfWeighsMax);
+    drawGamePlayHumanHighlight(screenHighlight, highlightedCoin);
+}
+
+void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates,
+    const size_t numOfWeighsLeft, const size_t numOfWeighsMax)
+{
+    clearScreen(DrawingWindow::Main);
+    drawCoins(DrawingWindow::Main, coinStates);
+    drawGamePlayNumOfWeighs(numOfWeighsLeft, numOfWeighsMax);
+    drawReturnButton();
+}
+
+void GameView::drawGameOverScreen(const bool isWin,
+    const size_t numOfWeighsLeft, const size_t numOfWeighMax)
+{
+    clearScreen(DrawingWindow::Main);
+    drawGameOverEndMessage(isWin);
+    drawGameOverNumOfWeighs(numOfWeighsLeft, numOfWeighMax);
+}
+
+void GameView::drawHistoryScreen(const History &history) {
+    clearScreen(DrawingWindow::History);
+    if (history.empty()) {
+        drawEmptyHistoryScreen();
+    } else {
+        drawHistoryScreen(history.getRecord(), history.currentIndex(), history.size());
+    }
+}

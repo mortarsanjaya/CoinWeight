@@ -2,7 +2,7 @@
 //  gamemodel.hpp
 //  CoinWeight
 //
-//  Created by Jamie Sebastian on 17/03/20.
+//  Created by Gian Cordana Sanjaya on 2020-03-17.
 //  Copyright © 2020 -. All rights reserved.
 //
 
@@ -10,67 +10,109 @@
 #define gamemodel_hpp
 
 #include <memory>
+#include "gamescreen.hpp"
+#include "gamesettings.hpp"
 #include "gamecore.hpp"
+#include "coinstates.hpp"
 #include "computer.hpp"
-#include "gameview.hpp"
+#include "history.hpp"
 #include "exception.hpp"
 
 class GameModel {
-    enum class Page {
-        Main,
-        Instruction,
-        Credit,
-        GameOption,  // Num of coins, Difficulty, Human/Computer
-        GamePlay,    // Coins, just coins, color depends
-        GameOver     // You win! You lose!
-    };
-    
-    struct GameOption {
-        size_t numOfCoins;
-        GameCore::Level level;
-        bool isHuman;
-    };
-    
+    GameScreen screen;
+    GameSettings settings;
     std::unique_ptr<GameCore> gameCore;
+    std::unique_ptr<CoinStates> coinStates;
     std::unique_ptr<Computer> computer;
-    Page page;
-    std::vector<int> coinStates;
-    int pageHighlight;
-    std::unique_ptr<GameOption> gameOption;
+    int coinHighlight;
+    History history;
     
-    /*
-        computer is set to NULL if the player is a Human
-        coinStates: a coin's state is:
-            0, if it is not in any group
-            1, if it is in group 1
-            2, if it is in group 2
-        pageHighlight:
-            If Page is Main or Game Option, either 0, 1, 2 based on
-                which button to highlight
-            If Page is Game Play, indicates which coin is being highlighted
-            If Page is Game Over, 0 indicates loss, 1 indicate win
-    */
+    // Not sure how I should put it right now
+    static const int coinsPerRow;
     
+    // Screen transition functions
+    void goFromMainScreen();
+    void goToMainScreen();
+    void goToGameOptionScreen();
+    void gameStart();
+    void gameOver(const bool isWin);
+    void gameCleanUp(); // Clean-up after game over
+    void computerSetup(); // Sets up computer for computer game
+    
+    // Settings manipulation (plus helper functions)
+    void increaseNumOfCoins();
+    void decreaseNumOfCoins();
+    void increaseLevel();
+    void decreaseLevel();
+    void switchMode();
+    void incrementSettings();
+    void decrementSettings();
+    
+    // Screen highlight manipulation
+    void incrementScreenHighlight();
+    void decrementScreenHighlight();
+    
+    // Coin highlight check
+    const bool isTopMostCoin() const;
+    const bool isBottomMostCoin() const;
+    const bool isLeftMostCoin() const;
+    const bool isRightMostCoin() const;
+    const bool gamePlayHumanOnCoinHighlight() const;
+    
+    // Coin highlight manipulation
+    void moveCoinHighlightUp();
+    void moveCoinHighlightDown();
+    void moveCoinHighlightLeft();
+    void moveCoinHighlightRight();
+    
+    // Coin states manipulation
+    void setStateOfCoin(CoinStates::Value state);
+    
+    // Game moves operations
+    void compareWeight();
+    void guessFakeCoins();
+    void humanGameMove();
+    void computerGameMove();
+    
+    // History index manipulation
+    void historyIncrementIndex();
+    void historyDecrementIndex();
     
 public:
     GameModel();
     
-    enum class KeyboardArrowInput {
-        Up,
-        Down,
-        Left,
-        Right
-    };
+    const GameScreen::Page currentScreen() const;
+    const int screenHighlight() const;
+    const int gameSize() const;
+    const GameLevel gameLevel() const;
+    const bool isHumanMode() const;
+    const CoinStates currentCoinStates() const;
+    const bool isComputerReadyToGuess() const;
+    const int highlightedCoinIndex() const;
+    const History currentHistory() const;
+    // Game core number of weighings
+    const size_t numOfWeighingsMax() const;
+    const size_t numOfWeighingsLeft() const;
     
-    // Updates the game view
-    void updateView(GameView &gameView);
+    // Coin states manipulation (extension)
+    void deselectCoin();
+    void moveCoinToLeftGroup();
+    void moveCoinToRightGroup();
+    void selectCoinToGuess();
     
-    // Updates game page based on input
-    // More documentation on gamemodel.cpp
-    void updatePage(char inp);
-    void updatePage(KeyboardArrowInput inp);
+    // Model logic functions
+    void mainScreenOnUpButton();
+    void mainScreenOnDownButton();
+    void mainScreenOnLeftButton();
+    void mainScreenOnRightButton();
+    void mainScreenOnReturnButton();
+    void historyScreenOnLeftButton();
+    void historyScreenOnRightButton();
 };
 
+
+
+//***************************************************** Game Model Failure
 class GameModelFailure : public Exception {
     const std::string headerMessage() const override;
 public:

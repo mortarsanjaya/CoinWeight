@@ -9,6 +9,8 @@
 #ifndef input_hpp
 #define input_hpp
 
+#include "exception.hpp"
+
 /*
     Warning:
         Don't call whatArrow() if the input type is Char
@@ -16,23 +18,32 @@
 */
 class Input {
 public:
-    enum class Type { Char, Arrow, Unknown };
+    enum class Source { Main, History }; // The screen source of input
+    enum class Type { Unknown, Char, Arrow };
     enum class Arrow { Up, Down, Left, Right };
     
 private:
+    Source source;
+    Type type;
     union {
         char charInp;
         Arrow arrowInp;
     };
-    Type type;
     
 public:
-    Input(char inp);
-    Input(Arrow inp);
-    Input();
+    Input(Source source, char inp);
+    Input(Source source, Arrow inp);
+    Input(Source source);
+    const Source sourceScreen() const;
     const Type inputType() const;
     const char whatChar() const;
     const Arrow whatArrow() const;
+};
+
+class InputFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    InputFailure(std::string coreMessage);
 };
 
 #endif

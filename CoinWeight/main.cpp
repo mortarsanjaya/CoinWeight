@@ -10,24 +10,16 @@
 #include <memory>
 #include <string>
 #include "gamemodel.hpp"
-#include "human.hpp"
-#include "computerhard.hpp"
-#include "x11graphics.hpp"
-#include "sdlgraphics.hpp"
-#include "gamecontrollersdl.hpp"
+#include "gameviewx11.hpp"
+#include "gamecontroller.hpp"
 #include "input.hpp"
 
-using namespace std;
-
 int main() {
-    std::unique_ptr<GameViewSDL> gameView = std::make_unique<GameViewSDL>();
-    //GameModel gameModel(std::move(gameView));
-    //GameControllerSDL gameController(&gameEngine);
-    //gameController.startEventLoop();
+    auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
+    gameController->updateView();
+    sleep(1);
     while (true) {
-        gameView->receiveInput();
-        gameView->lastInput();
-        gameView->drawMainScreen(1);
+        gameController->receiveInput();
+        gameController->updateView();
     }
-	return 0;
 }
