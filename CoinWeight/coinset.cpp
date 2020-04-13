@@ -11,23 +11,33 @@
 #include <algorithm>
 
 //***************************************************** Constructor
-CoinSet::CoinSet(int numOfCoins) : coins(numOfCoins, true) {
+CoinSet::CoinSet(int numOfCoins) : numOfCoins{numOfCoins} {
 	if (numOfFakeCoins > numOfCoins) {
 		throw CoinSetFailure("Bad number of fake coins.");
 	}
  
-    for (size_t i = 0; i < numOfFakeCoins; ++i) {
-        coins[i] = false;
+    std::random_device seed;
+    fakeCoinIndex1 = seed() % numOfCoins;
+    fakeCoinIndex2 = seed() % (numOfCoins - 1);
+    if (fakeCoinIndex1 > fakeCoinIndex2) {
+        std::swap(fakeCoinIndex1, fakeCoinIndex2);
+    } else {
+        ++fakeCoinIndex2;
     }
-    
-    std::shuffle(coins.begin(), coins.end(), std::random_device{});
 }
 
 
 
 //***************************************************** Field accessors
 const size_t CoinSet::size() const {
-    return coins.size();
+    return numOfCoins;
+}
+
+
+
+//***************************************************** Private member functions
+const bool CoinSet::isFakeCoinIndex(const int index) const {
+    return ((index == fakeCoinIndex1) || (index == fakeCoinIndex2));
 }
 
 
@@ -38,15 +48,15 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     int rightGroupSize = 0;
     int leftGroupNumOfFakes = 0;
     int rightGroupNumOfFakes = 0;
-    for (size_t i = 0; i < weighing.size(); ++i) {
+    for (int i = 0; i < weighing.size(); ++i) {
         if (weighing.at(i) == CoinStates::Value::LeftGroup) {
             ++leftGroupSize;
-            if (!coins.at(i)) {
+            if (isFakeCoinIndex(i)) {
                ++leftGroupNumOfFakes;
             }
         } else if (weighing.at(i) == CoinStates::Value::RightGroup) {
             ++rightGroupSize;
-            if (!coins.at(i)) {
+            if (isFakeCoinIndex(i)) {
                ++rightGroupNumOfFakes;
             }
         }
@@ -73,12 +83,12 @@ const bool CoinSet::guessFakeCoins(const CoinStates &guess) const {
                 throw CoinSetFailure("Invalid guess.");
                 break;
             case CoinStates::Value::NoSelect:
-                if (!coins.at(i)) {
+                if (isFakeCoinIndex(i)) {
                     return false;
                 }
                 break;
             case CoinStates::Value::Guess:
-                if (coins.at(i)) {
+                if (isFakeCoinIndex(i)) {
                     return false;
                 }
                 break;

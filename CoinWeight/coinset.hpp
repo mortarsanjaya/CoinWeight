@@ -15,8 +15,11 @@
 #include "exception.hpp"
 
 class CoinSet {
-    // Fake coins are lighter than real coins and are denoted by [false]
-	std::vector<bool> coins;
+    int numOfCoins;
+    int fakeCoinIndex1;
+    int fakeCoinIndex2;
+    
+    const bool isFakeCoinIndex(const int index) const;
 
 public:
 	CoinSet(int numOfCoins);
