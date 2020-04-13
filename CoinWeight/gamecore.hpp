@@ -14,7 +14,6 @@
 #include "gamelevel.hpp"
 #include "coinstates.hpp"
 #include "weighresult.hpp"
-#include "exception.hpp"
 
 class GameCore {
 	std::unique_ptr<CoinSet> setOfCoins;
@@ -36,12 +35,6 @@ public:
     // Throws if the counter's value is 0
     const WeighResult compareWeight(const CoinStates &weighing);
     const bool guessFakeCoins(const CoinStates &guess) const;
-};
-
-class GameCoreFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    GameCoreFailure(std::string coreMessage);
 };
 
 #endif

@@ -7,6 +7,7 @@
 //
 
 #include "gamecore.hpp"
+#include "exception.hpp"
 
 //***************************************************** Helper functions
 // Computes ceiling(log_n k)
@@ -65,7 +66,7 @@ const size_t GameCore::numOfWeighingsCap() const {
 //***************************************************** Game operations
 const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
-        throw GameCoreFailure("No more comparisons.");
+        throw Exception<GameCore>("No more comparisons.");
     }
     const WeighResult result = setOfCoins->compareWeight(weighing);
     --numOfWeighingsCounter;
@@ -78,10 +79,7 @@ const bool GameCore::guessFakeCoins(const CoinStates &guess) const {
 
 
 
-//***************************************************** Game Core Failure
-GameCoreFailure::GameCoreFailure(std::string coreMessage) :
-    Exception(coreMessage) {}
-
-const std::string GameCoreFailure::headerMessage() const {
+//***************************************************** Game Core Exception header message
+template<> const std::string exceptionHeaderMessage<GameCore>() {
     return "Game Core: ";
 }

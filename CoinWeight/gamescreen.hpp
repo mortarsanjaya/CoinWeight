@@ -9,8 +9,6 @@
 #ifndef gamescreen_hpp
 #define gamescreen_hpp
 
-#include "exception.hpp"
-
 class GameScreen {
 public:
     enum class Page {
@@ -45,12 +43,6 @@ public:
         // Throws if current page is not Game Over
     void playerWins();
     void playerLoses();
-};
-
-class GameScreenFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    GameScreenFailure(std::string coreMessage);
 };
 
 #endif

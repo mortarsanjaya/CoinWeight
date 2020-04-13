@@ -8,6 +8,7 @@
 
 #include "gamemodel.hpp"
 #include "computerhard.hpp"
+#include "exception.hpp"
 #include <unistd.h>
 
 //***************************************************** Constructor
@@ -84,7 +85,7 @@ void GameModel::goFromMainScreen() {
             screen.transition(GameScreen::Page::Credit);
             break;
         default:
-            throw GameModelFailure("Game Screen Highlight out of range.");
+            throw Exception<GameModel>("Game Screen Highlight out of range.");
     }
 }
 
@@ -130,7 +131,7 @@ void GameModel::gameCleanUp() {
 
 void GameModel::computerSetup() {
     if (isHumanMode()) {
-        throw GameModelFailure("Computer setup failed: Not computer mode.");
+        throw Exception<GameModel>("Computer setup failed: Not computer mode.");
     }
     
     if (computer->readyToGuess()) {
@@ -189,7 +190,7 @@ void GameModel::incrementSettings() {
             switchMode();
             break;
         default:
-            throw GameModelFailure("Game Screen Highlight out of range.");
+            throw Exception<GameModel>("Game Screen Highlight out of range.");
     }
 }
 
@@ -205,7 +206,7 @@ void GameModel::decrementSettings() {
             switchMode();
             break;
         default:
-            throw GameModelFailure("Game Screen Highlight out of range.");
+            throw Exception<GameModel>("Game Screen Highlight out of range.");
     }
 }
 
@@ -321,7 +322,7 @@ void GameModel::guessFakeCoins() {
 //**** Extension
 void GameModel::humanGameMove() {
     if (currentScreen() != GameScreen::Page::GamePlayHuman) {
-        throw GameModelFailure("Human Game Move Failure: Not a human game.");
+        throw Exception<GameModel>("Human Game Move Failure: Not a human game.");
     } else {
         switch (screenHighlight()) {
             case 1:
@@ -338,7 +339,7 @@ void GameModel::humanGameMove() {
 
 void GameModel::computerGameMove() {
     if (currentScreen() != GameScreen::Page::GamePlayComputer) {
-        throw GameModelFailure("Computer Game Move Failure: Not a computer game.");
+        throw Exception<GameModel>("Computer Game Move Failure: Not a computer game.");
     } else if (computer->readyToGuess()) {
         guessFakeCoins();
     } else {
@@ -477,7 +478,6 @@ void GameModel::historyScreenOnRightButton() {
 
 
 //***************************************************** Game Model Failure
-GameModelFailure::GameModelFailure(std::string coreMessage) : Exception{coreMessage} {}
-const std::string GameModelFailure::headerMessage() const {
+template<> const std::string exceptionHeaderMessage<GameModel>() {
     return "Game Model Failure: ";
 }

@@ -11,13 +11,16 @@
 
 #include <string>
 
-class Exception {
+template <typename T> const std::string exceptionHeaderMessage();
+
+template <typename T> class Exception {
     std::string coreMessage;
-    virtual const std::string headerMessage() const = 0;
     
 public:
-    Exception(std::string coreMessage);
-    const std::string fullMessage() const;
+    Exception(std::string coreMessage) : coreMessage{coreMessage} {}
+    const std::string fullMessage() const {
+        return exceptionHeaderMessage<T>() + coreMessage;
+    }
 };
 
 #endif

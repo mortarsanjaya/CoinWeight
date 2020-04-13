@@ -7,6 +7,7 @@
 //
 
 #include "gameviewx11.hpp"
+#include "exception.hpp"
 #include <iostream>
 
 //***************************************************** Constructor
@@ -16,7 +17,7 @@ GameViewX11::GameViewX11() {
 
     display = XOpenDisplay(nullptr);
     if (display == nullptr) {
-        throw GameViewX11Failure("Cannot open display");
+        throw Exception<GameViewX11>("Cannot open display");
     }
     
     screen = XDefaultScreen(display);
@@ -44,7 +45,7 @@ GameViewX11::GameViewX11() {
     
     for (unsigned int i = 0; i < colorVals.size(); ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
-            throw GameViewX11Failure("Cannot parse color");
+            throw Exception<GameViewX11>("Cannot parse color");
         }
         XAllocColor(display, cmap, &xcolor);
         colors.emplace_back(xcolor.pixel);
@@ -86,7 +87,7 @@ void GameViewX11::drawString(Window window, int x_pos, int y_pos, const std::str
 }
 
 void GameViewX11::drawCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw GameViewX11Failure("Invalid color");
+    if (color > colors.size()) throw Exception<GameViewX11>("Invalid color");
     XSetForeground(display, gc, colors[color]);
     XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
@@ -94,7 +95,7 @@ void GameViewX11::drawCircle(Window window, int x_pos, int y_pos, unsigned int r
 }
 
 void GameViewX11::fillCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw GameViewX11Failure("Invalid color");
+    if (color > colors.size()) throw Exception<GameViewX11>("Invalid color");
     XSetForeground(display, gc, colors[color]);
     XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
@@ -343,10 +344,7 @@ const Input GameViewX11::lastInput() {
 
 
 
-//***************************************************** Game View X11 Failure
-GameViewX11Failure::GameViewX11Failure(std::string coreMessage) :
-    Exception(coreMessage) {}
-    
-const std::string GameViewX11Failure::headerMessage() const {
+//***************************************************** Game View X11 Exception header message
+template<> const std::string exceptionHeaderMessage<GameViewX11>() {
     return "Game View X11 Failure: ";
 }

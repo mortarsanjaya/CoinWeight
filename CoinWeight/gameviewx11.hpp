@@ -94,10 +94,4 @@ public:
     const Input lastInput() override;
 };
 
-class GameViewX11Failure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    GameViewX11Failure(std::string coreMessage);
-};
-
 #endif

@@ -7,6 +7,7 @@
 //
 
 #include "coinstates.hpp"
+#include "exception.hpp"
 
 //***************************************************** Constructor
 CoinStates::CoinStates(size_t numOfCoins) :
@@ -25,7 +26,7 @@ CoinStates::Value &CoinStates::operator[](size_t index) {
 
 const CoinStates::Value CoinStates::at(size_t index) const {
     if (content.size() <= index) {
-        throw CoinStatesFailure("Out of range exception.");
+        throw Exception<CoinStates>("Out of range exception.");
     } else {
         return content[index];
     }
@@ -42,10 +43,7 @@ void CoinStates::resetStates() {
 
 
 
-//***************************************************** Coin States Failure
-CoinStatesFailure::CoinStatesFailure(std::string coreMessage) :
-    Exception(coreMessage) {}
-    
-const std::string CoinStatesFailure::headerMessage() const {
+//***************************************************** Coin States Exception header message
+template<> const std::string exceptionHeaderMessage<CoinStates>() {
     return "Coin States Failure: ";
 }

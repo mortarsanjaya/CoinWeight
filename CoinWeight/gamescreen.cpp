@@ -7,6 +7,7 @@
 //
 
 #include "gamescreen.hpp"
+#include "exception.hpp"
 
 //***************************************************** Constructor
 GameScreen::GameScreen(Page page, int highlight) :
@@ -74,24 +75,21 @@ void GameScreen::transition(const Page nextScreen) {
 
 void GameScreen::playerWins() {
     if (page != Page::GameOver) {
-        throw GameScreenFailure("Wrong page: Not Game Over");
+        throw ("Wrong page: Not Game Over");
     }
     highlight = 1;
 }
 
 void GameScreen::playerLoses() {
     if (page != Page::GameOver) {
-        throw GameScreenFailure("Wrong page: Not Game Over");
+        throw Exception<GameScreen>("Wrong page: Not Game Over");
     }
     highlight = 0;
 }
 
 
 
-//***************************************************** Game Screen Failure
-GameScreenFailure::GameScreenFailure(std::string coreMessage) :
-    Exception(coreMessage) {}
-
-const std::string GameScreenFailure::headerMessage() const {
+//***************************************************** Game Screen Exception header message
+template<> const std::string exceptionHeaderMessage<GameScreen>() {
     return "Game Screen: ";
 }

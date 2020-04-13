@@ -12,7 +12,6 @@
 #include <vector>
 #include "coinstates.hpp"
 #include "weighresult.hpp"
-#include "exception.hpp"
 
 class CoinSet {
     int numOfCoins;
@@ -31,15 +30,6 @@ public:
 	const bool guessFakeCoins(const CoinStates &guess) const;
  
 	static const size_t numOfFakeCoins;
-};
-
-
-
-//***************************************************** Coin Set Failure
-class CoinSetFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-	CoinSetFailure(std::string coreMessage);
 };
 
 #endif

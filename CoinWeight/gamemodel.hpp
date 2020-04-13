@@ -16,7 +16,6 @@
 #include "coinstates.hpp"
 #include "computer.hpp"
 #include "history.hpp"
-#include "exception.hpp"
 
 class GameModel {
     GameScreen screen;
@@ -108,15 +107,6 @@ public:
     void mainScreenOnReturnButton();
     void historyScreenOnLeftButton();
     void historyScreenOnRightButton();
-};
-
-
-
-//***************************************************** Game Model Failure
-class GameModelFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    GameModelFailure(std::string coreMessage);
 };
 
 #endif

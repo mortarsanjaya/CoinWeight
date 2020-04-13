@@ -7,13 +7,14 @@
 //
 
 #include "coinset.hpp"
+#include "exception.hpp"
 #include <random>
 #include <algorithm>
 
 //***************************************************** Constructor
 CoinSet::CoinSet(int numOfCoins) : numOfCoins{numOfCoins} {
 	if (numOfFakeCoins > numOfCoins) {
-		throw CoinSetFailure("Bad number of fake coins.");
+		throw Exception<CoinSet>("Bad number of fake coins.");
 	}
  
     std::random_device seed;
@@ -80,7 +81,7 @@ const bool CoinSet::guessFakeCoins(const CoinStates &guess) const {
         switch (guess.at(i)) {
             case CoinStates::Value::LeftGroup:
             case CoinStates::Value::RightGroup:
-                throw CoinSetFailure("Invalid guess.");
+                throw Exception<CoinSet>("Invalid guess.");
                 break;
             case CoinStates::Value::NoSelect:
                 if (isFakeCoinIndex(i)) {
@@ -105,10 +106,7 @@ const size_t CoinSet::numOfFakeCoins = 2;
 
 
 
-//***************************************************** Coin Set Failure
-CoinSetFailure::CoinSetFailure(std::string coreMessage) :
-    Exception{coreMessage} {}
-    
-const std::string CoinSetFailure::headerMessage() const {
+//***************************************************** Coin Set Exception header message
+template<> const std::string exceptionHeaderMessage<CoinSet>() {
     return "Coin Set: ";
 }

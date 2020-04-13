@@ -19,7 +19,6 @@
 		861E6483242AD81E00AA6FD7 /* computerhard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BE02402EE0C00C3DE84 /* computerhard.cpp */; };
 		861E6484242AD81E00AA6FD7 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
 		861E6486242AD81E00AA6FD7 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869BBCD424241BDD0002CDED /* input.cpp */; };
-		861E6487242AD81E00AA6FD7 /* exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866BE318241DE19D00DDD242 /* exception.cpp */; };
 		86C1C65724324806007E5B64 /* gamescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C65524324806007E5B64 /* gamescreen.cpp */; };
 		86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C659243249E7007E5B64 /* gamesettings.cpp */; };
 		86C1C65F24324A3D007E5B64 /* gamelevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C65D24324A3D007E5B64 /* gamelevel.cpp */; };
@@ -49,7 +48,6 @@
 		861B50DD243094AA00262336 /* gamecontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecontroller.hpp; sourceTree = "<group>"; };
 		8625C7D0242AA68F00558B55 /* coinstates.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinstates.cpp; sourceTree = "<group>"; };
 		8625C7D1242AA68F00558B55 /* coinstates.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinstates.hpp; sourceTree = "<group>"; };
-		866BE318241DE19D00DDD242 /* exception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = exception.cpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
 		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
 		867EFB2624160B46004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		866BE31B241DE1A800DDD242 /* Exceptions */ = {
 			isa = PBXGroup;
 			children = (
-				866BE318241DE19D00DDD242 /* exception.cpp */,
 				866BE319241DE19D00DDD242 /* exception.hpp */,
 			);
 			name = Exceptions;
@@ -371,7 +368,6 @@
 				861E6483242AD81E00AA6FD7 /* computerhard.cpp in Sources */,
 				861E6484242AD81E00AA6FD7 /* gameviewx11.cpp in Sources */,
 				861E6486242AD81E00AA6FD7 /* input.cpp in Sources */,
-				861E6487242AD81E00AA6FD7 /* exception.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

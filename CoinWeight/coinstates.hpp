@@ -11,7 +11,6 @@
 
 #include <vector>
 #include <string>
-#include "exception.hpp"
 
 class CoinStates {
 public:
@@ -34,12 +33,6 @@ public:
     
     // Resets all states to NoSelect
     void resetStates();
-};
-
-class CoinStatesFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    CoinStatesFailure(std::string coreMessage);
 };
 
 #endif

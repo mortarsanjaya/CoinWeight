@@ -29,14 +29,14 @@ const Input::Type Input::inputType() const {
 
 const char Input::whatChar() const {
     if (inputType() != Type::Char) {
-        throw InputFailure("Input not a character.");
+        throw Exception<Input>("Input not a character.");
     }
     return charInp;
 }
 
 const Input::Arrow Input::whatArrow() const {
     if (inputType() != Type::Arrow) {
-        throw InputFailure("Input not an arrow.");
+        throw Exception<Input>("Input not an arrow.");
     }
     return arrowInp;
 }
@@ -44,9 +44,6 @@ const Input::Arrow Input::whatArrow() const {
 
 
 //***************************************************** Input Failure
-InputFailure::InputFailure(std::string coreMessage) :
-    Exception(coreMessage) {}
-    
-const std::string InputFailure::headerMessage() const {
+template<> const std::string exceptionHeaderMessage<Input>() {
     return "Input Failure: ";
 }
