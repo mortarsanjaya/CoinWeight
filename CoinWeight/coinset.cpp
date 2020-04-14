@@ -94,11 +94,6 @@ const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
 
 
 
-//***************************************************** Number of fake coins
-const size_t CoinSet::numOfFakeCoins = 2;
-
-
-
 //***************************************************** Exception header message
 template<> const std::string exceptionHeaderMessage<CoinSet>() {
     return "Coin Set: ";

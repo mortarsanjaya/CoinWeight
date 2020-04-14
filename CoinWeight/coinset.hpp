@@ -18,6 +18,7 @@ class CoinSet {
     size_t fakeCoinIndex1;
     size_t fakeCoinIndex2;
     
+	static constexpr size_t numOfFakeCoins = 2;
     const bool isFakeCoinIndex(const size_t index) const;
 
 public:
@@ -29,7 +30,6 @@ public:
 	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const GuessResult guessFakeCoins(const CoinStates &guess) const;
  
-	static const size_t numOfFakeCoins;
 };
 
 #endif
