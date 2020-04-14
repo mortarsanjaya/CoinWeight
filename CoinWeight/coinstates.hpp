@@ -10,7 +10,6 @@
 #define coinstates_hpp
 
 #include <vector>
-#include <string>
 
 class CoinStates {
 public:
@@ -21,18 +20,23 @@ public:
         Guess
     };
     
-private:
-    std::vector<Value> content;
-    
-public:
     CoinStates(size_t numOfCoins);
     
     const size_t size() const;
-    Value &operator[](size_t index);
-    const Value at(size_t index) const;
+    const Value at(const size_t index) const;
     
-    // Resets all states to NoSelect
+    // Content manipulators
+    void deselect(const size_t index);
+    void moveToLeftGroup(const size_t index);
+    void moveToRightGroup(const size_t index);
+    void moveToGuess(const size_t index);
     void resetStates();
+    
+private:
+    std::vector<Value> content;
+    size_t leftGroupSize;
+    size_t rightGroupSize;
+    size_t guessSize;
 };
 
 #endif

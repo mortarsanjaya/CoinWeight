@@ -239,11 +239,11 @@ void ComputerHard::beforeWeigh() {
 const CoinStates ComputerHard::pickToWeigh() const {
     CoinStates weightStates(numOfCoins());
     for (size_t leftGroupIndex : state->partition.at(0)) {
-        weightStates[leftGroupIndex] = CoinStates::Value::LeftGroup;
+        weightStates.moveToLeftGroup(leftGroupIndex);
     }
     
     for (size_t rightGroupIndex : state->partition.at(1)) {
-        weightStates[rightGroupIndex] = CoinStates::Value::RightGroup;
+        weightStates.moveToRightGroup(rightGroupIndex);
     }
     
 	return weightStates;
@@ -419,7 +419,7 @@ const CoinStates ComputerHard::pickToGuess() const {
     CoinStates guessStates(numOfCoins());
     for (std::vector<size_t> single_partition : state->partition) {
         for (size_t element : single_partition) {
-            guessStates[element] = CoinStates::Value::Guess;
+            guessStates.moveToGuess(element);
         }
     }
     return guessStates;

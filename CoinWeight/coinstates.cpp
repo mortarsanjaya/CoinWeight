@@ -10,8 +10,9 @@
 #include "exception.hpp"
 
 //***************************************************** Constructor
-CoinStates::CoinStates(size_t numOfCoins) :
-    content(numOfCoins, Value::NoSelect) {}
+CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, Value::NoSelect),
+    leftGroupSize(0), rightGroupSize(0), guessSize(0)
+{}
 
 
 
@@ -20,30 +21,65 @@ const size_t CoinStates::size() const {
     return content.size();
 }
 
-CoinStates::Value &CoinStates::operator[](size_t index) {
-    return content[index];
-}
-
-const CoinStates::Value CoinStates::at(size_t index) const {
+const CoinStates::Value CoinStates::at(const size_t index) const {
     if (content.size() <= index) {
         throw Exception<CoinStates>("Out of range exception.");
     } else {
-        return content[index];
+        return content.at(index);
     }
 }
 
 
 
-//***************************************************** Reset function
+//***************************************************** Content manipulators
+void CoinStates::deselect(const size_t index) {
+    switch (at(index)) {
+        case Value::NoSelect:
+            break;
+        case Value::LeftGroup:
+            --leftGroupSize;
+            break;
+        case Value::RightGroup:
+            --rightGroupSize;
+            break;
+        case Value::Guess:
+            --guessSize;
+            break;
+    }
+    content[index] = Value::NoSelect;
+}
+
+void CoinStates::moveToLeftGroup(const size_t index) {
+    deselect(index);
+    content[index] = Value::LeftGroup;
+    ++leftGroupSize;
+}
+
+void CoinStates::moveToRightGroup(const size_t index) {
+    deselect(index);
+    content[index] = Value::RightGroup;
+    ++rightGroupSize;
+}
+
+void CoinStates::moveToGuess(const size_t index) {
+    deselect(index);
+    content[index] = Value::Guess;
+    ++guessSize;
+}
+
 void CoinStates::resetStates() {
-    for (int i = 0; i < content.size(); ++i) {
+    for (size_t i = 0; i < content.size(); ++i) {
         content[i] = Value::NoSelect;
     }
+    
+    leftGroupSize = 0;
+    rightGroupSize = 0;
+    guessSize = 0;
 }
 
 
 
-//***************************************************** Coin States Exception header message
+//***************************************************** Exception header message
 template<> const std::string exceptionHeaderMessage<CoinStates>() {
     return "Coin States Failure: ";
 }

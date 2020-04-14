@@ -264,33 +264,27 @@ void GameModel::moveCoinHighlightRight() {
 
 
 //***************************************************** Coin states manipulation
-//**** Main
-void GameModel::setStateOfCoin(CoinStates::Value state) {
-    (*coinStates)[coinHighlight] = state;
-}
-
-//**** Extension
 void GameModel::deselectCoin() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        setStateOfCoin(CoinStates::Value::NoSelect);
+        coinStates->deselect(coinHighlight);
     }
 }
 
 void GameModel::moveCoinToLeftGroup() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        setStateOfCoin(CoinStates::Value::LeftGroup);
+        coinStates->moveToLeftGroup(coinHighlight);
     }
 }
 
 void GameModel::moveCoinToRightGroup() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        setStateOfCoin(CoinStates::Value::RightGroup);
+        coinStates->moveToRightGroup(coinHighlight);
     }
 }
 
 void GameModel::selectCoinToGuess() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        setStateOfCoin(CoinStates::Value::Guess);
+        coinStates->moveToGuess(coinHighlight);
     }
 }
 
