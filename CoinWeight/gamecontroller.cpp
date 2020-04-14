@@ -143,6 +143,19 @@ void GameController::updateViewOnCreditScreen() {
 }
 
 void GameController::updateViewOnGameOptionScreen() {
+    auto toString = [](const GameLevel gameLevel) -> std::string {
+        switch (gameLevel) {
+            case GameLevel::Easy:
+                return "Easy";
+                break;
+            case GameLevel::Medium:
+                return "Medium";
+                break;
+            case GameLevel::Hard:
+                return "Hard";
+                break;
+        }
+    };
     view->drawGameOptionScreen(model->screenHighlight(), model->gameSize(),
         toString(model->gameLevel()), model->isHumanMode());
 }

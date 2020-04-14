@@ -20,7 +20,6 @@
 		861E6486242AD81E00AA6FD7 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869BBCD424241BDD0002CDED /* input.cpp */; };
 		86C1C65724324806007E5B64 /* gamescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C65524324806007E5B64 /* gamescreen.cpp */; };
 		86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C659243249E7007E5B64 /* gamesettings.cpp */; };
-		86C1C65F24324A3D007E5B64 /* gamelevel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C65D24324A3D007E5B64 /* gamelevel.cpp */; };
 		86C1C6632432D6A7007E5B64 /* history.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C6612432D6A7007E5B64 /* history.cpp */; };
 		86C1C66F2437A83F007E5B64 /* gameview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C66E2437A83F007E5B64 /* gameview.cpp */; };
 		86E55A83242C390B00053F2E /* weighresult.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 86E55A82242C390B00053F2E /* weighresult.hpp */; };
@@ -69,7 +68,6 @@
 		86C1C65624324806007E5B64 /* gamescreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamescreen.hpp; sourceTree = "<group>"; };
 		86C1C659243249E7007E5B64 /* gamesettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamesettings.cpp; sourceTree = "<group>"; };
 		86C1C65A243249E7007E5B64 /* gamesettings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamesettings.hpp; sourceTree = "<group>"; };
-		86C1C65D24324A3D007E5B64 /* gamelevel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamelevel.cpp; sourceTree = "<group>"; };
 		86C1C65E24324A3D007E5B64 /* gamelevel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamelevel.hpp; sourceTree = "<group>"; };
 		86C1C6612432D6A7007E5B64 /* history.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = history.cpp; sourceTree = "<group>"; };
 		86C1C6622432D6A7007E5B64 /* history.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = history.hpp; sourceTree = "<group>"; };
@@ -204,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				86A78CD124461EFE000DF706 /* coingroup.hpp */,
+				86C1C65E24324A3D007E5B64 /* gamelevel.hpp */,
 				86A78CCD24457899000DF706 /* guessresult.hpp */,
 				86E55A82242C390B00053F2E /* weighresult.hpp */,
 			);
@@ -260,15 +259,6 @@
 			name = "Game Settings";
 			sourceTree = "<group>";
 		};
-		86C1C66024324A46007E5B64 /* Game Level */ = {
-			isa = PBXGroup;
-			children = (
-				86C1C65D24324A3D007E5B64 /* gamelevel.cpp */,
-				86C1C65E24324A3D007E5B64 /* gamelevel.hpp */,
-			);
-			name = "Game Level";
-			sourceTree = "<group>";
-		};
 		86C1C6642432D6AC007E5B64 /* History */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +274,6 @@
 				86D9C9DC2421AA8A00FEB2B4 /* gamemodel.cpp */,
 				86D9C9DD2421AA8A00FEB2B4 /* gamemodel.hpp */,
 				86C1C6582432480C007E5B64 /* Game Screen */,
-				86C1C66024324A46007E5B64 /* Game Level */,
 				86C1C65C243249EC007E5B64 /* Game Settings */,
 				866FC8312409F75A00B3740D /* Game Core */,
 				8625C7D3242AA69400558B55 /* Coin States */,
@@ -356,7 +345,6 @@
 				86C1C66F2437A83F007E5B64 /* gameview.cpp in Sources */,
 				861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */,
 				86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */,
-				86C1C65F24324A3D007E5B64 /* gamelevel.cpp in Sources */,
 				861E647E242AD81E00AA6FD7 /* record.cpp in Sources */,
 				861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */,
 				861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */,

@@ -17,6 +17,4 @@ enum class GameLevel {
     Hard
 };
 
-const std::string toString(const GameLevel gameLevel);
-
 #endif
