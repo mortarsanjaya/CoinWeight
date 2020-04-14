@@ -57,9 +57,9 @@ class GameViewX11 : public GameView {
     void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) override;
     
     // Draw coin
-    const int coinColor(CoinStates::Group coinState) const;
-    void drawCoin(Window window, CoinStates::Group coinState, size_t coinIndex);
-    void drawCoin(DrawingWindow window, CoinStates::Group coinState, size_t coinIndex) override;
+    const int coinColor(CoinGroup coinState) const;
+    void drawCoin(Window window, CoinGroup coinState, size_t coinIndex);
+    void drawCoin(DrawingWindow window, CoinGroup coinState, size_t coinIndex) override;
     
     // Draw return button
     void drawReturnButton() override;

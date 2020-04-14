@@ -272,19 +272,19 @@ void GameModel::deselectCoin() {
 
 void GameModel::moveCoinToLeftGroup() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToLeftGroup(coinHighlight);
+        coinStates->moveToLeftWeighGroup(coinHighlight);
     }
 }
 
 void GameModel::moveCoinToRightGroup() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToRightGroup(coinHighlight);
+        coinStates->moveToRightWeighGroup(coinHighlight);
     }
 }
 
 void GameModel::selectCoinToGuess() {
     if (currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToGuess(coinHighlight);
+        coinStates->moveToGuessGroup(coinHighlight);
     }
 }
 

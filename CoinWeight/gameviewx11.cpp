@@ -150,20 +150,20 @@ void GameViewX11::drawWeighResultText(const DrawingWindow window, const WeighRes
 }
 
 //**** Coin
-const int GameViewX11::coinColor(CoinStates::Group coinState) const {
+const int GameViewX11::coinColor(CoinGroup coinState) const {
     switch (coinState) {
-        case CoinStates::Group::NoSelect:
+        case CoinGroup::NoSelect:
             return GameViewX11::Gold;
-        case CoinStates::Group::LeftGroup:
+        case CoinGroup::LeftWeigh:
             return GameViewX11::Red;
-        case CoinStates::Group::RightGroup:
+        case CoinGroup::RightWeigh:
             return GameViewX11::Blue;
-        case CoinStates::Group::Guess:
+        case CoinGroup::Guess:
             return GameViewX11::Green;
     }
 }
 
-void GameViewX11::drawCoin(Window window, CoinStates::Group coinState, size_t coinIndex) {
+void GameViewX11::drawCoin(Window window, CoinGroup coinState, size_t coinIndex) {
     const int x_pos = coin0XPos + coinDist * (coinIndex % coinsPerRow);
     const int y_pos = coin0YPos + coinDist * (coinIndex / coinsPerRow);
     fillCircle(window, x_pos, y_pos, coinRadius, coinColor(coinState));
@@ -171,7 +171,7 @@ void GameViewX11::drawCoin(Window window, CoinStates::Group coinState, size_t co
     drawString(window, x_pos, y_pos, std::to_string(coinIndex + 1));
 }
 
-void GameViewX11::drawCoin(DrawingWindow window, CoinStates::Group coinState, size_t coinIndex) {
+void GameViewX11::drawCoin(DrawingWindow window, CoinGroup coinState, size_t coinIndex) {
     drawCoin(windowToDraw(window), coinState, coinIndex);
 }
 

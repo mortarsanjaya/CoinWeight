@@ -58,6 +58,7 @@
 		869C4BE02402EE0C00C3DE84 /* computerhard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerhard.cpp; sourceTree = "<group>"; };
 		869C4BE12402EE0C00C3DE84 /* computerhard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerhard.hpp; sourceTree = "<group>"; };
 		86A78CCD24457899000DF706 /* guessresult.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = guessresult.hpp; sourceTree = "<group>"; };
+		86A78CD124461EFE000DF706 /* coingroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coingroup.hpp; sourceTree = SOURCE_ROOT; };
 		86A9AB902400AF50002AB0CF /* CoinWeight */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CoinWeight; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A9AB932400AF50002AB0CF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		86A9AB9A2400B26D002AB0CF /* coinset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinset.cpp; sourceTree = "<group>"; };
@@ -202,6 +203,7 @@
 		86A78CCF244578AE000DF706 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				86A78CD124461EFE000DF706 /* coingroup.hpp */,
 				86A78CCD24457899000DF706 /* guessresult.hpp */,
 				86E55A82242C390B00053F2E /* weighresult.hpp */,
 			);

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <utility>
+#include "coingroup.hpp"
 #include "coinstates.hpp"
 #include "history.hpp"
 #include "input.hpp"
@@ -24,7 +25,7 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) = 0;
-    virtual void drawCoin(const DrawingWindow window, const CoinStates::Group coinState, const size_t index) = 0;
+    virtual void drawCoin(const DrawingWindow window, const CoinGroup coinState, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
     // Game Play screen

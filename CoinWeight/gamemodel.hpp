@@ -13,6 +13,7 @@
 #include "gamescreen.hpp"
 #include "gamesettings.hpp"
 #include "gamecore.hpp"
+#include "coingroup.hpp"
 #include "coinstates.hpp"
 #include "computer.hpp"
 #include "history.hpp"
@@ -65,7 +66,7 @@ class GameModel {
     void moveCoinHighlightRight();
     
     // Coin states manipulation
-    void setStateOfCoin(CoinStates::Group state);
+    void setStateOfCoin(CoinGroup state);
     
     // Game moves operations
     void compareWeight();

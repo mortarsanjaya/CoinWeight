@@ -10,8 +10,8 @@
 #include "exception.hpp"
 
 //***************************************************** Constructor
-CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, Group::NoSelect),
-    leftGroupSize(0), rightGroupSize(0), guessSize(0)
+CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, CoinGroup::NoSelect),
+    leftWeighGroupSize(0), rightWeighGroupSize(0), guessGroupSize(0)
 {}
 
 
@@ -21,19 +21,19 @@ const size_t CoinStates::totalSize() const {
     return content.size();
 }
 
-const size_t CoinStates::sizeOfLeftGroup() const {
-    return leftGroupSize;
+const size_t CoinStates::sizeOfLeftWeighGroup() const {
+    return leftWeighGroupSize;
 }
 
-const size_t CoinStates::sizeOfRightGroup() const {
-    return rightGroupSize;
+const size_t CoinStates::sizeOfRightWeighGroup() const {
+    return rightWeighGroupSize;
 }
 
-const size_t CoinStates::sizeOfGuess() const {
-    return guessSize;
+const size_t CoinStates::sizeOfGuessGroup() const {
+    return guessGroupSize;
 }
 
-const CoinStates::Group CoinStates::at(const size_t index) const {
+const CoinGroup CoinStates::at(const size_t index) const {
     if (content.size() <= index) {
         throw Exception<CoinStates>("Out of range exception.");
     } else {
@@ -46,47 +46,47 @@ const CoinStates::Group CoinStates::at(const size_t index) const {
 //***************************************************** Content manipulators
 void CoinStates::deselect(const size_t index) {
     switch (at(index)) {
-        case Group::NoSelect:
+        case CoinGroup::NoSelect:
             break;
-        case Group::LeftGroup:
-            --leftGroupSize;
+        case CoinGroup::LeftWeigh:
+            --leftWeighGroupSize;
             break;
-        case Group::RightGroup:
-            --rightGroupSize;
+        case CoinGroup::RightWeigh:
+            --rightWeighGroupSize;
             break;
-        case Group::Guess:
-            --guessSize;
+        case CoinGroup::Guess:
+            --guessGroupSize;
             break;
     }
-    content[index] = Group::NoSelect;
+    content[index] = CoinGroup::NoSelect;
 }
 
-void CoinStates::moveToLeftGroup(const size_t index) {
+void CoinStates::moveToLeftWeighGroup(const size_t index) {
     deselect(index);
-    content[index] = Group::LeftGroup;
-    ++leftGroupSize;
+    content[index] = CoinGroup::LeftWeigh;
+    ++leftWeighGroupSize;
 }
 
-void CoinStates::moveToRightGroup(const size_t index) {
+void CoinStates::moveToRightWeighGroup(const size_t index) {
     deselect(index);
-    content[index] = Group::RightGroup;
-    ++rightGroupSize;
+    content[index] = CoinGroup::RightWeigh;
+    ++rightWeighGroupSize;
 }
 
-void CoinStates::moveToGuess(const size_t index) {
+void CoinStates::moveToGuessGroup(const size_t index) {
     deselect(index);
-    content[index] = Group::Guess;
-    ++guessSize;
+    content[index] = CoinGroup::Guess;
+    ++guessGroupSize;
 }
 
 void CoinStates::resetStates() {
     for (size_t i = 0; i < content.size(); ++i) {
-        content[i] = Group::NoSelect;
+        content[i] = CoinGroup::NoSelect;
     }
     
-    leftGroupSize = 0;
-    rightGroupSize = 0;
-    guessSize = 0;
+    leftWeighGroupSize = 0;
+    rightWeighGroupSize = 0;
+    guessGroupSize = 0;
 }
 
 
