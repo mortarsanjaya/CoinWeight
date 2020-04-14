@@ -51,15 +51,15 @@ class GameViewX11 : public GameView {
     const std::string numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const;
     
     // Window to draw
-    const Window windowToDraw(DrawingWindow window) const;
+    const Window windowToDraw(const DrawingWindow window) const;
     
     // Draw weigh result text
     void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) override;
     
     // Draw coin
-    const int coinColor(CoinStates::Value coinState) const;
-    void drawCoin(Window window, CoinStates::Value coinState, size_t coinIndex);
-    void drawCoin(DrawingWindow window, CoinStates::Value coinState, size_t coinIndex) override;
+    const int coinColor(CoinStates::Group coinState) const;
+    void drawCoin(Window window, CoinStates::Group coinState, size_t coinIndex);
+    void drawCoin(DrawingWindow window, CoinStates::Group coinState, size_t coinIndex) override;
     
     // Draw return button
     void drawReturnButton() override;

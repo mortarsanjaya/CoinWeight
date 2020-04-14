@@ -14,6 +14,7 @@
 #include "gamelevel.hpp"
 #include "coinstates.hpp"
 #include "weighresult.hpp"
+#include "guessresult.hpp"
 
 class GameCore {
 	std::unique_ptr<CoinSet> setOfCoins;
@@ -34,7 +35,7 @@ public:
     // Also decrements weighing counter
     // Throws if the counter's value is 0
     const WeighResult compareWeight(const CoinStates &weighing);
-    const bool guessFakeCoins(const CoinStates &guess) const;
+    const GuessResult guessFakeCoins(const CoinStates &guess) const;
 };
 
 #endif

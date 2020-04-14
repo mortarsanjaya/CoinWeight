@@ -11,6 +11,7 @@
 
 #include "coinstates.hpp"
 #include "weighresult.hpp"
+#include "guessresult.hpp"
 
 class CoinSet {
     size_t numOfCoins;
@@ -26,7 +27,7 @@ public:
 	
 	// Game operations
 	const WeighResult compareWeight(const CoinStates &weighing) const;
-	const bool guessFakeCoins(const CoinStates &guess) const;
+	const GuessResult guessFakeCoins(const CoinStates &guess) const;
  
 	static const size_t numOfFakeCoins;
 };

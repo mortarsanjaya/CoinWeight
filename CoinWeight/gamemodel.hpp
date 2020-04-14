@@ -65,7 +65,7 @@ class GameModel {
     void moveCoinHighlightRight();
     
     // Coin states manipulation
-    void setStateOfCoin(CoinStates::Value state);
+    void setStateOfCoin(CoinStates::Group state);
     
     // Game moves operations
     void compareWeight();

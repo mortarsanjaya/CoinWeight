@@ -10,7 +10,7 @@
 #include "exception.hpp"
 
 //***************************************************** Constructor
-CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, Value::NoSelect),
+CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, Group::NoSelect),
     leftGroupSize(0), rightGroupSize(0), guessSize(0)
 {}
 
@@ -33,7 +33,7 @@ const size_t CoinStates::sizeOfGuess() const {
     return guessSize;
 }
 
-const CoinStates::Value CoinStates::at(const size_t index) const {
+const CoinStates::Group CoinStates::at(const size_t index) const {
     if (content.size() <= index) {
         throw Exception<CoinStates>("Out of range exception.");
     } else {
@@ -46,42 +46,42 @@ const CoinStates::Value CoinStates::at(const size_t index) const {
 //***************************************************** Content manipulators
 void CoinStates::deselect(const size_t index) {
     switch (at(index)) {
-        case Value::NoSelect:
+        case Group::NoSelect:
             break;
-        case Value::LeftGroup:
+        case Group::LeftGroup:
             --leftGroupSize;
             break;
-        case Value::RightGroup:
+        case Group::RightGroup:
             --rightGroupSize;
             break;
-        case Value::Guess:
+        case Group::Guess:
             --guessSize;
             break;
     }
-    content[index] = Value::NoSelect;
+    content[index] = Group::NoSelect;
 }
 
 void CoinStates::moveToLeftGroup(const size_t index) {
     deselect(index);
-    content[index] = Value::LeftGroup;
+    content[index] = Group::LeftGroup;
     ++leftGroupSize;
 }
 
 void CoinStates::moveToRightGroup(const size_t index) {
     deselect(index);
-    content[index] = Value::RightGroup;
+    content[index] = Group::RightGroup;
     ++rightGroupSize;
 }
 
 void CoinStates::moveToGuess(const size_t index) {
     deselect(index);
-    content[index] = Value::Guess;
+    content[index] = Group::Guess;
     ++guessSize;
 }
 
 void CoinStates::resetStates() {
     for (size_t i = 0; i < content.size(); ++i) {
-        content[i] = Value::NoSelect;
+        content[i] = Group::NoSelect;
     }
     
     leftGroupSize = 0;

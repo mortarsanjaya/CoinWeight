@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		861B50D6242F9C3400262336 /* weighresult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 861B50D5242F9C3400262336 /* weighresult.cpp */; };
 		861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 861B50DC243094AA00262336 /* gamecontroller.cpp */; };
 		861E647C242AD81E00AA6FD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86A9AB932400AF50002AB0CF /* main.cpp */; };
 		861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8625C7D0242AA68F00558B55 /* coinstates.cpp */; };
@@ -43,7 +42,6 @@
 		8607519C240F0EAE007A96E5 /* gameviewx11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameviewx11.cpp; sourceTree = "<group>"; };
 		8607519D240F0EAE007A96E5 /* gameviewx11.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameviewx11.hpp; sourceTree = "<group>"; };
 		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
-		861B50D5242F9C3400262336 /* weighresult.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = weighresult.cpp; sourceTree = "<group>"; };
 		861B50DC243094AA00262336 /* gamecontroller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecontroller.cpp; sourceTree = "<group>"; };
 		861B50DD243094AA00262336 /* gamecontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecontroller.hpp; sourceTree = "<group>"; };
 		8625C7D0242AA68F00558B55 /* coinstates.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinstates.cpp; sourceTree = "<group>"; };
@@ -59,6 +57,7 @@
 		869C4BD72401BDCD00C3DE84 /* gamecore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecore.hpp; sourceTree = "<group>"; };
 		869C4BE02402EE0C00C3DE84 /* computerhard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerhard.cpp; sourceTree = "<group>"; };
 		869C4BE12402EE0C00C3DE84 /* computerhard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerhard.hpp; sourceTree = "<group>"; };
+		86A78CCD24457899000DF706 /* guessresult.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = guessresult.hpp; sourceTree = "<group>"; };
 		86A9AB902400AF50002AB0CF /* CoinWeight */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CoinWeight; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A9AB932400AF50002AB0CF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		86A9AB9A2400B26D002AB0CF /* coinset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinset.cpp; sourceTree = "<group>"; };
@@ -98,15 +97,6 @@
 				86980C062425E101001C8481 /* X11 */,
 			);
 			name = "Game View";
-			sourceTree = "<group>";
-		};
-		861B50D7242F9C3800262336 /* Weigh Result */ = {
-			isa = PBXGroup;
-			children = (
-				86E55A82242C390B00053F2E /* weighresult.hpp */,
-				861B50D5242F9C3400262336 /* weighresult.cpp */,
-			);
-			name = "Weigh Result";
 			sourceTree = "<group>";
 		};
 		861B50DF243094B400262336 /* Game Controller */ = {
@@ -209,6 +199,15 @@
 			name = Computer;
 			sourceTree = "<group>";
 		};
+		86A78CCF244578AE000DF706 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				86A78CCD24457899000DF706 /* guessresult.hpp */,
+				86E55A82242C390B00053F2E /* weighresult.hpp */,
+			);
+			name = Enums;
+			sourceTree = "<group>";
+		};
 		86A9AB872400AF50002AB0CF = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
-				861B50D7242F9C3800262336 /* Weigh Result */,
+				86A78CCF244578AE000DF706 /* Enums */,
 				86980C15242758EF001C8481 /* Record */,
 				86D9C9DF2421AA9300FEB2B4 /* Game Model */,
 				861B50DF243094B400262336 /* Game Controller */,
@@ -361,7 +360,6 @@
 				861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */,
 				861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */,
 				861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */,
-				861B50D6242F9C3400262336 /* weighresult.cpp in Sources */,
 				86C1C65724324806007E5B64 /* gamescreen.cpp in Sources */,
 				86C1C6632432D6A7007E5B64 /* history.cpp in Sources */,
 				861E6482242AD81E00AA6FD7 /* computer.cpp in Sources */,

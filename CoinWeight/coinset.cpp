@@ -45,58 +45,51 @@ const bool CoinSet::isFakeCoinIndex(const size_t index) const {
 
 //***************************************************** Game operations
 const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
-    int leftGroupSize = 0;
-    int rightGroupSize = 0;
-    int leftGroupNumOfFakes = 0;
-    int rightGroupNumOfFakes = 0;
-    for (int i = 0; i < weighing.totalSize(); ++i) {
-        if (weighing.at(i) == CoinStates::Value::LeftGroup) {
-            ++leftGroupSize;
-            if (isFakeCoinIndex(i)) {
-               ++leftGroupNumOfFakes;
-            }
-        } else if (weighing.at(i) == CoinStates::Value::RightGroup) {
-            ++rightGroupSize;
-            if (isFakeCoinIndex(i)) {
-               ++rightGroupNumOfFakes;
-            }
-        }
-    }
-    
-    if (leftGroupSize > rightGroupSize) {
+    if (weighing.sizeOfGuess() != 0) {
+        return WeighResult::Invalid;
+    } else if (weighing.sizeOfLeftGroup() > weighing.sizeOfRightGroup()) {
         return WeighResult::LeftHeavy;
-    } else if (leftGroupSize < rightGroupSize) {
+    } else if (weighing.sizeOfLeftGroup() < weighing.sizeOfRightGroup()) {
         return WeighResult::RightHeavy;
-    } else if (leftGroupNumOfFakes > rightGroupNumOfFakes) {
-        return WeighResult::RightHeavy;
-    } else if (leftGroupNumOfFakes < rightGroupNumOfFakes) {
-        return WeighResult::LeftHeavy;
     } else {
-        return WeighResult::Balance;
+        const CoinStates::Group fakeCoin1Group = weighing.at(fakeCoinIndex1);
+        const CoinStates::Group fakeCoin2Group = weighing.at(fakeCoinIndex2);
+        auto groupValue = [](const CoinStates::Group coinGroup) -> const int {
+            switch (coinGroup) {
+                case CoinStates::Group::NoSelect:
+                    return 0;
+                case CoinStates::Group::LeftGroup:
+                    return 1;
+                case CoinStates::Group::RightGroup:
+                    return -1;
+                case CoinStates::Group::Guess:
+                    throw Exception<CoinSet>("Coin States incorrect size-of-guess handling.");
+            }
+        };
+        
+        const int totalValue = groupValue(fakeCoin1Group) + groupValue(fakeCoin2Group);
+        if (totalValue > 0) {
+            return WeighResult::LeftHeavy;
+        } else if (totalValue < 0) {
+            return WeighResult::RightHeavy;
+        } else {
+            return WeighResult::Balance;
+        }
     }
 }
 
-const bool CoinSet::guessFakeCoins(const CoinStates &guess) const {
-	for (int i = 0; i < guess.totalSize(); ++i) {
-        switch (guess.at(i)) {
-            case CoinStates::Value::LeftGroup:
-            case CoinStates::Value::RightGroup:
-                throw Exception<CoinSet>("Invalid guess.");
-                break;
-            case CoinStates::Value::NoSelect:
-                if (isFakeCoinIndex(i)) {
-                    return false;
-                }
-                break;
-            case CoinStates::Value::Guess:
-                if (isFakeCoinIndex(i)) {
-                    return false;
-                }
-                break;
-        }
-	}
-    
-    return true;
+const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
+    if (guess.sizeOfLeftGroup() != 0 || guess.sizeOfRightGroup() != 0) {
+        return GuessResult::Invalid;
+    } else if (guess.sizeOfGuess() != numOfFakeCoins) {
+        return GuessResult::Incorrect;
+    } else if (guess.at(fakeCoinIndex1) != CoinStates::Group::Guess) {
+        return GuessResult::Incorrect;
+    } else if (guess.at(fakeCoinIndex2) != CoinStates::Group::Guess) {
+        return GuessResult::Incorrect;
+    } else {
+        return GuessResult::Correct;
+    }
 }
 
 

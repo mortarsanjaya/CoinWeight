@@ -309,8 +309,8 @@ void GameModel::compareWeight() {
 }
 
 void GameModel::guessFakeCoins() {
-    bool result = gameCore->guessFakeCoins(*coinStates);
-    gameOver(result);
+    GuessResult result = gameCore->guessFakeCoins(*coinStates);
+    gameOver(result == GuessResult::Correct);
 }
 
 //**** Extension

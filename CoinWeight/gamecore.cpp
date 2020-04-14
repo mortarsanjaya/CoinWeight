@@ -73,7 +73,7 @@ const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     return result;
 }
 
-const bool GameCore::guessFakeCoins(const CoinStates &guess) const {
+const GuessResult GameCore::guessFakeCoins(const CoinStates &guess) const {
     return setOfCoins->guessFakeCoins(guess);
 }
 

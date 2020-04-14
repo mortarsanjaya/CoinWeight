@@ -24,7 +24,7 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) = 0;
-    virtual void drawCoin(const DrawingWindow window, const CoinStates::Value coinState, const size_t index) = 0;
+    virtual void drawCoin(const DrawingWindow window, const CoinStates::Group coinState, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
     // Game Play screen
