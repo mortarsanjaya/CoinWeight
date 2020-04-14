@@ -12,7 +12,7 @@
 #include <algorithm>
 
 //***************************************************** Constructor
-CoinSet::CoinSet(int numOfCoins) : numOfCoins{numOfCoins} {
+CoinSet::CoinSet(size_t numOfCoins) : numOfCoins(numOfCoins) {
 	if (numOfFakeCoins > numOfCoins) {
 		throw Exception<CoinSet>("Bad number of fake coins.");
 	}
@@ -37,7 +37,7 @@ const size_t CoinSet::size() const {
 
 
 //***************************************************** Private member functions
-const bool CoinSet::isFakeCoinIndex(const int index) const {
+const bool CoinSet::isFakeCoinIndex(const size_t index) const {
     return ((index == fakeCoinIndex1) || (index == fakeCoinIndex2));
 }
 
@@ -49,7 +49,7 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     int rightGroupSize = 0;
     int leftGroupNumOfFakes = 0;
     int rightGroupNumOfFakes = 0;
-    for (int i = 0; i < weighing.size(); ++i) {
+    for (int i = 0; i < weighing.totalSize(); ++i) {
         if (weighing.at(i) == CoinStates::Value::LeftGroup) {
             ++leftGroupSize;
             if (isFakeCoinIndex(i)) {
@@ -77,7 +77,7 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
 }
 
 const bool CoinSet::guessFakeCoins(const CoinStates &guess) const {
-	for (int i = 0; i < guess.size(); ++i) {
+	for (int i = 0; i < guess.totalSize(); ++i) {
         switch (guess.at(i)) {
             case CoinStates::Value::LeftGroup:
             case CoinStates::Value::RightGroup:
@@ -106,7 +106,7 @@ const size_t CoinSet::numOfFakeCoins = 2;
 
 
 
-//***************************************************** Coin Set Exception header message
+//***************************************************** Exception header message
 template<> const std::string exceptionHeaderMessage<CoinSet>() {
     return "Coin Set: ";
 }

@@ -16,7 +16,7 @@ GameView::~GameView() {}
 //***************************************************** Non-virtual private methods
 //**** Draw coins
 void GameView::drawCoins(const DrawingWindow window, const CoinStates &coinStates) {
-    for (size_t i = 0; i < coinStates.size(); ++i) {
+    for (size_t i = 0; i < coinStates.totalSize(); ++i) {
         drawCoin(window, coinStates.at(i), i);
     }
 }

@@ -17,8 +17,20 @@ CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, Value::NoSelect)
 
 
 //***************************************************** Field accessors
-const size_t CoinStates::size() const {
+const size_t CoinStates::totalSize() const {
     return content.size();
+}
+
+const size_t CoinStates::sizeOfLeftGroup() const {
+    return leftGroupSize;
+}
+
+const size_t CoinStates::sizeOfRightGroup() const {
+    return rightGroupSize;
+}
+
+const size_t CoinStates::sizeOfGuess() const {
+    return guessSize;
 }
 
 const CoinStates::Value CoinStates::at(const size_t index) const {

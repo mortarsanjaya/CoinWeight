@@ -9,19 +9,18 @@
 #ifndef coinset_hpp
 #define coinset_hpp
 
-#include <vector>
 #include "coinstates.hpp"
 #include "weighresult.hpp"
 
 class CoinSet {
-    int numOfCoins;
-    int fakeCoinIndex1;
-    int fakeCoinIndex2;
+    size_t numOfCoins;
+    size_t fakeCoinIndex1;
+    size_t fakeCoinIndex2;
     
-    const bool isFakeCoinIndex(const int index) const;
+    const bool isFakeCoinIndex(const size_t index) const;
 
 public:
-	CoinSet(int numOfCoins);
+	CoinSet(size_t numOfCoins);
     
 	const size_t size() const;
 	

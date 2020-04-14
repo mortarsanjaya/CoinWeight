@@ -22,7 +22,10 @@ public:
     
     CoinStates(size_t numOfCoins);
     
-    const size_t size() const;
+    const size_t totalSize() const;
+    const size_t sizeOfLeftGroup() const;
+    const size_t sizeOfRightGroup() const;
+    const size_t sizeOfGuess() const;
     const Value at(const size_t index) const;
     
     // Content manipulators
