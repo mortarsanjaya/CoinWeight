@@ -10,9 +10,9 @@
 #define guessresult_hpp
 
 enum class GuessResult {
+    Invalid,
     Correct,
-    Incorrect,
-    Invalid
+    Incorrect
 };
 
 #endif

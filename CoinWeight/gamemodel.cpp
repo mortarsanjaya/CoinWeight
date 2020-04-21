@@ -13,8 +13,9 @@
 #include <unistd.h>
 
 //***************************************************** Constructor
-GameModel::GameModel() : screen(), settings(), gameCore(),
-    coinStates(), computer(), coinHighlight(), history() {}
+GameModel::GameModel() : screen(), settings(), gameCore(), coinStates(), computer(), coinHighlight(),
+    history(), lastWeighResult(WeighResult::Invalid), lastGuessResult(GuessResult::Invalid)
+{}
 
 
 
@@ -289,6 +290,9 @@ void GameModel::selectCoinToGuess() {
 //**** Title
 void GameModel::compareWeight() {
     const WeighResult weighResult = gameCore->compareWeight(*coinStates);
+    lastWeighResult = weighResult;
+    if (weighResult == WeighResult::Invalid) return;
+    
     if (!isHumanMode()) {
         computer->afterWeigh(weighResult);
         screen.transition(GameScreen::Page::GamePlayComputer);
@@ -297,7 +301,6 @@ void GameModel::compareWeight() {
     }
     coinHighlight = 0;
     history.addRecord(*coinStates, weighResult);
-    lastWeighResult = weighResult;
     coinStates->resetStates();
     if (!isHumanMode()) {
         computerSetup();
@@ -492,13 +495,13 @@ void GameModel::updateViewGameOptionScreen(GameView *view) {
 
 void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
     view->drawGamePlayHumanScreen(*coinStates, screen.currentHighlight(), coinHighlight,
-        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
+        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap(), lastWeighResult);
     view->drawHistoryScreen(history);
 }
 
 void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
-    view->drawGamePlayComputerScreen(*coinStates,
-        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
+    view->drawGamePlayComputerScreen(*coinStates, gameCore->numOfWeighingsLeft(),
+        gameCore->numOfWeighingsCap(), lastWeighResult);
     view->drawHistoryScreen(history);
 }
 

@@ -60,9 +60,10 @@ public:
         const GameLevel gameLevel, const bool isHuman) = 0;
         
     void drawGamePlayHumanScreen(const CoinStates &coinStates, const int screenHighlight,
-        const int highlightedCoin, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
-    void drawGamePlayComputerScreen(const CoinStates &coinStates,
-        const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
+        const int highlightedCoin, const size_t numOfWeighsLeft, const size_t numOfWeighsMax,
+        const WeighResult lastWeighResult);
+    void drawGamePlayComputerScreen(const CoinStates &coinStates, const size_t numOfWeighsLeft,
+        const size_t numOfWeighsMax, const WeighResult lastWeighResult);
     void drawGameOverScreen(const GuessResult guessResult,
         const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
         

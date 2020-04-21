@@ -42,10 +42,10 @@ class GameViewX11 : public GameView {
     static const int defaultFGColor = Black;
     
     // Basic drawing functions
-    void drawString(Window window, int x_pos, int y_pos, const std::string &msg, bool boxed = false);
-    void drawCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color);
-    void fillCircle(Window window, int x_pos, int y_pos, unsigned int radius, int color);
-    void drawRectangle(Window window, int x_pos, int y_pos, int width, int height);
+    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, bool boxed = false);
+    void drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
+    void fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
+    void drawRectangle(DrawingWindow window, int x_pos, int y_pos, int width, int height);
     
     // Number of weighings text
     const std::string numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const;
@@ -58,7 +58,6 @@ class GameViewX11 : public GameView {
     
     // Draw coin
     const int coinColor(CoinGroup coinState) const;
-    void drawCoin(Window window, CoinGroup coinState, size_t coinIndex);
     void drawCoin(DrawingWindow window, CoinGroup coinState, size_t coinIndex) override;
     
     // Draw return button
@@ -79,7 +78,7 @@ class GameViewX11 : public GameView {
     // Clear screen
     void clearMainScreen();
     void clearHistoryScreen();
-    void clearScreen(const DrawingWindow window) override;
+    void clearScreen(const DrawingWindow dwindow) override;
 
 public:
     GameViewX11();

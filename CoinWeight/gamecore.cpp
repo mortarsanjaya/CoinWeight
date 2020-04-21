@@ -66,7 +66,7 @@ const size_t GameCore::numOfWeighingsCap() const {
 //***************************************************** Game operations
 const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
-        throw Exception<GameCore>("No more comparisons.");
+        return WeighResult::Invalid;
     }
     const WeighResult result = setOfCoins->compareWeight(weighing);
     --numOfWeighingsCounter;
@@ -75,11 +75,4 @@ const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
 
 const GuessResult GameCore::guessFakeCoins(const CoinStates &guess) const {
     return setOfCoins->guessFakeCoins(guess);
-}
-
-
-
-//***************************************************** Game Core Exception header message
-template<> const std::string exceptionHeaderMessage<GameCore>() {
-    return "Game Core: ";
 }
