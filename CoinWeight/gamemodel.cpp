@@ -14,7 +14,7 @@
 
 //***************************************************** Constructor
 GameModel::GameModel() : screen(), settings(), gameCore(), coinStates(), computer(), coinHighlight(),
-    history(), lastWeighResult(WeighResult::Invalid), lastGuessResult(GuessResult::Invalid)
+    history(), lastWeighResult(WeighResult::Start), lastGuessResult(GuessResult::Invalid)
 {}
 
 
@@ -123,6 +123,9 @@ void GameModel::gameCleanUp() {
     coinStates.reset();
     computer.reset();
     history.clear();
+    coinHighlight = 0;
+    lastWeighResult = WeighResult::Start;
+    lastGuessResult = GuessResult::Invalid;
 }
 
 void GameModel::computerSetup() {
@@ -310,7 +313,7 @@ void GameModel::compareWeight() {
 void GameModel::guessFakeCoins() {
     lastGuessResult = gameCore->guessFakeCoins(*coinStates);
     if (lastGuessResult == GuessResult::Invalid) {
-        // ...
+        lastWeighResult = WeighResult::Invalid;
     } else {
         gameOver();
     }

@@ -30,19 +30,19 @@ class GameViewX11 : public GameView {
     
     // The following numbers are sadly hard-coded
     // Need to find a way to get their value in a better way
-    static const int font_width = 6;
-    static const int font_height = 10;
-    static const int circle_full_arc = 360 * 64;
+    static constexpr int font_width = 6;
+    static constexpr int font_height = 10;
+    static constexpr int circle_full_arc = 360 * 64;
     // Coin configurations
-    static const int coinRadius = 30;
-    static const int coinDist = 50;
-    static const int coin0XPos = 200;
-    static const int coin0YPos = 200;
-    static const int coinsPerRow = 10;
-    static const int defaultFGColor = Black;
+    static constexpr int coinRadius = 30;
+    static constexpr int coinDist = 50;
+    static constexpr int coin0XPos = 200;
+    static constexpr int coin0YPos = 200;
+    static constexpr int coinsPerRow = 10;
+    static constexpr int defaultFGColor = Black;
     
     // Basic drawing functions
-    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, bool boxed = false);
+    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed = false);
     void drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
     void fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
     void drawRectangle(DrawingWindow window, int x_pos, int y_pos, int width, int height);

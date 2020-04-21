@@ -10,6 +10,7 @@
 #define weighresult_hpp
 
 enum class WeighResult {
+    Start,
     Invalid,
     Balance,
     LeftHeavy,

@@ -69,7 +69,9 @@ const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
         return WeighResult::Invalid;
     }
     const WeighResult result = setOfCoins->compareWeight(weighing);
-    --numOfWeighingsCounter;
+    if (result != WeighResult::Invalid) {
+        --numOfWeighingsCounter;
+    }
     return result;
 }
 
