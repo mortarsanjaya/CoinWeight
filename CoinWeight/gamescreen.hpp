@@ -12,7 +12,7 @@
 class GameScreen {
 public:
     enum class Page {
-        Main,               // Play, Instruction, Credit
+        Title,               // Play, Instruction, Credit
         Instruction,
         Credit,
         GameOption,         // Number of coins, Difficulty, Human/Computer mode
@@ -31,7 +31,7 @@ private:
     void resetHighlight();
 
 public:
-    GameScreen(Page page = Page::Main, int highlight = 0);
+    GameScreen(Page page = Page::Title, int highlight = 0);
     
     const Page currentScreen() const;
     const int currentHighlight() const;
@@ -40,9 +40,6 @@ public:
     void incrementHighlight();
     void decrementHighlight();
     void transition(const Page nextScreen);
-        // Throws if current page is not Game Over
-    void playerWins();
-    void playerLoses();
 };
 
 #endif

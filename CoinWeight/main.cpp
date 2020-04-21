@@ -14,12 +14,30 @@
 #include "gamecontroller.hpp"
 #include "input.hpp"
 
+using namespace std;
+
 int main() {
-    auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
-    gameController->updateView();
+    std::unique_ptr<GameModel> model;
+    std::unique_ptr<GameView> view;
+    GameController controller;
+    
+    model = std::make_unique<GameModel>();
+    if (model == nullptr) {
+        cout << "Oops. Cannot initialize model." << endl;
+        return 0;
+    }
+    
+    view = std::make_unique<GameViewX11>();
+    if (view == nullptr) {
+        cout << "Oops. Cannot open display." << endl;
+        return 0;
+    }
+    
     sleep(1);
+    model->updateView(view.get());
     while (true) {
-        gameController->receiveInput();
-        gameController->updateView();
+        view->receiveInput();
+        controller.onReceivingInput(*model, view->lastInput());
+        model->updateView(view.get());
     }
 }

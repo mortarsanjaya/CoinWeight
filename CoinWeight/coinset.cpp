@@ -59,9 +59,9 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
                 case CoinGroup::NoSelect:
                     return 0;
                 case CoinGroup::LeftWeigh:
-                    return 1;
-                case CoinGroup::RightWeigh:
                     return -1;
+                case CoinGroup::RightWeigh:
+                    return 1;
                 case CoinGroup::Guess:
                     throw Exception<CoinSet>("Coin States incorrect size-of-guess handling.");
             }

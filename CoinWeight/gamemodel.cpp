@@ -7,14 +7,14 @@
 //
 
 #include "gamemodel.hpp"
+#include "gameview.hpp"
 #include "computerhard.hpp"
 #include "exception.hpp"
 #include <unistd.h>
 
 //***************************************************** Constructor
-GameModel::GameModel() :
-    screen(), settings(), gameCore(), coinStates(),
-    computer(), coinHighlight(), history() {}
+GameModel::GameModel() : screen(), settings(), gameCore(),
+    coinStates(), computer(), coinHighlight(), history() {}
 
 
 
@@ -93,7 +93,7 @@ void GameModel::goToMainScreen() {
     if (currentScreen() == GameScreen::Page::GameOver) {
         gameCleanUp();
     }
-    screen.transition(GameScreen::Page::Main);
+    screen.transition(GameScreen::Page::Title);
 }
 
 void GameModel::goToGameOptionScreen() {
@@ -112,13 +112,8 @@ void GameModel::gameStart() {
     }
 }
 
-void GameModel::gameOver(const bool isWin) {
+void GameModel::gameOver() {
     screen.transition(GameScreen::Page::GameOver);
-    if (isWin) {
-        screen.playerWins();
-    } else {
-        screen.playerLoses();
-    }
     coinHighlight = 0;
 }
 
@@ -177,7 +172,7 @@ void GameModel::switchMode() {
     settings.switchMode();
 }
 
-//**** Main
+//**** Title
 void GameModel::incrementSettings() {
     switch (screenHighlight()) {
         case 0:
@@ -291,7 +286,7 @@ void GameModel::selectCoinToGuess() {
 
 
 //***************************************************** Game moves operations
-//**** Main
+//**** Title
 void GameModel::compareWeight() {
     const WeighResult weighResult = gameCore->compareWeight(*coinStates);
     if (!isHumanMode()) {
@@ -302,6 +297,7 @@ void GameModel::compareWeight() {
     }
     coinHighlight = 0;
     history.addRecord(*coinStates, weighResult);
+    lastWeighResult = weighResult;
     coinStates->resetStates();
     if (!isHumanMode()) {
         computerSetup();
@@ -309,8 +305,12 @@ void GameModel::compareWeight() {
 }
 
 void GameModel::guessFakeCoins() {
-    GuessResult result = gameCore->guessFakeCoins(*coinStates);
-    gameOver(result == GuessResult::Correct);
+    lastGuessResult = gameCore->guessFakeCoins(*coinStates);
+    if (lastGuessResult == GuessResult::Invalid) {
+        // ...
+    } else {
+        gameOver();
+    }
 }
 
 //**** Extension
@@ -357,7 +357,7 @@ void GameModel::historyDecrementIndex() {
 //***************************************************** Model logic functions
 void GameModel::mainScreenOnUpButton() {
     switch (currentScreen()) {
-        case GameScreen::Page::Main:
+        case GameScreen::Page::Title:
         case GameScreen::Page::Instruction:
         case GameScreen::Page::Credit:
         case GameScreen::Page::GameOption:
@@ -378,7 +378,7 @@ void GameModel::mainScreenOnUpButton() {
 
 void GameModel::mainScreenOnDownButton() {
     switch (currentScreen()) {
-        case GameScreen::Page::Main:
+        case GameScreen::Page::Title:
         case GameScreen::Page::Instruction:
         case GameScreen::Page::Credit:
         case GameScreen::Page::GameOption:
@@ -399,7 +399,7 @@ void GameModel::mainScreenOnDownButton() {
 
 void GameModel::mainScreenOnLeftButton() {
     switch (currentScreen()) {
-        case GameScreen::Page::Main:
+        case GameScreen::Page::Title:
         case GameScreen::Page::Instruction:
         case GameScreen::Page::Credit:
             break;
@@ -419,7 +419,7 @@ void GameModel::mainScreenOnLeftButton() {
 
 void GameModel::mainScreenOnRightButton() {
     switch (currentScreen()) {
-        case GameScreen::Page::Main:
+        case GameScreen::Page::Title:
         case GameScreen::Page::Instruction:
         case GameScreen::Page::Credit:
             break;
@@ -439,7 +439,7 @@ void GameModel::mainScreenOnRightButton() {
 
 void GameModel::mainScreenOnReturnButton() {
     switch (currentScreen()) {
-        case GameScreen::Page::Main:
+        case GameScreen::Page::Title:
             goToGameOptionScreen();
             break;
         case GameScreen::Page::Instruction:
@@ -469,6 +469,70 @@ void GameModel::historyScreenOnRightButton() {
     historyIncrementIndex();
 }
 
+
+
+//***************************************************** View update functions
+//**** Helper
+void GameModel::updateViewTitleScreen(GameView *view) {
+    view->drawTitleScreen(screen.currentHighlight());
+}
+
+void GameModel::updateViewInstructionScreen(GameView *view) {
+    view->drawInstructionScreen();
+}
+
+void GameModel::updateViewCreditScreen(GameView *view) {
+    view->drawCreditScreen();
+}
+
+void GameModel::updateViewGameOptionScreen(GameView *view) {
+    view->drawGameOptionScreen(screen.currentHighlight(), settings.gameSize(),
+        settings.gameLevel(), settings.isHumanMode());
+}
+
+void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
+    view->drawGamePlayHumanScreen(*coinStates, screen.currentHighlight(), coinHighlight,
+        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
+    view->drawHistoryScreen(history);
+}
+
+void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
+    view->drawGamePlayComputerScreen(*coinStates,
+        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
+    view->drawHistoryScreen(history);
+}
+
+void GameModel::updateViewGameOverScreen(GameView *view) {
+    view->drawGameOverScreen(lastGuessResult,
+        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsCap());
+}
+
+//**** Main
+void GameModel::updateView(GameView *view) {
+    switch (screen.currentScreen()) {
+        case GameScreen::Page::Title:
+            updateViewTitleScreen(view);
+            break;
+        case GameScreen::Page::Instruction:
+            updateViewInstructionScreen(view);
+            break;
+        case GameScreen::Page::Credit:
+            updateViewCreditScreen(view);
+            break;
+        case GameScreen::Page::GameOption:
+            updateViewGameOptionScreen(view);
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            updateViewGamePlayHumanScreen(view);
+            break;
+        case GameScreen::Page::GamePlayComputer:
+            updateViewGamePlayComputerScreen(view);
+            break;
+        case GameScreen::Page::GameOver:
+            updateViewGameOverScreen(view);
+            break;
+    }
+}
 
 
 //***************************************************** Game Model Failure

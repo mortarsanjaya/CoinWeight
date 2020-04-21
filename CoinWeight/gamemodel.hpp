@@ -17,6 +17,10 @@
 #include "coinstates.hpp"
 #include "computer.hpp"
 #include "history.hpp"
+#include "weighresult.hpp"
+#include "guessresult.hpp"
+
+class GameView;
 
 class GameModel {
     GameScreen screen;
@@ -26,16 +30,18 @@ class GameModel {
     std::unique_ptr<Computer> computer;
     int coinHighlight;
     History history;
+    WeighResult lastWeighResult;
+    GuessResult lastGuessResult;
     
     // Not sure how I should put it right now
     static const int coinsPerRow;
     
-    // Screen transition functions
+    // Screen transition functions [Might need update]
     void goFromMainScreen();
     void goToMainScreen();
     void goToGameOptionScreen();
     void gameStart();
-    void gameOver(const bool isWin);
+    void gameOver();
     void gameCleanUp(); // Clean-up after game over
     void computerSetup(); // Sets up computer for computer game
     
@@ -65,9 +71,6 @@ class GameModel {
     void moveCoinHighlightLeft();
     void moveCoinHighlightRight();
     
-    // Coin states manipulation
-    void setStateOfCoin(CoinGroup state);
-    
     // Game moves operations
     void compareWeight();
     void guessFakeCoins();
@@ -77,6 +80,15 @@ class GameModel {
     // History index manipulation
     void historyIncrementIndex();
     void historyDecrementIndex();
+    
+    // View update helper functions
+    void updateViewTitleScreen(GameView *view);
+    void updateViewInstructionScreen(GameView *view);
+    void updateViewCreditScreen(GameView *view);
+    void updateViewGameOptionScreen(GameView *view);
+    void updateViewGamePlayHumanScreen(GameView *view);
+    void updateViewGamePlayComputerScreen(GameView *view);
+    void updateViewGameOverScreen(GameView *view);
     
 public:
     GameModel();
@@ -94,7 +106,7 @@ public:
     const size_t numOfWeighingsMax() const;
     const size_t numOfWeighingsLeft() const;
     
-    // Coin states manipulation (extension)
+    // Coin states manipulation
     void deselectCoin();
     void moveCoinToLeftGroup();
     void moveCoinToRightGroup();
@@ -108,6 +120,9 @@ public:
     void mainScreenOnReturnButton();
     void historyScreenOnLeftButton();
     void historyScreenOnRightButton();
+    
+    // View updater functions
+    void updateView(GameView *view);
 };
 
 #endif

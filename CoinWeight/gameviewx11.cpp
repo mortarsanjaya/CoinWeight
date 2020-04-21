@@ -197,8 +197,22 @@ void GameViewX11::drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const si
 }
 
 //**** Game Over screen
-void GameViewX11::drawGameOverEndMessage(const bool isWin) {
-    drawString(mainWindow, 300, 200, isWin ? "You Win!" : "You Lose :(");
+void GameViewX11::drawGameOverEndMessage(const GuessResult guessResult) {
+    auto guessStr = [&guessResult]() -> std::string {
+        switch (guessResult) {
+            case GuessResult::Correct:
+                return "You Win!";
+                break;
+            case GuessResult::Incorrect:
+                return "You Lose :(";
+                break;
+            case GuessResult::Invalid:
+                return "WHAT...";
+                break;
+        }
+    }();
+    
+    drawString(mainWindow, 300, 200, guessStr);
 }
 void GameViewX11::drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
     drawString(mainWindow, 300, 300, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax));
@@ -238,7 +252,7 @@ void GameViewX11::clearScreen(const DrawingWindow window) {
 
 
 //***************************************************** Public methods
-void GameViewX11::drawMainScreen(int screenHighlight) {
+void GameViewX11::drawTitleScreen(int screenHighlight) {
     const int stringHeight = 20;
     clearScreen(DrawingWindow::Main);
     
@@ -312,8 +326,22 @@ void GameViewX11::drawCreditScreen() {
 }
 
 void GameViewX11::drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-    const std::string &gameLevel, const bool isHuman)
+    const GameLevel gameLevel, const bool isHuman)
 {
+    const std::string gameLevelStr = [&gameLevel]() -> std::string {
+        switch (gameLevel) {
+            case GameLevel::Easy:
+                return "Easy";
+                break;
+            case GameLevel::Medium:
+                return "Medium";
+                break;
+            case GameLevel::Hard:
+                return "Hard";
+                break;
+            }
+    }();
+
     const int stringHeight = 20;
     clearScreen(DrawingWindow::Main);
     
@@ -323,7 +351,7 @@ void GameViewX11::drawGameOptionScreen(const int screenHighlight, const size_t n
     drawString(mainWindow, 300, 300 + 3 * stringHeight, "Mode:");
     
     drawString(mainWindow, 405, 300 + stringHeight, std::to_string(numOfCoins), screenHighlight == 0);
-    drawString(mainWindow, 405, 300 + 2 * stringHeight, gameLevel, screenHighlight == 1);
+    drawString(mainWindow, 405, 300 + 2 * stringHeight, gameLevelStr, screenHighlight == 1);
     drawString(mainWindow, 405, 300 + 3 * stringHeight, isHuman ? "Human" : "Computer", screenHighlight == 2);
 }
 

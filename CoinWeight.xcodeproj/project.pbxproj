@@ -138,7 +138,6 @@
 			children = (
 				869C4BD62401BDCD00C3DE84 /* gamecore.cpp */,
 				869C4BD72401BDCD00C3DE84 /* gamecore.hpp */,
-				866FC8302409F74D00B3740D /* Coin Set */,
 			);
 			name = "Game Core";
 			sourceTree = "<group>";
@@ -275,6 +274,7 @@
 				86D9C9DD2421AA8A00FEB2B4 /* gamemodel.hpp */,
 				86C1C6582432480C007E5B64 /* Game Screen */,
 				86C1C65C243249EC007E5B64 /* Game Settings */,
+				866FC8302409F74D00B3740D /* Coin Set */,
 				866FC8312409F75A00B3740D /* Game Core */,
 				8625C7D3242AA69400558B55 /* Coin States */,
 				869C4BE424048E4700C3DE84 /* Computer */,

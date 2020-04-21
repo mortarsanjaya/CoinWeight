@@ -69,7 +69,7 @@ class GameViewX11 : public GameView {
     void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
     
     // Game Over screen
-    void drawGameOverEndMessage(const bool isWin) override;
+    void drawGameOverEndMessage(const GuessResult guessResult) override;
     void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
     
     // History screen
@@ -84,11 +84,11 @@ class GameViewX11 : public GameView {
 public:
     GameViewX11();
     // Main drawing functions
-    void drawMainScreen(const int screenHighlight) override;
+    void drawTitleScreen(const int screenHighlight) override;
     void drawInstructionScreen() override;
     void drawCreditScreen() override;
     void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-            const std::string &gameLevel, const bool isHuman) override;
+            const GameLevel gameLevel, const bool isHuman) override;
     
     void receiveInput() override;
     const Input lastInput() override;

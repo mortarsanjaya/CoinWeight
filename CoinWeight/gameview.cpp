@@ -57,11 +57,11 @@ void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates,
     drawReturnButton();
 }
 
-void GameView::drawGameOverScreen(const bool isWin,
+void GameView::drawGameOverScreen(const GuessResult guessResult,
     const size_t numOfWeighsLeft, const size_t numOfWeighMax)
 {
     clearScreen(DrawingWindow::Main);
-    drawGameOverEndMessage(isWin);
+    drawGameOverEndMessage(guessResult);
     drawGameOverNumOfWeighs(numOfWeighsLeft, numOfWeighMax);
 }
 

@@ -34,7 +34,7 @@ const int GameScreen::minHighlight() {
 
 const int GameScreen::maxHighlight() {
     switch (page) {
-        case Page::Main:
+        case Page::Title:
             return 2;
         case Page::Instruction:
             return 0;
@@ -47,7 +47,7 @@ const int GameScreen::maxHighlight() {
         case Page::GamePlayComputer:
             return 0;
         case Page::GameOver:
-            return 1;
+            return 0;
     }
 }
 
@@ -71,20 +71,6 @@ void GameScreen::decrementHighlight() {
 void GameScreen::transition(const Page nextScreen) {
     page = nextScreen;
     resetHighlight();
-}
-
-void GameScreen::playerWins() {
-    if (page != Page::GameOver) {
-        throw ("Wrong page: Not Game Over");
-    }
-    highlight = 1;
-}
-
-void GameScreen::playerLoses() {
-    if (page != Page::GameOver) {
-        throw Exception<GameScreen>("Wrong page: Not Game Over");
-    }
-    highlight = 0;
 }
 
 

@@ -9,13 +9,13 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
-#include <vector>
-#include <utility>
 #include "coingroup.hpp"
+#include "gamelevel.hpp"
+#include "weighresult.hpp"
+#include "guessresult.hpp"
 #include "coinstates.hpp"
 #include "history.hpp"
 #include "input.hpp"
-#include "weighresult.hpp"
 
 class GameView {
 protected:
@@ -33,7 +33,7 @@ private:
     virtual void drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) = 0;
         
     // Game Over screen
-    virtual void drawGameOverEndMessage(const bool isWin) = 0;
+    virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
     virtual void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
     
     // History screen
@@ -53,17 +53,18 @@ public:
     virtual ~GameView() = 0;
     
     // Drawing functions
-    virtual void drawMainScreen(const int screenHighlight) = 0;
+    virtual void drawTitleScreen(const int screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
     virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-        const std::string &gameLevel, const bool isHuman) = 0;
+        const GameLevel gameLevel, const bool isHuman) = 0;
         
     void drawGamePlayHumanScreen(const CoinStates &coinStates, const int screenHighlight,
         const int highlightedCoin, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
     void drawGamePlayComputerScreen(const CoinStates &coinStates,
         const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
-    void drawGameOverScreen(const bool isWin, const size_t numOfWeighsLeft, const size_t numOfWeighMax);
+    void drawGameOverScreen(const GuessResult guessResult,
+        const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
         
     void drawHistoryScreen(const History &history);
     
