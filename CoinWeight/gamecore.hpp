@@ -30,7 +30,7 @@ public:
 	const size_t numOfCoins() const;
     const GameLevel gameLevel() const;
 	const size_t numOfWeighingsLeft() const;
-    const size_t numOfWeighingsCap() const;
+    const size_t numOfWeighingsMax() const;
  
     // Also decrements weighing counter
     // Throws if the counter's value is 0

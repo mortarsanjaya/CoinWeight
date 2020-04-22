@@ -42,7 +42,7 @@ class GameViewX11 : public GameView {
     static constexpr int defaultFGColor = Black;
     
     // Basic drawing functions
-    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed = false);
+    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed);
     void drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
     void fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
     void drawRectangle(DrawingWindow window, int x_pos, int y_pos, int width, int height);
@@ -63,8 +63,8 @@ class GameViewX11 : public GameView {
     // Draw return button
     void drawReturnButton() override;
     
-    // Game Play screen
-    void drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) override;
+    // Game Play Human screen
+    void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight) override;
     void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
     
     // Game Over screen
@@ -83,11 +83,11 @@ class GameViewX11 : public GameView {
 public:
     GameViewX11();
     // Main drawing functions
-    void drawTitleScreen(const int screenHighlight) override;
+    void drawTitleScreen(const TitleScreen::Highlight screenHighlight) override;
     void drawInstructionScreen() override;
     void drawCreditScreen() override;
-    void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-            const GameLevel gameLevel, const bool isHuman) override;
+    void drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight,
+        const GameSettings &currSettings) override;
     
     void receiveInput() override;
     const Input lastInput() override;

@@ -79,25 +79,25 @@ void GameController::onHistoryScreenArrowInput(GameModel &model, const Input::Ar
 
 //**** Char
 void GameController::onCharInput0(GameModel &model) {
-    if (model.currentScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
         model.deselectCoin();
     }
 }
 
 void GameController::onCharInput1(GameModel &model) {
-    if (model.currentScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
         model.moveCoinToLeftGroup();
     }
 }
 
 void GameController::onCharInput2(GameModel &model) {
-    if (model.currentScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
         model.moveCoinToRightGroup();
     }
 }
 
 void GameController::onCharInput3(GameModel &model) {
-    if (model.currentScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
         model.selectCoinToGuess();
     }
 }

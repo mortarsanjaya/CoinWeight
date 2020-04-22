@@ -9,6 +9,9 @@
 #ifndef gamescreen_hpp
 #define gamescreen_hpp
 
+#include <memory>
+#include "ScreenPages/allinclude.hpp"
+
 class GameScreen {
 public:
     enum class Page {
@@ -20,26 +23,49 @@ public:
         GamePlayComputer,   // Next Step Only
         GameOver            // Lose, Win
     };
+    
+    GameScreen();
+    
+    const Page currentScreen() const;
+    const TitleScreen::Highlight titleHighlight() const;
+    const InstructionScreen::Highlight instructionHighlight() const;
+    const CreditScreen::Highlight creditHighlight() const;
+    const GameOptionScreen::Highlight gameOptionHighlight() const;
+    const GameSettings &gameOptionSettings() const;
+    const GamePlayHumanScreen::ScreenHighlight gamePlayHumanScreenHighlight() const;
+    const size_t gamePlayHumanCoinHighlight() const;
+    const GamePlayComputerScreen::Highlight gamePlayComputerHighlight() const;
+    const GameOverScreen::Highlight gameOverHighlight() const;
+    
+    // Arrow button highlight switch
+    void highlightUp();
+    void highlightDown();
+    void highlightLeft();
+    void highlightRight();
+    
+    // Reset highlight
+    void resetHighlight();
+    
+    // Screen switch
+    void goToTitleScreen();
+    void goToInstructionScreen();
+    void goToCreditScreen();
+    void goToGameOptionScreen();
+    void goToGamePlayHumanScreen(const size_t numOfCoins, const size_t coinsPerRow);
+    void goToGamePlayComputerScreen();
+    void goToGameOverScreen();
 
 private:
     Page page;
-    int highlight;
-
-    // Modifier functions (private)
-    const int minHighlight();
-    const int maxHighlight();
-    void resetHighlight();
-
-public:
-    GameScreen(Page page = Page::Title, int highlight = 0);
-    
-    const Page currentScreen() const;
-    const int currentHighlight() const;
-    
-    // Modifier functions (public)
-    void incrementHighlight();
-    void decrementHighlight();
-    void transition(const Page nextScreen);
+    union {
+        TitleScreen title;
+        InstructionScreen instruction;
+        CreditScreen credit;
+        GameOptionScreen gameOption;
+        GamePlayHumanScreen gamePlayHuman;
+        GamePlayComputerScreen gamePlayComputer;
+        GameOverScreen gameOver;
+    };
 };
 
 #endif

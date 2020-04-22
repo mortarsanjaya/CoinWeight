@@ -57,7 +57,7 @@ const size_t GameCore::numOfWeighingsLeft() const {
     return numOfWeighingsCounter;
 }
 
-const size_t GameCore::numOfWeighingsCap() const {
+const size_t GameCore::numOfWeighingsMax() const {
     return maxComparisons(setOfCoins->size(), level);
 }
 

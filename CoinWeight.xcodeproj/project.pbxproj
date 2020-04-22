@@ -43,6 +43,21 @@
 		860751A1240F2844007A96E5 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
 		861B50DC243094AA00262336 /* gamecontroller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecontroller.cpp; sourceTree = "<group>"; };
 		861B50DD243094AA00262336 /* gamecontroller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecontroller.hpp; sourceTree = "<group>"; };
+		86219BD1244FF1BD005E4F93 /* titlescreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = titlescreen.cpp; sourceTree = "<group>"; };
+		86219BD2244FF1BD005E4F93 /* titlescreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = titlescreen.hpp; sourceTree = "<group>"; };
+		86219BD5244FF7E4005E4F93 /* instructionscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = instructionscreen.cpp; sourceTree = "<group>"; };
+		86219BD6244FF7E4005E4F93 /* instructionscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = instructionscreen.hpp; sourceTree = "<group>"; };
+		86219BD8244FFB07005E4F93 /* creditscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = creditscreen.cpp; sourceTree = "<group>"; };
+		86219BD9244FFB07005E4F93 /* creditscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = creditscreen.hpp; sourceTree = "<group>"; };
+		86219BDB244FFDBA005E4F93 /* gameoptionscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameoptionscreen.cpp; sourceTree = "<group>"; };
+		86219BDC244FFDBA005E4F93 /* gameoptionscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameoptionscreen.hpp; sourceTree = "<group>"; };
+		86219BDE244FFE42005E4F93 /* gameplayhumanscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameplayhumanscreen.cpp; sourceTree = "<group>"; };
+		86219BDF244FFE42005E4F93 /* gameplayhumanscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameplayhumanscreen.hpp; sourceTree = "<group>"; };
+		86219BE124500FF9005E4F93 /* gameplaycomputerscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameplaycomputerscreen.cpp; sourceTree = "<group>"; };
+		86219BE224500FF9005E4F93 /* gameplaycomputerscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameplaycomputerscreen.hpp; sourceTree = "<group>"; };
+		86219BE42450105A005E4F93 /* gameoverscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameoverscreen.cpp; sourceTree = "<group>"; };
+		86219BE52450105A005E4F93 /* gameoverscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameoverscreen.hpp; sourceTree = "<group>"; };
+		86219BE724501164005E4F93 /* allinclude.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = allinclude.hpp; path = CoinWeight/ScreenPages/allinclude.hpp; sourceTree = SOURCE_ROOT; };
 		8625C7D0242AA68F00558B55 /* coinstates.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinstates.cpp; sourceTree = "<group>"; };
 		8625C7D1242AA68F00558B55 /* coinstates.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinstates.hpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
@@ -105,6 +120,94 @@
 				861B50DC243094AA00262336 /* gamecontroller.cpp */,
 			);
 			name = "Game Controller";
+			sourceTree = "<group>";
+		};
+		86219BD4244FF1E7005E4F93 /* ScreenPages */ = {
+			isa = PBXGroup;
+			children = (
+				86219BE724501164005E4F93 /* allinclude.hpp */,
+				86219BE92450D5F0005E4F93 /* Title */,
+				86219BEA2450D5F8005E4F93 /* Instruction */,
+				86219BEB2450D5FD005E4F93 /* Credit */,
+				86219BEC2450D602005E4F93 /* Game Option */,
+				86219BED2450D609005E4F93 /* Game Play Human */,
+				86219BEE2450D60F005E4F93 /* Game Play Computer */,
+				86219BEF2450D617005E4F93 /* Game Over */,
+			);
+			path = ScreenPages;
+			sourceTree = "<group>";
+		};
+		86219BE92450D5F0005E4F93 /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD1244FF1BD005E4F93 /* titlescreen.cpp */,
+				86219BD2244FF1BD005E4F93 /* titlescreen.hpp */,
+			);
+			name = Title;
+			sourceTree = "<group>";
+		};
+		86219BEA2450D5F8005E4F93 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD5244FF7E4005E4F93 /* instructionscreen.cpp */,
+				86219BD6244FF7E4005E4F93 /* instructionscreen.hpp */,
+			);
+			name = Instruction;
+			sourceTree = "<group>";
+		};
+		86219BEB2450D5FD005E4F93 /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD8244FFB07005E4F93 /* creditscreen.cpp */,
+				86219BD9244FFB07005E4F93 /* creditscreen.hpp */,
+			);
+			name = Credit;
+			sourceTree = "<group>";
+		};
+		86219BEC2450D602005E4F93 /* Game Option */ = {
+			isa = PBXGroup;
+			children = (
+				86219BDB244FFDBA005E4F93 /* gameoptionscreen.cpp */,
+				86219BDC244FFDBA005E4F93 /* gameoptionscreen.hpp */,
+				86219BF02450D8EE005E4F93 /* Game Settings */,
+			);
+			name = "Game Option";
+			sourceTree = "<group>";
+		};
+		86219BED2450D609005E4F93 /* Game Play Human */ = {
+			isa = PBXGroup;
+			children = (
+				86219BDE244FFE42005E4F93 /* gameplayhumanscreen.cpp */,
+				86219BDF244FFE42005E4F93 /* gameplayhumanscreen.hpp */,
+			);
+			name = "Game Play Human";
+			sourceTree = "<group>";
+		};
+		86219BEE2450D60F005E4F93 /* Game Play Computer */ = {
+			isa = PBXGroup;
+			children = (
+				86219BE124500FF9005E4F93 /* gameplaycomputerscreen.cpp */,
+				86219BE224500FF9005E4F93 /* gameplaycomputerscreen.hpp */,
+			);
+			name = "Game Play Computer";
+			sourceTree = "<group>";
+		};
+		86219BEF2450D617005E4F93 /* Game Over */ = {
+			isa = PBXGroup;
+			children = (
+				86219BE42450105A005E4F93 /* gameoverscreen.cpp */,
+				86219BE52450105A005E4F93 /* gameoverscreen.hpp */,
+			);
+			name = "Game Over";
+			sourceTree = "<group>";
+		};
+		86219BF02450D8EE005E4F93 /* Game Settings */ = {
+			isa = PBXGroup;
+			children = (
+				86C1C659243249E7007E5B64 /* gamesettings.cpp */,
+				86C1C65A243249E7007E5B64 /* gamesettings.hpp */,
+			);
+			name = "Game Settings";
 			sourceTree = "<group>";
 		};
 		8625C7D3242AA69400558B55 /* Coin States */ = {
@@ -245,17 +348,9 @@
 			children = (
 				86C1C65524324806007E5B64 /* gamescreen.cpp */,
 				86C1C65624324806007E5B64 /* gamescreen.hpp */,
+				86219BD4244FF1E7005E4F93 /* ScreenPages */,
 			);
 			name = "Game Screen";
-			sourceTree = "<group>";
-		};
-		86C1C65C243249EC007E5B64 /* Game Settings */ = {
-			isa = PBXGroup;
-			children = (
-				86C1C659243249E7007E5B64 /* gamesettings.cpp */,
-				86C1C65A243249E7007E5B64 /* gamesettings.hpp */,
-			);
-			name = "Game Settings";
 			sourceTree = "<group>";
 		};
 		86C1C6642432D6AC007E5B64 /* History */ = {
@@ -273,7 +368,6 @@
 				86D9C9DC2421AA8A00FEB2B4 /* gamemodel.cpp */,
 				86D9C9DD2421AA8A00FEB2B4 /* gamemodel.hpp */,
 				86C1C6582432480C007E5B64 /* Game Screen */,
-				86C1C65C243249EC007E5B64 /* Game Settings */,
 				866FC8302409F74D00B3740D /* Coin Set */,
 				866FC8312409F75A00B3740D /* Game Core */,
 				8625C7D3242AA69400558B55 /* Coin States */,
@@ -342,9 +436,14 @@
 			files = (
 				861E647C242AD81E00AA6FD7 /* main.cpp in Sources */,
 				86E55A83242C390B00053F2E /* weighresult.hpp in Sources */,
+				86219BE324500FF9005E4F93 /* gameplaycomputerscreen.cpp in Sources */,
 				86C1C66F2437A83F007E5B64 /* gameview.cpp in Sources */,
 				861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */,
+				86219BDA244FFB07005E4F93 /* creditscreen.cpp in Sources */,
 				86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */,
+				86219BD3244FF1BD005E4F93 /* titlescreen.cpp in Sources */,
+				86219BD7244FF7E4005E4F93 /* instructionscreen.cpp in Sources */,
+				86219BE62450105A005E4F93 /* gameoverscreen.cpp in Sources */,
 				861E647E242AD81E00AA6FD7 /* record.cpp in Sources */,
 				861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */,
 				861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */,
@@ -353,9 +452,11 @@
 				86C1C65724324806007E5B64 /* gamescreen.cpp in Sources */,
 				86C1C6632432D6A7007E5B64 /* history.cpp in Sources */,
 				861E6482242AD81E00AA6FD7 /* computer.cpp in Sources */,
+				86219BDD244FFDBA005E4F93 /* gameoptionscreen.cpp in Sources */,
 				861E6483242AD81E00AA6FD7 /* computerhard.cpp in Sources */,
 				861E6484242AD81E00AA6FD7 /* gameviewx11.cpp in Sources */,
 				861E6486242AD81E00AA6FD7 /* input.cpp in Sources */,
+				86219BE0244FFE42005E4F93 /* gameplayhumanscreen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
