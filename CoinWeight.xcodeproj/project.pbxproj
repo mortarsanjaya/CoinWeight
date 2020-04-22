@@ -18,6 +18,13 @@
 		861E6483242AD81E00AA6FD7 /* computerhard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BE02402EE0C00C3DE84 /* computerhard.cpp */; };
 		861E6484242AD81E00AA6FD7 /* gameviewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* gameviewx11.cpp */; };
 		861E6486242AD81E00AA6FD7 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869BBCD424241BDD0002CDED /* input.cpp */; };
+		86219BD3244FF1BD005E4F93 /* titlescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BD1244FF1BD005E4F93 /* titlescreen.cpp */; };
+		86219BD7244FF7E4005E4F93 /* instructionscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BD5244FF7E4005E4F93 /* instructionscreen.cpp */; };
+		86219BDA244FFB07005E4F93 /* creditscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BD8244FFB07005E4F93 /* creditscreen.cpp */; };
+		86219BDD244FFDBA005E4F93 /* gameoptionscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BDB244FFDBA005E4F93 /* gameoptionscreen.cpp */; };
+		86219BE0244FFE42005E4F93 /* gameplayhumanscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BDE244FFE42005E4F93 /* gameplayhumanscreen.cpp */; };
+		86219BE324500FF9005E4F93 /* gameplaycomputerscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE124500FF9005E4F93 /* gameplaycomputerscreen.cpp */; };
+		86219BE62450105A005E4F93 /* gameoverscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE42450105A005E4F93 /* gameoverscreen.cpp */; };
 		86C1C65724324806007E5B64 /* gamescreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C65524324806007E5B64 /* gamescreen.cpp */; };
 		86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C659243249E7007E5B64 /* gamesettings.cpp */; };
 		86C1C6632432D6A7007E5B64 /* history.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C6612432D6A7007E5B64 /* history.cpp */; };
