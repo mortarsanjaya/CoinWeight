@@ -36,11 +36,11 @@ public:
     virtual void receiveInput() override;
     virtual const Input lastInput() override;
     
-    virtual void drawMainScreen(const int screenHighlight) override;
+    //virtual void drawMainScreen(const int screenHighlight) override;
     virtual void drawInstructionScreen() override;
     virtual void drawCreditScreen() override;
-    virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-                                      const std::string &gameLevel, const bool isHuman) override;
+    //virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+      //                                const std::string &gameLevel, const bool isHuman) override;
 };
 
 #endif /* gameviewsdl_hpp */

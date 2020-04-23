@@ -10,12 +10,12 @@
 #define sdlexception_hpp
 
 #include "exception.hpp"
-
+/*
 class SDLException : public Exception {
     const std::string headerMessage() const override;
     
 public:
     SDLException(std::string message);
 };
-
+*/
 #endif /* sdlexception_hpp */

@@ -137,12 +137,12 @@ const Input SDLGraphics::lastInput() const {
 
 GameViewSDL::GameViewSDL() : coreGraphics(WIDTH, HEIGHT) {}
 
-void GameViewSDL::drawMainScreen(int screenHighlight) {
+/*void GameViewSDL::drawMainScreen(int screenHighlight) {
     coreGraphics.drawText("Coin Weighting", WIDTH/2, 100, 48);
     coreGraphics.drawText("Play", WIDTH/2, HEIGHT/2, 24, screenHighlight == 0 ? true : false);
     coreGraphics.drawText("Instructions", WIDTH/2, HEIGHT/2 + 50, 24, screenHighlight == 1 ? true : false);
     coreGraphics.drawText("Credits", WIDTH/2, HEIGHT/2 + 100, 24, screenHighlight == 2 ? true : false);
-}
+}*/
 
 void GameViewSDL::drawInstructionScreen() {
     // drawText instructions
@@ -152,10 +152,10 @@ void GameViewSDL::drawCreditScreen() {
     // drawText credits
 }
 
-void GameViewSDL::drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+/*void GameViewSDL::drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
                           const std::string &gameLevel, const bool isHuman) {
     
-}
+}*/
 
 void GameViewSDL::receiveInput() {
     return coreGraphics.receiveInput();
