@@ -298,7 +298,7 @@ void GameViewX11::drawInstructionScreen() {
         "Press arrow keys to select coins.",
         "Press '1' to move selected coin to the red (left) set.",
         "Press '2' to move selected coin to the blue (right) set.",
-        "Press '2' to move selected coin to the green (guess) set.",
+        "Press '3' to move selected coin to the green (guess) set.",
         "Press 'w' to weigh.",
         "Press 'g' to guess.",
         "Press 'h' to switch to history."
@@ -325,15 +325,12 @@ void GameViewX11::drawInstructionScreen() {
         }
     }
     
-    sleep(1);
     drawReturnButton();
 }
 
 void GameViewX11::drawCreditScreen() {
     clearScreen(DrawingWindow::Main);
     drawString(DrawingWindow::Main, 300, 300, "---", defaultFGColor, false);
-    
-    sleep(1);
     drawReturnButton();
 }
 
