@@ -14,33 +14,33 @@
 
 class GameViewSDL : public GameView {
     SDLGraphics coreGraphics;
+    SDL_Window *mainWindow;
+    SDL_Window *historyWindow;
+    SDL_Renderer *renderer;
+    SDL_Surface *surface;
+    SDL_Event event;
     
-    static const int width = 800;
-    static const int height = 600;
+    void drawText(std::string text, int x, int y, int fontSize, bool selected = false);
+    void drawInputBox(std::string infoText, std::string inputText, int x, int y, bool selected = false);
+    void drawCoin(std::string coinNumber, int x, int y, bool selected = false);
+    void drawRectangle(int x, int y, int width, int height, int red, int green, int blue);
+    void drawButton(std::string text, int x, int y, bool selected = false);
+    void drawScale(int tilt, int leftCoinsCount, int rightCoinsCount);
+    
+    static const int WIDTH = 800;
+    static const int HEIGHT = 600;
     
 public:
     GameViewSDL();
     
-    virtual void drawMainScreen(int screenHighlight) override;
+    virtual void receiveInput() override;
+    virtual const Input lastInput() override;
+    
+    virtual void drawMainScreen(const int screenHighlight) override;
     virtual void drawInstructionScreen() override;
     virtual void drawCreditScreen() override;
-    virtual void drawGameOptionScreen(
-        int screenHighlight, size_t numOfCoins,
-        std::string gameLevel,
-        bool isHuman) override;
-    virtual void drawGamePlayScreen(
-        std::vector<int> coinStates,
-        int highlightedCoin,
-        size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        std::vector<std::pair<Weighing, int>> gameHistory) override;
-    virtual void drawGameOverScreen(
-        bool isWin,
-        size_t numOfComparisonsLeft,
-        size_t numOfComparisonsCap,
-        std::vector<size_t> finalGuess) override;
-    virtual void receiveInput() override;
-    virtual const Input lastInput() const override;
+    virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
+                                      const std::string &gameLevel, const bool isHuman) override;
 };
 
 #endif /* gameviewsdl_hpp */

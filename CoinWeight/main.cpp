@@ -11,13 +11,14 @@
 #include <string>
 #include "gamemodel.hpp"
 #include "gameviewx11.hpp"
+#include "gameviewsdl.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
 
 int main() {
     auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
     gameController->updateView();
-    sleep(1);
+    //sleep(1);
     while (true) {
         gameController->receiveInput();
         gameController->updateView();

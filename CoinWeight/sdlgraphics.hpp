@@ -6,6 +6,8 @@
 //  Copyright © 2020 -. All rights reserved.
 //
 
+// to transfer over to gameviewsdl
+
 #ifndef sdlgraphics_hpp
 #define sdlgraphics_hpp
 

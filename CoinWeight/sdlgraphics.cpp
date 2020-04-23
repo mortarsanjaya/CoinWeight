@@ -16,27 +16,27 @@ SDLGraphics::SDLGraphics(int width, int height) {
     // Initialize everything
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
-        throw SDLException("Unable to initialize SDL.");
+        //throw SDLException("Unable to initialize SDL.");
     }
 
     // Create a Window
     window = SDL_CreateWindow("Coin Weighting", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     if (window == nullptr) {
         SDL_Log("Unable to create window: %s", SDL_GetError());
-        throw SDLException("Unable to create window.");
+        //throw SDLException("Unable to create window.");
     }
     
     surface = SDL_GetWindowSurface(window);
     if (surface == nullptr) {
         SDL_Log("Unable to get window surface: %s", SDL_GetError());
-        throw SDLException("Unable to get surface.");
+        //throw SDLException("Unable to get surface.");
     }
     
     // Create a Renderer
     renderer = SDL_GetRenderer(window);
     if (renderer == nullptr) {
         SDL_Log("Unable to create renderer: %s", SDL_GetError());
-        throw SDLException("Unable to create renderer.");
+        //throw SDLException("Unable to create renderer.");
     }
     
     TTF_Init();
@@ -45,7 +45,7 @@ SDLGraphics::SDLGraphics(int width, int height) {
 void SDLGraphics::drawText(std::string text, int x, int y, int fontSize, bool selected) {
     TTF_Font* Sans = TTF_OpenFont("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", 24);
     if (Sans == nullptr) {
-        throw SDLException("Unable to create sans.");
+        //throw SDLException("Unable to create sans.");
     }
     SDL_Color White = {255, 255, 255};
 
@@ -88,7 +88,7 @@ void SDLGraphics::receiveInput() {
     SDL_PollEvent(&event);
 }
 
-const Input SDLGraphics::lastInput() const {
+const Input SDLGraphics::lastInput() const {/*
     switch (event.type) {
         case SDL_KEYDOWN:
             switch (event.key.keysym.sym) {
@@ -128,6 +128,6 @@ const Input SDLGraphics::lastInput() const {
             break;
         default:
             return Input();
-    }
-    return Input();
+    }*/
+    return Input(Input::Source::Main);
 }
