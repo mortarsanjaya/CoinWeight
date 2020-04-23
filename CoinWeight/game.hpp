@@ -1,50 +1,47 @@
 //
-//  game.hpp
+//  gamecores.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-02-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef game_hpp
-#define game_hpp
+#ifndef gamecore_hpp
+#define gamecore_hpp
 
-#include <iostream>
-#include <vector>
 #include <memory>
 #include "coinset.hpp"
-#include "player.hpp"
-#include "weighing.hpp"
+#include "gamelevel.hpp"
+#include "coinstates.hpp"
+#include "weighresult.hpp"
+#include "exception.hpp"
 
-
-// Only supports 2-fake-coins game currently
-class Game {
+class GameCore {
+    std::unique_ptr<CoinSet> setOfCoins;
+    GameLevel level;
+    size_t numOfWeighingsCounter;
+    
+    // maximum number of comparisons, to initialize the cap
+    static const size_t maxComparisons(size_t numOfCoins, GameLevel level);
+    
 public:
-	enum class Level { Easy, Medium, Hard, Insane };
-	
-private:
-	std::unique_ptr<CoinSet> setOfCoins;
-	std::unique_ptr<Player> player;
-	Level level;
-	size_t numOfWeighingsCap;
-	
-public:
-	Game(int numOfCoins, std::unique_ptr<Player> player, Level level);
-	
-	// "Field accessors"
-	const size_t numOfCoins() const;
-	const size_t numOfFakes() const;
-	const size_t maxNumOfWeighings() const;
-	
-	// calls the function of the same name in CoinSet
-	void compareWeight();
-	void guessFakes();
-	const bool move();
-	
-	// maximum number of comparisons
-	static const size_t maxComparisons(size_t numOfCoins, Level level);
+    GameCore(int numOfCoins, GameLevel level);
+    
+    const size_t numOfCoins() const;
+    const GameLevel gameLevel() const;
+    const size_t numOfWeighingsLeft() const;
+    const size_t numOfWeighingsCap() const;
+    
+    // Also decrements weighing counter
+    // Throws if the counter's value is 0
+    const WeighResult compareWeight(const CoinStates &weighing);
+    const bool guessFakeCoins(const CoinStates &guess) const;
 };
 
-std::istream &operator>>(std::istream &in, Game::Level &level);
+class GameCoreFailure : public Exception {
+    const std::string headerMessage() const override;
+public:
+    GameCoreFailure(std::string coreMessage);
+};
 
 #endif

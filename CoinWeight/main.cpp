@@ -9,55 +9,18 @@
 #include <iostream>
 #include <memory>
 #include <string>
-#include "game.hpp"
-#include "human.hpp"
-#include "computerhard.hpp"
-#include "x11graphics.hpp"
-
-using namespace std;
+#include "gamemodel.hpp"
+#include "gameviewx11.hpp"
+#include "gameviewsdl.hpp"
+#include "gamecontroller.hpp"
+#include "input.hpp"
 
 int main() {
-
-	cout << "You are playing a coin weight game.\n";
-	cout << "Number of coins: ";
-	int numOfCoins;
-	cin >> numOfCoins;
-	cout << "\n";
-	
-	cout << "Number of fake coins: 2\n";
-	
-	cout << "Difficulty: ";
-	Game::Level level;
-	cin >> level;
-	cout << "\n";
-	
-	cout << "Please enter the player's type (Human or Computer): ";
-	std::string playerType;
-	cin >> playerType;
-	cout << "\n";
-	
-	std::unique_ptr<Player> player;
-	if (playerType == "Human") {
-		player = std::make_unique<Human>(numOfCoins, 2);
-	} else if (playerType == "Computer") {
-		player = std::make_unique<ComputerHard>(numOfCoins, 2);
-	} else {
-		cerr << "WHAT?" << endl;
-		return 1;
-	}
-	
-	Game game(numOfCoins, std::move(player), level);
-	// X11Graphics x11graphics{};
-	// x11graphics.fillCircle(20, 20, 10);
-
-	cout << "Game starts!\n";
-	
-	cout << "There are up to " << game.maxNumOfWeighings()
-		<< " weighings available to determine the fake coins.\n";
-		
-	bool isWeigh = true;
-	while (isWeigh) {
-		isWeigh = game.move();
-	}
-	return 0;
+    auto gameController = std::make_unique<GameController>(new GameModel, new GameViewX11);
+    gameController->updateView();
+    //sleep(1);
+    while (true) {
+        gameController->receiveInput();
+        gameController->updateView();
+    }
 }
