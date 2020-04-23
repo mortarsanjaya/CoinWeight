@@ -7,6 +7,7 @@
 //
 
 #include "history.hpp"
+#include "exception.hpp"
 
 //***************************************************** Field accessors
 const size_t History::size() const {
@@ -19,7 +20,7 @@ const size_t History::currentIndex() const {
 
 const Record History::getRecord() const {
     if (listOfRecords.empty()) {
-        throw HistoryFailure("History is empty.");
+        throw Exception<History>("History is empty.");
     }
     return listOfRecords[recordIndex];
 }
@@ -64,7 +65,6 @@ void History::decrementIndex() {
 
 
 //***************************************************** History Failure
-HistoryFailure::HistoryFailure(std::string coreMessage) : Exception{coreMessage} {}
-const std::string HistoryFailure::headerMessage() const {
+template<> const std::string exceptionHeaderMessage<History>() {
     return "History Failure: ";
 }

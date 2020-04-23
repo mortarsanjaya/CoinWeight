@@ -9,14 +9,12 @@
 #ifndef weighresult_hpp
 #define weighresult_hpp
 
-#include <string>
-
 enum class WeighResult {
+    Start,
+    Invalid,
     Balance,
     LeftHeavy,
     RightHeavy
 };
-
-const std::string toString(const WeighResult weighResult);
 
 #endif

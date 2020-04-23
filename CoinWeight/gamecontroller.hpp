@@ -11,49 +11,33 @@
 
 #include <memory>
 #include "gamemodel.hpp"
-#include "gameview.hpp"
 #include "input.hpp"
 
 class GameController {
-    std::unique_ptr<GameModel> model;
-    std::unique_ptr<GameView> view;
-    
+
     // Arrow input handling
-    void onMainScreenArrowInputUp();
-    void onMainScreenArrowInputDown();
-    void onMainScreenArrowInputLeft();
-    void onMainScreenArrowInputRight();
-    void onMainScreenArrowInput(Input::Arrow arrowInp);
-    void onHistoryScreenArrowInputUp();
-    void onHistoryScreenArrowInputDown();
-    void onHistoryScreenArrowInputLeft();
-    void onHistoryScreenArrowInputRight();
-    void onHistoryScreenArrowInput(Input::Arrow arrowInp);
+    void onMainScreenArrowInputUp(GameModel &model);
+    void onMainScreenArrowInputDown(GameModel &model);
+    void onMainScreenArrowInputLeft(GameModel &model);
+    void onMainScreenArrowInputRight(GameModel &model);
+    void onMainScreenArrowInput(GameModel &model, const Input::Arrow arrowInp);
+    void onHistoryScreenArrowInputUp(GameModel &model);
+    void onHistoryScreenArrowInputDown(GameModel &model);
+    void onHistoryScreenArrowInputLeft(GameModel &model);
+    void onHistoryScreenArrowInputRight(GameModel &model);
+    void onHistoryScreenArrowInput(GameModel &model, const Input::Arrow arrowInp);
     
     // Character input handling (not used by History screen)
-    void onCharInput0();
-    void onCharInput1();
-    void onCharInput2();
-    void onCharInput3();
-    void onReturnButton();
-    void onCharInput(char charInp);
-    
-    // Update view
-    void updateViewOnMainScreen();
-    void updateViewOnInstructionScreen();
-    void updateViewOnCreditScreen();
-    void updateViewOnGameOptionScreen();
-    void updateViewOnGamePlayHumanScreen();
-    void updateViewOnGamePlayComputerScreen();
-    void updateViewOnGameOverScreen();
-    
-
-    void onReceivingInput(Input inp);
+    void onCharInput0(GameModel &model);
+    void onCharInput1(GameModel &model);
+    void onCharInput2(GameModel &model);
+    void onCharInput3(GameModel &model);
+    void onReturnButton(GameModel &model);
+    void onCharInput(GameModel &model, const char charInp);
     
 public:
-    GameController(GameModel *model, GameView *view);
-    void receiveInput();
-    void updateView();
+    GameController();
+    void onReceivingInput(GameModel &model, const Input &inp);
 };
 
 #endif

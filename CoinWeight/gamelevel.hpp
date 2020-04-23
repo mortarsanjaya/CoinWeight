@@ -9,14 +9,10 @@
 #ifndef gamelevel_hpp
 #define gamelevel_hpp
 
-#include <string>
-
 enum class GameLevel {
     Easy,
     Medium,
     Hard
 };
-
-const std::string toString(const GameLevel gameLevel);
 
 #endif

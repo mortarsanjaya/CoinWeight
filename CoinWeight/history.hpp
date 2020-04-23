@@ -11,7 +11,6 @@
 
 #include <vector>
 #include "record.hpp"
-#include "exception.hpp"
 
 class History {
     std::vector<Record> listOfRecords;
@@ -33,12 +32,6 @@ public:
     void clear();
     void incrementIndex();
     void decrementIndex();
-};
-
-class HistoryFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    HistoryFailure(std::string coreMessage);
 };
 
 #endif

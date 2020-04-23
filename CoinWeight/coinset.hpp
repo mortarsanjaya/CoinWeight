@@ -9,34 +9,27 @@
 #ifndef coinset_hpp
 #define coinset_hpp
 
-#include <vector>
 #include "coinstates.hpp"
 #include "weighresult.hpp"
-#include "exception.hpp"
+#include "guessresult.hpp"
 
 class CoinSet {
-    // Fake coins are lighter than real coins and are denoted by [false]
-	std::vector<bool> coins;
+    size_t numOfCoins;
+    size_t fakeCoinIndex1;
+    size_t fakeCoinIndex2;
+    
+	static constexpr size_t numOfFakeCoins = 2;
+    const bool isFakeCoinIndex(const size_t index) const;
 
 public:
-	CoinSet(int numOfCoins);
+	CoinSet(size_t numOfCoins);
     
 	const size_t size() const;
 	
 	// Game operations
 	const WeighResult compareWeight(const CoinStates &weighing) const;
-	const bool guessFakeCoins(const CoinStates &guess) const;
+	const GuessResult guessFakeCoins(const CoinStates &guess) const;
  
-	static const size_t numOfFakeCoins;
-};
-
-
-
-//***************************************************** Coin Set Failure
-class CoinSetFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-	CoinSetFailure(std::string coreMessage);
 };
 
 #endif

@@ -9,12 +9,14 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
-#include <vector>
-#include <utility>
+#include "coingroup.hpp"
+#include "gamelevel.hpp"
+#include "weighresult.hpp"
+#include "guessresult.hpp"
 #include "coinstates.hpp"
 #include "history.hpp"
 #include "input.hpp"
-#include "weighresult.hpp"
+#include "ScreenPages/allinclude.hpp"
 
 class GameView {
 protected:
@@ -24,15 +26,16 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) = 0;
-    virtual void drawCoin(const DrawingWindow window, const CoinStates::Value coinState, const size_t index) = 0;
+    virtual void drawCoin(const DrawingWindow window, const CoinGroup coinState, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
     // Game Play screen
     virtual void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
-    virtual void drawGamePlayHumanHighlight(const int screenHighlight, const int coinHighlight) = 0;
+    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight,
+        const size_t coinHighlight) = 0;
         
     // Game Over screen
-    virtual void drawGameOverEndMessage(const bool isWin) = 0;
+    virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
     virtual void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
     
     // History screen
@@ -52,17 +55,16 @@ public:
     virtual ~GameView() = 0;
     
     // Drawing functions
-    virtual void drawMainScreen(const int screenHighlight) = 0;
+    virtual void drawTitleScreen(const TitleScreen::Highlight screenHighlight) = 0;
     virtual void drawInstructionScreen() = 0;
     virtual void drawCreditScreen() = 0;
-    virtual void drawGameOptionScreen(const int screenHighlight, const size_t numOfCoins,
-        const std::string &gameLevel, const bool isHuman) = 0;
+    virtual void drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight, const GameSettings &currSettings) = 0;
         
-    void drawGamePlayHumanScreen(const CoinStates &coinStates, const int screenHighlight,
-        const int highlightedCoin, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
-    void drawGamePlayComputerScreen(const CoinStates &coinStates,
-        const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
-    void drawGameOverScreen(const bool isWin, const size_t numOfWeighsLeft, const size_t numOfWeighMax);
+    void drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen::ScreenHighlight screenHighlight,
+        const size_t coinHighlight, const size_t numOfWeighsLeft, const size_t numOfWeighsMax, const WeighResult lastWeighResult);
+    void drawGamePlayComputerScreen(const CoinStates &coinStates, const size_t numOfWeighsLeft,
+        const size_t numOfWeighsMax, const WeighResult lastWeighResult);
+    void drawGameOverScreen(const GuessResult guessResult, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
         
     void drawHistoryScreen(const History &history);
     

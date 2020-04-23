@@ -10,20 +10,25 @@
 #define gamesettings_hpp
 
 #include "gamelevel.hpp"
+#include <utility>
 
 class GameSettings {
-    int numOfCoins;
+    size_t gameSize;
     GameLevel level;
     bool isHuman;
     
     // Number of coins bound
-    static const int numOfCoinsLowerBound;
-    static const int numOfCoinsUpperBound;
+    static constexpr size_t numOfCoinsLowerBound = 3;
+    static constexpr size_t numOfCoinsUpperBound = 100;
+    
+    static constexpr size_t defaultNumOfCoins = numOfCoinsLowerBound;
+    static constexpr GameLevel defaultLevel = GameLevel::Hard;
+    static constexpr bool defaultIsHuman = true;
     
 public:
-    GameSettings(int numOfCoins = 13, GameLevel level = GameLevel::Hard, bool isHuman = true);
+    GameSettings();
     
-    const int gameSize() const;
+    const size_t numOfCoins() const;
     const GameLevel gameLevel() const;
     const bool isHumanMode() const;
     

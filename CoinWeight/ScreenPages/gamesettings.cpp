@@ -9,14 +9,14 @@
 #include "gamesettings.hpp"
 
 //***************************************************** Constructor
-GameSettings::GameSettings(int numOfCoins, GameLevel level, bool isHuman) :
-    numOfCoins(numOfCoins), level(level), isHuman(isHuman) {}
+GameSettings::GameSettings() : gameSize(defaultNumOfCoins),
+    level(defaultLevel), isHuman(defaultIsHuman) {}
     
     
     
 //***************************************************** Field accessors
-const int GameSettings::gameSize() const {
-    return numOfCoins;
+const size_t GameSettings::numOfCoins() const {
+    return gameSize;
 }
 
 const GameLevel GameSettings::gameLevel() const {
@@ -31,14 +31,14 @@ const bool GameSettings::isHumanMode() const {
 
 //***************************************************** Modifier functions
 void GameSettings::increaseGameSize() {
-    if (numOfCoins < numOfCoinsUpperBound) {
-        ++numOfCoins;
+    if (gameSize < numOfCoinsUpperBound) {
+        ++gameSize;
     }
 }
 
 void GameSettings::decreaseGameSize() {
-    if (numOfCoins > numOfCoinsLowerBound) {
-        --numOfCoins;
+    if (gameSize > numOfCoinsLowerBound) {
+        --gameSize;
     }
 }
 
@@ -73,9 +73,3 @@ void GameSettings::decreaseDifficulty() {
 void GameSettings::switchMode() {
     isHuman = !isHuman;
 }
-
-
-
-//***************************************************** Number of coins bound
-const int GameSettings::numOfCoinsLowerBound = 2;
-const int GameSettings::numOfCoinsUpperBound = 100;
