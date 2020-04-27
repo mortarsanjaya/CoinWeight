@@ -46,7 +46,7 @@ GameCore::GameCore(int numOfCoins, GameLevel level) :
 
 //***************************************************** Field accessors
 const size_t GameCore::numOfCoins() const {
-    return setOfCoins->size();
+    return setOfCoins->numOfCoins();
 }
 
 const GameLevel GameCore::gameLevel() const {
@@ -58,7 +58,7 @@ const size_t GameCore::numOfWeighingsLeft() const {
 }
 
 const size_t GameCore::numOfWeighingsMax() const {
-    return maxComparisons(setOfCoins->size(), level);
+    return maxComparisons(setOfCoins->numOfCoins(), level);
 }
 
 
