@@ -38,7 +38,7 @@ public:
     
 private:
     Highlight highlight;
-    GameSettings settings;
+    static GameSettings settings;
     
     static constexpr Highlight defaultHighlight = Highlight::NumOfCoins;
 };

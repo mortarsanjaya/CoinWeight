@@ -7,10 +7,13 @@
 //
 
 #include "gameoptionscreen.hpp"
+//************************** Static non-const member
+GameSettings GameOptionScreen::settings {};
+
+
 
 //************************** Constructor
-GameOptionScreen::GameOptionScreen() : highlight(defaultHighlight),
-    settings() {}
+GameOptionScreen::GameOptionScreen() : highlight(defaultHighlight) {}
 
 
 

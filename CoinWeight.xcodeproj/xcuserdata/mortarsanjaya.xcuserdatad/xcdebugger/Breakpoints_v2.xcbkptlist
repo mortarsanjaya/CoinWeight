@@ -94,8 +94,8 @@
             filePath = "CoinWeight/ScreenPages/gameoptionscreen.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "GameOptionScreen::highlightLeft()"
             landmarkType = "7">
          </BreakpointContent>
