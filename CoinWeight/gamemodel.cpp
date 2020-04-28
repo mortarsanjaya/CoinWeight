@@ -9,17 +9,18 @@
 #include "gamemodel.hpp"
 #include "gameview.hpp"
 #include "computerhard.hpp"
+#include "computerfactory.hpp"
 #include "exception.hpp"
 #include <unistd.h>
 
-//***************************************************** Constructor
+//************************** Constructor
 GameModel::GameModel() : screen(), gameCore(), coinStates(), computer(),
     history(), lastWeighResult(WeighResult::Start), lastGuessResult(GuessResult::Invalid)
 {}
 
 
 
-//***************************************************** "Field accessors"
+//************************** "Field accessors"
 const GameScreen::Page GameModel::currScreen() const {
     return screen.currentScreen();
 }
@@ -51,7 +52,7 @@ const size_t GameModel::numOfWeighingsLeft() const {
 
 
 
-//***************************************************** Screen transition functions
+//************************** Screen transition functions
 //**** Helper
 void GameModel::goFromTitleScreen() {
     if (screen.currentScreen() != GameScreen::Page::Title) {
@@ -86,7 +87,7 @@ void GameModel::gameStart() {
     if (settings.isHumanMode()) {
         screen.goToGamePlayHumanScreen(settings.numOfCoins(), coinsPerRow);
     } else {
-        computer = std::make_unique<ComputerHard>(settings.numOfCoins());
+        computer = ComputerFactory::createFactory(settings.gameLevel())->createComputer(settings.numOfCoins());
         screen.goToGamePlayComputerScreen();
         computerSetup();
     }
@@ -120,7 +121,7 @@ void GameModel::computerSetup() {
 
 
 
-//***************************************************** Coin states manipulation
+//************************** Coin states manipulation
 void GameModel::deselectCoin() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
         coinStates->deselect(screen.gamePlayHumanCoinHighlight());
@@ -147,7 +148,7 @@ void GameModel::selectCoinToGuess() {
 
 
 
-//***************************************************** Game moves operations
+//************************** Game moves operations
 //**** Title
 void GameModel::compareWeight() {
     
@@ -209,7 +210,7 @@ void GameModel::computerGameMove() {
 
 
 
-//***************************************************** History index manipulation
+//************************** History index manipulation
 void GameModel::historyIncrementIndex() {
     history.incrementIndex();
 }
@@ -220,7 +221,7 @@ void GameModel::historyDecrementIndex() {
 
 
 
-//***************************************************** Model logic functions
+//************************** Model logic functions
 void GameModel::mainScreenOnUpButton() {
     screen.highlightUp();
 }
@@ -274,7 +275,7 @@ void GameModel::historyScreenOnRightButton() {
 
 
 
-//***************************************************** View update functions
+//************************** View update functions
 //**** Helper
 void GameModel::updateViewTitleScreen(GameView *view) {
     view->drawTitleScreen(screen.titleHighlight());
@@ -337,7 +338,7 @@ void GameModel::updateView(GameView *view) {
 }
 
 
-//***************************************************** Game Model Failure
+//************************** Game Model Failure
 template<> const std::string exceptionHeaderMessage<GameModel>() {
     return "Game Model Failure: ";
 }

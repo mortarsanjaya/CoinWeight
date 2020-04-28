@@ -59,7 +59,7 @@ Separate documentation for states and strategies (sadly needed):
  */
 
 
-//***************************************************** Helper function
+//************************** Helper function
 template <size_t n> const size_t first_digit_base(const size_t k) {
 	size_t res = k;
 	while (res >= n) { res /= n; }
@@ -68,7 +68,7 @@ template <size_t n> const size_t first_digit_base(const size_t k) {
 
 
 
-//***************************************************** State and Strategy
+//************************** State and Strategy
 enum class ComputerHard::State::Type {
 	ZeroInfo,		// Partition consists of one set, all possibilities remain
 	OneVsOne,		// Partition consists of two sets, each one fake coins
@@ -99,15 +99,15 @@ ComputerHard::State::State(size_t numOfCoins) :
 
 
 
-//***************************************************** Constructor and Destructor
-ComputerHard::ComputerHard(size_t numOfCoins, size_t numOfFakeCoins) :
+//************************** Constructor and Destructor
+ComputerHard::ComputerHard(size_t numOfCoins) :
 	Computer(numOfCoins), state(std::make_unique<State>(numOfCoins)),
 	strategy(Strategy::NoStrategy) {}
 
 ComputerHard::~ComputerHard() {}
 
 
-//***************************************************** Non-overriding functions
+//************************** Non-overriding functions
 void ComputerHard::beforeWeigh() {
 
 	auto splitLastToThree = [this](const size_t twoSetSize) -> void {
@@ -235,7 +235,7 @@ void ComputerHard::beforeWeigh() {
 
 
 
-//***************************************************** Overriding functions
+//************************** Overriding functions
 const CoinStates ComputerHard::pickToWeigh() const {
     CoinStates weightStates(numOfCoins());
     for (size_t leftGroupIndex : state->partition.at(0)) {

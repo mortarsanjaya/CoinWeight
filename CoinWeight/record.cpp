@@ -8,13 +8,13 @@
 
 #include "record.hpp"
 
-//***************************************************** Constructor
+//************************** Constructor
 Record::Record(CoinStates weighStates, WeighResult weighResult) :
     weighStates{weighStates}, weighResult{weighResult} {}
 
 
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const CoinStates Record::coinStates() const {
     return weighStates;
 }

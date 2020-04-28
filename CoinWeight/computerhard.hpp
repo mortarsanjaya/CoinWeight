@@ -14,6 +14,11 @@
 #include <memory>
 
 class ComputerHard : public Computer {
+public:
+	ComputerHard(size_t numOfCoins);
+	~ComputerHard();
+ 
+private:
 
 	// States and strategy: How the results are handled
 	struct State {
@@ -35,10 +40,6 @@ class ComputerHard : public Computer {
 	void afterWeigh(const WeighResult weighResult) override;
 	const CoinStates pickToGuess() const override;
     const bool readyToGuess() const override;
-	
-public:
-	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);
-	~ComputerHard();
 };
 
 #endif

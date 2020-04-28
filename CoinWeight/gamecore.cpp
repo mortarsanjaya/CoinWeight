@@ -9,7 +9,7 @@
 #include "gamecore.hpp"
 #include "exception.hpp"
 
-//***************************************************** Helper functions
+//************************** Helper functions
 // Computes ceiling(log_n k)
 template <size_t n> static const size_t log_ceil(size_t k) {
 	if (k == 0) exit(100);
@@ -23,7 +23,7 @@ template <size_t n> static const size_t log_ceil(size_t k) {
 
 
 
-//***************************************************** Private static method
+//************************** Private static method
 const size_t GameCore::maxComparisons(size_t numOfCoins, GameLevel level) {
 	switch (level) {
 		case GameLevel::Easy:
@@ -37,14 +37,14 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameLevel level) {
 
 
 
-//***************************************************** Constructor
+//************************** Constructor
 GameCore::GameCore(int numOfCoins, GameLevel level) :
 	setOfCoins(std::make_unique<CoinSet>(numOfCoins)) , level(level),
 	numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 	
 
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const size_t GameCore::numOfCoins() const {
     return setOfCoins->numOfCoins();
 }
@@ -63,7 +63,7 @@ const size_t GameCore::numOfWeighingsMax() const {
 
 
 
-//***************************************************** Game operations
+//************************** Game operations
 const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
         return WeighResult::Invalid;

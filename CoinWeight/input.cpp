@@ -8,7 +8,7 @@
 
 #include "input.hpp"
 
-//***************************************************** Constructor
+//************************** Constructor
 Input::Input(Source source, char inp) :
     source{source}, type{Type::Char}, charInp{inp} {}
 Input::Input(Source source, Arrow inp) :
@@ -18,7 +18,7 @@ Input::Input(Source source) :
 
 
 
-//***************************************************** Public methods
+//************************** Public methods
 const Input::Source Input::sourceScreen() const {
     return source;
 }
@@ -43,7 +43,7 @@ const Input::Arrow Input::whatArrow() const {
 
 
 
-//***************************************************** Input Failure
+//************************** Input Failure
 template<> const std::string exceptionHeaderMessage<Input>() {
     return "Input Failure: ";
 }

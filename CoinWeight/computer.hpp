@@ -14,10 +14,8 @@
 #include "weighresult.hpp"
 
 class Computer {
-	size_t coinSetSize;
-	
 public:
-	Computer(size_t coinSetSize);
+	Computer(size_t numOfCoins);
 	virtual ~Computer();
 	
 	const size_t numOfCoins() const;
@@ -28,6 +26,9 @@ public:
 	virtual void afterWeigh(const WeighResult weighResult) = 0;
 	virtual const CoinStates pickToGuess() const = 0;
     virtual const bool readyToGuess() const = 0;
+    
+private:
+    size_t nCoins;
 };
 
 #endif

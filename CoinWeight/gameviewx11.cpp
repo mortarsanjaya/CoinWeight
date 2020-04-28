@@ -11,7 +11,7 @@
 #include <utility>
 #include <cmath>
 
-//***************************************************** Constructor
+//************************** Constructor
 GameViewX11::GameViewX11() {
     const int width = 800;
     const int height = 800;
@@ -74,7 +74,7 @@ GameViewX11::GameViewX11() {
 
 
 
-//***************************************************** Private methods
+//************************** Private methods
 //******************** Basic drawing functions
 void GameViewX11::drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed) {
     XSetForeground(display, gc, colors[color]);
@@ -359,7 +359,7 @@ void GameViewX11::clearScreen(const DrawingWindow window) {
 
 
 
-//***************************************************** Public methods
+//************************** Public methods
 void GameViewX11::drawTitleScreen(TitleScreen::Highlight screenHighlight) {
     const int stringHeight = 20;
     clearScreen(DrawingWindow::Main);
@@ -496,7 +496,7 @@ const Input GameViewX11::lastInput() {
 
 
 
-//***************************************************** Game View X11 Exception header message
+//************************** Game View X11 Exception header message
 template<> const std::string exceptionHeaderMessage<GameViewX11>() {
     return "Game View X11 Failure: ";
 }

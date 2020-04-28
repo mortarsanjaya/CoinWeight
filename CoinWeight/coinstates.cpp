@@ -9,14 +9,14 @@
 #include "coinstates.hpp"
 #include "exception.hpp"
 
-//***************************************************** Constructor
+//************************** Constructor
 CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, CoinGroup::NoSelect),
     leftWeighGroupSize(0), rightWeighGroupSize(0), guessGroupSize(0)
 {}
 
 
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const size_t CoinStates::totalSize() const {
     return content.size();
 }
@@ -43,7 +43,7 @@ const CoinGroup CoinStates::at(const size_t index) const {
 
 
 
-//***************************************************** Content manipulators
+//************************** Content manipulators
 void CoinStates::deselect(const size_t index) {
     switch (at(index)) {
         case CoinGroup::NoSelect:
@@ -91,7 +91,7 @@ void CoinStates::resetStates() {
 
 
 
-//***************************************************** Exception header message
+//************************** Exception header message
 template<> const std::string exceptionHeaderMessage<CoinStates>() {
     return "Coin States Failure: ";
 }

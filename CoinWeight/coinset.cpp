@@ -11,7 +11,7 @@
 #include <random>
 #include <algorithm>
 
-//***************************************************** Constructor
+//************************** Constructor
 CoinSet::CoinSet(size_t numOfCoins) : nCoins(numOfCoins) {
 	if (numOfFakeCoins > numOfCoins) {
 		throw Exception<CoinSet>("Bad number of fake coins.");
@@ -29,21 +29,21 @@ CoinSet::CoinSet(size_t numOfCoins) : nCoins(numOfCoins) {
 
 
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const size_t CoinSet::numOfCoins() const {
     return nCoins;
 }
 
 
 
-//***************************************************** Private member functions
+//************************** Private member functions
 const bool CoinSet::isFakeCoinIndex(const size_t index) const {
     return ((index == fakeCoinI1) || (index == fakeCoinI2));
 }
 
 
 
-//***************************************************** Game operations
+//************************** Game operations
 const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     if (weighing.sizeOfGuessGroup() != 0) {
         return WeighResult::Invalid;
@@ -94,7 +94,7 @@ const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
 
 
 
-//***************************************************** Exception header message
+//************************** Exception header message
 template<> const std::string exceptionHeaderMessage<CoinSet>() {
     return "Coin Set: ";
 }
