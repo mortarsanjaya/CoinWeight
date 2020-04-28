@@ -10,91 +10,91 @@
 
 /*
 Separate documentation for states and strategies (sadly needed):
-	
-	State consists of partitions of the set of possibly fake coins and also type
-	The types are:
-	1. Zero Information:
-		Partition consists of one set, any two coins from the set may be fake
-	2. One Vs One:
-		Partition consists of two sets, each with exactly one fake coin
-		Any coin from each set could be the single fake coin
-		State is programmed such that if at least one set is a singleton, then
-			the first set is definitely a singleton
-	3. Split 3 Case 1:
-		Partition consists of three nearly-balanced sets, say S1, S2, S3
-		Either S1 and S2 contains one fake coin each, or S3 contains two fake coins
-	4. Split 3 Case 2:
-		Partition consists of two sets, the first one contains at least one fake coin
-		
-	Strategy are determined based on the current state
-	The strategies are:
-	1. Guess:
-		Possible state types: Zero Information, One Vs One
-		Guess the fake coins; invoked when the state ensures the fake coins position
-		At process of forming strategy, the partition are merged into one set only
-	2. One Vs One:
-		Possible state types: One Vs One
-		Split whichever set that is not singleton yet; the size of partition becomes four
-		Then, swap the first and third element to ensure we are comparing the right set
-		Possible next state types: One Vs One
-	3. Split 2:
-		Possible state types: Zero Information
-		Split the big set into three, where last one is "leftover"
-		Compare the first two sets, then make decisions
-		Possible next state types: Zero Information, One Vs One
-	4. Split 3 Step 1:
-		Possible state types: Zero Information
-		Split the big set into three and compare the first two sets
-		Possible next state types: Split 3 Case 1, Split 3 Case 2
-	5. Split 3 Step 2 Case 1:
-		Possible state types: Split 3 Case 1
-		Compare S1 and S3, as described by states documentation
-		We create the fourth set for storing r remainder coins, where r = n % 3
-		Possible next state types: Zero Information, One Vs One
-	6. Split 3 Step 2 Case 2:
-		Possible state types: Split 3 Case 2
-		"Balance out" the two sets by removing at most one coin from one of the sets
-		Then, make comparisons
-		Possible next state types: Zero Information, One Vs One
+    
+    State consists of partitions of the set of possibly fake coins and also type
+    The types are:
+    1. Zero Information:
+        Partition consists of one set, any two coins from the set may be fake
+    2. One Vs One:
+        Partition consists of two sets, each with exactly one fake coin
+        Any coin from each set could be the single fake coin
+        State is programmed such that if at least one set is a singleton, then
+            the first set is definitely a singleton
+    3. Split 3 Case 1:
+        Partition consists of three nearly-balanced sets, say S1, S2, S3
+        Either S1 and S2 contains one fake coin each, or S3 contains two fake coins
+    4. Split 3 Case 2:
+        Partition consists of two sets, the first one contains at least one fake coin
+        
+    Strategy are determined based on the current state
+    The strategies are:
+    1. Guess:
+        Possible state types: Zero Information, One Vs One
+        Guess the fake coins; invoked when the state ensures the fake coins position
+        At process of forming strategy, the partition are merged into one set only
+    2. One Vs One:
+        Possible state types: One Vs One
+        Split whichever set that is not singleton yet; the size of partition becomes four
+        Then, swap the first and third element to ensure we are comparing the right set
+        Possible next state types: One Vs One
+    3. Split 2:
+        Possible state types: Zero Information
+        Split the big set into three, where last one is "leftover"
+        Compare the first two sets, then make decisions
+        Possible next state types: Zero Information, One Vs One
+    4. Split 3 Step 1:
+        Possible state types: Zero Information
+        Split the big set into three and compare the first two sets
+        Possible next state types: Split 3 Case 1, Split 3 Case 2
+    5. Split 3 Step 2 Case 1:
+        Possible state types: Split 3 Case 1
+        Compare S1 and S3, as described by states documentation
+        We create the fourth set for storing r remainder coins, where r = n % 3
+        Possible next state types: Zero Information, One Vs One
+    6. Split 3 Step 2 Case 2:
+        Possible state types: Split 3 Case 2
+        "Balance out" the two sets by removing at most one coin from one of the sets
+        Then, make comparisons
+        Possible next state types: Zero Information, One Vs One
  */
 
 
 //***************************************************** Helper function
 template <size_t n> const size_t first_digit_base(const size_t k) {
-	size_t res = k;
-	while (res >= n) { res /= n; }
-	return res;
+    size_t res = k;
+    while (res >= n) { res /= n; }
+    return res;
 }
 
 
 
 //***************************************************** State and Strategy
 enum class ComputerHard::State::Type {
-	ZeroInfo,		// Partition consists of one set, all possibilities remain
-	OneVsOne,		// Partition consists of two sets, each one fake coins
-	Split3Case1,	// Partition consists of three sets, either the first two contains
-					//   one fake coin each, or the third one containss all fake coins
-	Split3Case2,	// Partition consists of two sets, the first one has >= 1 fake coin
-	SendingMove		// Intermediate step of forming strategy
+    ZeroInfo,        // Partition consists of one set, all possibilities remain
+    OneVsOne,        // Partition consists of two sets, each one fake coins
+    Split3Case1,    // Partition consists of three sets, either the first two contains
+                    //   one fake coin each, or the third one containss all fake coins
+    Split3Case2,    // Partition consists of two sets, the first one has >= 1 fake coin
+    SendingMove        // Intermediate step of forming strategy
 };
 
 enum class ComputerHard::Strategy {
-	Guess,				// Guess
-	Split2,				// Split almost equally into two sets then compare
-	Split3Step1,		// Split almost equally into three sets then compare
-						// The first and second one has same size
-	OneVsOne,			// Special strategy for OneVsOne; second set split by three
-	Split3Step2Case1,	// Compare the second and the third set
-	Split3Step2Case2,	// Compare the first and the second set
-	NoStrategy			// Neutral state
+    Guess,                // Guess
+    Split2,                // Split almost equally into two sets then compare
+    Split3Step1,        // Split almost equally into three sets then compare
+                        // The first and second one has same size
+    OneVsOne,            // Special strategy for OneVsOne; second set split by three
+    Split3Step2Case1,    // Compare the second and the third set
+    Split3Step2Case2,    // Compare the first and the second set
+    NoStrategy            // Neutral state
 };
 
 ComputerHard::State::State(size_t numOfCoins) :
-	partition(), type(Type::ZeroInfo)
+    partition(), type(Type::ZeroInfo)
 {
-	std::vector<size_t> setOfCoins;
-	for (size_t i = 0; i < numOfCoins; ++i) { setOfCoins.push_back(i); }
-	partition.push_back(setOfCoins);
+    std::vector<size_t> setOfCoins;
+    for (size_t i = 0; i < numOfCoins; ++i) { setOfCoins.push_back(i); }
+    partition.push_back(setOfCoins);
 }
 
 
@@ -110,19 +110,19 @@ ComputerHard::~ComputerHard() {}
 //***************************************************** Non-overriding functions
 void ComputerHard::beforeWeigh() {
 
-	auto splitLastToThree = [this](const size_t twoSetSize) -> void {
-		std::vector<size_t> backSet = state->partition.back();
-		auto set1bound = backSet.begin() + twoSetSize;
-		auto set2bound = set1bound + twoSetSize;
-		state->partition.pop_back();
-		state->partition.emplace_back(backSet.begin(), set1bound);
-		state->partition.emplace_back(set1bound, set2bound);
-		state->partition.emplace_back(set2bound, backSet.end());
-	};
-	
-	auto readyToSendMove = [this]() {
-		state->type = State::Type::SendingMove;
-	};
+    auto splitLastToThree = [this](const size_t twoSetSize) -> void {
+        std::vector<size_t> backSet = state->partition.back();
+        auto set1bound = backSet.begin() + twoSetSize;
+        auto set2bound = set1bound + twoSetSize;
+        state->partition.pop_back();
+        state->partition.emplace_back(backSet.begin(), set1bound);
+        state->partition.emplace_back(set1bound, set2bound);
+        state->partition.emplace_back(set2bound, backSet.end());
+    };
+    
+    auto readyToSendMove = [this]() {
+        state->type = State::Type::SendingMove;
+    };
 
 	switch (state->type) {
 		case State::Type::ZeroInfo:
@@ -239,11 +239,11 @@ void ComputerHard::beforeWeigh() {
 const CoinStates ComputerHard::pickToWeigh() const {
     CoinStates weightStates(numOfCoins());
     for (size_t leftGroupIndex : state->partition.at(0)) {
-        weightStates[leftGroupIndex] = CoinStates::Value::LeftGroup;
+        weightStates.moveToLeftWeighGroup(leftGroupIndex);
     }
     
     for (size_t rightGroupIndex : state->partition.at(1)) {
-        weightStates[rightGroupIndex] = CoinStates::Value::RightGroup;
+        weightStates.moveToRightWeighGroup(rightGroupIndex);
     }
     
 	return weightStates;
@@ -419,7 +419,7 @@ const CoinStates ComputerHard::pickToGuess() const {
     CoinStates guessStates(numOfCoins());
     for (std::vector<size_t> single_partition : state->partition) {
         for (size_t element : single_partition) {
-            guessStates[element] = CoinStates::Value::Guess;
+            guessStates.moveToGuessGroup(element);
         }
     }
     return guessStates;

@@ -10,36 +10,29 @@
 #define coinstates_hpp
 
 #include <vector>
-#include <string>
-#include "exception.hpp"
+#include "coingroup.hpp"
 
 class CoinStates {
-public:
-    enum class Value {
-        NoSelect,
-        LeftGroup,
-        RightGroup,
-        Guess
-    };
-    
-private:
-    std::vector<Value> content;
+    std::vector<CoinGroup> content;
+    size_t leftWeighGroupSize;
+    size_t rightWeighGroupSize;
+    size_t guessGroupSize;
     
 public:
     CoinStates(size_t numOfCoins);
     
-    const size_t size() const;
-    Value &operator[](size_t index);
-    const Value at(size_t index) const;
+    const size_t totalSize() const;
+    const size_t sizeOfLeftWeighGroup() const;
+    const size_t sizeOfRightWeighGroup() const;
+    const size_t sizeOfGuessGroup() const;
+    const CoinGroup at(const size_t index) const;
     
-    // Resets all states to NoSelect
+    // Content manipulators
+    void deselect(const size_t index);
+    void moveToLeftWeighGroup(const size_t index);
+    void moveToRightWeighGroup(const size_t index);
+    void moveToGuessGroup(const size_t index);
     void resetStates();
-};
-
-class CoinStatesFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    CoinStatesFailure(std::string coreMessage);
 };
 
 #endif

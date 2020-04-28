@@ -40,10 +40,4 @@ public:
     const Arrow whatArrow() const;
 };
 
-class InputFailure : public Exception {
-    const std::string headerMessage() const override;
-public:
-    InputFailure(std::string coreMessage);
-};
-
 #endif
