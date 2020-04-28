@@ -65,7 +65,6 @@ GameViewX11::GameViewX11() {
     
     XMapRaised(display, historyWindow);
     XMapRaised(display, mainWindow);
-    XFlush(display);
  
     sleep(1);
 }
@@ -83,7 +82,6 @@ void GameViewX11::drawString(DrawingWindow window, int x_pos, int y_pos, const s
         drawRectangle(window, x_pos - font_width, y_pos - font_height - font_width,
             font_width * msg.length() + 2 * border_dist, font_height + 2 * font_width);
     }
-    XFlush(display);
 }
 
 void GameViewX11::drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color) {
@@ -91,7 +89,6 @@ void GameViewX11::drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigne
     XSetForeground(display, gc, colors[color]);
     XDrawArc(display, windowToDraw(window), gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
-    XFlush(display);
 }
 
 void GameViewX11::fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color) {
@@ -99,7 +96,6 @@ void GameViewX11::fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigne
     XSetForeground(display, gc, colors[color]);
     XFillArc(display, windowToDraw(window), gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
     XSetForeground(display, gc, colors[defaultFGColor]);
-    XFlush(display);
 }
 
 void GameViewX11::drawRectangle(DrawingWindow window, int x_pos, int y_pos, int width, int height) {
@@ -107,7 +103,6 @@ void GameViewX11::drawRectangle(DrawingWindow window, int x_pos, int y_pos, int 
     XDrawLine(display, windowToDraw(window), gc, x_pos, y_pos, x_pos, y_pos + height);
     XDrawLine(display, windowToDraw(window), gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
     XDrawLine(display, windowToDraw(window), gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
-    XFlush(display);
 }
 
 //******************** Tons of helper functions
@@ -196,7 +191,7 @@ void GameViewX11::drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHi
     if (screenHighlight == GamePlayHumanScreen::ScreenHighlight::Coins) {
         drawCircle(DrawingWindow::Main, x_pos, y_pos, 15, Black); // magic number :(
     }
-    
+    XFlush(display);
 }
 
 void GameViewX11::drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
@@ -224,26 +219,27 @@ void GameViewX11::drawGameOverEndMessage(const GuessResult guessResult) {
 }
 void GameViewX11::drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
     drawString(DrawingWindow::Main, 300, 300, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax), defaultFGColor, false);
+    XFlush(display);
 }
 
 //**** History screen
 void GameViewX11::drawHistoryIndexText(const size_t index, const size_t numOfWeighs) {
     drawString(DrawingWindow::History, 300, 50, "Move " + std::to_string(index + 1) + " out of " + std::to_string(numOfWeighs), defaultFGColor, false);
+    XFlush(display);
 }
 
 void GameViewX11::drawEmptyHistoryScreen() {
     drawString(DrawingWindow::History, 300, 200, "You have not made any moves.", defaultFGColor, false);
+    XFlush(display);
 }
 
 //**** Clear screen
 void GameViewX11::clearMainScreen() {
     XClearWindow(display, mainWindow);
-    XFlush(display);
 }
 
 void GameViewX11::clearHistoryScreen() {
     XClearWindow(display, historyWindow);
-    XFlush(display);
 }
 
 void GameViewX11::clearScreen(const DrawingWindow window) {
@@ -270,6 +266,7 @@ void GameViewX11::drawTitleScreen(TitleScreen::Highlight screenHighlight) {
         screenHighlight == TitleScreen::Highlight::Instruction);
     drawString(DrawingWindow::Main, 300, 300 + 3 * stringHeight, "Credits", defaultFGColor,
         screenHighlight == TitleScreen::Highlight::Credit);
+    XFlush(display);
 }
 
 void GameViewX11::drawInstructionScreen() {
@@ -324,15 +321,16 @@ void GameViewX11::drawInstructionScreen() {
         }
     }
     
-    sleep(1);
+    //sleep(1);
     drawReturnButton();
+    XFlush(display);
 }
 
 void GameViewX11::drawCreditScreen() {
     clearScreen(DrawingWindow::Main);
     drawString(DrawingWindow::Main, 300, 300, "---", defaultFGColor, false);
     
-    sleep(1);
+    //sleep(1);
     drawReturnButton();
 }
 
@@ -366,13 +364,10 @@ void GameViewX11::drawGameOptionScreen(const GameOptionScreen::Highlight screenH
         defaultFGColor, screenHighlight == GameOptionScreen::Highlight::Level);
     drawString(DrawingWindow::Main, 405, 300 + 3 * stringHeight, currSettings.isHumanMode() ? "Human" : "Computer",
         defaultFGColor, screenHighlight == GameOptionScreen::Highlight::Mode);
+    XFlush(display);
 }
 
-void GameViewX11::receiveInput() {
-    XNextEvent(display, &event);
-}
-
-const Input GameViewX11::lastInput() {
+Input GameViewX11::lastInput() {
     if (event.type == KeyPress) {
         Input::Source source;
         if (event.xkey.window == mainWindow) {
@@ -395,6 +390,15 @@ const Input GameViewX11::lastInput() {
     } else {
         return Input(Input::Source::Main);
     }
+}
+
+std::vector<Input> GameViewX11::processInputs() {
+    std::vector<Input> inputs;
+    while (XPending(display)) {
+        XNextEvent(display, &event);
+        inputs.emplace_back(lastInput());
+    }
+    return inputs;
 }
 
 

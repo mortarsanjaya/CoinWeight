@@ -10,7 +10,6 @@
 		401E20D0243D16FE0036AC34 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867EFB2624160B46004C43A3 /* SDL2.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		401E20D1243D16FE0036AC34 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40CA97E12425454B006D0147 /* SDL2_ttf.framework */; };
 		403739CB243BC57E00B1F3B8 /* gameviewsdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 403739CA243BC57E00B1F3B8 /* gameviewsdl.cpp */; };
-		403739CE243BC5CB00B1F3B8 /* sdlgraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 403739CC243BC5CA00B1F3B8 /* sdlgraphics.cpp */; };
 		40A2375124517271006DF78C /* coingroup.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 40A2375024517271006DF78C /* coingroup.hpp */; };
 		861B50D6242F9C3400262336 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 861B50DC243094AA00262336 /* gamecontroller.cpp */; };
@@ -53,8 +52,6 @@
 /* Begin PBXFileReference section */
 		403739C9243BC57E00B1F3B8 /* gameviewsdl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gameviewsdl.hpp; sourceTree = "<group>"; };
 		403739CA243BC57E00B1F3B8 /* gameviewsdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameviewsdl.cpp; sourceTree = "<group>"; };
-		403739CC243BC5CA00B1F3B8 /* sdlgraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sdlgraphics.cpp; sourceTree = "<group>"; };
-		403739CD243BC5CB00B1F3B8 /* sdlgraphics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sdlgraphics.hpp; sourceTree = "<group>"; };
 		40A2375024517271006DF78C /* coingroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coingroup.hpp; sourceTree = "<group>"; };
 		40CA97D1241DF15C006D0147 /* sdlexception.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sdlexception.cpp; sourceTree = "<group>"; };
 		40CA97D2241DF15C006D0147 /* sdlexception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sdlexception.hpp; sourceTree = "<group>"; };
@@ -128,8 +125,6 @@
 		403739C8243BC56300B1F3B8 /* SDL */ = {
 			isa = PBXGroup;
 			children = (
-				403739CC243BC5CA00B1F3B8 /* sdlgraphics.cpp */,
-				403739CD243BC5CB00B1F3B8 /* sdlgraphics.hpp */,
 				403739CA243BC57E00B1F3B8 /* gameviewsdl.cpp */,
 				403739C9243BC57E00B1F3B8 /* gameviewsdl.hpp */,
 			);
@@ -485,7 +480,6 @@
 				861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */,
 				861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */,
 				40A2375124517271006DF78C /* coingroup.hpp in Sources */,
-				403739CE243BC5CB00B1F3B8 /* sdlgraphics.cpp in Sources */,
 				861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */,
 				861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */,
 				861B50D6242F9C3400262336 /* (null) in Sources */,
@@ -510,7 +504,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -573,7 +567,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;

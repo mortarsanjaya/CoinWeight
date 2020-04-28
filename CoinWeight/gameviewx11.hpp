@@ -88,8 +88,8 @@ public:
     void drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight,
         const GameSettings &currSettings) override;
     
-    void receiveInput() override;
-    const Input lastInput() override;
+    Input lastInput() override;
+    std::vector<Input> processInputs() override;
 };
 
 #endif

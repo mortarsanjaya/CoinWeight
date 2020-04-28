@@ -69,8 +69,8 @@ public:
     void drawHistoryScreen(const History &history);
     
     // Input handling functions
-    virtual void receiveInput() = 0;
-    virtual const Input lastInput() = 0;
+    virtual Input lastInput() = 0;
+    virtual std::vector<Input> processInputs() = 0;
 };
 
 #endif
