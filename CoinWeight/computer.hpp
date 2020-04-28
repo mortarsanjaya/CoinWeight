@@ -22,9 +22,9 @@ public:
 	
 	// Weighing and guessing process
     virtual void beforeWeigh() = 0;
-	virtual const CoinStates pickToWeigh() const = 0;
+	virtual void pickToWeigh(CoinStates &coinStates) const = 0;
 	virtual void afterWeigh(const WeighResult weighResult) = 0;
-	virtual const CoinStates pickToGuess() const = 0;
+	virtual void pickToGuess(CoinStates &coinStates) const = 0;
     virtual const bool readyToGuess() const = 0;
     
 private:

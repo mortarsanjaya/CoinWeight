@@ -36,9 +36,9 @@ private:
 	
     // Overriding functions
 	void beforeWeigh() override;
-	const CoinStates pickToWeigh() const override;
+	void pickToWeigh(CoinStates &coinStates) const override;
 	void afterWeigh(const WeighResult weighResult) override;
-	const CoinStates pickToGuess() const override;
+	void pickToGuess(CoinStates &coinStates) const override;
     const bool readyToGuess() const override;
 };
 
