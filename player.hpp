@@ -29,8 +29,6 @@ private:
     CoinStates coinStates;
     History history;
     std::unique_ptr<Computer> computer;
-    
-    
 };
 
 #endif
