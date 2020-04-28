@@ -86,17 +86,6 @@ void GameModel::gameStart() {
         player = std::make_unique<Player>(settings.numOfCoins(), settings.gameLevel());
         screen.goToGamePlayComputerScreen();
     }
-    
-    /*
-    coinStates = std::make_unique<CoinStates>(settings.numOfCoins());
-    if (settings.isHumanMode()) {
-        screen.goToGamePlayHumanScreen(settings.numOfCoins(), coinsPerRow);
-    } else {
-        computer = ComputerFactory::createFactory(settings.gameLevel())->createComputer(settings.numOfCoins());
-        screen.goToGamePlayComputerScreen();
-        computerSetup();
-    }
-    */
 }
 
 void GameModel::gameOver() {
