@@ -26,7 +26,7 @@ ComputerMedium1::ComputerMedium1(const size_t numOfCoins) :
 Computer(numOfCoins), state(numOfCoins) {}
 
 ComputerMedium1::State::State(const size_t numOfCoins) :
-type{Type::OneRange}, range1{0, numOfCoins - 1} {}
+type{Type::OneRange}, range1{0, numOfCoins} {}
 
 
 
@@ -70,8 +70,8 @@ void ComputerMedium1::pickToGuess(CoinStates &coinStates) const {
         throw Exception<ComputerMedium1>("Should be weighing.");
     }
     
-    coinStates.moveToGuessGroup(state.range1.lower);
-    coinStates.moveToGuessGroup(state.range2.lower);
+    coinStates.moveToGuessGroup(state.range1.begin);
+    coinStates.moveToGuessGroup(state.range2.begin);
 }
 
 const bool ComputerMedium1::readyToGuess() const {
@@ -95,11 +95,11 @@ void ComputerMedium1::pickToWeighTwoRanges1(CoinStates &coinStates) const {
 
 void ComputerMedium1::pickToWeighPileEndSplit(CoinStates &coinStates,
 const State::Range &range, const size_t weighPileSize) {
-    for (size_t i = range.lower; i < range.lower + weighPileSize; ++i) {
+    for (size_t i = range.begin; i < range.begin + weighPileSize; ++i) {
         coinStates.moveToLeftWeighGroup(i);
     }
     
-    for (size_t i = range.upper; i > range.upper - weighPileSize; --i) {
+    for (size_t i = range.end - weighPileSize; i < range.end; ++i) {
         coinStates.moveToRightWeighGroup(i);
     }
 }
@@ -173,15 +173,15 @@ void ComputerMedium1::afterWeighBalance() {
 
 //************************** Helper functions for splitting with two fake coins
 void ComputerMedium1::splitCheckLeftHeavyTwoFakes() {
-    state.range1.lower += weighPileSizeTwoFakes(state.range1);
+    state.range1.begin += weighPileSizeTwoFakes(state.range1);
     switch (state.range1.size()) {
         case 0:
         case 1:
             throw Exception<ComputerMedium1>("Internal bug.");
         case 2:
             state.type = State::Type::Finish;
-            state.range2.lower = state.range1.lower + 1;
-            state.range2.upper = state.range2.lower;
+            state.range2.begin = state.range1.begin + 1;
+            state.range2.end = state.range2.begin + 1;
             break;
         default:
             break;
@@ -189,15 +189,15 @@ void ComputerMedium1::splitCheckLeftHeavyTwoFakes() {
 }
 
 void ComputerMedium1::splitCheckRightHeavyTwoFakes() {
-    state.range1.upper -= weighPileSizeTwoFakes(state.range1);
+    state.range1.end -= weighPileSizeTwoFakes(state.range1);
     switch (state.range1.size()) {
         case 0:
         case 1:
             throw Exception<ComputerMedium1>("Internal bug.");
         case 2:
             state.type = State::Type::Finish;
-            state.range2.lower = state.range1.lower + 1;
-            state.range2.upper = state.range2.lower;
+            state.range2.begin = state.range1.begin + 1;
+            state.range2.end = state.range2.begin + 1;
             break;
         default:
             break;
@@ -205,9 +205,9 @@ void ComputerMedium1::splitCheckRightHeavyTwoFakes() {
 }
 
 void ComputerMedium1::splitCheckBalanceTwoFakes() {
-    state.range2.upper = state.range1.upper;
-    state.range2.lower = state.range1.upper - weighPileSizeTwoFakes(state.range1) + 1;
-    state.range1.upper = state.range1.lower + weighPileSizeTwoFakes(state.range1) - 1;
+    state.range2.end = state.range1.end;
+    state.range2.begin = state.range1.end - weighPileSizeTwoFakes(state.range1);
+    state.range1.end = state.range1.begin + weighPileSizeTwoFakes(state.range1);
     switch (state.range1.size()) {
         case 0:
             throw Exception<ComputerMedium1>("Internal bug.");
@@ -224,20 +224,20 @@ void ComputerMedium1::splitCheckBalanceTwoFakes() {
 
 //************************** Static functions for general splitting with one fake coin
 void ComputerMedium1::splitLeftHeavyOneFake(State::Range &range) {
-    range.lower = range.upper - weighPileSizeOneFake(range) + 1;
+    range.begin = range.end - weighPileSizeOneFake(range);
 }
 
 void ComputerMedium1::splitRightHeavyOneFake(State::Range &range) {
-    range.upper = range.lower + weighPileSizeOneFake(range) - 1;
+    range.end = range.begin + weighPileSizeOneFake(range);
 }
 
 
 
 void ComputerMedium1::splitBalanceOneFake(State::Range &range) {
     const size_t weighPileSize = weighPileSizeOneFake(range);
-    range.lower += weighPileSize;
-    range.upper -= weighPileSize;
-    if (range.lower > range.upper) {
+    range.begin += weighPileSize;
+    range.end -= weighPileSize;
+    if (range.begin >= range.end) {
         throw Exception<ComputerMedium1>("Internal bug.");
     } // Should be dead but whatever
 }
@@ -276,5 +276,5 @@ void ComputerMedium1::checkRange2OneFake() {
 
 //************************** Range size checker
 const size_t ComputerMedium1::State::Range::size() const {
-    return (upper - lower + 1);
+    return end - begin;
 }

@@ -32,8 +32,8 @@ private:
         };
         
         struct Range {
-            size_t lower;
-            size_t upper;
+            size_t begin;
+            size_t end; // Just like STL iterators
             
             const size_t size() const;
         };
