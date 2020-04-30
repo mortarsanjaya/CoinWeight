@@ -8,12 +8,12 @@
 
 #include "gameview.hpp"
 
-//***************************************************** Destructor
+//************************** Destructor
 GameView::~GameView() {}
 
 
 
-//***************************************************** Non-virtual private methods
+//************************** Non-virtual private methods
 //**** Draw coins
 void GameView::drawCoins(const DrawingWindow window, const CoinStates &coinStates) {
     for (size_t i = 0; i < coinStates.totalSize(); ++i) {
@@ -37,7 +37,7 @@ void GameView::drawHistoryScreen(const Record &record,
 
 
 
-//***************************************************** Public methods
+//************************** Public methods
 void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates,
     const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight,
     const size_t numOfWeighsLeft, const size_t numOfWeighsMax,

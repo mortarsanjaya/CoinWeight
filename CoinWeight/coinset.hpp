@@ -14,9 +14,9 @@
 #include "guessresult.hpp"
 
 class CoinSet {
-    size_t numOfCoins;
-    size_t fakeCoinIndex1;
-    size_t fakeCoinIndex2;
+    size_t nCoins;
+    size_t fakeCoinI1;
+    size_t fakeCoinI2;
     
 	static constexpr size_t numOfFakeCoins = 2;
     const bool isFakeCoinIndex(const size_t index) const;
@@ -24,12 +24,15 @@ class CoinSet {
 public:
 	CoinSet(size_t numOfCoins);
     
-	const size_t size() const;
+	const size_t numOfCoins() const;
+    const size_t fakeCoinIndex1() const;
+    const size_t fakeCoinIndex2() const;
 	
 	// Game operations
 	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const GuessResult guessFakeCoins(const CoinStates &guess) const;
  
+    friend void test();
 };
 
 #endif

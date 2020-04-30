@@ -8,8 +8,9 @@
 #include "gameviewx11.hpp"
 #include "exception.hpp"
 #include <utility>
+#include <cmath>
 
-//***************************************************** Constructor
+//************************** Constructor
 GameViewX11::GameViewX11() {
     const int width = 800;
     const int height = 800;
@@ -37,7 +38,7 @@ GameViewX11::GameViewX11() {
     Colormap cmap;
 
     std::vector<std::string> colorVals = {
-        "black", "red", "blue", "green", "gold"
+        "black", "white", "red", "blue", "green", "gold"
     };
     
     cmap = DefaultColormap(display, DefaultScreen(display));
@@ -71,7 +72,7 @@ GameViewX11::GameViewX11() {
 
 
 
-//***************************************************** Private methods
+//************************** Private methods
 //******************** Basic drawing functions
 void GameViewX11::drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed) {
     XSetForeground(display, gc, colors[color]);
@@ -141,6 +142,104 @@ void GameViewX11::drawWeighResultText(const DrawingWindow window, const WeighRes
                 return std::pair<std::string, int>("Invalid move!", Red);
         }
     }();
+    
+    // Hack: Draw scale as well, lol
+    const Window &win = (window == DrawingWindow::Main) ? mainWindow : historyWindow;
+    {
+        
+        std::vector<XPoint> xpoints {
+            {95, 180},
+            {95, 280},
+            {90, 280},
+            {60, 300},
+            {50, 320},
+            {50, 340},
+            {150, 340},
+            {150, 320},
+            {140, 300},
+            {110, 280},
+            {105, 280},
+            {105, 180}
+        };
+        
+        XSetForeground(display, gc, colors[Blue]);
+        XFillPolygon(display, win, gc, xpoints.begin().base(), xpoints.size(), Nonconvex, CoordModeOrigin);
+    }
+    
+    {
+        const int radius = 20;
+        XSetForeground(display, gc, colors[Green]);
+        XFillArc(display, win, gc, 100 - radius, 181 - 2 * radius, radius * 2, radius * 2, 0, circle_full_arc);
+    }
+    
+    {
+        const auto anchors = [&weighResult]() -> std::pair<XPoint, XPoint> {
+            const int y_tilt = 20;
+            const int y_base = 180;
+            const int x_base = 100;
+            const int x_shift = 50;
+            switch (weighResult) {
+                case WeighResult::Start:
+                case WeighResult::Invalid:
+                case WeighResult::Balance:
+                    return {{x_base - x_shift, y_base}, {x_base + x_shift, y_base}};
+                case WeighResult::LeftHeavy:
+                    return {{x_base - x_shift, y_base + y_tilt}, {x_base + x_shift, y_base - y_tilt}};
+                case WeighResult::RightHeavy:
+                    return {{x_base - x_shift, y_base - y_tilt}, {x_base + x_shift, y_base + y_tilt}};
+            }
+        }();
+        
+        const short center_anchor_y_shift = 50;
+        const XPoint left_anchor = anchors.first;
+        const XPoint right_anchor = anchors.second;
+        const XPoint left_center = {left_anchor.x, static_cast<short>(left_anchor.y + center_anchor_y_shift)};
+        const XPoint right_center = {right_anchor.x, static_cast<short>(right_anchor.y + center_anchor_y_shift)};
+        
+        const int one_degree_scale = 64;
+        const int south_degree = 270;
+        const int range = 100;
+        const int radius = 25;
+        const int angle1 = one_degree_scale * (south_degree - range / 2);
+        const int angle2 = one_degree_scale * range;
+        
+        const auto weighpoints = [&left_center, &right_center]() -> std::vector<XPoint> {
+            const double converter = M_PI / (double(one_degree_scale) * 180);
+            const double center_x_shift = - radius * cos(double(angle1) * converter);
+            const double center_y_shift = - radius * sin(double(angle1) * converter);
+            return std::vector<XPoint> {
+                {static_cast<short>(left_center.x - center_x_shift), static_cast<short>(left_center.y + center_y_shift)},
+                {static_cast<short>(left_center.x + center_x_shift), static_cast<short>(left_center.y + center_y_shift)},
+                {static_cast<short>(right_center.x - center_x_shift), static_cast<short>(right_center.y + center_y_shift)},
+                {static_cast<short>(right_center.x + center_x_shift), static_cast<short>(right_center.y + center_y_shift)}
+            };
+        }();
+        
+        XSetForeground(display, gc, colors[Black]);
+        XDrawLine(display, win, gc, left_anchor.x, left_anchor.y, right_anchor.x, right_anchor.y);
+        XDrawLine(display, win, gc, left_anchor.x, left_anchor.y, weighpoints[0].x, weighpoints[0].y);
+        XDrawLine(display, win, gc, left_anchor.x, left_anchor.y, weighpoints[1].x, weighpoints[1].y);
+        XDrawLine(display, win, gc, right_anchor.x, right_anchor.y, weighpoints[2].x, weighpoints[2].y);
+        XDrawLine(display, win, gc, right_anchor.x, right_anchor.y, weighpoints[3].x, weighpoints[3].y);
+        
+        XSetForeground(display, gc, colors[Red]);
+        XFillArc(display, win, gc, left_center.x - radius, left_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
+        XSetForeground(display, gc, colors[Blue]);
+        XFillArc(display, win, gc, right_center.x - radius, right_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
+        
+        XSetForeground(display, gc, colors[White]);
+        std::vector<XPoint> leftTrianglePoints{left_center, weighpoints[0], weighpoints[1]};
+        XFillPolygon(display, win, gc, leftTrianglePoints.begin().base(), leftTrianglePoints.size(), Convex, CoordModeOrigin);
+        std::vector<XPoint> rightTrianglePoints{right_center, weighpoints[2], weighpoints[3]};
+        XFillPolygon(display, win, gc, rightTrianglePoints.begin().base(), rightTrianglePoints.size(), Convex, CoordModeOrigin);
+        
+        XSetForeground(display, gc, colors[Black]);
+        XDrawArc(display, win, gc, left_center.x - radius, left_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
+        XDrawArc(display, win, gc, right_center.x - radius, right_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
+    }
+        
+    XSetForeground(display, gc, colors[defaultFGColor]);
+    
 
     switch (window) {
         case GameView::DrawingWindow::Main:
@@ -255,7 +354,7 @@ void GameViewX11::clearScreen(const DrawingWindow window) {
 
 
 
-//***************************************************** Public methods
+//************************** Public methods
 void GameViewX11::drawTitleScreen(TitleScreen::Highlight screenHighlight) {
     const int stringHeight = 20;
     clearScreen(DrawingWindow::Main);
@@ -294,7 +393,7 @@ void GameViewX11::drawInstructionScreen() {
         "Press arrow keys to select coins.",
         "Press '1' to move selected coin to the red (left) set.",
         "Press '2' to move selected coin to the blue (right) set.",
-        "Press '2' to move selected coin to the green (guess) set.",
+        "Press '3' to move selected coin to the green (guess) set.",
         "Press 'w' to weigh.",
         "Press 'g' to guess.",
         "Press 'h' to switch to history."
@@ -321,7 +420,6 @@ void GameViewX11::drawInstructionScreen() {
         }
     }
     
-    //sleep(1);
     drawReturnButton();
     XFlush(display);
 }
@@ -329,9 +427,8 @@ void GameViewX11::drawInstructionScreen() {
 void GameViewX11::drawCreditScreen() {
     clearScreen(DrawingWindow::Main);
     drawString(DrawingWindow::Main, 300, 300, "---", defaultFGColor, false);
-    
-    //sleep(1);
     drawReturnButton();
+    XFlush(display);
 }
 
 void GameViewX11::drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight, const GameSettings &currSettings)
@@ -403,7 +500,7 @@ std::vector<Input> GameViewX11::processInputs() {
 
 
 
-//***************************************************** Game View X11 Exception header message
+//************************** Game View X11 Exception header message
 template<> const std::string exceptionHeaderMessage<GameViewX11>() {
     return "Game View X11 Failure: ";
 }

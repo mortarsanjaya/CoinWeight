@@ -17,6 +17,7 @@
 #include "coinstates.hpp"
 #include "computer.hpp"
 #include "history.hpp"
+#include "player.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 
@@ -29,7 +30,6 @@ public:
     const GameScreen::Page currScreen() const;
     const CoinStates &currentCoinStates() const;
     const bool isHumanMode() const;
-    const bool isComputerReadyToGuess() const;
     const History &currentHistory() const;
     
     // Game core number of weighings
@@ -56,12 +56,8 @@ public:
 
 private:
     GameScreen screen;
-    
     std::unique_ptr<GameCore> gameCore;
-    
-    std::unique_ptr<CoinStates> coinStates;
-    std::unique_ptr<Computer> computer;
-    History history;
+    std::unique_ptr<Player> player;
     
     WeighResult lastWeighResult;
     GuessResult lastGuessResult;
@@ -74,7 +70,6 @@ private:
     void gameStart();
     void gameOver();
     void gameCleanUp(); // Clean-up after game over
-    void computerSetup(); // Sets up computer for computer game
     
     // Game moves operations
     void compareWeight();

@@ -6,35 +6,83 @@
 //  Copyright © 2020 -. All rights reserved.
 //
 
+#include "coinset.hpp"
+#include "computer.hpp"
+#include "computerhard.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
 #include <chrono>
-#include <thread>
 #include "gamemodel.hpp"
 #include "gameviewx11.hpp"
 #include "gameviewsdl.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
 
-using namespace std;
+template <size_t n> static const size_t log_ceil(size_t k) {
+	if (k == 0) exit(100);
+	size_t res = 0;
+	while (k > 1) {
+		k = (k - 1) / n + 1;
+		++res;
+	}
+	return res;
+}
 
-int main() {
+void test() {
+    for (size_t numOfCoins = 3; numOfCoins <= 50; ++numOfCoins) {
+        auto coinSet = std::make_unique<CoinSet>(numOfCoins);
+        size_t worstCaseWeigh = 0;
+        for (size_t i = 0; i < numOfCoins; ++i) {
+            for (size_t j = i + 1; j < numOfCoins; ++j) {
+                coinSet->fakeCoinI1 = i;
+                coinSet->fakeCoinI2 = j;
+                auto computer = std::make_unique<ComputerHard>(numOfCoins);
+                CoinStates coinStates(numOfCoins);
+                size_t numOfWeigh = 0;
+                while (true) {
+                    if (computer->readyToGuess()) {
+                        computer->pickToGuess(coinStates);
+                        const GuessResult guessResult = coinSet->guessFakeCoins(coinStates);
+                        if (guessResult == GuessResult::Correct) break;
+                        else exit(1);
+                    } else {
+                        computer->beforeWeigh();
+                        computer->pickToWeigh(coinStates);
+                        const WeighResult weighResult = coinSet->compareWeight(coinStates);
+                        computer->afterWeigh(weighResult);
+                        coinStates.resetStates();
+                        ++numOfWeigh;
+                    }
+                }
+                
+                if (worstCaseWeigh < numOfWeigh) {
+                    worstCaseWeigh = numOfWeigh;
+                }
+            }
+        }
+        
+        std::cout << numOfCoins << " " << worstCaseWeigh << " " <<
+            log_ceil<3>(numOfCoins * (numOfCoins - 1) / 2) + 1 << std::endl;
+    }
+}
+
+void play() {
     std::unique_ptr<GameModel> model;
     std::unique_ptr<GameView> view;
     GameController controller;
     
     model = std::make_unique<GameModel>();
     if (model == nullptr) {
-        cout << "Oops. Cannot initialize model." << endl;
-        return 0;
+        std::cout << "Oops. Cannot initialize model." << std::endl;
+        return;
     }
     
     view = std::make_unique<GameViewX11>();
     //view = std::make_unique<GameViewSDL>();
     if (view == nullptr) {
-        cout << "Oops. Cannot open display." << endl;
-        return 0;
+        std::cout << "Oops. Cannot open display." << std::endl;
+        return;
     }
     
     sleep(1);
@@ -51,4 +99,10 @@ int main() {
         std::cout << diff.count() << "\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
     }
+}
+
+using namespace std;
+
+int main() {
+    play();
 }

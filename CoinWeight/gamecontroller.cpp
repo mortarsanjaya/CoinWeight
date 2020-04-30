@@ -8,12 +8,12 @@
 
 #include "gamecontroller.hpp"
 
-//***************************************************** Constructor
+//************************** Constructor
 GameController::GameController() {}
 
 
 
-//***************************************************** Input function
+//************************** Input function
 //**** Arrow, Main
 void GameController::onMainScreenArrowInputUp(GameModel &model) {
     model.mainScreenOnUpButton();
@@ -129,7 +129,7 @@ void GameController::onCharInput(GameModel &model, const char charInp) {
 
 
 
-//***************************************************** Input process function
+//************************** Input process function
 void GameController::onReceivingInput(GameModel &model, const Input &inp) {
     switch (inp.sourceScreen()) {
         case Input::Source::Main:

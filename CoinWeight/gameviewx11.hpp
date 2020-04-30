@@ -25,7 +25,7 @@ class GameViewX11 : public GameView {
     XEvent event;
     std::vector<unsigned long> colors;
     
-    enum { Black, Red, Blue, Green, Gold };
+    enum { Black, White, Red, Blue, Green, Gold };
     
     // The following numbers are sadly hard-coded
     // Need to find a way to get their value in a better way
@@ -53,6 +53,7 @@ class GameViewX11 : public GameView {
     const Window windowToDraw(const DrawingWindow window) const;
     
     // Draw weigh result text
+    // HACKED INTO DRAWING THE SCALE AS WELL
     void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) override;
     
     // Draw coin

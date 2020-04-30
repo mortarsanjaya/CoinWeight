@@ -9,7 +9,7 @@
 #include "history.hpp"
 #include "exception.hpp"
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const size_t History::size() const {
     return listOfRecords.size();
 }
@@ -31,7 +31,7 @@ const bool History::empty() const {
 
 
 
-//***************************************************** Modifying functions
+//************************** Modifying functions
 void History::resetIndex() {
     recordIndex = size() - 1;
 }
@@ -64,7 +64,7 @@ void History::decrementIndex() {
 }
 
 
-//***************************************************** History Failure
+//************************** History Failure
 template<> const std::string exceptionHeaderMessage<History>() {
     return "History Failure: ";
 }

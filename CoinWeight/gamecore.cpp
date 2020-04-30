@@ -9,7 +9,7 @@
 #include "gamecore.hpp"
 #include "exception.hpp"
 
-//***************************************************** Helper functions
+//************************** Helper functions
 // Computes ceiling(log_n k)
 template <size_t n> static const size_t log_ceil(size_t k) {
     if (k == 0) exit(100);
@@ -23,30 +23,31 @@ template <size_t n> static const size_t log_ceil(size_t k) {
 
 
 
-//***************************************************** Private static method
+//************************** Private static method
 const size_t GameCore::maxComparisons(size_t numOfCoins, GameLevel level) {
-    switch (level) {
-        case GameLevel::Easy:
-            return numOfCoins;
-        case GameLevel::Medium:
-            return 2 * log_ceil<3>(numOfCoins) + 3;
-        case GameLevel::Hard:
-            return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
-    }
+	switch (level) {
+		case GameLevel::Easy:
+			return numOfCoins;
+		case GameLevel::Medium:
+			return log_ceil<2>(numOfCoins + 1) + log_ceil<2>(numOfCoins + 2) - 3;
+		case GameLevel::Hard:
+            // return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
+			return log_ceil<3>(numOfCoins * (numOfCoins - 1) / 2) + 1;
+	}
 }
 
 
 
-//***************************************************** Constructor
+//************************** Constructor
 GameCore::GameCore(int numOfCoins, GameLevel level) :
 setOfCoins(std::make_unique<CoinSet>(numOfCoins)) , level(level),
 numOfWeighingsCounter(maxComparisons(numOfCoins, level)) {}
 
 
 
-//***************************************************** Field accessors
+//************************** Field accessors
 const size_t GameCore::numOfCoins() const {
-    return setOfCoins->size();
+    return setOfCoins->numOfCoins();
 }
 
 const GameLevel GameCore::gameLevel() const {
@@ -58,12 +59,12 @@ const size_t GameCore::numOfWeighingsLeft() const {
 }
 
 const size_t GameCore::numOfWeighingsMax() const {
-    return maxComparisons(setOfCoins->size(), level);
+    return maxComparisons(setOfCoins->numOfCoins(), level);
 }
 
 
 
-//***************************************************** Game operations
+//************************** Game operations
 const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     if (numOfWeighingsCounter == 0) {
         return WeighResult::Invalid;

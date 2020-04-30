@@ -9,35 +9,31 @@
 #include "gamemodel.hpp"
 #include "gameview.hpp"
 #include "computerhard.hpp"
+#include "computerfactory.hpp"
 #include "exception.hpp"
 #include <unistd.h>
 
-//***************************************************** Constructor
-GameModel::GameModel() : screen(), gameCore(), coinStates(), computer(),
-    history(), lastWeighResult(WeighResult::Start), lastGuessResult(GuessResult::Invalid)
+//************************** Constructor
+GameModel::GameModel() : screen(), gameCore(), player(), lastWeighResult(WeighResult::Start), lastGuessResult(GuessResult::Invalid)
 {}
 
 
 
-//***************************************************** "Field accessors"
+//************************** "Field accessors"
 const GameScreen::Page GameModel::currScreen() const {
     return screen.currentScreen();
 }
 
 const CoinStates &GameModel::currentCoinStates() const {
-    return *coinStates;
-}
-
-const bool GameModel::isComputerReadyToGuess() const {
-    return computer->readyToGuess();
+    return player->currStates();
 }
 
 const bool GameModel::isHumanMode() const {
-    return (!computer);
+    return player->isHuman();
 }
 
 const History &GameModel::currentHistory() const {
-    return history;
+    return player->currHistory();
 }
 
 //**** Game core number of weighings
@@ -51,7 +47,7 @@ const size_t GameModel::numOfWeighingsLeft() const {
 
 
 
-//***************************************************** Screen transition functions
+//************************** Screen transition functions
 //**** Helper
 void GameModel::goFromTitleScreen() {
     if (screen.currentScreen() != GameScreen::Page::Title) {
@@ -82,13 +78,13 @@ void GameModel::gameStart() {
     
     const GameSettings &settings = screen.gameOptionSettings();
     gameCore = std::make_unique<GameCore>(settings.numOfCoins(), settings.gameLevel());
-    coinStates = std::make_unique<CoinStates>(settings.numOfCoins());
+    
     if (settings.isHumanMode()) {
+        player = std::make_unique<Player>(settings.numOfCoins());
         screen.goToGamePlayHumanScreen(settings.numOfCoins(), coinsPerRow);
     } else {
-        computer = std::make_unique<ComputerHard>(settings.numOfCoins());
+        player = std::make_unique<Player>(settings.numOfCoins(), settings.gameLevel());
         screen.goToGamePlayComputerScreen();
-        computerSetup();
     }
 }
 
@@ -98,79 +94,54 @@ void GameModel::gameOver() {
 
 void GameModel::gameCleanUp() {
     gameCore.reset();
-    coinStates.reset();
-    computer.reset();
-    history.clear();
+    player.reset();
     lastWeighResult = WeighResult::Start;
     lastGuessResult = GuessResult::Invalid;
 }
 
-void GameModel::computerSetup() {
-    if (isHumanMode()) {
-        throw Exception<GameModel>("Not in game play computer mode.");
-    }
-    
-    if (computer->readyToGuess()) {
-        *coinStates = computer->pickToGuess();
-    } else {
-        computer->beforeWeigh();
-        *coinStates = computer->pickToWeigh();
-    }
-}
 
 
-
-//***************************************************** Coin states manipulation
+//************************** Coin states manipulation
 void GameModel::deselectCoin() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->deselect(screen.gamePlayHumanCoinHighlight());
+        player->deselectCoin(screen.gamePlayHumanCoinHighlight());
     }
 }
 
 void GameModel::moveCoinToLeftGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToLeftWeighGroup(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToLeftGroup(screen.gamePlayHumanCoinHighlight());
     }
 }
 
 void GameModel::moveCoinToRightGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToRightWeighGroup(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToRightGroup(screen.gamePlayHumanCoinHighlight());
     }
 }
 
 void GameModel::selectCoinToGuess() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        coinStates->moveToGuessGroup(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToGuess(screen.gamePlayHumanCoinHighlight());
     }
 }
 
 
 
-//***************************************************** Game moves operations
+//************************** Game moves operations
 //**** Title
 void GameModel::compareWeight() {
     
-    const WeighResult weighResult = gameCore->compareWeight(*coinStates);
+    const WeighResult weighResult = gameCore->compareWeight(player->currStates());
     lastWeighResult = weighResult;
     if (weighResult == WeighResult::Invalid) return;
     
-    if (!isHumanMode()) {
-        computer->afterWeigh(weighResult);
-        screen.resetHighlight();
-    } else {
-        screen.resetHighlight();
-    }
-    
-    history.addRecord(*coinStates, weighResult);
-    coinStates->resetStates();
-    if (!isHumanMode()) {
-        computerSetup();
-    }
+    player->receiveWeighResult(weighResult);
+    screen.resetHighlight();
 }
 
 void GameModel::guessFakeCoins() {
-    lastGuessResult = gameCore->guessFakeCoins(*coinStates);
+    lastGuessResult = gameCore->guessFakeCoins(player->currStates());
     if (lastGuessResult == GuessResult::Invalid) {
         lastWeighResult = WeighResult::Invalid;
     } else {
@@ -200,7 +171,7 @@ void GameModel::humanGameMove() {
 void GameModel::computerGameMove() {
     if (currScreen() != GameScreen::Page::GamePlayComputer) {
         throw Exception<GameModel>("Computer Game Move Failure: Not a computer game.");
-    } else if (computer->readyToGuess()) {
+    } else if (player->readyToGuess()) {
         guessFakeCoins();
     } else {
         compareWeight();
@@ -209,18 +180,18 @@ void GameModel::computerGameMove() {
 
 
 
-//***************************************************** History index manipulation
+//************************** History index manipulation
 void GameModel::historyIncrementIndex() {
-    history.incrementIndex();
+    player->historyIncrementIndex();
 }
 
 void GameModel::historyDecrementIndex() {
-    history.decrementIndex();
+    player->historyDecrementIndex();
 }
 
 
 
-//***************************************************** Model logic functions
+//************************** Model logic functions
 void GameModel::mainScreenOnUpButton() {
     screen.highlightUp();
 }
@@ -274,7 +245,7 @@ void GameModel::historyScreenOnRightButton() {
 
 
 
-//***************************************************** View update functions
+//************************** View update functions
 //**** Helper
 void GameModel::updateViewTitleScreen(GameView *view) {
     view->drawTitleScreen(screen.titleHighlight());
@@ -293,15 +264,15 @@ void GameModel::updateViewGameOptionScreen(GameView *view) {
 }
 
 void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
-    view->drawGamePlayHumanScreen(*coinStates, screen.gamePlayHumanScreenHighlight(), screen.gamePlayHumanCoinHighlight(),
+    view->drawGamePlayHumanScreen(player->currStates(), screen.gamePlayHumanScreenHighlight(), screen.gamePlayHumanCoinHighlight(),
         gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsMax(), lastWeighResult);
-    view->drawHistoryScreen(history);
+    view->drawHistoryScreen(player->currHistory());
 }
 
 void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
-    view->drawGamePlayComputerScreen(*coinStates, gameCore->numOfWeighingsLeft(),
+    view->drawGamePlayComputerScreen(player->currStates(), gameCore->numOfWeighingsLeft(),
         gameCore->numOfWeighingsMax(), lastWeighResult);
-    view->drawHistoryScreen(history);
+    view->drawHistoryScreen(player->currHistory());
 }
 
 void GameModel::updateViewGameOverScreen(GameView *view) {
@@ -337,7 +308,7 @@ void GameModel::updateView(GameView *view) {
 }
 
 
-//***************************************************** Game Model Failure
+//************************** Game Model Failure
 template<> const std::string exceptionHeaderMessage<GameModel>() {
     return "Game Model Failure: ";
 }

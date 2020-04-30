@@ -14,6 +14,18 @@
 #include <memory>
 
 class ComputerHard : public Computer {
+public:
+	ComputerHard(size_t numOfCoins);
+	~ComputerHard();
+ 
+    // Overriding functions
+	void beforeWeigh() override;
+	void pickToWeigh(CoinStates &coinStates) const override;
+	void afterWeigh(const WeighResult weighResult) override;
+	void pickToGuess(CoinStates &coinStates) const override;
+    const bool readyToGuess() const override;
+ 
+private:
 
 	// States and strategy: How the results are handled
 	struct State {
@@ -28,17 +40,6 @@ class ComputerHard : public Computer {
 	
 	std::unique_ptr<State> state;
 	Strategy strategy;
-	
-    // Overriding functions
-	void beforeWeigh() override;
-	const CoinStates pickToWeigh() const override;
-	void afterWeigh(const WeighResult weighResult) override;
-	const CoinStates pickToGuess() const override;
-    const bool readyToGuess() const override;
-	
-public:
-	ComputerHard(size_t numOfCoins, size_t numOfFakeCoins = 2);
-	~ComputerHard();
 };
 
 #endif
