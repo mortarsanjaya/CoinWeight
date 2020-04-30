@@ -11,7 +11,7 @@
 
 #include "computer.hpp"
 
-class ComputerEasy1 : public Computer {
+class ComputerEasy1 final : public Computer {
 public:
 	ComputerEasy1(const size_t numOfCoins);
  
@@ -41,11 +41,11 @@ private:
     State state;
     size_t testIndex;
     
-    void firstMoveAfterWeigh(const WeighResult weighResult);
-    void secondMoveAfterWeigh(const WeighResult weighResult);
-    void coin0IsFakeAfterWeigh(const WeighResult weighResult);
-    void coin0IsReal0AfterWeigh(const WeighResult weighResult);
-    void coin0IsReal1AfterWeigh(const WeighResult weighResult);
+    void afterWeighFirstMove(const WeighResult weighResult);
+    void afterWeighSecondMove(const WeighResult weighResult);
+    void afterWeighCoin0IsFake(const WeighResult weighResult);
+    void afterWeighCoin0IsReal0(const WeighResult weighResult);
+    void afterWeighCoin0IsReal1(const WeighResult weighResult);
 };
 
 #endif

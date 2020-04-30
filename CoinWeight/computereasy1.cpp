@@ -9,6 +9,15 @@
 #include "computereasy1.hpp"
 #include "exception.hpp"
 
+/*
+Small documentation for the computer strategy:
+The computer compares Coin 0 against all other single coins each
+If Coin 0 is fake, the first two moves finds that it is indeed fake
+In fact, in this case, if the second move is necessary, Coin 0 and 1 are fake
+In both cases, after determining if Coin 0 is genuine, all other coins
+    can be determined by comparing against coin 0
+ */
+
 //************************** Constructor
 ComputerEasy1::ComputerEasy1(const size_t numOfCoins) :
 Computer{numOfCoins}, state{State::Type::FirstMove}, testIndex{1} {}
@@ -28,15 +37,15 @@ void ComputerEasy1::pickToWeigh(CoinStates &coinStates) const {
 void ComputerEasy1::afterWeigh(const WeighResult weighResult) {
     switch (state.type) {
         case State::Type::FirstMove:
-            return firstMoveAfterWeigh(weighResult);
+            return afterWeighFirstMove(weighResult);
         case State::Type::SecondMove:
-            return secondMoveAfterWeigh(weighResult);
+            return afterWeighSecondMove(weighResult);
         case State::Type::Coin0IsFake:
-            return coin0IsFakeAfterWeigh(weighResult);
+            return afterWeighCoin0IsFake(weighResult);
         case State::Type::Coin0IsReal0:
-            return coin0IsReal0AfterWeigh(weighResult);
+            return afterWeighCoin0IsReal0(weighResult);
         case State::Type::Coin0IsReal1:
-            return coin0IsReal1AfterWeigh(weighResult);
+            return afterWeighCoin0IsReal1(weighResult);
         case State::Type::Finish:
             throw Exception<ComputerEasy1>("Should be guessing.");
     }
@@ -58,7 +67,7 @@ const bool ComputerEasy1::readyToGuess() const {
 
 
 //************************** Private member methods
-void ComputerEasy1::firstMoveAfterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::afterWeighFirstMove(const WeighResult weighResult) {
     switch (weighResult) {
         case WeighResult::Balance:
             state.type = State::Type::SecondMove;
@@ -77,7 +86,7 @@ void ComputerEasy1::firstMoveAfterWeigh(const WeighResult weighResult) {
     ++testIndex;
 }
 
-void ComputerEasy1::secondMoveAfterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::afterWeighSecondMove(const WeighResult weighResult) {
     switch (weighResult) {
         case WeighResult::Balance:
             state.type = State::Type::Coin0IsReal0;
@@ -97,7 +106,7 @@ void ComputerEasy1::secondMoveAfterWeigh(const WeighResult weighResult) {
     ++testIndex;
 }
 
-void ComputerEasy1::coin0IsFakeAfterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::afterWeighCoin0IsFake(const WeighResult weighResult) {
     switch (weighResult) {
         case WeighResult::Balance:
             state.type = State::Type::Finish;
@@ -111,7 +120,7 @@ void ComputerEasy1::coin0IsFakeAfterWeigh(const WeighResult weighResult) {
     ++testIndex;
 }
 
-void ComputerEasy1::coin0IsReal0AfterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::afterWeighCoin0IsReal0(const WeighResult weighResult) {
     switch (weighResult) {
         case WeighResult::Balance:
             break;
@@ -125,7 +134,7 @@ void ComputerEasy1::coin0IsReal0AfterWeigh(const WeighResult weighResult) {
     ++testIndex;
 }
 
-void ComputerEasy1::coin0IsReal1AfterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::afterWeighCoin0IsReal1(const WeighResult weighResult) {
     switch (weighResult) {
         case WeighResult::Balance:
             break;

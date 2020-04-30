@@ -32,6 +32,7 @@ public:
 	const WeighResult compareWeight(const CoinStates &weighing) const;
 	const GuessResult guessFakeCoins(const CoinStates &guess) const;
  
+    friend void test();
 };
 
 #endif

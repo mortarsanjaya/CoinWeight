@@ -29,9 +29,10 @@ const size_t GameCore::maxComparisons(size_t numOfCoins, GameLevel level) {
 		case GameLevel::Easy:
 			return numOfCoins;
 		case GameLevel::Medium:
-			return 2 * log_ceil<3>(numOfCoins) + 3;
+			return log_ceil<2>(numOfCoins + 1) + log_ceil<2>(numOfCoins + 2) - 3;
 		case GameLevel::Hard:
-			return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
+            // return log_ceil<3>(numOfCoins) + log_ceil<3>((numOfCoins + 1) / 2);
+			return log_ceil<3>(numOfCoins * (numOfCoins - 1) / 2) + 1;
 	}
 }
 

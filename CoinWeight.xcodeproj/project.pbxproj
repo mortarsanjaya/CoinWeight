@@ -26,6 +26,7 @@
 		86219BE324500FF9005E4F93 /* gameplaycomputerscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE124500FF9005E4F93 /* gameplaycomputerscreen.cpp */; };
 		86219BE62450105A005E4F93 /* gameoverscreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE42450105A005E4F93 /* gameoverscreen.cpp */; };
 		864467BE245A743900442BD8 /* computereasy1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BC245A743900442BD8 /* computereasy1.cpp */; };
+		864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BF245AB0C100442BD8 /* computermedium1.cpp */; };
 		865B163224579966005DE924 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B163024579966005DE924 /* player.cpp */; };
 		865B16392457BB18005DE924 /* computerfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B16382457BB18005DE924 /* computerfactory.cpp */; };
 		865B165224581739005DE924 /* computereasyfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B165024581739005DE924 /* computereasyfactory.cpp */; };
@@ -75,6 +76,8 @@
 		8625C7D1242AA68F00558B55 /* coinstates.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinstates.hpp; sourceTree = "<group>"; };
 		864467BC245A743900442BD8 /* computereasy1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computereasy1.cpp; sourceTree = "<group>"; };
 		864467BD245A743900442BD8 /* computereasy1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computereasy1.hpp; sourceTree = "<group>"; };
+		864467BF245AB0C100442BD8 /* computermedium1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computermedium1.cpp; sourceTree = "<group>"; };
+		864467C0245AB0C100442BD8 /* computermedium1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computermedium1.hpp; sourceTree = "<group>"; };
 		865B163024579966005DE924 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = SOURCE_ROOT; };
 		865B163124579966005DE924 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = SOURCE_ROOT; };
 		865B16352457AFCF005DE924 /* computerfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerfactory.hpp; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 			children = (
 				864467BC245A743900442BD8 /* computereasy1.cpp */,
 				864467BD245A743900442BD8 /* computereasy1.hpp */,
+				864467BF245AB0C100442BD8 /* computermedium1.cpp */,
+				864467C0245AB0C100442BD8 /* computermedium1.hpp */,
 				869C4BE02402EE0C00C3DE84 /* computerhard.cpp */,
 				869C4BE12402EE0C00C3DE84 /* computerhard.hpp */,
 			);
@@ -500,6 +505,7 @@
 				86219BE324500FF9005E4F93 /* gameplaycomputerscreen.cpp in Sources */,
 				865B16552458174D005DE924 /* computermediumfactory.cpp in Sources */,
 				864467BE245A743900442BD8 /* computereasy1.cpp in Sources */,
+				864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */,
 				86C1C66F2437A83F007E5B64 /* gameview.cpp in Sources */,
 				861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */,
 				86219BDA244FFB07005E4F93 /* creditscreen.cpp in Sources */,
