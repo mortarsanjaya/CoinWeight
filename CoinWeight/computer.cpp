@@ -10,11 +10,3 @@
 
 //************************** Constructor and Destructor
 Computer::Computer(size_t numOfCoins) : nCoins(numOfCoins) {}
-Computer::~Computer() {}
-
-
-
-//************************** Field accessors
-const size_t Computer::numOfCoins() const {
-    return nCoins;
-}

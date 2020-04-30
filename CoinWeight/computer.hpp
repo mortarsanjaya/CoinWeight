@@ -16,9 +16,7 @@
 class Computer {
 public:
 	Computer(size_t numOfCoins);
-	virtual ~Computer();
-	
-	const size_t numOfCoins() const;
+	virtual ~Computer() = default;
 	
 	// Weighing and guessing process
     virtual void beforeWeigh() = 0;
@@ -27,8 +25,8 @@ public:
 	virtual void pickToGuess(CoinStates &coinStates) const = 0;
     virtual const bool readyToGuess() const = 0;
     
-private:
-    size_t nCoins;
+protected:
+    const size_t nCoins;
 };
 
 #endif

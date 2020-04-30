@@ -7,8 +7,8 @@
 //
 
 #include "computereasyfactory.hpp"
-#include "computerhard.hpp"
+#include "computereasy1.hpp"
 
 std::unique_ptr<Computer> ComputerEasyFactory::createComputer(const size_t numOfCoins) {
-    return std::make_unique<ComputerHard>(numOfCoins);
+    return std::make_unique<ComputerEasy1>(numOfCoins);
 }

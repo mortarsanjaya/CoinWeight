@@ -9,6 +9,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
+#include <chrono>
 #include "gamemodel.hpp"
 #include "gameviewx11.hpp"
 #include "gamecontroller.hpp"
