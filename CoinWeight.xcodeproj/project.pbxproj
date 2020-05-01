@@ -78,14 +78,14 @@
 		864467BD245A743900442BD8 /* computereasy1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computereasy1.hpp; sourceTree = "<group>"; };
 		864467BF245AB0C100442BD8 /* computermedium1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computermedium1.cpp; sourceTree = "<group>"; };
 		864467C0245AB0C100442BD8 /* computermedium1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computermedium1.hpp; sourceTree = "<group>"; };
-		865B163024579966005DE924 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = SOURCE_ROOT; };
-		865B163124579966005DE924 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = SOURCE_ROOT; };
+		865B163024579966005DE924 /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = player.cpp; path = CoinWeight/player.cpp; sourceTree = SOURCE_ROOT; };
+		865B163124579966005DE924 /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = player.hpp; path = CoinWeight/player.hpp; sourceTree = SOURCE_ROOT; };
 		865B16352457AFCF005DE924 /* computerfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerfactory.hpp; sourceTree = "<group>"; };
 		865B16382457BB18005DE924 /* computerfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerfactory.cpp; sourceTree = "<group>"; };
 		865B165024581739005DE924 /* computereasyfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computereasyfactory.cpp; sourceTree = "<group>"; };
 		865B165124581739005DE924 /* computereasyfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computereasyfactory.hpp; sourceTree = "<group>"; };
-		865B16532458174D005DE924 /* computermediumfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computermediumfactory.cpp; sourceTree = SOURCE_ROOT; };
-		865B16542458174D005DE924 /* computermediumfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computermediumfactory.hpp; sourceTree = SOURCE_ROOT; };
+		865B16532458174D005DE924 /* computermediumfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = computermediumfactory.cpp; path = CoinWeight/computermediumfactory.cpp; sourceTree = SOURCE_ROOT; };
+		865B16542458174D005DE924 /* computermediumfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = computermediumfactory.hpp; path = CoinWeight/computermediumfactory.hpp; sourceTree = SOURCE_ROOT; };
 		865B16562458175D005DE924 /* computerhardfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerhardfactory.cpp; sourceTree = "<group>"; };
 		865B16572458175D005DE924 /* computerhardfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerhardfactory.hpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
@@ -247,6 +247,33 @@
 			name = "Coin States";
 			sourceTree = "<group>";
 		};
+		864467C2245BF6A000442BD8 /* Easy Level */ = {
+			isa = PBXGroup;
+			children = (
+				864467BC245A743900442BD8 /* computereasy1.cpp */,
+				864467BD245A743900442BD8 /* computereasy1.hpp */,
+			);
+			name = "Easy Level";
+			sourceTree = "<group>";
+		};
+		864467C3245BF6A700442BD8 /* Medium Level */ = {
+			isa = PBXGroup;
+			children = (
+				864467BF245AB0C100442BD8 /* computermedium1.cpp */,
+				864467C0245AB0C100442BD8 /* computermedium1.hpp */,
+			);
+			name = "Medium Level";
+			sourceTree = "<group>";
+		};
+		864467C4245BF6AD00442BD8 /* Hard Level */ = {
+			isa = PBXGroup;
+			children = (
+				869C4BE02402EE0C00C3DE84 /* computerhard.cpp */,
+				869C4BE12402EE0C00C3DE84 /* computerhard.hpp */,
+			);
+			name = "Hard Level";
+			sourceTree = "<group>";
+		};
 		865B16332457996C005DE924 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,12 +338,9 @@
 		866FC832240A2A5900B3740D /* Computer Types */ = {
 			isa = PBXGroup;
 			children = (
-				864467BC245A743900442BD8 /* computereasy1.cpp */,
-				864467BD245A743900442BD8 /* computereasy1.hpp */,
-				864467BF245AB0C100442BD8 /* computermedium1.cpp */,
-				864467C0245AB0C100442BD8 /* computermedium1.hpp */,
-				869C4BE02402EE0C00C3DE84 /* computerhard.cpp */,
-				869C4BE12402EE0C00C3DE84 /* computerhard.hpp */,
+				864467C2245BF6A000442BD8 /* Easy Level */,
+				864467C3245BF6A700442BD8 /* Medium Level */,
+				864467C4245BF6AD00442BD8 /* Hard Level */,
 			);
 			name = "Computer Types";
 			sourceTree = "<group>";
