@@ -13,7 +13,7 @@
 #include <vector>
 #include <memory>
 
-class ComputerHard : public Computer {
+class ComputerHard final : public Computer {
 public:
 	ComputerHard(size_t numOfCoins);
 	~ComputerHard();
