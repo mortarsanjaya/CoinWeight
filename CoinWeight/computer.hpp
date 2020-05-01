@@ -15,7 +15,6 @@
 
 class Computer {
 public:
-	Computer(size_t numOfCoins);
 	virtual ~Computer() = default;
 	
 	// Weighing and guessing process
@@ -27,6 +26,7 @@ public:
     
 protected:
     const size_t nCoins;
+    Computer(size_t numOfCoins);
 };
 
 #endif

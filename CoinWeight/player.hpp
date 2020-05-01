@@ -19,6 +19,7 @@ class Computer;
 
 class Player {
 public:
+    // UUUH Why two constructors
     Player(const size_t numOfCoins);
     Player(const size_t numOfCoins, const GameLevel gameLevel);
     
