@@ -28,14 +28,7 @@ public:
 private:
 
 	// States and strategy: How the results are handled
-	struct State {
-		std::vector<std::vector<size_t>> partition;
-		enum class Type;
-		Type type;
-        
-		State(size_t numOfCoins);
-	};
-	
+    struct State;
 	enum class Strategy;
 	
 	std::unique_ptr<State> state;

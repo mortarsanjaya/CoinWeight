@@ -69,6 +69,14 @@ template <size_t n> const size_t first_digit_base(const size_t k) {
 
 
 //************************** State and Strategy
+struct ComputerHard::State {
+		std::vector<std::vector<size_t>> partition;
+		enum class Type;
+		Type type;
+        
+		State(size_t numOfCoins);
+};
+    
 enum class ComputerHard::State::Type {
 	ZeroInfo,		// Partition consists of one set, all possibilities remain
 	OneVsOne,		// Partition consists of two sets, each one fake coins
