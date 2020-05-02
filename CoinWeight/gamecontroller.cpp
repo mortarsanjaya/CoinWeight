@@ -7,6 +7,7 @@
 //
 
 #include "gamecontroller.hpp"
+#include "gamemodel.hpp"
 
 //************************** Constructor
 GameController::GameController() {}
@@ -15,23 +16,23 @@ GameController::GameController() {}
 
 //************************** Input function
 //**** Arrow, Main
-void GameController::onMainScreenArrowInputUp(GameModel &model) {
-    model.mainScreenOnUpButton();
+void GameController::onMainScreenArrowInputUp(GameModel *model) {
+    model->mainScreenOnUpButton();
 }
 
-void GameController::onMainScreenArrowInputDown(GameModel &model) {
-    model.mainScreenOnDownButton();
+void GameController::onMainScreenArrowInputDown(GameModel *model) {
+    model->mainScreenOnDownButton();
 }
 
-void GameController::onMainScreenArrowInputLeft(GameModel &model) {
-    model.mainScreenOnLeftButton();
+void GameController::onMainScreenArrowInputLeft(GameModel *model) {
+    model->mainScreenOnLeftButton();
 }
 
-void GameController::onMainScreenArrowInputRight(GameModel &model) {
-    model.mainScreenOnRightButton();
+void GameController::onMainScreenArrowInputRight(GameModel *model) {
+    model->mainScreenOnRightButton();
 }
 
-void GameController::onMainScreenArrowInput(GameModel &model, const Input::Arrow arrowInp) {
+void GameController::onMainScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
             onMainScreenArrowInputUp(model);
@@ -49,18 +50,18 @@ void GameController::onMainScreenArrowInput(GameModel &model, const Input::Arrow
 }
 
 //**** Arrow, History
-void GameController::onHistoryScreenArrowInputUp(GameModel &model) {}
-void GameController::onHistoryScreenArrowInputDown(GameModel &model) {}
+void GameController::onHistoryScreenArrowInputUp(GameModel *model) {}
+void GameController::onHistoryScreenArrowInputDown(GameModel *model) {}
 
-void GameController::onHistoryScreenArrowInputLeft(GameModel &model) {
-    model.historyScreenOnLeftButton();
+void GameController::onHistoryScreenArrowInputLeft(GameModel *model) {
+    model->historyScreenOnLeftButton();
 }
 
-void GameController::onHistoryScreenArrowInputRight(GameModel &model) {
-    model.historyScreenOnRightButton();
+void GameController::onHistoryScreenArrowInputRight(GameModel *model) {
+    model->historyScreenOnRightButton();
 }
 
-void GameController::onHistoryScreenArrowInput(GameModel &model, const Input::Arrow arrowInp) {
+void GameController::onHistoryScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
             onHistoryScreenArrowInputUp(model);
@@ -78,35 +79,35 @@ void GameController::onHistoryScreenArrowInput(GameModel &model, const Input::Ar
 }
 
 //**** Char
-void GameController::onCharInput0(GameModel &model) {
-    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
-        model.deselectCoin();
+void GameController::onCharInput0(GameModel *model) {
+    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+        model->deselectCoin();
     }
 }
 
-void GameController::onCharInput1(GameModel &model) {
-    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
-        model.moveCoinToLeftGroup();
+void GameController::onCharInput1(GameModel *model) {
+    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+        model->moveCoinToLeftGroup();
     }
 }
 
-void GameController::onCharInput2(GameModel &model) {
-    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
-        model.moveCoinToRightGroup();
+void GameController::onCharInput2(GameModel *model) {
+    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+        model->moveCoinToRightGroup();
     }
 }
 
-void GameController::onCharInput3(GameModel &model) {
-    if (model.currScreen() == GameScreen::Page::GamePlayHuman) {
-        model.selectCoinToGuess();
+void GameController::onCharInput3(GameModel *model) {
+    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+        model->selectCoinToGuess();
     }
 }
 
-void GameController::onReturnButton(GameModel &model) {
-    model.mainScreenOnReturnButton();
+void GameController::onReturnButton(GameModel *model) {
+    model->mainScreenOnReturnButton();
 }
 
-void GameController::onCharInput(GameModel &model, const char charInp) {
+void GameController::onCharInput(GameModel *model, const char charInp) {
     switch (charInp) {
         case '0':
             onCharInput0(model);
@@ -130,7 +131,7 @@ void GameController::onCharInput(GameModel &model, const char charInp) {
 
 
 //************************** Input process function
-void GameController::onReceivingInput(GameModel &model, const Input &inp) {
+void GameController::onReceivingInput(GameModel *model, const Input &inp) {
     switch (inp.sourceScreen()) {
         case Input::Source::Main:
             switch (inp.inputType()) {

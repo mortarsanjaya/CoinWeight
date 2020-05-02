@@ -87,7 +87,7 @@ void play() {
     model->updateView(view.get());
     while (true) {
         view->receiveInput();
-        controller.onReceivingInput(*model, view->lastInput());
+        controller.onReceivingInput(model.get(), view->lastInput());
         model->updateView(view.get());
     }
 }
