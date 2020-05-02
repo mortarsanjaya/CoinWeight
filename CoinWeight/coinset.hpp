@@ -13,7 +13,7 @@
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 
-class CoinSet {
+class CoinSet final {
     size_t nCoins;
     size_t fakeCoinI1;
     size_t fakeCoinI2;
