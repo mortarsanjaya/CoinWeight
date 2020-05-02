@@ -13,11 +13,6 @@
 #include "coingroup.hpp"
 
 class CoinStates {
-    std::vector<CoinGroup> content;
-    size_t leftWeighGroupSize;
-    size_t rightWeighGroupSize;
-    size_t guessGroupSize;
-    
 public:
     CoinStates(size_t numOfCoins);
     
@@ -33,6 +28,12 @@ public:
     void moveToRightWeighGroup(const size_t index);
     void moveToGuessGroup(const size_t index);
     void resetStates();
+    
+private:
+    std::vector<CoinGroup> content;
+    size_t leftWeighGroupSize;
+    size_t rightWeighGroupSize;
+    size_t guessGroupSize;
 };
 
 #endif
