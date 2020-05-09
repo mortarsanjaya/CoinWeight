@@ -267,6 +267,6 @@ void GameScreen::goToGameOverScreen() {
 
 
 //***************************************************** Game Screen Exception header message
-template<> const std::string exceptionHeaderMessage<GameScreen>() {
+template<> const std::string Exception<GameScreen>::headerMessage() const {
     return "Game Screen: ";
 }

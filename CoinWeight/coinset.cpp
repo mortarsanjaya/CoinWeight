@@ -95,6 +95,6 @@ const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
 
 
 //************************** Exception header message
-template<> const std::string exceptionHeaderMessage<CoinSet>() {
+template<> const std::string Exception<CoinSet>::headerMessage() const {
     return "Coin Set: ";
 }

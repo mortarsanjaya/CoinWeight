@@ -497,6 +497,6 @@ const Input GameViewX11::lastInput() {
 
 
 //************************** Game View X11 Exception header message
-template<> const std::string exceptionHeaderMessage<GameViewX11>() {
+template<> const std::string Exception<GameViewX11>::headerMessage() const {
     return "Game View X11 Failure: ";
 }

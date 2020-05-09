@@ -309,6 +309,6 @@ void GameModel::updateView(GameView *view) {
 
 
 //************************** Game Model Failure
-template<> const std::string exceptionHeaderMessage<GameModel>() {
+template<> const std::string Exception<GameModel>::headerMessage() const {
     return "Game Model Failure: ";
 }

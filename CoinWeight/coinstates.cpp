@@ -92,6 +92,6 @@ void CoinStates::resetStates() {
 
 
 //************************** Exception header message
-template<> const std::string exceptionHeaderMessage<CoinStates>() {
+template<> const std::string Exception<CoinStates>::headerMessage() const {
     return "Coin States Failure: ";
 }

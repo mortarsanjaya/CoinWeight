@@ -9,8 +9,6 @@
 #ifndef input_hpp
 #define input_hpp
 
-#include "exception.hpp"
-
 /*
     Warning:
         Don't call whatArrow() if the input type is Char

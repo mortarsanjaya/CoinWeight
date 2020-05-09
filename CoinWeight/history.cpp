@@ -65,6 +65,6 @@ void History::decrementIndex() {
 
 
 //************************** History Failure
-template<> const std::string exceptionHeaderMessage<History>() {
+template<> const std::string Exception<History>::headerMessage() const {
     return "History Failure: ";
 }

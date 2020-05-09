@@ -7,6 +7,7 @@
 //
 
 #include "input.hpp"
+#include "exception.hpp"
 
 //************************** Constructor
 Input::Input(Source source, char inp) :
@@ -44,6 +45,6 @@ const Input::Arrow Input::whatArrow() const {
 
 
 //************************** Input Failure
-template<> const std::string exceptionHeaderMessage<Input>() {
+template<> const std::string Exception<Input>::headerMessage() const {
     return "Input Failure: ";
 }

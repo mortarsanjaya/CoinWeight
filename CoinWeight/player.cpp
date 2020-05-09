@@ -107,6 +107,6 @@ void Player::computerSetup() {
 
 
 //************************** Player exception
-template<> const std::string exceptionHeaderMessage<Player>() {
+template<> const std::string Exception<Player>::headerMessage() const {
     return "Player: ";
 }
