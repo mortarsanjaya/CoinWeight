@@ -16,7 +16,11 @@ class GameModel;
 class GameUI;
 
 class GameController {
-
+public:
+    GameController();
+    void onReceivingInput(GameModel *model, const Input &inp);
+    
+private:
     // Arrow input handling
     void onMainScreenArrowInputUp(GameModel *model);
     void onMainScreenArrowInputDown(GameModel *model);
@@ -32,9 +36,6 @@ class GameController {
     void onReturnButton(GameModel *model);
     void onCharInput(GameModel *model, const char charInp);
     
-public:
-    GameController();
-    void onReceivingInput(GameModel *model, const Input &inp);
 };
 
 #endif
