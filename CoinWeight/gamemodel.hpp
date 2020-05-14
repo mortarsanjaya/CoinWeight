@@ -28,7 +28,6 @@ public:
     
     const GameScreen &currScreen() const;
     const CoinSelection &currentCoinStates() const;
-    const bool isHumanMode() const;
     const History &currentHistory() const;
     
     // PLEASE CLEAN THIS FUNCTION

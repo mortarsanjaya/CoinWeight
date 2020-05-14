@@ -29,10 +29,6 @@ const CoinSelection &GameModel::currentCoinStates() const {
     return player->currSelection();
 }
 
-const bool GameModel::isHumanMode() const {
-    return player->isHuman();
-}
-
 const History &GameModel::currentHistory() const {
     return player->currHistory();
 }

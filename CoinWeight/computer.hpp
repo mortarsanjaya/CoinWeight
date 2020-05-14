@@ -23,11 +23,6 @@ protected:
     
     const bool isAbleToWeigh() const final;
     
-    // PLEASE DELETE THIS
-    const bool isHuman() const final {
-        return false;
-    }
-    
 private:
     WeighCounter counter;
     

@@ -32,9 +32,6 @@ public:
 
     virtual const bool isAbleToWeigh() const = 0;
     
-    // PLEASE DELETE THIS
-    virtual const bool isHuman() const = 0;
-    
 protected:
     Player(const size_t numOfCoins);
     const size_t numOfCoins() const;

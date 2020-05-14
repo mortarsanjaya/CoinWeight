@@ -20,11 +20,6 @@ public:
     
     const bool isAbleToWeigh() const final;
     
-    // PLEASE DELETE THIS
-    const bool isHuman() const final {
-        return true;
-    }
-    
 private:
     WeighCounter counter;
     
