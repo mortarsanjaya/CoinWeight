@@ -57,5 +57,5 @@ using namespace std;
 int main() {
     computerTest(50, GameLevel::Easy);
     computerTest(75, GameLevel::Medium);
-    play();
+    // play();
 }
