@@ -16,12 +16,10 @@
 */
 class Input {
 public:
-    enum class Source { Main, History }; // The screen source of input
     enum class Type { Unknown, Char, Arrow };
     enum class Arrow { Up, Down, Left, Right };
     
 private:
-    Source source;
     Type type;
     union {
         char charInp;
@@ -29,10 +27,9 @@ private:
     };
     
 public:
-    Input(Source source, char inp);
-    Input(Source source, Arrow inp);
-    Input(Source source);
-    const Source sourceScreen() const;
+    Input(char inp);
+    Input(Arrow inp);
+    Input();
     const Type inputType() const;
     const char whatChar() const;
     const Arrow whatArrow() const;

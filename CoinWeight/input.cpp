@@ -10,20 +10,13 @@
 #include "exception.hpp"
 
 //************************** Constructor
-Input::Input(Source source, char inp) :
-    source{source}, type{Type::Char}, charInp{inp} {}
-Input::Input(Source source, Arrow inp) :
-    source{source}, type{Type::Arrow}, arrowInp{inp} {}
-Input::Input(Source source) :
-    source{source}, type{Type::Unknown} {}
+Input::Input(char inp) : type{Type::Char}, charInp{inp} {}
+Input::Input(Arrow inp) : type{Type::Arrow}, arrowInp{inp} {}
+Input::Input() : type{Type::Unknown} {}
 
 
 
 //************************** Public methods
-const Input::Source Input::sourceScreen() const {
-    return source;
-}
-
 const Input::Type Input::inputType() const {
     return type;
 }

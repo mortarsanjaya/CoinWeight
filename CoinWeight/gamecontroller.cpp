@@ -105,20 +105,14 @@ void GameController::onCharInput(GameModel *model, const char charInp) {
 
 //************************** Input process function
 void GameController::onReceivingInput(GameModel *model, const Input &inp) {
-    switch (inp.sourceScreen()) {
-        case Input::Source::Main:
-            switch (inp.inputType()) {
-                case Input::Type::Unknown:
-                    break;
-                case Input::Type::Char:
-                    onCharInput(model, inp.whatChar());
-                    break;
-                case Input::Type::Arrow:
-                    onScreenArrowInput(model, inp.whatArrow());
-                    break;
-            }
+    switch (inp.inputType()) {
+        case Input::Type::Unknown:
             break;
-        case Input::Source::History:
+        case Input::Type::Char:
+            onCharInput(model, inp.whatChar());
+            break;
+        case Input::Type::Arrow:
+            onScreenArrowInput(model, inp.whatArrow());
             break;
     }
 }

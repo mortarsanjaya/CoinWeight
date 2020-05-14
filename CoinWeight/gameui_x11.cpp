@@ -431,26 +431,20 @@ void GameUI_X11::receiveInput() {
 
 const Input GameUI_X11::lastInput() {
     if (event.type == KeyPress) {
-        Input::Source source;
-        if (event.xkey.window == window) {
-            source = Input::Source::Main;
-        } else {
-            source = Input::Source::History;
-        }
         switch (XLookupKeysym(&(event.xkey), 0)) {
-            case XK_0:          return Input(source, '0');
-            case XK_1:          return Input(source, '1');
-            case XK_2:          return Input(source, '2');
-            case XK_3:          return Input(source, '3');
-            case XK_Return:     return Input(source, '\n');
-            case XK_Left:       return Input(source, Input::Arrow::Left);
-            case XK_Right:      return Input(source, Input::Arrow::Right);
-            case XK_Up:         return Input(source, Input::Arrow::Up);
-            case XK_Down:       return Input(source, Input::Arrow::Down);
-            default:            return Input(source);
+            case XK_0:          return Input('0');
+            case XK_1:          return Input('1');
+            case XK_2:          return Input('2');
+            case XK_3:          return Input('3');
+            case XK_Return:     return Input('\n');
+            case XK_Left:       return Input(Input::Arrow::Left);
+            case XK_Right:      return Input(Input::Arrow::Right);
+            case XK_Up:         return Input(Input::Arrow::Up);
+            case XK_Down:       return Input(Input::Arrow::Down);
+            default:            return Input();
         }
     } else {
-        return Input(Input::Source::Main);
+        return Input();
     }
 }
 
