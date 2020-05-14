@@ -13,7 +13,7 @@
 #include "input.hpp"
 
 class GameModel;
-class GameView;
+class GameUI;
 
 class GameController {
 

@@ -20,7 +20,7 @@
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 
-class GameView;
+class GameUI;
 
 class GameModel {
 public:
@@ -50,7 +50,7 @@ public:
     void historyScreenOnRightButton();
     
     // View-related functions
-    void updateView(GameView *view);
+    void updateView(GameUI *view);
 
 private:
     GameScreen screen;
@@ -80,13 +80,13 @@ private:
     void historyDecrementIndex();
     
     // View update helper functions
-    void updateViewTitleScreen(GameView *view);
-    void updateViewInstructionScreen(GameView *view);
-    void updateViewCreditScreen(GameView *view);
-    void updateViewGameOptionScreen(GameView *view);
-    void updateViewGamePlayHumanScreen(GameView *view);
-    void updateViewGamePlayComputerScreen(GameView *view);
-    void updateViewGameOverScreen(GameView *view);
+    void updateViewTitleScreen(GameUI *view);
+    void updateViewInstructionScreen(GameUI *view);
+    void updateViewCreditScreen(GameUI *view);
+    void updateViewGameOptionScreen(GameUI *view);
+    void updateViewGamePlayHumanScreen(GameUI *view);
+    void updateViewGamePlayComputerScreen(GameUI *view);
+    void updateViewGameOverScreen(GameUI *view);
 };
 
 #endif

@@ -7,7 +7,7 @@
 //
 
 #include "gamemodel.hpp"
-#include "gameview.hpp"
+#include "gameui.hpp"
 #include "computerhard.hpp"
 #include "computerfactory.hpp"
 #include "exception.hpp"
@@ -243,38 +243,38 @@ void GameModel::historyScreenOnRightButton() {
 
 //************************** View update functions
 //**** Helper
-void GameModel::updateViewTitleScreen(GameView *view) {
+void GameModel::updateViewTitleScreen(GameUI *view) {
     view->drawTitleScreen(screen.titleScreen());
 }
 
-void GameModel::updateViewInstructionScreen(GameView *view) {
+void GameModel::updateViewInstructionScreen(GameUI *view) {
     view->drawInstructionScreen(screen.instructionScreen());
 }
 
-void GameModel::updateViewCreditScreen(GameView *view) {
+void GameModel::updateViewCreditScreen(GameUI *view) {
     view->drawCreditScreen(screen.creditScreen());
 }
 
-void GameModel::updateViewGameOptionScreen(GameView *view) {
+void GameModel::updateViewGameOptionScreen(GameUI *view) {
     view->drawGameOptionScreen(screen.gameOptionScreen());
 }
 
-void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
+void GameModel::updateViewGamePlayHumanScreen(GameUI *view) {
     view->drawGamePlayHumanScreen(player->currStates(),
         screen.gamePlayHumanScreen(), weighCounter(), lastWeighResult);
 }
 
-void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
+void GameModel::updateViewGamePlayComputerScreen(GameUI *view) {
     view->drawGamePlayComputerScreen(player->currStates(),
         screen.gamePlayComputerScreen(), weighCounter(), lastWeighResult);
 }
 
-void GameModel::updateViewGameOverScreen(GameView *view) {
+void GameModel::updateViewGameOverScreen(GameUI *view) {
     view->drawGameOverScreen(lastGuessResult, weighCounter());
 }
 
 //**** Main
-void GameModel::updateView(GameView *view) {
+void GameModel::updateView(GameUI *view) {
     switch (screen.currentScreen()) {
         case GameScreen::Page::Title:
             updateViewTitleScreen(view);

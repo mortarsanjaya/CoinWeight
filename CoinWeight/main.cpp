@@ -14,7 +14,7 @@
 #include <string>
 #include <chrono>
 #include "gamemodel.hpp"
-#include "gameviewx11.hpp"
+#include "gameui_x11.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
 
@@ -68,7 +68,7 @@ void test() {
 
 void play() {
     std::unique_ptr<GameModel> model;
-    std::unique_ptr<GameView> view;
+    std::unique_ptr<GameUI> view;
     GameController controller;
     
     model = std::make_unique<GameModel>();
@@ -77,7 +77,7 @@ void play() {
         return;
     }
     
-    view = std::make_unique<GameViewX11>();
+    view = std::make_unique<GameUI_X11>();
     if (view == nullptr) {
         std::cout << "Oops. Cannot open display." << std::endl;
         return;
@@ -96,5 +96,5 @@ using namespace std;
 
 int main() {
     test();
-    play();
+    // play();
 }
