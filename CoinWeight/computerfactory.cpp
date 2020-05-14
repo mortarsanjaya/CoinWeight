@@ -42,5 +42,13 @@ ComputerFactory::createMedium(const size_t numOfCoins, const size_t numOfMovesMa
 
 std::unique_ptr<Computer>
 ComputerFactory::createHard(const size_t numOfCoins, const size_t numOfMovesMax) {
+    throw Exception<ComputerFactory>("Oops. Hard-level computer NOT IMPLEMENTED YET!");
     return std::make_unique<ComputerMedium1>(numOfCoins, numOfMovesMax);
+}
+
+
+
+//************************** Exception handling
+template<> const std::string Exception<ComputerFactory>::headerMessage() const {
+    return "Computer Factory: ";
 }
