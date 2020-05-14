@@ -21,9 +21,6 @@ class GameCore {
 	std::unique_ptr<CoinSet> setOfCoins;
 	GameLevel level;
     WeighCounter counter;
- 
-    // maximum number of comparisons, to initialize the cap
-    static const size_t maxComparisons(size_t numOfCoins, GameLevel level);
 	
 public:
 	GameCore(int numOfCoins, GameLevel level);

@@ -18,7 +18,7 @@ static const size_t log_ceil(const size_t n, const size_t base) {
     size_t k = n - 1;
     size_t res = 0;
     while (k > 0) {
-        k /= n;
+        k /= base;
         ++res;
     }
     
@@ -48,13 +48,10 @@ const size_t numOfWeighsMax(const size_t numOfCoins, const GameLevel level) {
     switch (level) {
         case GameLevel::Easy:
             return nMovesMaxEasy(numOfCoins);
-            break;
         case GameLevel::Medium:
             return nMovesMaxMedium(numOfCoins);
-            break;
         case GameLevel::Hard:
             return nMovesMaxHard(numOfCoins);
-            break;
     }
 }
 
