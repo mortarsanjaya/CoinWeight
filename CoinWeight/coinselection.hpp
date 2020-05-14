@@ -10,17 +10,23 @@
 #define coinstates_hpp
 
 #include <vector>
-#include "coingroup.hpp"
 
 class CoinSelection {
 public:
+    enum class Group {
+        NoSelect,
+        LeftWeigh,
+        RightWeigh,
+        Guess
+    };
+
     CoinSelection(size_t numOfCoins);
     
     const size_t totalSize() const;
     const size_t sizeOfLeftWeighGroup() const;
     const size_t sizeOfRightWeighGroup() const;
     const size_t sizeOfGuessGroup() const;
-    const CoinGroup at(const size_t index) const;
+    const Group at(const size_t index) const;
     
     // Content manipulators
     void deselect(const size_t index);
@@ -30,7 +36,7 @@ public:
     void reset();
     
 private:
-    std::vector<CoinGroup> content;
+    std::vector<Group> content;
     size_t leftWeighGroupSize;
     size_t rightWeighGroupSize;
     size_t guessGroupSize;

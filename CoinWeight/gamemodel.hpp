@@ -13,7 +13,6 @@
 #include "gamescreen.hpp"
 #include "gamesettings.hpp"
 #include "gamecore.hpp"
-#include "coingroup.hpp"
 #include "coinselection.hpp"
 #include "computer.hpp"
 #include "history.hpp"

@@ -10,7 +10,7 @@
 #include "exception.hpp"
 
 //************************** Constructor
-CoinSelection::CoinSelection(size_t numOfCoins) : content(numOfCoins, CoinGroup::NoSelect),
+CoinSelection::CoinSelection(size_t numOfCoins) : content(numOfCoins, Group::NoSelect),
     leftWeighGroupSize(0), rightWeighGroupSize(0), guessGroupSize(0)
 {}
 
@@ -33,7 +33,7 @@ const size_t CoinSelection::sizeOfGuessGroup() const {
     return guessGroupSize;
 }
 
-const CoinGroup CoinSelection::at(const size_t index) const {
+const CoinSelection::Group CoinSelection::at(const size_t index) const {
     if (content.size() <= index) {
         throw Exception<CoinSelection>("Out of range exception.");
     } else {
@@ -46,42 +46,42 @@ const CoinGroup CoinSelection::at(const size_t index) const {
 //************************** Content manipulators
 void CoinSelection::deselect(const size_t index) {
     switch (at(index)) {
-        case CoinGroup::NoSelect:
+        case Group::NoSelect:
             break;
-        case CoinGroup::LeftWeigh:
+        case Group::LeftWeigh:
             --leftWeighGroupSize;
             break;
-        case CoinGroup::RightWeigh:
+        case Group::RightWeigh:
             --rightWeighGroupSize;
             break;
-        case CoinGroup::Guess:
+        case Group::Guess:
             --guessGroupSize;
             break;
     }
-    content[index] = CoinGroup::NoSelect;
+    content[index] = Group::NoSelect;
 }
 
 void CoinSelection::moveToLeftWeighGroup(const size_t index) {
     deselect(index);
-    content[index] = CoinGroup::LeftWeigh;
+    content[index] = Group::LeftWeigh;
     ++leftWeighGroupSize;
 }
 
 void CoinSelection::moveToRightWeighGroup(const size_t index) {
     deselect(index);
-    content[index] = CoinGroup::RightWeigh;
+    content[index] = Group::RightWeigh;
     ++rightWeighGroupSize;
 }
 
 void CoinSelection::moveToGuessGroup(const size_t index) {
     deselect(index);
-    content[index] = CoinGroup::Guess;
+    content[index] = Group::Guess;
     ++guessGroupSize;
 }
 
 void CoinSelection::reset() {
     for (size_t i = 0; i < content.size(); ++i) {
-        content[i] = CoinGroup::NoSelect;
+        content[i] = Group::NoSelect;
     }
     
     leftWeighGroupSize = 0;

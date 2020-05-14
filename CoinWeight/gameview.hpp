@@ -9,7 +9,6 @@
 #ifndef gameview_hpp
 #define gameview_hpp
 
-#include "coingroup.hpp"
 #include "gamelevel.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
@@ -24,7 +23,7 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const WeighResult weighResult) = 0;
-    virtual void drawCoin(const CoinGroup coinState, const size_t index) = 0;
+    virtual void drawCoin(const CoinSelection::Group coinState, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
     // Game Play screen
