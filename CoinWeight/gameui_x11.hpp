@@ -1,24 +1,24 @@
 //
-//  gameviewx11.hpp
+//  gameui_x11.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameviewx11_hpp
-#define gameviewx11_hpp
+#ifndef gameui_x11_hpp
+#define gameui_x11_hpp
 
 #include <memory>
 #include <string>
 #include <X11/Xlib.h>
 #include <X11/Xos.h>
 #include <X11/Xutil.h>
-#include "gameview.hpp"
+#include "gameui.hpp"
 #include "exception.hpp"
 #include "weighcounter.hpp"
 
-class GameViewX11 : public GameView {
+class GameUI_X11 : public GameUI {
     Display *display;
     Window window;
     int screen;
@@ -79,7 +79,7 @@ class GameViewX11 : public GameView {
     void clearScreen() override;
 
 public:
-    GameViewX11();
+    GameUI_X11();
     // Main drawing functions
     void drawTitleScreen(const TitleScreen &titleScreen) override;
     void drawInstructionScreen(const InstructionScreen &instructionScreen) override;

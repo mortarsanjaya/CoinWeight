@@ -1,13 +1,13 @@
 //
-//  gameview.hpp
+//  gameui.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameview_hpp
-#define gameview_hpp
+#ifndef gameui_hpp
+#define gameui_hpp
 
 #include "gamelevel.hpp"
 #include "weighresult.hpp"
@@ -18,7 +18,7 @@
 #include "weighcounter.hpp"
 #include "ScreenPages/allinclude.hpp"
 
-class GameView {
+class GameUI {
 private:
 //**** Virtual hook methods
     // General
@@ -49,8 +49,8 @@ private:
     void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
     
 public:
-    GameView() = default;
-    virtual ~GameView() = 0;
+    GameUI() = default;
+    virtual ~GameUI() = 0;
     
     // Drawing functions
     virtual void drawTitleScreen(const TitleScreen &screen) = 0;

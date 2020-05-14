@@ -1,34 +1,34 @@
 //
-//  gameview.cpp
+//  gameui.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "gameview.hpp"
+#include "gameui.hpp"
 
 //************************** Destructor
-GameView::~GameView() {}
+GameUI::~GameUI() {}
 
 
 
 //************************** Non-virtual private methods
 //**** Draw coins
-void GameView::drawCoins(const CoinSelection &coinStates) {
+void GameUI::drawCoins(const CoinSelection &coinStates) {
     for (size_t i = 0; i < coinStates.totalSize(); ++i) {
         drawCoin(coinStates.at(i), i);
     }
 }
 
 //**** Draw record
-void GameView::drawRecord(const Record &record) {
+void GameUI::drawRecord(const Record &record) {
     drawCoins(record.coinStates());
     drawWeighResultText(record.result());
 }
 
 //**** Draw history screen, non-empty case
-void GameView::drawHistoryScreen(const Record &record,
+void GameUI::drawHistoryScreen(const Record &record,
     const size_t index, const size_t numOfWeighs)
 {
     drawRecord(record);
@@ -38,7 +38,7 @@ void GameView::drawHistoryScreen(const Record &record,
 
 
 //************************** Public methods
-void GameView::drawGamePlayHumanScreen(const CoinSelection &coinStates, const GamePlayHumanScreen &screen,
+void GameUI::drawGamePlayHumanScreen(const CoinSelection &coinStates, const GamePlayHumanScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
@@ -47,7 +47,7 @@ const WeighCounter &counter, const WeighResult lastWeighResult) {
     drawGamePlayHumanHighlight(screen);
 }
 
-void GameView::drawGamePlayComputerScreen(const CoinSelection &coinStates, const GamePlayComputerScreen &screen,
+void GameUI::drawGamePlayComputerScreen(const CoinSelection &coinStates, const GamePlayComputerScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
@@ -56,7 +56,7 @@ const WeighCounter &counter, const WeighResult lastWeighResult) {
     drawReturnButton();
 }
 
-void GameView::drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter)
+void GameUI::drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter)
 {
     clearScreen();
     drawGameOverEndMessage(guessResult);
