@@ -39,32 +39,28 @@ void GameView::drawHistoryScreen(const Record &record,
 
 //************************** Public methods
 void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates,
-    const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight,
-    const size_t numOfWeighsLeft, const size_t numOfWeighsMax,
-    const WeighResult lastWeighResult)
-{
+const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight,
+const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
     drawWeighResultText(lastWeighResult);
-    drawGamePlayNumOfWeighs(numOfWeighsLeft, numOfWeighsMax);
+    drawGamePlayNumOfWeighs(counter);
     drawGamePlayHumanHighlight(screenHighlight, coinHighlight);
 }
 
-void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates, const size_t numOfWeighsLeft,
-    const size_t numOfWeighsMax, const WeighResult lastWeighResult)
-{
+void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates,
+const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
     drawWeighResultText(lastWeighResult);
-    drawGamePlayNumOfWeighs(numOfWeighsLeft, numOfWeighsMax);
+    drawGamePlayNumOfWeighs(counter);
     drawReturnButton();
 }
 
-void GameView::drawGameOverScreen(const GuessResult guessResult,
-    const size_t numOfWeighsLeft, const size_t numOfWeighMax)
+void GameView::drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter)
 {
     clearScreen();
     drawGameOverEndMessage(guessResult);
-    drawGameOverNumOfWeighs(numOfWeighsLeft, numOfWeighMax);
+    drawGameOverNumOfWeighs(counter);
 }
 

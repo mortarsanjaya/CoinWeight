@@ -16,6 +16,7 @@
 #include <X11/Xutil.h>
 #include "gameview.hpp"
 #include "exception.hpp"
+#include "weighcounter.hpp"
 
 class GameViewX11 : public GameView {
     Display *display;
@@ -47,7 +48,7 @@ class GameViewX11 : public GameView {
     void drawRectangle(int x_pos, int y_pos, int width, int height);
     
     // Number of weighings text
-    const std::string numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const;
+    const std::string numOfWeighsText(const WeighCounter &counter) const;
     
     // Draw weigh result text
     // HACKED INTO DRAWING THE SCALE AS WELL
@@ -62,11 +63,11 @@ class GameViewX11 : public GameView {
     
     // Game Play Human screen
     void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight) override;
-    void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
+    void drawGamePlayNumOfWeighs(const WeighCounter &counter) override;
     
     // Game Over screen
     void drawGameOverEndMessage(const GuessResult guessResult) override;
-    void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
+    void drawGameOverNumOfWeighs(const WeighCounter &counter) override;
     
     // History screen
     /*

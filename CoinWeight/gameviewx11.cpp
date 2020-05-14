@@ -108,11 +108,11 @@ void GameViewX11::drawRectangle(int x_pos, int y_pos, int width, int height) {
 
 //******************** Tons of helper functions
 //**** Number of weighings
-const std::string GameViewX11::numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const {
+const std::string GameViewX11::numOfWeighsText(const WeighCounter &counter) const {
     std::string numOfWeighsStr = "Number of comparisons remaining: ";
-    numOfWeighsStr += std::to_string(numOfWeighsLeft);
+    numOfWeighsStr += std::to_string(counter.numOfWeighsLeft());
     numOfWeighsStr += " out of ";
-    numOfWeighsStr += std::to_string(numOfWeighsMax);
+    numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
     return numOfWeighsStr;
 }
 
@@ -274,8 +274,8 @@ void GameViewX11::drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHi
     
 }
 
-void GameViewX11::drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
-    drawString(30, 30, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax), defaultFGColor, false);
+void GameViewX11::drawGamePlayNumOfWeighs(const WeighCounter &counter) {
+    drawString(30, 30, numOfWeighsText(counter), defaultFGColor, false);
     // magic number :(
 }
 
@@ -297,8 +297,8 @@ void GameViewX11::drawGameOverEndMessage(const GuessResult guessResult) {
     
     drawString(300, 200, guessStr, defaultFGColor, false);
 }
-void GameViewX11::drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) {
-    drawString(300, 300, numOfWeighsText(numOfWeighsLeft, numOfWeighsMax), defaultFGColor, false);
+void GameViewX11::drawGameOverNumOfWeighs(const WeighCounter &counter) {
+    drawString(300, 300, numOfWeighsText(counter), defaultFGColor, false);
 }
 
 //**** Clear screen

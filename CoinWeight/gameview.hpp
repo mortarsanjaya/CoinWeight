@@ -16,6 +16,7 @@
 #include "coinstates.hpp"
 #include "history.hpp"
 #include "input.hpp"
+#include "weighcounter.hpp"
 #include "ScreenPages/allinclude.hpp"
 
 class GameView {
@@ -27,13 +28,13 @@ private:
     virtual void drawReturnButton() = 0;
     
     // Game Play screen
-    virtual void drawGamePlayNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
+    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
     virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight,
         const size_t coinHighlight) = 0;
         
     // Game Over screen
     virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
-    virtual void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) = 0;
+    virtual void drawGameOverNumOfWeighs(const WeighCounter &counter) = 0;
     
     /*
     // History screen
@@ -60,10 +61,9 @@ public:
     virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
         
     void drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen::ScreenHighlight screenHighlight,
-        const size_t coinHighlight, const size_t numOfWeighsLeft, const size_t numOfWeighsMax, const WeighResult lastWeighResult);
-    void drawGamePlayComputerScreen(const CoinStates &coinStates, const size_t numOfWeighsLeft,
-        const size_t numOfWeighsMax, const WeighResult lastWeighResult);
-    void drawGameOverScreen(const GuessResult guessResult, const size_t numOfWeighsLeft, const size_t numOfWeighsMax);
+        const size_t coinHighlight, const WeighCounter &counter, const WeighResult lastWeighResult);
+    void drawGamePlayComputerScreen(const CoinStates &coinStates, const WeighCounter &counter, const WeighResult lastWeighResult);
+    void drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter);
     
     // Input handling functions
     virtual void receiveInput() = 0;

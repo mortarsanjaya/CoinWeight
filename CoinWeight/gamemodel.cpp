@@ -263,17 +263,15 @@ void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
     view->drawGamePlayHumanScreen(player->currStates(),
         screen.gamePlayHumanScreen().currScreenHighlight(),
         screen.gamePlayHumanScreen().currCoinHighlight(),
-                                  weighCounter().numOfWeighsLeft(), weighCounter().numOfWeighsMax(), lastWeighResult);
+        weighCounter(), lastWeighResult);
 }
 
 void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
-    view->drawGamePlayComputerScreen(player->currStates(), weighCounter().numOfWeighsLeft(),
-        weighCounter().numOfWeighsMax(), lastWeighResult);
+    view->drawGamePlayComputerScreen(player->currStates(), weighCounter(), lastWeighResult);
 }
 
 void GameModel::updateViewGameOverScreen(GameView *view) {
-    view->drawGameOverScreen(lastGuessResult,
-        weighCounter().numOfWeighsLeft(), weighCounter().numOfWeighsMax());
+    view->drawGameOverScreen(lastGuessResult, weighCounter());
 }
 
 //**** Main
