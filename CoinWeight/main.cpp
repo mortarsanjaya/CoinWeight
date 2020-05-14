@@ -67,30 +67,36 @@ void test() {
 }
 
 void play() {
-    std::shared_ptr<GameModel> model;
-    std::unique_ptr<GameUI> view;
     GameController controller;
     
-    model = std::make_shared<GameModel>();
-    if (model == nullptr) {
-        std::cout << "Oops. Cannot initialize model." << std::endl;
-        return;
-    } else {
-        controller.registerModel(model);
-    }
+    do {
     
-    view = std::make_unique<GameUI_X11>();
-    if (view == nullptr) {
-        std::cout << "Oops. Cannot open display." << std::endl;
-        return;
-    }
+        std::shared_ptr<GameModel> model;
+        std::unique_ptr<GameUI> view;
+        
+        model = std::make_shared<GameModel>();
+        if (model == nullptr) {
+            std::cout << "Oops. Cannot initialize model." << std::endl;
+            return;
+        } else {
+            controller.registerModel(model);
+        }
+    
+        view = std::make_unique<GameUI_X11>();
+        if (view == nullptr) {
+            std::cout << "Oops. Cannot open display." << std::endl;
+            return;
+        }
+    
+        controller.registerUI(view);
+    } while (false);
     
     sleep(1);
-    controller.updateView(view.get());
+    controller.updateView();
     while (true) {
-        view->receiveInput();
-        controller.onReceivingInput(view->lastInput());
-        controller.updateView(view.get());
+        controller.receiveInput();
+        controller.onReceivingInput(controller.lastInput());
+        controller.updateView();
     }
 }
 

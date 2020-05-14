@@ -17,15 +17,20 @@ class GameUI;
 
 class GameController {
 public:
-    GameController();
+    GameController() = default;
     void registerModel(const std::shared_ptr<GameModel> model);
+    void registerUI(std::unique_ptr<GameUI> &ui);
+    
     void onReceivingInput(const Input &inp);
     
     // View-related functions
-    void updateView(GameUI *view);
+    void receiveInput();
+    const Input lastInput();
+    void updateView();
     
 private:
     std::shared_ptr<GameModel> model;
+    std::unique_ptr<GameUI> view;
 
     // Arrow input handling
     void onScreenArrowInputUp();
@@ -43,13 +48,13 @@ private:
     void onCharInput(const char charInp);
     
     // View update helper functions
-    void updateViewTitleScreen(GameUI *view);
-    void updateViewInstructionScreen(GameUI *view);
-    void updateViewCreditScreen(GameUI *view);
-    void updateViewGameOptionScreen(GameUI *view);
-    void updateViewGamePlayHumanScreen(GameUI *view);
-    void updateViewGamePlayComputerScreen(GameUI *view);
-    void updateViewGameOverScreen(GameUI *view);
+    void updateViewTitleScreen();
+    void updateViewInstructionScreen();
+    void updateViewCreditScreen();
+    void updateViewGameOptionScreen();
+    void updateViewGamePlayHumanScreen();
+    void updateViewGamePlayComputerScreen();
+    void updateViewGameOverScreen();
 };
 
 #endif

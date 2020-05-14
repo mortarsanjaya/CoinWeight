@@ -10,16 +10,14 @@
 #include "gamemodel.hpp"
 #include "gameui.hpp"
 
-//************************** Constructor
-GameController::GameController() {}
-
-
-
 //************************** Register model
 void GameController::registerModel(const std::shared_ptr<GameModel> model) {
     this->model = model;
 }
 
+void GameController::registerUI(std::unique_ptr<GameUI> &ui) {
+    std::swap(this->view, ui);
+}
 
 
 //************************** Input function
@@ -125,63 +123,71 @@ void GameController::onReceivingInput(const Input &inp) {
     }
 }
 
+void GameController::receiveInput() {
+    view->receiveInput();
+}
+
+const Input GameController::lastInput() {
+    return view->lastInput();
+}
+
 
 
 //************************** View update functions
 //**** Helper
-void GameController::updateViewTitleScreen(GameUI *view) {
+void GameController::updateViewTitleScreen() {
     view->drawTitleScreen(model->currScreen().titleScreen());
 }
 
-void GameController::updateViewInstructionScreen(GameUI *view) {
+void GameController::updateViewInstructionScreen() {
     view->drawInstructionScreen(model->currScreen().instructionScreen());
 }
 
-void GameController::updateViewCreditScreen(GameUI *view) {
+void GameController::updateViewCreditScreen() {
     view->drawCreditScreen(model->currScreen().creditScreen());
 }
 
-void GameController::updateViewGameOptionScreen(GameUI *view) {
+void GameController::updateViewGameOptionScreen() {
     view->drawGameOptionScreen(model->currScreen().gameOptionScreen());
 }
 
-void GameController::updateViewGamePlayHumanScreen(GameUI *view) {
+void GameController::updateViewGamePlayHumanScreen() {
     view->drawGamePlayHumanScreen(model->currPlayer()->currStates(),
         model->currScreen().gamePlayHumanScreen(), model->weighCounter(), model->prevWeighResult());
 }
 
-void GameController::updateViewGamePlayComputerScreen(GameUI *view) {
+void GameController::updateViewGamePlayComputerScreen() {
     view->drawGamePlayComputerScreen(model->currPlayer()->currStates(),
         model->currScreen().gamePlayComputerScreen(), model->weighCounter(), model->prevWeighResult());
 }
 
-void GameController::updateViewGameOverScreen(GameUI *view) {
+void GameController::updateViewGameOverScreen() {
     view->drawGameOverScreen(model->prevGuessResult(), model->weighCounter());
 }
 
 //**** Main
-void GameController::updateView(GameUI *view) {
+void GameController::updateView() {
     switch (model->currScreen().currentScreen()) {
         case GameScreen::Page::Title:
-            updateViewTitleScreen(view);
+            updateViewTitleScreen();
             break;
         case GameScreen::Page::Instruction:
-            updateViewInstructionScreen(view);
+            updateViewInstructionScreen();
             break;
         case GameScreen::Page::Credit:
-            updateViewCreditScreen(view);
+            updateViewCreditScreen();
             break;
         case GameScreen::Page::GameOption:
-            updateViewGameOptionScreen(view);
+            updateViewGameOptionScreen();
             break;
         case GameScreen::Page::GamePlayHuman:
-            updateViewGamePlayHumanScreen(view);
+            updateViewGamePlayHumanScreen();
             break;
         case GameScreen::Page::GamePlayComputer:
-            updateViewGamePlayComputerScreen(view);
+            updateViewGamePlayComputerScreen();
             break;
         case GameScreen::Page::GameOver:
-            updateViewGameOverScreen(view);
+            updateViewGameOverScreen();
             break;
     }
 }
