@@ -16,35 +16,35 @@ GameController::GameController() {}
 
 //************************** Input function
 //**** Arrow, Main
-void GameController::onMainScreenArrowInputUp(GameModel *model) {
+void GameController::onScreenArrowInputUp(GameModel *model) {
     model->mainScreenOnUpButton();
 }
 
-void GameController::onMainScreenArrowInputDown(GameModel *model) {
+void GameController::onScreenArrowInputDown(GameModel *model) {
     model->mainScreenOnDownButton();
 }
 
-void GameController::onMainScreenArrowInputLeft(GameModel *model) {
+void GameController::onScreenArrowInputLeft(GameModel *model) {
     model->mainScreenOnLeftButton();
 }
 
-void GameController::onMainScreenArrowInputRight(GameModel *model) {
+void GameController::onScreenArrowInputRight(GameModel *model) {
     model->mainScreenOnRightButton();
 }
 
-void GameController::onMainScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
+void GameController::onScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
-            onMainScreenArrowInputUp(model);
+            onScreenArrowInputUp(model);
             break;
         case Input::Arrow::Down:
-            onMainScreenArrowInputDown(model);
+            onScreenArrowInputDown(model);
             break;
         case Input::Arrow::Left:
-            onMainScreenArrowInputLeft(model);
+            onScreenArrowInputLeft(model);
             break;
         case Input::Arrow::Right:
-            onMainScreenArrowInputRight(model);
+            onScreenArrowInputRight(model);
             break;
     }
 }
@@ -114,7 +114,7 @@ void GameController::onReceivingInput(GameModel *model, const Input &inp) {
                     onCharInput(model, inp.whatChar());
                     break;
                 case Input::Type::Arrow:
-                    onMainScreenArrowInput(model, inp.whatArrow());
+                    onScreenArrowInput(model, inp.whatArrow());
                     break;
             }
             break;

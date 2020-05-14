@@ -22,13 +22,13 @@ public:
     
 private:
     // Arrow input handling
-    void onMainScreenArrowInputUp(GameModel *model);
-    void onMainScreenArrowInputDown(GameModel *model);
-    void onMainScreenArrowInputLeft(GameModel *model);
-    void onMainScreenArrowInputRight(GameModel *model);
-    void onMainScreenArrowInput(GameModel *model, const Input::Arrow arrowInp);
+    void onScreenArrowInputUp(GameModel *model);
+    void onScreenArrowInputDown(GameModel *model);
+    void onScreenArrowInputLeft(GameModel *model);
+    void onScreenArrowInputRight(GameModel *model);
+    void onScreenArrowInput(GameModel *model, const Input::Arrow arrowInp);
     
-    // Character input handling (not used by History screen)
+    // Character input handling
     void onCharInput0(GameModel *model);
     void onCharInput1(GameModel *model);
     void onCharInput2(GameModel *model);
