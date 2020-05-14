@@ -79,7 +79,7 @@ void CoinStates::moveToGuessGroup(const size_t index) {
     ++guessGroupSize;
 }
 
-void CoinStates::resetStates() {
+void CoinStates::reset() {
     for (size_t i = 0; i < content.size(); ++i) {
         content[i] = CoinGroup::NoSelect;
     }

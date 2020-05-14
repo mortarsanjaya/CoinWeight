@@ -88,7 +88,7 @@ void Player::addWeighResult(const WeighResult weighResult) {
 }
 
 void Player::resetStates() {
-    coinStates.resetStates();
+    coinStates.reset();
 }
 
 void Player::computerSetup() {

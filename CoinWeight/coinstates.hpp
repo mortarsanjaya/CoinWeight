@@ -27,7 +27,7 @@ public:
     void moveToLeftWeighGroup(const size_t index);
     void moveToRightWeighGroup(const size_t index);
     void moveToGuessGroup(const size_t index);
-    void resetStates();
+    void reset();
     
 private:
     std::vector<CoinGroup> content;

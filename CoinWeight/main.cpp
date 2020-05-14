@@ -50,7 +50,7 @@ void test() {
                         computer->pickToWeigh(coinStates);
                         const WeighResult weighResult = coinSet->compareWeight(coinStates);
                         computer->afterWeigh(weighResult);
-                        coinStates.resetStates();
+                        coinStates.reset();
                         ++numOfWeigh;
                     }
                 }
