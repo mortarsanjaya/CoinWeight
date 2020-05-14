@@ -32,7 +32,7 @@ type{Type::OneRange}, range1{0, numOfCoins} {}
 
 //************************** Overriding functions
 void ComputerMedium1::beforeWeigh() {}
-void ComputerMedium1::pickToWeigh(CoinStates &coinStates) const {
+void ComputerMedium1::pickToWeigh(CoinSelection &coinStates) const {
     switch (state.type) {
         case State::Type::OneRange:
             pickToWeighOneRange(coinStates);
@@ -65,7 +65,7 @@ void ComputerMedium1::afterWeigh(const WeighResult weighResult) {
 }
 
 
-void ComputerMedium1::pickToGuess(CoinStates &coinStates) const {
+void ComputerMedium1::pickToGuess(CoinSelection &coinStates) const {
     if (!readyToGuess()) {
         throw Exception<ComputerMedium1>("Should be weighing.");
     }
@@ -81,19 +81,19 @@ const bool ComputerMedium1::readyToGuess() const {
 
 
 //************************** Helper functions for pickToWeigh
-void ComputerMedium1::pickToWeighOneRange(CoinStates &coinStates) const {
+void ComputerMedium1::pickToWeighOneRange(CoinSelection &coinStates) const {
     pickToWeighPileEndSplit(coinStates, state.range1, weighPileSizeTwoFakes(state.range1));
 }
 
-void ComputerMedium1::pickToWeighTwoRanges0(CoinStates &coinStates) const {
+void ComputerMedium1::pickToWeighTwoRanges0(CoinSelection &coinStates) const {
     pickToWeighPileEndSplit(coinStates, state.range1, weighPileSizeOneFake(state.range1));
 }
 
-void ComputerMedium1::pickToWeighTwoRanges1(CoinStates &coinStates) const {
+void ComputerMedium1::pickToWeighTwoRanges1(CoinSelection &coinStates) const {
     pickToWeighPileEndSplit(coinStates, state.range2, weighPileSizeOneFake(state.range2));
 }
 
-void ComputerMedium1::pickToWeighPileEndSplit(CoinStates &coinStates,
+void ComputerMedium1::pickToWeighPileEndSplit(CoinSelection &coinStates,
 const State::Range &range, const size_t weighPileSize) {
     for (size_t i = range.begin; i < range.begin + weighPileSize; ++i) {
         coinStates.moveToLeftWeighGroup(i);

@@ -28,7 +28,7 @@ public:
     GameModel();
     
     const GameScreen::Page currScreen() const;
-    const CoinStates &currentCoinStates() const;
+    const CoinSelection &currentCoinStates() const;
     const bool isHumanMode() const;
     const History &currentHistory() const;
     

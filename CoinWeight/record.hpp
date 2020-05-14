@@ -13,13 +13,13 @@
 #include "weighresult.hpp"
 
 class Record {
-    CoinStates weighStates;
+    CoinSelection weighStates;
     WeighResult weighResult;
     
 public:
-    Record(CoinStates weighStates, WeighResult weighResult);
+    Record(CoinSelection weighStates, WeighResult weighResult);
     // Accessor functions
-    const CoinStates coinStates() const;
+    const CoinSelection coinStates() const;
     const WeighResult result() const;
 };
 

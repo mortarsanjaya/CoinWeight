@@ -10,32 +10,32 @@
 #include "exception.hpp"
 
 //************************** Constructor
-CoinStates::CoinStates(size_t numOfCoins) : content(numOfCoins, CoinGroup::NoSelect),
+CoinSelection::CoinSelection(size_t numOfCoins) : content(numOfCoins, CoinGroup::NoSelect),
     leftWeighGroupSize(0), rightWeighGroupSize(0), guessGroupSize(0)
 {}
 
 
 
 //************************** Field accessors
-const size_t CoinStates::totalSize() const {
+const size_t CoinSelection::totalSize() const {
     return content.size();
 }
 
-const size_t CoinStates::sizeOfLeftWeighGroup() const {
+const size_t CoinSelection::sizeOfLeftWeighGroup() const {
     return leftWeighGroupSize;
 }
 
-const size_t CoinStates::sizeOfRightWeighGroup() const {
+const size_t CoinSelection::sizeOfRightWeighGroup() const {
     return rightWeighGroupSize;
 }
 
-const size_t CoinStates::sizeOfGuessGroup() const {
+const size_t CoinSelection::sizeOfGuessGroup() const {
     return guessGroupSize;
 }
 
-const CoinGroup CoinStates::at(const size_t index) const {
+const CoinGroup CoinSelection::at(const size_t index) const {
     if (content.size() <= index) {
-        throw Exception<CoinStates>("Out of range exception.");
+        throw Exception<CoinSelection>("Out of range exception.");
     } else {
         return content.at(index);
     }
@@ -44,7 +44,7 @@ const CoinGroup CoinStates::at(const size_t index) const {
 
 
 //************************** Content manipulators
-void CoinStates::deselect(const size_t index) {
+void CoinSelection::deselect(const size_t index) {
     switch (at(index)) {
         case CoinGroup::NoSelect:
             break;
@@ -61,25 +61,25 @@ void CoinStates::deselect(const size_t index) {
     content[index] = CoinGroup::NoSelect;
 }
 
-void CoinStates::moveToLeftWeighGroup(const size_t index) {
+void CoinSelection::moveToLeftWeighGroup(const size_t index) {
     deselect(index);
     content[index] = CoinGroup::LeftWeigh;
     ++leftWeighGroupSize;
 }
 
-void CoinStates::moveToRightWeighGroup(const size_t index) {
+void CoinSelection::moveToRightWeighGroup(const size_t index) {
     deselect(index);
     content[index] = CoinGroup::RightWeigh;
     ++rightWeighGroupSize;
 }
 
-void CoinStates::moveToGuessGroup(const size_t index) {
+void CoinSelection::moveToGuessGroup(const size_t index) {
     deselect(index);
     content[index] = CoinGroup::Guess;
     ++guessGroupSize;
 }
 
-void CoinStates::reset() {
+void CoinSelection::reset() {
     for (size_t i = 0; i < content.size(); ++i) {
         content[i] = CoinGroup::NoSelect;
     }
@@ -92,6 +92,6 @@ void CoinStates::reset() {
 
 
 //************************** Exception header message
-template<> const std::string Exception<CoinStates>::headerMessage() const {
+template<> const std::string Exception<CoinSelection>::headerMessage() const {
     return "Coin States Failure: ";
 }

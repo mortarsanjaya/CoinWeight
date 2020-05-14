@@ -9,13 +9,13 @@
 #include "record.hpp"
 
 //************************** Constructor
-Record::Record(CoinStates weighStates, WeighResult weighResult) :
+Record::Record(CoinSelection weighStates, WeighResult weighResult) :
     weighStates{weighStates}, weighResult{weighResult} {}
 
 
 
 //************************** Field accessors
-const CoinStates Record::coinStates() const {
+const CoinSelection Record::coinStates() const {
     return weighStates;
 }
 

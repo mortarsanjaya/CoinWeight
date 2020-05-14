@@ -23,7 +23,7 @@ public:
     Player(const size_t numOfCoins);
     Player(const size_t numOfCoins, const GameLevel gameLevel);
     
-    const CoinStates &currStates() const;
+    const CoinSelection &currStates() const;
     const History &currHistory() const;
     const bool isHuman() const;
     const bool readyToGuess() const; // Should be removed
@@ -39,7 +39,7 @@ public:
     void historyDecrementIndex(); // Should be removed
 
 private:
-    CoinStates coinStates;
+    CoinSelection coinStates;
     History history;
     std::unique_ptr<Computer> computer;
     

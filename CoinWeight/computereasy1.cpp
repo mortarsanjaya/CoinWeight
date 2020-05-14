@@ -26,7 +26,7 @@ Computer{numOfCoins}, state{State::Type::FirstMove}, testIndex{1} {}
 
 //************************** Overriding functions
 void ComputerEasy1::beforeWeigh() {}
-void ComputerEasy1::pickToWeigh(CoinStates &coinStates) const {
+void ComputerEasy1::pickToWeigh(CoinSelection &coinStates) const {
     if (testIndex == nCoins) {
         throw Exception<ComputerEasy1>("Should be guessing.");
     }
@@ -51,7 +51,7 @@ void ComputerEasy1::afterWeigh(const WeighResult weighResult) {
     }
 }
 
-void ComputerEasy1::pickToGuess(CoinStates &coinStates) const {
+void ComputerEasy1::pickToGuess(CoinSelection &coinStates) const {
     if (!readyToGuess()) {
         throw Exception<ComputerEasy1>("Should be weighing.");
     }

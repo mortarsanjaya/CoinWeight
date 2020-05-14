@@ -31,8 +31,8 @@ public:
  
     // Also decrements weighing counter
     // Throws if the counter's value is 0
-    const WeighResult compareWeight(const CoinStates &weighing);
-    const GuessResult guessFakeCoins(const CoinStates &guess) const;
+    const WeighResult compareWeight(const CoinSelection &weighing);
+    const GuessResult guessFakeCoins(const CoinSelection &guess) const;
 };
 
 #endif

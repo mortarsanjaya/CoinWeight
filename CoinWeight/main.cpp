@@ -37,7 +37,7 @@ void test() {
                 coinSet->fakeCoinI1 = i;
                 coinSet->fakeCoinI2 = j;
                 auto computer = std::make_unique<ComputerHard>(numOfCoins);
-                CoinStates coinStates(numOfCoins);
+                CoinSelection coinStates(numOfCoins);
                 size_t numOfWeigh = 0;
                 while (true) {
                     if (computer->readyToGuess()) {

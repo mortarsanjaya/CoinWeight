@@ -12,9 +12,9 @@
 #include <vector>
 #include "coingroup.hpp"
 
-class CoinStates {
+class CoinSelection {
 public:
-    CoinStates(size_t numOfCoins);
+    CoinSelection(size_t numOfCoins);
     
     const size_t totalSize() const;
     const size_t sizeOfLeftWeighGroup() const;

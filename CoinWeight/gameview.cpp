@@ -15,7 +15,7 @@ GameView::~GameView() {}
 
 //************************** Non-virtual private methods
 //**** Draw coins
-void GameView::drawCoins(const CoinStates &coinStates) {
+void GameView::drawCoins(const CoinSelection &coinStates) {
     for (size_t i = 0; i < coinStates.totalSize(); ++i) {
         drawCoin(coinStates.at(i), i);
     }
@@ -38,7 +38,7 @@ void GameView::drawHistoryScreen(const Record &record,
 
 
 //************************** Public methods
-void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen &screen,
+void GameView::drawGamePlayHumanScreen(const CoinSelection &coinStates, const GamePlayHumanScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
@@ -47,7 +47,7 @@ const WeighCounter &counter, const WeighResult lastWeighResult) {
     drawGamePlayHumanHighlight(screen);
 }
 
-void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates, const GamePlayComputerScreen &screen,
+void GameView::drawGamePlayComputerScreen(const CoinSelection &coinStates, const GamePlayComputerScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);

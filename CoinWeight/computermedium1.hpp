@@ -17,9 +17,9 @@ public:
  
     // Overriding functions
 	void beforeWeigh() override;
-	void pickToWeigh(CoinStates &coinStates) const override;
+	void pickToWeigh(CoinSelection &coinStates) const override;
 	void afterWeigh(const WeighResult weighResult) override;
-	void pickToGuess(CoinStates &coinStates) const override;
+	void pickToGuess(CoinSelection &coinStates) const override;
     const bool readyToGuess() const override;
  
 private:
@@ -47,11 +47,11 @@ private:
     
     State state;
     
-    void pickToWeighOneRange(CoinStates &coinStates) const;
-    void pickToWeighTwoRanges0(CoinStates &coinStates) const;
-    void pickToWeighTwoRanges1(CoinStates &coinStates) const;
+    void pickToWeighOneRange(CoinSelection &coinStates) const;
+    void pickToWeighTwoRanges0(CoinSelection &coinStates) const;
+    void pickToWeighTwoRanges1(CoinSelection &coinStates) const;
     
-    static void pickToWeighPileEndSplit(CoinStates &coinStates,
+    static void pickToWeighPileEndSplit(CoinSelection &coinStates,
         const State::Range &range, const size_t weighPileSize);
     static const size_t weighPileSizeTwoFakes(const State::Range &range);
     static const size_t weighPileSizeOneFake(const State::Range &range);

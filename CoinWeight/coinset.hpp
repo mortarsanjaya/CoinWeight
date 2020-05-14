@@ -29,8 +29,8 @@ public:
     const size_t fakeCoinIndex2() const;
 	
 	// Game operations
-	const WeighResult compareWeight(const CoinStates &weighing) const;
-	const GuessResult guessFakeCoins(const CoinStates &guess) const;
+	const WeighResult compareWeight(const CoinSelection &weighing) const;
+	const GuessResult guessFakeCoins(const CoinSelection &guess) const;
  
     friend void test();
 };

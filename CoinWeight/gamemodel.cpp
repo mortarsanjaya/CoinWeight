@@ -24,7 +24,7 @@ const GameScreen::Page GameModel::currScreen() const {
     return screen.currentScreen();
 }
 
-const CoinStates &GameModel::currentCoinStates() const {
+const CoinSelection &GameModel::currentCoinStates() const {
     return player->currStates();
 }
 

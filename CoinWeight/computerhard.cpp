@@ -244,7 +244,7 @@ void ComputerHard::beforeWeigh() {
 
 
 //************************** Overriding functions
-void ComputerHard::pickToWeigh(CoinStates &coinStates) const {
+void ComputerHard::pickToWeigh(CoinSelection &coinStates) const {
     for (size_t leftGroupIndex : state->partition.at(0)) {
         coinStates.moveToLeftWeighGroup(leftGroupIndex);
     }
@@ -420,7 +420,7 @@ void ComputerHard::afterWeigh(const WeighResult weighResult) {
 	strategy = Strategy::NoStrategy;
 }
 
-void ComputerHard::pickToGuess(CoinStates &coinStates) const {
+void ComputerHard::pickToGuess(CoinSelection &coinStates) const {
     for (std::vector<size_t> single_partition : state->partition) {
         for (size_t element : single_partition) {
             coinStates.moveToGuessGroup(element);

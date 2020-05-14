@@ -41,7 +41,7 @@ void History::addRecord(const Record &record) {
     resetIndex();
 }
 
-void History::addRecord(const CoinStates &weighStates, const WeighResult &weighResult) {
+void History::addRecord(const CoinSelection &weighStates, const WeighResult &weighResult) {
     listOfRecords.emplace_back(weighStates, weighResult);
     resetIndex();
 }

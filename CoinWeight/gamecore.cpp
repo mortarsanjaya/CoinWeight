@@ -33,7 +33,7 @@ const WeighCounter &GameCore::weighCounter() const {
 
 
 //************************** Game operations
-const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
+const WeighResult GameCore::compareWeight(const CoinSelection &weighing) {
     if (counter.isZero()) {
         return WeighResult::Invalid;
     }
@@ -46,6 +46,6 @@ const WeighResult GameCore::compareWeight(const CoinStates &weighing) {
     return result;
 }
 
-const GuessResult GameCore::guessFakeCoins(const CoinStates &guess) const {
+const GuessResult GameCore::guessFakeCoins(const CoinSelection &guess) const {
     return setOfCoins->guessFakeCoins(guess);
 }

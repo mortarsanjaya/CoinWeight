@@ -23,7 +23,7 @@ Player::Player(const size_t numOfCoins, const GameLevel gameLevel) :
 
 
 //************************** Field accessors
-const CoinStates &Player::currStates() const {
+const CoinSelection &Player::currStates() const {
     return coinStates;
 }
 

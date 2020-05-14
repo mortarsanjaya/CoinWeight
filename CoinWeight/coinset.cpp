@@ -44,7 +44,7 @@ const bool CoinSet::isFakeCoinIndex(const size_t index) const {
 
 
 //************************** Game operations
-const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
+const WeighResult CoinSet::compareWeight(const CoinSelection &weighing) const {
     if (weighing.sizeOfGuessGroup() != 0) {
         return WeighResult::Invalid;
     } else if (weighing.sizeOfLeftWeighGroup() > weighing.sizeOfRightWeighGroup()) {
@@ -78,7 +78,7 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     }
 }
 
-const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
+const GuessResult CoinSet::guessFakeCoins(const CoinSelection &guess) const {
     if (guess.sizeOfLeftWeighGroup() != 0 || guess.sizeOfRightWeighGroup() != 0) {
         return GuessResult::Invalid;
     } else if (guess.sizeOfGuessGroup() != numOfFakeCoins) {

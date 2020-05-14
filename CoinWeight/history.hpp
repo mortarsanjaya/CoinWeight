@@ -28,7 +28,7 @@ public:
     const bool empty() const;
     
     void addRecord(const Record &record);
-    void addRecord(const CoinStates &weighStates, const WeighResult &weighResult);
+    void addRecord(const CoinSelection &weighStates, const WeighResult &weighResult);
     void clear();
     void incrementIndex();
     void decrementIndex();
