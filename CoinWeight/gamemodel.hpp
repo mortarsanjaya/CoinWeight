@@ -33,8 +33,7 @@ public:
     const History &currentHistory() const;
     
     // Game core number of weighings
-    const size_t numOfWeighingsMax() const;
-    const size_t numOfWeighingsLeft() const;
+    const WeighCounter &weighCounter() const;
     
     // Coin states manipulation
     void deselectCoin();

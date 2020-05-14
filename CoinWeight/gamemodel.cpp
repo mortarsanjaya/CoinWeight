@@ -37,12 +37,8 @@ const History &GameModel::currentHistory() const {
 }
 
 //**** Game core number of weighings
-const size_t GameModel::numOfWeighingsMax() const {
-    return gameCore->numOfWeighingsMax();
-}
-
-const size_t GameModel::numOfWeighingsLeft() const {
-    return gameCore->numOfWeighingsLeft();
+const WeighCounter &GameModel::weighCounter() const {
+    return gameCore->weighCounter();
 }
 
 
@@ -267,17 +263,17 @@ void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
     view->drawGamePlayHumanScreen(player->currStates(),
         screen.gamePlayHumanScreen().currScreenHighlight(),
         screen.gamePlayHumanScreen().currCoinHighlight(),
-        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsMax(), lastWeighResult);
+                                  weighCounter().numOfWeighsLeft(), weighCounter().numOfWeighsMax(), lastWeighResult);
 }
 
 void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
-    view->drawGamePlayComputerScreen(player->currStates(), gameCore->numOfWeighingsLeft(),
-        gameCore->numOfWeighingsMax(), lastWeighResult);
+    view->drawGamePlayComputerScreen(player->currStates(), weighCounter().numOfWeighsLeft(),
+        weighCounter().numOfWeighsMax(), lastWeighResult);
 }
 
 void GameModel::updateViewGameOverScreen(GameView *view) {
     view->drawGameOverScreen(lastGuessResult,
-        gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsMax());
+        weighCounter().numOfWeighsLeft(), weighCounter().numOfWeighsMax());
 }
 
 //**** Main

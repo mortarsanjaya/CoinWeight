@@ -15,11 +15,12 @@
 #include "coinstates.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
+#include "weighcounter.hpp"
 
 class GameCore {
 	std::unique_ptr<CoinSet> setOfCoins;
 	GameLevel level;
-	size_t numOfWeighingsCounter;
+    WeighCounter counter;
  
     // maximum number of comparisons, to initialize the cap
     static const size_t maxComparisons(size_t numOfCoins, GameLevel level);
@@ -29,8 +30,7 @@ public:
 
 	const size_t numOfCoins() const;
     const GameLevel gameLevel() const;
-	const size_t numOfWeighingsLeft() const;
-    const size_t numOfWeighingsMax() const;
+    const WeighCounter &weighCounter() const;
  
     // Also decrements weighing counter
     // Throws if the counter's value is 0
