@@ -54,7 +54,7 @@ void GameModel::goFromTitleScreen() {
         throw Exception<GameModel>("Go from title screen: Not a title screen.");
     }
     
-    switch (screen.titleHighlight()) {
+    switch (screen.titleScreen().currHighlight()) {
         case TitleScreen::Highlight::Play:
             screen.goToGameOptionScreen();
             break;
@@ -76,7 +76,7 @@ void GameModel::gameStart() {
         throw Exception<GameModel>("Not from game options screen.");
     }
     
-    const GameSettings &settings = screen.gameOptionSettings();
+    const GameSettings &settings = screen.gameOptionScreen().currSettings();
     gameCore = std::make_unique<GameCore>(settings.numOfCoins(), settings.gameLevel());
     
     if (settings.isHumanMode()) {
@@ -104,25 +104,25 @@ void GameModel::gameCleanUp() {
 //************************** Coin states manipulation
 void GameModel::deselectCoin() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->deselectCoin(screen.gamePlayHumanCoinHighlight());
+        player->deselectCoin(screen.gamePlayHumanScreen().currCoinHighlight());
     }
 }
 
 void GameModel::moveCoinToLeftGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToLeftGroup(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToLeftGroup(screen.gamePlayHumanScreen().currCoinHighlight());
     }
 }
 
 void GameModel::moveCoinToRightGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToRightGroup(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToRightGroup(screen.gamePlayHumanScreen().currCoinHighlight());
     }
 }
 
 void GameModel::selectCoinToGuess() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToGuess(screen.gamePlayHumanCoinHighlight());
+        player->selectCoinToGuess(screen.gamePlayHumanScreen().currCoinHighlight());
     }
 }
 
@@ -155,7 +155,7 @@ void GameModel::humanGameMove() {
         throw Exception<GameModel>("Human Game Move Failure: Not a human game.");
     }
     
-    switch (screen.gamePlayHumanScreenHighlight()) {
+    switch (screen.gamePlayHumanScreen().currScreenHighlight()) {
         case GamePlayHumanScreen::ScreenHighlight::WeighButton:
             compareWeight();
             break;
@@ -248,7 +248,7 @@ void GameModel::historyScreenOnRightButton() {
 //************************** View update functions
 //**** Helper
 void GameModel::updateViewTitleScreen(GameView *view) {
-    view->drawTitleScreen(screen.titleHighlight());
+    view->drawTitleScreen(screen.titleScreen().currHighlight());
 }
 
 void GameModel::updateViewInstructionScreen(GameView *view) {
@@ -260,11 +260,13 @@ void GameModel::updateViewCreditScreen(GameView *view) {
 }
 
 void GameModel::updateViewGameOptionScreen(GameView *view) {
-    view->drawGameOptionScreen(screen.gameOptionHighlight(), screen.gameOptionSettings());
+    view->drawGameOptionScreen(screen.gameOptionScreen().currHighlight(), screen.gameOptionScreen().currSettings());
 }
 
 void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
-    view->drawGamePlayHumanScreen(player->currStates(), screen.gamePlayHumanScreenHighlight(), screen.gamePlayHumanCoinHighlight(),
+    view->drawGamePlayHumanScreen(player->currStates(),
+        screen.gamePlayHumanScreen().currScreenHighlight(),
+        screen.gamePlayHumanScreen().currCoinHighlight(),
         gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsMax(), lastWeighResult);
     view->drawHistoryScreen(player->currHistory());
 }

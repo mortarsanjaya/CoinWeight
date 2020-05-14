@@ -19,76 +19,60 @@ const GameScreen::Page GameScreen::currentScreen() const {
     return page;
 }
 
-const TitleScreen::Highlight GameScreen::titleHighlight() const {
+const TitleScreen &GameScreen::titleScreen() const {
     if (page != Page::Title) {
         throw Exception<GameScreen>("Currently not a title screen.");
     }
     
-    return title.currHighlight();
+    return title;
 }
 
-const InstructionScreen::Highlight GameScreen::instructionHighlight() const {
+const InstructionScreen &GameScreen::instructionScreen() const {
     if (page != Page::Instruction) {
         throw Exception<GameScreen>("Currently not an instruction screen.");
     }
     
-    return instruction.currHighlight();
+    return instruction;
 }
 
-const CreditScreen::Highlight GameScreen::creditHighlight() const {
+const CreditScreen &GameScreen::creditScreen() const {
     if (page != Page::Credit) {
         throw Exception<GameScreen>("Currently not a credit screen.");
     }
     
-    return credit.currHighlight();
+    return credit;
 }
 
-const GameOptionScreen::Highlight GameScreen::gameOptionHighlight() const {
+const GameOptionScreen &GameScreen::gameOptionScreen() const {
     if (page != Page::GameOption) {
         throw Exception<GameScreen>("Currently not a game option screen.");
     }
     
-    return gameOption.currHighlight();
+    return gameOption;
 }
 
-const GameSettings &GameScreen::gameOptionSettings() const {
-    if (page != Page::GameOption) {
-        throw Exception<GameScreen>("Currently not a game option screen.");
-    }
-    
-    return gameOption.currSettings();
-}
-
-const GamePlayHumanScreen::ScreenHighlight GameScreen::gamePlayHumanScreenHighlight() const {
+const GamePlayHumanScreen &GameScreen::gamePlayHumanScreen() const {
     if (page != Page::GamePlayHuman) {
         throw Exception<GameScreen>("Currently not a human game screen.");
     }
     
-    return gamePlayHuman.currScreenHighlight();
+    return gamePlayHuman;
 }
 
-const size_t GameScreen::gamePlayHumanCoinHighlight() const {
-    if (page != Page::GamePlayHuman) {
-        throw Exception<GameScreen>("Currently not a human game screen.");
-    }
-    
-    return gamePlayHuman.currCoinHighlight();
-}
-
-const GamePlayComputerScreen::Highlight GameScreen::gamePlayComputerHighlight() const {
+const GamePlayComputerScreen &GameScreen::gamePlayComputerScreen() const {
     if (page != Page::GamePlayComputer) {
         throw Exception<GameScreen>("Currently not a computer game screen.");
     }
     
-    return gamePlayComputer.currHighlight();
+    return gamePlayComputer;
 }
 
-const GameOverScreen::Highlight GameScreen::gameOverHighlight() const {
+const GameOverScreen &GameScreen::gameOverScreen() const {
     if (page != Page::GameOver) {
         throw Exception<GameScreen>("Currently not a game over screen.");
     }
     
-    return gameOver.currHighlight();
+    return gameOver;
 }
 
 

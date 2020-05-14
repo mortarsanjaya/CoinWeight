@@ -27,15 +27,13 @@ public:
     GameScreen();
     
     const Page currentScreen() const;
-    const TitleScreen::Highlight titleHighlight() const;
-    const InstructionScreen::Highlight instructionHighlight() const;
-    const CreditScreen::Highlight creditHighlight() const;
-    const GameOptionScreen::Highlight gameOptionHighlight() const;
-    const GameSettings &gameOptionSettings() const;
-    const GamePlayHumanScreen::ScreenHighlight gamePlayHumanScreenHighlight() const;
-    const size_t gamePlayHumanCoinHighlight() const;
-    const GamePlayComputerScreen::Highlight gamePlayComputerHighlight() const;
-    const GameOverScreen::Highlight gameOverHighlight() const;
+    const TitleScreen &titleScreen() const;
+    const InstructionScreen &instructionScreen() const;
+    const CreditScreen &creditScreen() const;
+    const GameOptionScreen &gameOptionScreen() const;
+    const GamePlayHumanScreen &gamePlayHumanScreen() const;
+    const GamePlayComputerScreen &gamePlayComputerScreen() const;
+    const GameOverScreen &gameOverScreen() const;
     
     // Arrow button highlight switch
     void highlightUp();
