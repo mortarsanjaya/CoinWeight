@@ -14,37 +14,44 @@ GameController::GameController() {}
 
 
 
+//************************** Register model
+void GameController::registerModel(const std::shared_ptr<GameModel> model) {
+    this->model = model;
+}
+
+
+
 //************************** Input function
 //**** Arrow, Main
-void GameController::onScreenArrowInputUp(GameModel *model) {
+void GameController::onScreenArrowInputUp() {
     model->mainScreenOnUpButton();
 }
 
-void GameController::onScreenArrowInputDown(GameModel *model) {
+void GameController::onScreenArrowInputDown() {
     model->mainScreenOnDownButton();
 }
 
-void GameController::onScreenArrowInputLeft(GameModel *model) {
+void GameController::onScreenArrowInputLeft() {
     model->mainScreenOnLeftButton();
 }
 
-void GameController::onScreenArrowInputRight(GameModel *model) {
+void GameController::onScreenArrowInputRight() {
     model->mainScreenOnRightButton();
 }
 
-void GameController::onScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
+void GameController::onScreenArrowInput(const Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
-            onScreenArrowInputUp(model);
+            onScreenArrowInputUp();
             break;
         case Input::Arrow::Down:
-            onScreenArrowInputDown(model);
+            onScreenArrowInputDown();
             break;
         case Input::Arrow::Left:
-            onScreenArrowInputLeft(model);
+            onScreenArrowInputLeft();
             break;
         case Input::Arrow::Right:
-            onScreenArrowInputRight(model);
+            onScreenArrowInputRight();
             break;
     }
 }
@@ -52,50 +59,50 @@ void GameController::onScreenArrowInput(GameModel *model, const Input::Arrow arr
 
 
 //**** Char
-void GameController::onCharInput0(GameModel *model) {
+void GameController::onCharInput0() {
     if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
         model->deselectCoin();
     }
 }
 
-void GameController::onCharInput1(GameModel *model) {
+void GameController::onCharInput1() {
     if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
         model->moveCoinToLeftGroup();
     }
 }
 
-void GameController::onCharInput2(GameModel *model) {
+void GameController::onCharInput2() {
     if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
         model->moveCoinToRightGroup();
     }
 }
 
-void GameController::onCharInput3(GameModel *model) {
+void GameController::onCharInput3() {
     if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
         model->selectCoinToGuess();
     }
 }
 
-void GameController::onReturnButton(GameModel *model) {
+void GameController::onReturnButton() {
     model->mainScreenOnReturnButton();
 }
 
-void GameController::onCharInput(GameModel *model, const char charInp) {
+void GameController::onCharInput(const char charInp) {
     switch (charInp) {
         case '0':
-            onCharInput0(model);
+            onCharInput0();
             break;
         case '1':
-            onCharInput1(model);
+            onCharInput1();
             break;
         case '2':
-            onCharInput2(model);
+            onCharInput2();
             break;
         case '3':
-            onCharInput3(model);
+            onCharInput3();
             break;
         case '\n':
-            onReturnButton(model);
+            onReturnButton();
         default:
             break;
     }
@@ -104,15 +111,15 @@ void GameController::onCharInput(GameModel *model, const char charInp) {
 
 
 //************************** Input process function
-void GameController::onReceivingInput(GameModel *model, const Input &inp) {
+void GameController::onReceivingInput(const Input &inp) {
     switch (inp.inputType()) {
         case Input::Type::Unknown:
             break;
         case Input::Type::Char:
-            onCharInput(model, inp.whatChar());
+            onCharInput(inp.whatChar());
             break;
         case Input::Type::Arrow:
-            onScreenArrowInput(model, inp.whatArrow());
+            onScreenArrowInput(inp.whatArrow());
             break;
     }
 }

@@ -67,14 +67,16 @@ void test() {
 }
 
 void play() {
-    std::unique_ptr<GameModel> model;
+    std::shared_ptr<GameModel> model;
     std::unique_ptr<GameUI> view;
     GameController controller;
     
-    model = std::make_unique<GameModel>();
+    model = std::make_shared<GameModel>();
     if (model == nullptr) {
         std::cout << "Oops. Cannot initialize model." << std::endl;
         return;
+    } else {
+        controller.registerModel(model);
     }
     
     view = std::make_unique<GameUI_X11>();
@@ -87,7 +89,7 @@ void play() {
     model->updateView(view.get());
     while (true) {
         view->receiveInput();
-        controller.onReceivingInput(model.get(), view->lastInput());
+        controller.onReceivingInput(view->lastInput());
         model->updateView(view.get());
     }
 }
@@ -96,5 +98,5 @@ using namespace std;
 
 int main() {
     test();
-    // play();
+    play();
 }
