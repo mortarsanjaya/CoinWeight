@@ -10,9 +10,10 @@
 #define coinset_hpp
 
 #include "coinselection.hpp"
-#include "gamelevel.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
+
+enum class GameLevel;
 
 class CoinSet final {
     size_t nCoins;
