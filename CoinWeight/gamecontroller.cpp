@@ -22,35 +22,35 @@ void GameController::registerUI(std::unique_ptr<GameUI> &ui) {
 
 //************************** Input function
 //**** Arrow, Main
-void GameController::onScreenArrowInputUp() {
+void GameController::onButtonUp() {
     model->onUpButton();
 }
 
-void GameController::onScreenArrowInputDown() {
+void GameController::onButtonDown() {
     model->onDownButton();
 }
 
-void GameController::onScreenArrowInputLeft() {
+void GameController::onButtonLeft() {
     model->onLeftButton();
 }
 
-void GameController::onScreenArrowInputRight() {
+void GameController::onButtonRight() {
     model->onRightButton();
 }
 
-void GameController::onScreenArrowInput(const Input::Arrow arrowInp) {
+void GameController::onArrowInput(const Input::Arrow arrowInp) {
     switch (arrowInp) {
         case Input::Arrow::Up:
-            onScreenArrowInputUp();
+            onButtonUp();
             break;
         case Input::Arrow::Down:
-            onScreenArrowInputDown();
+            onButtonDown();
             break;
         case Input::Arrow::Left:
-            onScreenArrowInputLeft();
+            onButtonLeft();
             break;
         case Input::Arrow::Right:
-            onScreenArrowInputRight();
+            onButtonRight();
             break;
     }
 }
@@ -118,7 +118,7 @@ void GameController::onReceivingInput(const Input &inp) {
             onCharInput(inp.whatChar());
             break;
         case Input::Type::Arrow:
-            onScreenArrowInput(inp.whatArrow());
+            onArrowInput(inp.whatArrow());
             break;
     }
 }

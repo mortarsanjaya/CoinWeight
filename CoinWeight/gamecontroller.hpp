@@ -33,11 +33,11 @@ private:
     std::unique_ptr<GameUI> view;
 
     // Arrow input handling
-    void onScreenArrowInputUp();
-    void onScreenArrowInputDown();
-    void onScreenArrowInputLeft();
-    void onScreenArrowInputRight();
-    void onScreenArrowInput(const Input::Arrow arrowInp);
+    void onButtonUp();
+    void onButtonDown();
+    void onButtonLeft();
+    void onButtonRight();
+    void onArrowInput(const Input::Arrow arrowInp);
     
     // Character input handling
     void onCharInput0();
