@@ -49,34 +49,7 @@ void GameController::onMainScreenArrowInput(GameModel *model, const Input::Arrow
     }
 }
 
-//**** Arrow, History
-void GameController::onHistoryScreenArrowInputUp(GameModel *model) {}
-void GameController::onHistoryScreenArrowInputDown(GameModel *model) {}
 
-void GameController::onHistoryScreenArrowInputLeft(GameModel *model) {
-    model->historyScreenOnLeftButton();
-}
-
-void GameController::onHistoryScreenArrowInputRight(GameModel *model) {
-    model->historyScreenOnRightButton();
-}
-
-void GameController::onHistoryScreenArrowInput(GameModel *model, const Input::Arrow arrowInp) {
-    switch (arrowInp) {
-        case Input::Arrow::Up:
-            onHistoryScreenArrowInputUp(model);
-            break;
-        case Input::Arrow::Down:
-            onHistoryScreenArrowInputDown(model);
-            break;
-        case Input::Arrow::Left:
-            onHistoryScreenArrowInputLeft(model);
-            break;
-        case Input::Arrow::Right:
-            onHistoryScreenArrowInputRight(model);
-            break;
-    }
-}
 
 //**** Char
 void GameController::onCharInput0(GameModel *model) {
@@ -146,15 +119,6 @@ void GameController::onReceivingInput(GameModel *model, const Input &inp) {
             }
             break;
         case Input::Source::History:
-            switch (inp.inputType()) {
-                case Input::Type::Unknown:
-                    break;
-                case Input::Type::Char:
-                    break;
-                case Input::Type::Arrow:
-                    onHistoryScreenArrowInput(model, inp.whatArrow());
-                    break;
-            }
             break;
     }
 }

@@ -23,11 +23,6 @@ class GameController {
     void onMainScreenArrowInputLeft(GameModel *model);
     void onMainScreenArrowInputRight(GameModel *model);
     void onMainScreenArrowInput(GameModel *model, const Input::Arrow arrowInp);
-    void onHistoryScreenArrowInputUp(GameModel *model);
-    void onHistoryScreenArrowInputDown(GameModel *model);
-    void onHistoryScreenArrowInputLeft(GameModel *model);
-    void onHistoryScreenArrowInputRight(GameModel *model);
-    void onHistoryScreenArrowInput(GameModel *model, const Input::Arrow arrowInp);
     
     // Character input handling (not used by History screen)
     void onCharInput0(GameModel *model);

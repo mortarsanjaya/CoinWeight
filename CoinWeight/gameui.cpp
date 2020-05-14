@@ -28,29 +28,31 @@ void GameUI::drawRecord(const Record &record) {
 }
 
 //**** Draw history screen, non-empty case
+/*
 void GameUI::drawHistoryScreen(const Record &record,
     const size_t index, const size_t numOfWeighs)
 {
     drawRecord(record);
     // drawHistoryIndexText(index, numOfWeighs);
 }
+*/
 
 
 
 //************************** Public methods
-void GameUI::drawGamePlayHumanScreen(const CoinSelection &coinStates, const GamePlayHumanScreen &screen,
+void GameUI::drawGamePlayHumanScreen(const CoinSelection &selection, const GamePlayHumanScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
-    drawCoins(coinStates);
+    drawCoins(selection);
     drawWeighResultText(lastWeighResult);
     drawGamePlayNumOfWeighs(counter);
     drawGamePlayHumanHighlight(screen);
 }
 
-void GameUI::drawGamePlayComputerScreen(const CoinSelection &coinStates, const GamePlayComputerScreen &screen,
+void GameUI::drawGamePlayComputerScreen(const CoinSelection &selection, const GamePlayComputerScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
-    drawCoins(coinStates);
+    drawCoins(selection);
     drawWeighResultText(lastWeighResult);
     drawGamePlayNumOfWeighs(counter);
     drawReturnButton();

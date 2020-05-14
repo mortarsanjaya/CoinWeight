@@ -231,14 +231,6 @@ void GameModel::mainScreenOnReturnButton() {
     }
 }
 
-void GameModel::historyScreenOnLeftButton() {
-    historyDecrementIndex();
-}
-
-void GameModel::historyScreenOnRightButton() {
-    historyIncrementIndex();
-}
-
 
 
 //************************** View update functions

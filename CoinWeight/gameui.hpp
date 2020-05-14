@@ -23,12 +23,9 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const WeighResult weighResult) = 0;
-    virtual void drawCoin(const CoinSelection::Group coinState, const size_t index) = 0;
+    virtual void drawCoin(const CoinSelection::Group group, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
-    // Game Play screen
-    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
-    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
         
     // Game Over screen
     virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
@@ -46,7 +43,7 @@ private:
 //**** Private non-virtual methods
     void drawCoins(const CoinSelection &coinStates);
     void drawRecord(const Record &record);
-    void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
+    // void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
     
 public:
     GameUI() = default;
@@ -57,10 +54,14 @@ public:
     virtual void drawInstructionScreen(const InstructionScreen &screen) = 0;
     virtual void drawCreditScreen(const CreditScreen &screen) = 0;
     virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
+    
+    // Game Play screen
+    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
+    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
         
-    void drawGamePlayHumanScreen(const CoinSelection &coinStates, const GamePlayHumanScreen &screen,
+    void drawGamePlayHumanScreen(const CoinSelection &selection, const GamePlayHumanScreen &screen,
         const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGamePlayComputerScreen(const CoinSelection &coinStates, const GamePlayComputerScreen &screen,
+    void drawGamePlayComputerScreen(const CoinSelection &selection, const GamePlayComputerScreen &screen,
         const WeighCounter &counter, const WeighResult lastWeighResult);
     void drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter);
     

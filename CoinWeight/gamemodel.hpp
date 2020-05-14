@@ -46,8 +46,6 @@ public:
     void mainScreenOnLeftButton();
     void mainScreenOnRightButton();
     void mainScreenOnReturnButton();
-    void historyScreenOnLeftButton();
-    void historyScreenOnRightButton();
     
     // View-related functions
     void updateView(GameUI *view);
