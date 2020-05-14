@@ -2,23 +2,45 @@
 //  computerfactory.cpp
 //  CoinWeight
 //
-//  Created by Gian Cordana Sanjaya on 2020-04-27.
+//  Created by Gian Cordana Sanjaya on 2020-05-11.
 //  Copyright © 2020 -. All rights reserved.
 //
 
 #include "computerfactory.hpp"
-#include "computereasyfactory.hpp"
-#include "computermediumfactory.hpp"
-#include "computerhardfactory.hpp"
-#include <utility>
+#include "computer.hpp"
+#include "computereasy1.hpp"
+#include "computermedium1.hpp"
 
-const std::unique_ptr<ComputerFactory> ComputerFactory::createFactory(const GameLevel level) {
+//************************** Main factory method
+std::unique_ptr<Computer>
+ComputerFactory::create(const size_t numOfCoins, const size_t numOfMovesMax, const GameLevel level) {
     switch (level) {
         case GameLevel::Easy:
-            return std::make_unique<ComputerEasyFactory>();
+            return createEasy(numOfCoins, numOfMovesMax);
+            break;
         case GameLevel::Medium:
-            return std::make_unique<ComputerMediumFactory>();
+            return createMedium(numOfCoins, numOfMovesMax);
+            break;
         case GameLevel::Hard:
-            return std::make_unique<ComputerHardFactory>();
+            return createHard(numOfCoins, numOfMovesMax);
+            break;
     }
+}
+
+
+
+//************************** Level-based factory methods
+std::unique_ptr<Computer>
+ComputerFactory::createEasy(const size_t numOfCoins, const size_t numOfMovesMax) {
+    return std::make_unique<ComputerEasy1>(numOfCoins, numOfMovesMax);
+}
+
+std::unique_ptr<Computer>
+ComputerFactory::createMedium(const size_t numOfCoins, const size_t numOfMovesMax) {
+    return std::make_unique<ComputerMedium1>(numOfCoins, numOfMovesMax);
+}
+
+std::unique_ptr<Computer>
+ComputerFactory::createHard(const size_t numOfCoins, const size_t numOfMovesMax) {
+    return std::make_unique<ComputerMedium1>(numOfCoins, numOfMovesMax);
 }

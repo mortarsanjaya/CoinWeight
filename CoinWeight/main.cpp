@@ -8,7 +8,6 @@
 
 #include "coinset.hpp"
 #include "computer.hpp"
-#include "computerhard.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
@@ -17,54 +16,7 @@
 #include "gameui_x11.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
-
-template <size_t n> static const size_t log_ceil(size_t k) {
-	if (k == 0) exit(100);
-	size_t res = 0;
-	while (k > 1) {
-		k = (k - 1) / n + 1;
-		++res;
-	}
-	return res;
-}
-
-void test() {
-    for (size_t numOfCoins = 3; numOfCoins <= 50; ++numOfCoins) {
-        auto coinSet = std::make_unique<CoinSet>(numOfCoins);
-        size_t worstCaseWeigh = 0;
-        for (size_t i = 0; i < numOfCoins; ++i) {
-            for (size_t j = i + 1; j < numOfCoins; ++j) {
-                coinSet->fakeCoinI1 = i;
-                coinSet->fakeCoinI2 = j;
-                auto computer = std::make_unique<ComputerHard>(numOfCoins);
-                CoinSelection coinStates(numOfCoins);
-                size_t numOfWeigh = 0;
-                while (true) {
-                    if (computer->readyToGuess()) {
-                        computer->pickToGuess(coinStates);
-                        const GuessResult guessResult = coinSet->guessFakeCoins(coinStates);
-                        if (guessResult == GuessResult::Correct) break;
-                        else exit(1);
-                    } else {
-                        computer->beforeWeigh();
-                        computer->pickToWeigh(coinStates);
-                        const WeighResult weighResult = coinSet->compareWeight(coinStates);
-                        computer->afterWeigh(weighResult);
-                        coinStates.reset();
-                        ++numOfWeigh;
-                    }
-                }
-                
-                if (worstCaseWeigh < numOfWeigh) {
-                    worstCaseWeigh = numOfWeigh;
-                }
-            }
-        }
-        
-        std::cout << numOfCoins << " " << worstCaseWeigh << " " <<
-            log_ceil<3>(numOfCoins * (numOfCoins - 1) / 2) + 1 << std::endl;
-    }
-}
+#include "computertest.hpp"
 
 void play() {
     GameController controller;
@@ -103,6 +55,7 @@ void play() {
 using namespace std;
 
 int main() {
-    test();
+    computerTest(50, GameLevel::Easy);
+    computerTest(75, GameLevel::Medium);
     play();
 }

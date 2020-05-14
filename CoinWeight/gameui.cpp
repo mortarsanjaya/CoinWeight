@@ -22,10 +22,12 @@ void GameUI::drawCoins(const CoinSelection &coinStates) {
 }
 
 //**** Draw record
+/*
 void GameUI::drawRecord(const Record &record) {
     drawCoins(record.coinStates());
     drawWeighResultText(record.result());
 }
+*/
 
 //**** Draw history screen, non-empty case
 /*

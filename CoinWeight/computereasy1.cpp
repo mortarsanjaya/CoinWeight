@@ -19,22 +19,32 @@ In both cases, after determining if Coin 0 is genuine, all other coins
  */
 
 //************************** Constructor
-ComputerEasy1::ComputerEasy1(const size_t numOfCoins) :
-Computer{numOfCoins}, state{State::Type::FirstMove}, testIndex{1} {}
+ComputerEasy1::ComputerEasy1(const size_t numOfCoins, const size_t numOfMovesMax) :
+Computer{numOfCoins, numOfMovesMax}, state{State::Type::FirstMove}, testIndex{1} {
+    setSelection();
+}
 
 
 
 //************************** Overriding functions
-void ComputerEasy1::beforeWeigh() {}
-void ComputerEasy1::pickToWeigh(CoinSelection &coinStates) const {
-    if (testIndex == nCoins) {
-        throw Exception<ComputerEasy1>("Should be guessing.");
+void ComputerEasy1::setSelection() {
+    if (!isAbleToWeigh() && state.type != State::Type::Finish) {
+        selectCoinToGuess(0);
+        return;
     }
-    coinStates.moveToLeftWeighGroup(0);
-    coinStates.moveToRightWeighGroup(testIndex);
+    
+    if (state.type == State::Type::Finish) {
+        selectCoinToGuess(state.fakeCoin1);
+        selectCoinToGuess(state.fakeCoin2);
+    } else if (testIndex == numOfCoins()) {
+        throw Exception<ComputerEasy1>("Invalid handling.");
+    } else {
+        selectCoinToLeftGroup(0);
+        selectCoinToRightGroup(testIndex);
+    }
 }
 
-void ComputerEasy1::afterWeigh(const WeighResult weighResult) {
+void ComputerEasy1::changeState(const WeighResult weighResult) {
     switch (state.type) {
         case State::Type::FirstMove:
             return afterWeighFirstMove(weighResult);
@@ -51,19 +61,6 @@ void ComputerEasy1::afterWeigh(const WeighResult weighResult) {
     }
 }
 
-void ComputerEasy1::pickToGuess(CoinSelection &coinStates) const {
-    if (!readyToGuess()) {
-        throw Exception<ComputerEasy1>("Should be weighing.");
-    }
-    
-    coinStates.moveToGuessGroup(state.fakeCoin1);
-    coinStates.moveToGuessGroup(state.fakeCoin2);
-}
-
-const bool ComputerEasy1::readyToGuess() const {
-    return (state.type == State::Type::Finish);
-}
-
 
 
 //************************** Private member methods
@@ -74,7 +71,7 @@ void ComputerEasy1::afterWeighFirstMove(const WeighResult weighResult) {
             break;
         case WeighResult::LeftHeavy:
             state.type = State::Type::Coin0IsReal1;
-            state.fakeCoin1 = testIndex;
+            state.fakeCoin1 = 1;
             break;
         case WeighResult::RightHeavy:
             state.type = State::Type::Coin0IsFake;
@@ -93,12 +90,12 @@ void ComputerEasy1::afterWeighSecondMove(const WeighResult weighResult) {
             break;
         case WeighResult::LeftHeavy:
             state.type = State::Type::Coin0IsReal1;
-            state.fakeCoin1 = testIndex;
+            state.fakeCoin1 = 2;
             break;
         case WeighResult::RightHeavy:
             state.type = State::Type::Finish;
             state.fakeCoin1 = 0;
-            state.fakeCoin2 = testIndex;
+            state.fakeCoin2 = 1;
             break;
         default:
             throw Exception<ComputerEasy1>("Invalid weighing result.");

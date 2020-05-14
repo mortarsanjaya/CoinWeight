@@ -42,7 +42,7 @@ private:
     
 //**** Private non-virtual methods
     void drawCoins(const CoinSelection &coinStates);
-    void drawRecord(const Record &record);
+    // void drawRecord(const Record &record);
     // void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
     
 public:

@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/range.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/range.hpp">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

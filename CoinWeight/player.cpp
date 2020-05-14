@@ -7,101 +7,64 @@
 //
 
 #include "player.hpp"
-#include "computerfactory.hpp"
 #include "exception.hpp"
 
 //************************** Constructor
-Player::Player(size_t numOfCoins) : coinStates(numOfCoins), history(), computer() {}
-Player::Player(const size_t numOfCoins, const GameLevel gameLevel) :
-    coinStates(numOfCoins), history(), computer()
-{
-    const auto &factory = ComputerFactory::createFactory(gameLevel);
-    computer = factory->createComputer(numOfCoins);
-    computerSetup();
-}
+Player::Player(const size_t numOfCoins) : selection(numOfCoins), history() {}
 
 
 
 //************************** Field accessors
-const CoinSelection &Player::currStates() const {
-    return coinStates;
+const CoinSelection &Player::currSelection() const {
+    return selection;
 }
 
 const History &Player::currHistory() const {
     return history;
 }
 
-const bool Player::isHuman() const {
-    return !computer;
-}
-
-const bool Player::readyToGuess() const {
-    return computer->readyToGuess();
+const size_t Player::numOfCoins() const {
+    return selection.totalSize();
 }
 
 
 
 //************************** Coin states manipulation
 void Player::deselectCoin(const size_t coinIndex) {
-    coinStates.deselect(coinIndex);
+    selection.setGroup(coinIndex, CoinSelection::Group::NoSelect);
 }
 
 void Player::selectCoinToLeftGroup(const size_t coinIndex) {
-    coinStates.moveToLeftWeighGroup(coinIndex);
+    if (isAbleToWeigh()) {
+        selection.setGroup(coinIndex, CoinSelection::Group::LeftWeigh);
+    }
 }
 
 void Player::selectCoinToRightGroup(const size_t coinIndex) {
-    coinStates.moveToRightWeighGroup(coinIndex);
+    if (isAbleToWeigh()) {
+        selection.setGroup(coinIndex, CoinSelection::Group::RightWeigh);
+    }
 }
 
 void Player::selectCoinToGuess(const size_t coinIndex) {
-    coinStates.moveToGuessGroup(coinIndex);
+    selection.setGroup(coinIndex, CoinSelection::Group::Guess);
 }
 
 
 
-//************************** Other public methods
+//************************** On receiving weigh result
 void Player::receiveWeighResult(const WeighResult weighResult) {
     addWeighResult(weighResult);
     resetStates();
-    if (computer) {
-        computerSetup();
-    }
+    afterWeigh(weighResult);
 }
 
-void Player::historyIncrementIndex() {
-    history.incrementIndex();
-}
-
-void Player::historyDecrementIndex() {
-    history.decrementIndex();
-}
-
-
-
-//************************** Private methods
 void Player::addWeighResult(const WeighResult weighResult) {
-    history.addRecord(coinStates, weighResult);
-    if (computer) {
-        computer->afterWeigh(weighResult);
-    }
+    history.add(selection, weighResult);
 }
 
 void Player::resetStates() {
-    coinStates.reset();
-}
-
-void Player::computerSetup() {
-    if (!computer) {
-        throw Exception<Player>("computerSetup: Not a computer.");
-    }
-    
-    if (computer->readyToGuess()) {
-        computer->pickToGuess(coinStates);
-    } else {
-        computer->beforeWeigh();
-        computer->pickToWeigh(coinStates);
-    }
+    selection.reset();
 }
 
 

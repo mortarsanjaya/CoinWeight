@@ -75,9 +75,11 @@ private:
     void humanGameMove();
     void computerGameMove();
     
+    /*
     // History index manipulation
     void historyIncrementIndex();
     void historyDecrementIndex();
+    */
 };
 
 #endif

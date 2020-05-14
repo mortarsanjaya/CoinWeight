@@ -8,8 +8,9 @@
 
 #include "gamemodel.hpp"
 #include "gameui.hpp"
-#include "computerhard.hpp"
-#include "computerfactory.hpp"
+#include "computer.hpp"
+#include "playerfactory.hpp"
+#include "numofweighsmax.hpp"
 #include "exception.hpp"
 #include <unistd.h>
 
@@ -25,7 +26,7 @@ const GameScreen &GameModel::currScreen() const {
 }
 
 const CoinSelection &GameModel::currentCoinStates() const {
-    return player->currStates();
+    return player->currSelection();
 }
 
 const bool GameModel::isHumanMode() const {
@@ -89,10 +90,10 @@ void GameModel::gameStart() {
     gameCore = std::make_unique<GameCore>(settings.numOfCoins(), settings.gameLevel());
     
     if (settings.isHumanMode()) {
-        player = std::make_unique<Player>(settings.numOfCoins());
+        player = PlayerFactory::createHumanStd(settings.numOfCoins(), numOfWeighsMax(settings.numOfCoins(), settings.gameLevel()));
         screen.goToGamePlayHumanScreen(settings.numOfCoins(), coinsPerRow);
     } else {
-        player = std::make_unique<Player>(settings.numOfCoins(), settings.gameLevel());
+        player = PlayerFactory::createComputer(settings.numOfCoins(), numOfWeighsMax(settings.numOfCoins(), settings.gameLevel()), settings.gameLevel());
         screen.goToGamePlayComputerScreen();
     }
 }
@@ -141,7 +142,7 @@ void GameModel::selectCoinToGuess() {
 //**** Title
 void GameModel::compareWeight() {
     
-    const WeighResult weighResult = gameCore->compareWeight(player->currStates());
+    const WeighResult weighResult = gameCore->compareWeight(player->currSelection());
     lastWeighResult = weighResult;
     if (weighResult == WeighResult::Invalid) return;
     
@@ -150,7 +151,7 @@ void GameModel::compareWeight() {
 }
 
 void GameModel::guessFakeCoins() {
-    lastGuessResult = gameCore->guessFakeCoins(player->currStates());
+    lastGuessResult = gameCore->guessFakeCoins(player->currSelection());
     if (lastGuessResult == GuessResult::Invalid) {
         lastWeighResult = WeighResult::Invalid;
     } else {
@@ -180,7 +181,7 @@ void GameModel::humanGameMove() {
 void GameModel::computerGameMove() {
     if (currScreen().currentScreen() != GameScreen::Page::GamePlayComputer) {
         throw Exception<GameModel>("Computer Game Move Failure: Not a computer game.");
-    } else if (player->readyToGuess()) {
+    } else if (player->currSelection().sizeOfGuessGroup() != 0) {
         guessFakeCoins();
     } else {
         compareWeight();
@@ -190,6 +191,7 @@ void GameModel::computerGameMove() {
 
 
 //************************** History index manipulation
+/*
 void GameModel::historyIncrementIndex() {
     player->historyIncrementIndex();
 }
@@ -197,6 +199,7 @@ void GameModel::historyIncrementIndex() {
 void GameModel::historyDecrementIndex() {
     player->historyDecrementIndex();
 }
+*/
 
 
 

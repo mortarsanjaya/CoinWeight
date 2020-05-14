@@ -152,12 +152,12 @@ void GameController::updateViewGameOptionScreen() {
 }
 
 void GameController::updateViewGamePlayHumanScreen() {
-    view->drawGamePlayHumanScreen(model->currPlayer()->currStates(),
+    view->drawGamePlayHumanScreen(model->currPlayer()->currSelection(),
         model->currScreen().gamePlayHumanScreen(), model->weighCounter(), model->prevWeighResult());
 }
 
 void GameController::updateViewGamePlayComputerScreen() {
-    view->drawGamePlayComputerScreen(model->currPlayer()->currStates(),
+    view->drawGamePlayComputerScreen(model->currPlayer()->currSelection(),
         model->currScreen().gamePlayComputerScreen(), model->weighCounter(), model->prevWeighResult());
 }
 

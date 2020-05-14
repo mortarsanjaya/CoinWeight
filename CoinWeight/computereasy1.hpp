@@ -13,14 +13,11 @@
 
 class ComputerEasy1 final : public Computer {
 public:
-	ComputerEasy1(const size_t numOfCoins);
+	ComputerEasy1(const size_t numOfCoins, const size_t numOfMovesMax);
  
     // Overriding functions
-	void beforeWeigh() override;
-	void pickToWeigh(CoinSelection &coinStates) const override;
-	void afterWeigh(const WeighResult weighResult) override;
-	void pickToGuess(CoinSelection &coinStates) const override;
-    const bool readyToGuess() const override;
+	void setSelection() override;
+	void changeState(const WeighResult weighResult) override;
  
 private:
     struct State {

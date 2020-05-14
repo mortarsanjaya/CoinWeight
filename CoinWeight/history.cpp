@@ -7,64 +7,31 @@
 //
 
 #include "history.hpp"
-#include "exception.hpp"
 
 //************************** Field accessors
 const size_t History::size() const {
     return listOfRecords.size();
 }
 
-const size_t History::currentIndex() const {
-    return recordIndex;
-}
-
-const Record History::getRecord() const {
-    if (listOfRecords.empty()) {
-        throw Exception<History>("History is empty.");
-    }
-    return listOfRecords[recordIndex];
-}
-
 const bool History::empty() const {
     return listOfRecords.empty();
+}
+
+const CoinSelection &History::getSelectionAt(const size_t index) const {
+    return listOfRecords.at(index).coinStates;
+}
+
+const WeighResult &History::getResultAt(const size_t index) const {
+    return listOfRecords.at(index).result;
 }
 
 
 
 //************************** Modifying functions
-void History::resetIndex() {
-    recordIndex = size() - 1;
-}
-
-void History::addRecord(const Record &record) {
-    listOfRecords.push_back(record);
-    resetIndex();
-}
-
-void History::addRecord(const CoinSelection &weighStates, const WeighResult &weighResult) {
-    listOfRecords.emplace_back(weighStates, weighResult);
-    resetIndex();
+void History::add(const CoinSelection &coinStates, const WeighResult &result) {
+    listOfRecords.emplace_back(coinStates, result);
 }
 
 void History::clear() {
     listOfRecords.clear();
-    resetIndex();
-}
-
-void History::incrementIndex() {
-    if (recordIndex < listOfRecords.size() - 1) {
-        ++recordIndex;
-    }
-}
-
-void History::decrementIndex() {
-    if (recordIndex > 0) {
-        --recordIndex;
-    }
-}
-
-
-//************************** History Failure
-template<> const std::string Exception<History>::headerMessage() const {
-    return "History Failure: ";
 }

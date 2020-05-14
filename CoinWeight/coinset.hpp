@@ -10,6 +10,7 @@
 #define coinset_hpp
 
 #include "coinselection.hpp"
+#include "gamelevel.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 
@@ -32,7 +33,7 @@ public:
 	const WeighResult compareWeight(const CoinSelection &weighing) const;
 	const GuessResult guessFakeCoins(const CoinSelection &guess) const;
  
-    friend void test();
+    friend void computerTest(const size_t nCoinsCap, const GameLevel level);
 };
 
 #endif

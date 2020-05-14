@@ -10,28 +10,31 @@
 #define history_hpp
 
 #include <vector>
-#include "record.hpp"
+#include "coinselection.hpp"
+#include "weighresult.hpp"
 
-class History {
-    std::vector<Record> listOfRecords;
-    size_t recordIndex;
-    
-    void resetIndex();
-
+class History final {
 public:
     History() = default;
     
     const size_t size() const;
-    // Current index is calculated in reverse order of record listing
-    const size_t currentIndex() const;
-    const Record getRecord() const;
     const bool empty() const;
+    const CoinSelection &getSelectionAt(const size_t index) const;
+    const WeighResult &getResultAt(const size_t index) const;
     
-    void addRecord(const Record &record);
-    void addRecord(const CoinSelection &weighStates, const WeighResult &weighResult);
+    void add(const CoinSelection &coinStates, const WeighResult &result);
     void clear();
-    void incrementIndex();
-    void decrementIndex();
+    
+private:
+    struct Record {
+        CoinSelection coinStates;
+        WeighResult result;
+    
+        Record(const CoinSelection &coinStates, const WeighResult result) :
+            coinStates{coinStates}, result{result} {}
+    };
+    
+    std::vector<Record> listOfRecords;
 };
 
 #endif

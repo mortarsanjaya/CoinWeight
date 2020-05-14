@@ -10,17 +10,16 @@
 #define computermedium1_hpp
 
 #include "computer.hpp"
+#include "range.hpp"
+#include "exception.hpp"
 
 class ComputerMedium1 final : public Computer {
 public:
-	ComputerMedium1(const size_t numOfCoins);
+	ComputerMedium1(const size_t numOfCoins, const size_t numOfMovesMax);
  
     // Overriding functions
-	void beforeWeigh() override;
-	void pickToWeigh(CoinSelection &coinStates) const override;
-	void afterWeigh(const WeighResult weighResult) override;
-	void pickToGuess(CoinSelection &coinStates) const override;
-    const bool readyToGuess() const override;
+	void setSelection() override;
+	void changeState(const WeighResult weighResult) override;
  
 private:
     struct State {
@@ -28,14 +27,8 @@ private:
             OneRange,
             TwoRanges0,
             TwoRanges1,
-            Finish
-        };
-        
-        struct Range {
-            size_t begin;
-            size_t end; // Just like STL iterators
-            
-            const size_t size() const;
+            Finish1Range,
+            Finish2Ranges
         };
         
         Type type;
@@ -47,14 +40,13 @@ private:
     
     State state;
     
-    void pickToWeighOneRange(CoinSelection &coinStates) const;
-    void pickToWeighTwoRanges0(CoinSelection &coinStates) const;
-    void pickToWeighTwoRanges1(CoinSelection &coinStates) const;
+    const bool readyToGuess() const;
     
-    static void pickToWeighPileEndSplit(CoinSelection &coinStates,
-        const State::Range &range, const size_t weighPileSize);
-    static const size_t weighPileSizeTwoFakes(const State::Range &range);
-    static const size_t weighPileSizeOneFake(const State::Range &range);
+    void setSelectionOneRange();
+    void setSelectionTwoRanges0();
+    void setSelectionTwoRanges1();
+    void setSelectionFinish1Range();
+    void setSelectionFinish2Ranges();
 
     void afterWeighLeftHeavy();
     void afterWeighRightHeavy();
@@ -64,11 +56,15 @@ private:
     void splitCheckRightHeavyTwoFakes();
     void splitCheckBalanceTwoFakes();
     
-    static void splitLeftHeavyOneFake(State::Range &range);
-    static void splitRightHeavyOneFake(State::Range &range);
-    static void splitBalanceOneFake(State::Range &range);
+    static void splitLeftHeavyOneFake(Range &range);
+    static void splitRightHeavyOneFake(Range &range);
+    static void splitBalanceOneFake(Range &range);
     void checkRange1OneFake();
     void checkRange2OneFake();
+    
+    static const size_t splitSize(const Range &range);
+    
+    static void internalBug() throw (Exception<ComputerMedium1>);
 };
 
 #endif
