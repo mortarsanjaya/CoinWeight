@@ -62,7 +62,7 @@ class GameViewX11 : public GameView {
     void drawReturnButton() override;
     
     // Game Play Human screen
-    void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight) override;
+    void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) override;
     void drawGamePlayNumOfWeighs(const WeighCounter &counter) override;
     
     // Game Over screen

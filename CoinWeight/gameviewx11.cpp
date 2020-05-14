@@ -261,7 +261,9 @@ void GameViewX11::drawReturnButton() {
 }
 
 //**** Game Play screen
-void GameViewX11::drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight) {
+void GameViewX11::drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) {
+    const GamePlayHumanScreen::ScreenHighlight screenHighlight = screen.currScreenHighlight();
+    const size_t coinHighlight = screen.currCoinHighlight();
     const int x_pos = coin0XPos - 6 + coinDist * (coinHighlight % coinsPerRow);
     const int y_pos = coin0YPos - 12 + coinDist * (coinHighlight / coinsPerRow);
     drawString(300, coin0YPos - 2 * coinDist, "Weigh", defaultFGColor,

@@ -38,17 +38,16 @@ void GameView::drawHistoryScreen(const Record &record,
 
 
 //************************** Public methods
-void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates,
-const GamePlayHumanScreen::ScreenHighlight screenHighlight, const size_t coinHighlight,
+void GameView::drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);
     drawWeighResultText(lastWeighResult);
     drawGamePlayNumOfWeighs(counter);
-    drawGamePlayHumanHighlight(screenHighlight, coinHighlight);
+    drawGamePlayHumanHighlight(screen);
 }
 
-void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates,
+void GameView::drawGamePlayComputerScreen(const CoinStates &coinStates, const GamePlayComputerScreen &screen,
 const WeighCounter &counter, const WeighResult lastWeighResult) {
     clearScreen();
     drawCoins(coinStates);

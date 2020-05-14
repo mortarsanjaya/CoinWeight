@@ -29,8 +29,7 @@ private:
     
     // Game Play screen
     virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
-    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen::ScreenHighlight screenHighlight,
-        const size_t coinHighlight) = 0;
+    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
         
     // Game Over screen
     virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
@@ -60,9 +59,10 @@ public:
     virtual void drawCreditScreen(const CreditScreen &screen) = 0;
     virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
         
-    void drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen::ScreenHighlight screenHighlight,
-        const size_t coinHighlight, const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGamePlayComputerScreen(const CoinStates &coinStates, const WeighCounter &counter, const WeighResult lastWeighResult);
+    void drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen &screen,
+        const WeighCounter &counter, const WeighResult lastWeighResult);
+    void drawGamePlayComputerScreen(const CoinStates &coinStates, const GamePlayComputerScreen &screen,
+        const WeighCounter &counter, const WeighResult lastWeighResult);
     void drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter);
     
     // Input handling functions
