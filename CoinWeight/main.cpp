@@ -86,11 +86,11 @@ void play() {
     }
     
     sleep(1);
-    model->updateView(view.get());
+    controller.updateView(view.get());
     while (true) {
         view->receiveInput();
         controller.onReceivingInput(view->lastInput());
-        model->updateView(view.get());
+        controller.updateView(view.get());
     }
 }
 

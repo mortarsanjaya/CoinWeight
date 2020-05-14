@@ -20,8 +20,8 @@ GameModel::GameModel() : screen(), gameCore(), player(), lastWeighResult(WeighRe
 
 
 //************************** "Field accessors"
-const GameScreen::Page GameModel::currScreen() const {
-    return screen.currentScreen();
+const GameScreen &GameModel::currScreen() const {
+    return screen;
 }
 
 const CoinSelection &GameModel::currentCoinStates() const {
@@ -35,6 +35,19 @@ const bool GameModel::isHumanMode() const {
 const History &GameModel::currentHistory() const {
     return player->currHistory();
 }
+
+const Player *const GameModel::currPlayer() const {
+    return player.get();
+}
+
+const WeighResult GameModel::prevWeighResult() const {
+    return lastWeighResult;
+}
+
+const GuessResult  GameModel::prevGuessResult() const {
+    return lastGuessResult;
+}
+
 
 //**** Game core number of weighings
 const WeighCounter &GameModel::weighCounter() const {
@@ -147,7 +160,7 @@ void GameModel::guessFakeCoins() {
 
 //**** Extension
 void GameModel::humanGameMove() {
-    if (currScreen() != GameScreen::Page::GamePlayHuman) {
+    if (currScreen().currentScreen() != GameScreen::Page::GamePlayHuman) {
         throw Exception<GameModel>("Human Game Move Failure: Not a human game.");
     }
     
@@ -165,7 +178,7 @@ void GameModel::humanGameMove() {
 }
 
 void GameModel::computerGameMove() {
-    if (currScreen() != GameScreen::Page::GamePlayComputer) {
+    if (currScreen().currentScreen() != GameScreen::Page::GamePlayComputer) {
         throw Exception<GameModel>("Computer Game Move Failure: Not a computer game.");
     } else if (player->readyToGuess()) {
         guessFakeCoins();
@@ -205,7 +218,7 @@ void GameModel::onRightButton() {
 }
 
 void GameModel::onReturnButton() {
-    switch (currScreen()) {
+    switch (currScreen().currentScreen()) {
         case GameScreen::Page::Title:
             goFromTitleScreen();
             break;
@@ -231,66 +244,6 @@ void GameModel::onReturnButton() {
     }
 }
 
-
-
-//************************** View update functions
-//**** Helper
-void GameModel::updateViewTitleScreen(GameUI *view) {
-    view->drawTitleScreen(screen.titleScreen());
-}
-
-void GameModel::updateViewInstructionScreen(GameUI *view) {
-    view->drawInstructionScreen(screen.instructionScreen());
-}
-
-void GameModel::updateViewCreditScreen(GameUI *view) {
-    view->drawCreditScreen(screen.creditScreen());
-}
-
-void GameModel::updateViewGameOptionScreen(GameUI *view) {
-    view->drawGameOptionScreen(screen.gameOptionScreen());
-}
-
-void GameModel::updateViewGamePlayHumanScreen(GameUI *view) {
-    view->drawGamePlayHumanScreen(player->currStates(),
-        screen.gamePlayHumanScreen(), weighCounter(), lastWeighResult);
-}
-
-void GameModel::updateViewGamePlayComputerScreen(GameUI *view) {
-    view->drawGamePlayComputerScreen(player->currStates(),
-        screen.gamePlayComputerScreen(), weighCounter(), lastWeighResult);
-}
-
-void GameModel::updateViewGameOverScreen(GameUI *view) {
-    view->drawGameOverScreen(lastGuessResult, weighCounter());
-}
-
-//**** Main
-void GameModel::updateView(GameUI *view) {
-    switch (screen.currentScreen()) {
-        case GameScreen::Page::Title:
-            updateViewTitleScreen(view);
-            break;
-        case GameScreen::Page::Instruction:
-            updateViewInstructionScreen(view);
-            break;
-        case GameScreen::Page::Credit:
-            updateViewCreditScreen(view);
-            break;
-        case GameScreen::Page::GameOption:
-            updateViewGameOptionScreen(view);
-            break;
-        case GameScreen::Page::GamePlayHuman:
-            updateViewGamePlayHumanScreen(view);
-            break;
-        case GameScreen::Page::GamePlayComputer:
-            updateViewGamePlayComputerScreen(view);
-            break;
-        case GameScreen::Page::GameOver:
-            updateViewGameOverScreen(view);
-            break;
-    }
-}
 
 
 //************************** Game Model Failure

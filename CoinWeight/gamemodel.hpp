@@ -26,10 +26,15 @@ class GameModel {
 public:
     GameModel();
     
-    const GameScreen::Page currScreen() const;
+    const GameScreen &currScreen() const;
     const CoinSelection &currentCoinStates() const;
     const bool isHumanMode() const;
     const History &currentHistory() const;
+    
+    // PLEASE CLEAN THIS FUNCTION
+    const Player *const currPlayer() const;
+    const WeighResult prevWeighResult() const;
+    const GuessResult prevGuessResult() const;
     
     // Game core number of weighings
     const WeighCounter &weighCounter() const;
@@ -46,9 +51,6 @@ public:
     void onLeftButton();
     void onRightButton();
     void onReturnButton();
-    
-    // View-related functions
-    void updateView(GameUI *view);
 
 private:
     GameScreen screen;
@@ -76,15 +78,6 @@ private:
     // History index manipulation
     void historyIncrementIndex();
     void historyDecrementIndex();
-    
-    // View update helper functions
-    void updateViewTitleScreen(GameUI *view);
-    void updateViewInstructionScreen(GameUI *view);
-    void updateViewCreditScreen(GameUI *view);
-    void updateViewGameOptionScreen(GameUI *view);
-    void updateViewGamePlayHumanScreen(GameUI *view);
-    void updateViewGamePlayComputerScreen(GameUI *view);
-    void updateViewGameOverScreen(GameUI *view);
 };
 
 #endif

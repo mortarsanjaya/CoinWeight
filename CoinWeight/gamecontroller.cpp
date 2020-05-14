@@ -8,6 +8,7 @@
 
 #include "gamecontroller.hpp"
 #include "gamemodel.hpp"
+#include "gameui.hpp"
 
 //************************** Constructor
 GameController::GameController() {}
@@ -60,25 +61,25 @@ void GameController::onScreenArrowInput(const Input::Arrow arrowInp) {
 
 //**** Char
 void GameController::onCharInput0() {
-    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model->currScreen().currentScreen() == GameScreen::Page::GamePlayHuman) {
         model->deselectCoin();
     }
 }
 
 void GameController::onCharInput1() {
-    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model->currScreen().currentScreen() == GameScreen::Page::GamePlayHuman) {
         model->moveCoinToLeftGroup();
     }
 }
 
 void GameController::onCharInput2() {
-    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model->currScreen().currentScreen() == GameScreen::Page::GamePlayHuman) {
         model->moveCoinToRightGroup();
     }
 }
 
 void GameController::onCharInput3() {
-    if (model->currScreen() == GameScreen::Page::GamePlayHuman) {
+    if (model->currScreen().currentScreen() == GameScreen::Page::GamePlayHuman) {
         model->selectCoinToGuess();
     }
 }
@@ -120,6 +121,67 @@ void GameController::onReceivingInput(const Input &inp) {
             break;
         case Input::Type::Arrow:
             onScreenArrowInput(inp.whatArrow());
+            break;
+    }
+}
+
+
+
+//************************** View update functions
+//**** Helper
+void GameController::updateViewTitleScreen(GameUI *view) {
+    view->drawTitleScreen(model->currScreen().titleScreen());
+}
+
+void GameController::updateViewInstructionScreen(GameUI *view) {
+    view->drawInstructionScreen(model->currScreen().instructionScreen());
+}
+
+void GameController::updateViewCreditScreen(GameUI *view) {
+    view->drawCreditScreen(model->currScreen().creditScreen());
+}
+
+void GameController::updateViewGameOptionScreen(GameUI *view) {
+    view->drawGameOptionScreen(model->currScreen().gameOptionScreen());
+}
+
+void GameController::updateViewGamePlayHumanScreen(GameUI *view) {
+    view->drawGamePlayHumanScreen(model->currPlayer()->currStates(),
+        model->currScreen().gamePlayHumanScreen(), model->weighCounter(), model->prevWeighResult());
+}
+
+void GameController::updateViewGamePlayComputerScreen(GameUI *view) {
+    view->drawGamePlayComputerScreen(model->currPlayer()->currStates(),
+        model->currScreen().gamePlayComputerScreen(), model->weighCounter(), model->prevWeighResult());
+}
+
+void GameController::updateViewGameOverScreen(GameUI *view) {
+    view->drawGameOverScreen(model->prevGuessResult(), model->weighCounter());
+}
+
+//**** Main
+void GameController::updateView(GameUI *view) {
+    switch (model->currScreen().currentScreen()) {
+        case GameScreen::Page::Title:
+            updateViewTitleScreen(view);
+            break;
+        case GameScreen::Page::Instruction:
+            updateViewInstructionScreen(view);
+            break;
+        case GameScreen::Page::Credit:
+            updateViewCreditScreen(view);
+            break;
+        case GameScreen::Page::GameOption:
+            updateViewGameOptionScreen(view);
+            break;
+        case GameScreen::Page::GamePlayHuman:
+            updateViewGamePlayHumanScreen(view);
+            break;
+        case GameScreen::Page::GamePlayComputer:
+            updateViewGamePlayComputerScreen(view);
+            break;
+        case GameScreen::Page::GameOver:
+            updateViewGameOverScreen(view);
             break;
     }
 }

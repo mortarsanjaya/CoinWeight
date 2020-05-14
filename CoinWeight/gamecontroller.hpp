@@ -21,6 +21,9 @@ public:
     void registerModel(const std::shared_ptr<GameModel> model);
     void onReceivingInput(const Input &inp);
     
+    // View-related functions
+    void updateView(GameUI *view);
+    
 private:
     std::shared_ptr<GameModel> model;
 
@@ -39,6 +42,14 @@ private:
     void onReturnButton();
     void onCharInput(const char charInp);
     
+    // View update helper functions
+    void updateViewTitleScreen(GameUI *view);
+    void updateViewInstructionScreen(GameUI *view);
+    void updateViewCreditScreen(GameUI *view);
+    void updateViewGameOptionScreen(GameUI *view);
+    void updateViewGamePlayHumanScreen(GameUI *view);
+    void updateViewGamePlayComputerScreen(GameUI *view);
+    void updateViewGameOverScreen(GameUI *view);
 };
 
 #endif
