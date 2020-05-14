@@ -1,5 +1,5 @@
 //
-//  coinstates.cpp
+//  coinselection.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-24.

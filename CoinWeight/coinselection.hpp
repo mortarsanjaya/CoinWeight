@@ -1,13 +1,13 @@
 //
-//  coinstates.hpp
+//  coinselection.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-24.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef coinstates_hpp
-#define coinstates_hpp
+#ifndef coinselection_hpp
+#define coinselection_hpp
 
 #include <vector>
 
