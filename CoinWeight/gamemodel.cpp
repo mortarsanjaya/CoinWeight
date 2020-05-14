@@ -268,13 +268,11 @@ void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
         screen.gamePlayHumanScreen().currScreenHighlight(),
         screen.gamePlayHumanScreen().currCoinHighlight(),
         gameCore->numOfWeighingsLeft(), gameCore->numOfWeighingsMax(), lastWeighResult);
-    view->drawHistoryScreen(player->currHistory());
 }
 
 void GameModel::updateViewGamePlayComputerScreen(GameView *view) {
     view->drawGamePlayComputerScreen(player->currStates(), gameCore->numOfWeighingsLeft(),
         gameCore->numOfWeighingsMax(), lastWeighResult);
-    view->drawHistoryScreen(player->currHistory());
 }
 
 void GameModel::updateViewGameOverScreen(GameView *view) {

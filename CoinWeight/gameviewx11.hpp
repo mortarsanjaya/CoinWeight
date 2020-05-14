@@ -19,8 +19,7 @@
 
 class GameViewX11 : public GameView {
     Display *display;
-    Window mainWindow;
-    Window historyWindow;
+    Window window;
     int screen;
     GC gc;
     XEvent event;
@@ -42,24 +41,21 @@ class GameViewX11 : public GameView {
     static constexpr int defaultFGColor = Black;
     
     // Basic drawing functions
-    void drawString(DrawingWindow window, int x_pos, int y_pos, const std::string &msg, int color, bool boxed);
-    void drawCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
-    void fillCircle(DrawingWindow window, int x_pos, int y_pos, unsigned int radius, int color);
-    void drawRectangle(DrawingWindow window, int x_pos, int y_pos, int width, int height);
+    void drawString(int x_pos, int y_pos, const std::string &msg, int color, bool boxed);
+    void drawCircle(int x_pos, int y_pos, unsigned int radius, int color);
+    void fillCircle(int x_pos, int y_pos, unsigned int radius, int color);
+    void drawRectangle(int x_pos, int y_pos, int width, int height);
     
     // Number of weighings text
     const std::string numOfWeighsText(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) const;
     
-    // Window to draw
-    const Window windowToDraw(const DrawingWindow window) const;
-    
     // Draw weigh result text
     // HACKED INTO DRAWING THE SCALE AS WELL
-    void drawWeighResultText(const DrawingWindow window, const WeighResult weighResult) override;
+    void drawWeighResultText(const WeighResult weighResult) override;
     
     // Draw coin
-    const int coinColor(CoinGroup coinState) const;
-    void drawCoin(DrawingWindow window, CoinGroup coinState, size_t coinIndex) override;
+    const int coinColor(const CoinGroup coinState) const;
+    void drawCoin(const CoinGroup coinState, const size_t coinIndex) override;
     
     // Draw return button
     void drawReturnButton() override;
@@ -73,13 +69,13 @@ class GameViewX11 : public GameView {
     void drawGameOverNumOfWeighs(const size_t numOfWeighsLeft, const size_t numOfWeighsMax) override;
     
     // History screen
+    /*
     void drawHistoryIndexText(const size_t index, const size_t numOfWeighs) override;
     void drawEmptyHistoryScreen() override;
+    */
     
     // Clear screen
-    void clearMainScreen();
-    void clearHistoryScreen();
-    void clearScreen(const DrawingWindow dwindow) override;
+    void clearScreen() override;
 
 public:
     GameViewX11();
