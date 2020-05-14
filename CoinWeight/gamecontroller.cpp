@@ -24,19 +24,19 @@ void GameController::registerModel(const std::shared_ptr<GameModel> model) {
 //************************** Input function
 //**** Arrow, Main
 void GameController::onScreenArrowInputUp() {
-    model->mainScreenOnUpButton();
+    model->onUpButton();
 }
 
 void GameController::onScreenArrowInputDown() {
-    model->mainScreenOnDownButton();
+    model->onDownButton();
 }
 
 void GameController::onScreenArrowInputLeft() {
-    model->mainScreenOnLeftButton();
+    model->onLeftButton();
 }
 
 void GameController::onScreenArrowInputRight() {
-    model->mainScreenOnRightButton();
+    model->onRightButton();
 }
 
 void GameController::onScreenArrowInput(const Input::Arrow arrowInp) {
@@ -84,7 +84,7 @@ void GameController::onCharInput3() {
 }
 
 void GameController::onReturnButton() {
-    model->mainScreenOnReturnButton();
+    model->onReturnButton();
 }
 
 void GameController::onCharInput(const char charInp) {

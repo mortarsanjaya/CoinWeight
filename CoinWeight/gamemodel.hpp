@@ -41,11 +41,11 @@ public:
     void selectCoinToGuess();
     
     // Model logic functions
-    void mainScreenOnUpButton();
-    void mainScreenOnDownButton();
-    void mainScreenOnLeftButton();
-    void mainScreenOnRightButton();
-    void mainScreenOnReturnButton();
+    void onUpButton();
+    void onDownButton();
+    void onLeftButton();
+    void onRightButton();
+    void onReturnButton();
     
     // View-related functions
     void updateView(GameUI *view);

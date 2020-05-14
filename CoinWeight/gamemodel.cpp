@@ -188,23 +188,23 @@ void GameModel::historyDecrementIndex() {
 
 
 //************************** Model logic functions
-void GameModel::mainScreenOnUpButton() {
+void GameModel::onUpButton() {
     screen.highlightUp();
 }
 
-void GameModel::mainScreenOnDownButton() {
+void GameModel::onDownButton() {
     screen.highlightDown();
 }
 
-void GameModel::mainScreenOnLeftButton() {
+void GameModel::onLeftButton() {
     screen.highlightLeft();
 }
 
-void GameModel::mainScreenOnRightButton() {
+void GameModel::onRightButton() {
     screen.highlightRight();
 }
 
-void GameModel::mainScreenOnReturnButton() {
+void GameModel::onReturnButton() {
     switch (currScreen()) {
         case GameScreen::Page::Title:
             goFromTitleScreen();
