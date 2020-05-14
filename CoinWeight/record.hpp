@@ -9,7 +9,7 @@
 #ifndef record_hpp
 #define record_hpp
 
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "weighresult.hpp"
 
 class Record {

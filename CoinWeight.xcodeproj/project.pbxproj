@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 861B50DC243094AA00262336 /* gamecontroller.cpp */; };
 		861E647C242AD81E00AA6FD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86A9AB932400AF50002AB0CF /* main.cpp */; };
-		861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8625C7D0242AA68F00558B55 /* coinstates.cpp */; };
+		861E647D242AD81E00AA6FD7 /* coinselection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8625C7D0242AA68F00558B55 /* coinselection.cpp */; };
 		861E647E242AD81E00AA6FD7 /* record.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86980C12242758E7001C8481 /* record.cpp */; };
 		861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C9DC2421AA8A00FEB2B4 /* gamemodel.cpp */; };
 		861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* gamecore.cpp */; };
@@ -74,8 +74,8 @@
 		86219BE42450105A005E4F93 /* gameoverscreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameoverscreen.cpp; sourceTree = "<group>"; };
 		86219BE52450105A005E4F93 /* gameoverscreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameoverscreen.hpp; sourceTree = "<group>"; };
 		86219BE724501164005E4F93 /* allinclude.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = allinclude.hpp; path = CoinWeight/ScreenPages/allinclude.hpp; sourceTree = SOURCE_ROOT; };
-		8625C7D0242AA68F00558B55 /* coinstates.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinstates.cpp; sourceTree = "<group>"; };
-		8625C7D1242AA68F00558B55 /* coinstates.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinstates.hpp; sourceTree = "<group>"; };
+		8625C7D0242AA68F00558B55 /* coinselection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coinselection.cpp; sourceTree = "<group>"; };
+		8625C7D1242AA68F00558B55 /* coinselection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinselection.hpp; sourceTree = "<group>"; };
 		8626C292246CD735003B99D4 /* weighcounter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = weighcounter.hpp; sourceTree = "<group>"; };
 		8626C293246CD735003B99D4 /* weighcounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weighcounter.cpp; sourceTree = "<group>"; };
 		8626C295246CD780003B99D4 /* numofweighsmax.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = numofweighsmax.cpp; sourceTree = "<group>"; };
@@ -244,13 +244,13 @@
 			name = "Game Settings";
 			sourceTree = "<group>";
 		};
-		8625C7D3242AA69400558B55 /* Coin States */ = {
+		8625C7D3242AA69400558B55 /* Coin Selection */ = {
 			isa = PBXGroup;
 			children = (
-				8625C7D0242AA68F00558B55 /* coinstates.cpp */,
-				8625C7D1242AA68F00558B55 /* coinstates.hpp */,
+				8625C7D0242AA68F00558B55 /* coinselection.cpp */,
+				8625C7D1242AA68F00558B55 /* coinselection.hpp */,
 			);
-			name = "Coin States";
+			name = "Coin Selection";
 			sourceTree = "<group>";
 		};
 		864467C2245BF6A000442BD8 /* Easy Level */ = {
@@ -285,7 +285,7 @@
 			children = (
 				865B163024579966005DE924 /* player.cpp */,
 				865B163124579966005DE924 /* player.hpp */,
-				8625C7D3242AA69400558B55 /* Coin States */,
+				8625C7D3242AA69400558B55 /* Coin Selection */,
 				869C4BE424048E4700C3DE84 /* Computer */,
 				86C1C6642432D6AC007E5B64 /* History */,
 			);
@@ -541,7 +541,7 @@
 				864467BE245A743900442BD8 /* computereasy1.cpp in Sources */,
 				864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */,
 				86C1C66F2437A83F007E5B64 /* gameview.cpp in Sources */,
-				861E647D242AD81E00AA6FD7 /* coinstates.cpp in Sources */,
+				861E647D242AD81E00AA6FD7 /* coinselection.cpp in Sources */,
 				86219BDA244FFB07005E4F93 /* creditscreen.cpp in Sources */,
 				86C1C65B243249E7007E5B64 /* gamesettings.cpp in Sources */,
 				86219BD3244FF1BD005E4F93 /* titlescreen.cpp in Sources */,

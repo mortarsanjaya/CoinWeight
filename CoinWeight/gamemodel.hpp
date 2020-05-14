@@ -14,7 +14,7 @@
 #include "gamesettings.hpp"
 #include "gamecore.hpp"
 #include "coingroup.hpp"
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "computer.hpp"
 #include "history.hpp"
 #include "player.hpp"

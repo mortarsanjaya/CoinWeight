@@ -12,7 +12,7 @@
 #include <memory>
 #include "coinset.hpp"
 #include "gamelevel.hpp"
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 #include "weighcounter.hpp"

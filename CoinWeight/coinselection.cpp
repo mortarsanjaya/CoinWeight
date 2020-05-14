@@ -6,7 +6,7 @@
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "exception.hpp"
 
 //************************** Constructor

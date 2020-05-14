@@ -9,7 +9,7 @@
 #ifndef coinset_hpp
 #define coinset_hpp
 
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 

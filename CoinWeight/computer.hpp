@@ -10,7 +10,7 @@
 #define computer_hpp
 
 #include <vector>
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "weighresult.hpp"
 
 class Computer {

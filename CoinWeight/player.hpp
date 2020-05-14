@@ -10,7 +10,7 @@
 #define player_hpp
 
 #include <memory>
-#include "coinstates.hpp"
+#include "coinselection.hpp"
 #include "history.hpp"
 #include "gamelevel.hpp"
 #include "weighresult.hpp"
