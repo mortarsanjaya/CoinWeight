@@ -360,19 +360,22 @@ void GameViewX11::clearScreen(const DrawingWindow window) {
 
 
 //************************** Public methods
-void GameViewX11::drawTitleScreen(TitleScreen::Highlight screenHighlight) {
-    const int stringHeight = 20;
+void GameViewX11::drawTitleScreen(const TitleScreen &titleScreen) {
     clearScreen(DrawingWindow::Main);
+    
+    const int stringHeight = 20;
+    const TitleScreen::Highlight highlight = titleScreen.currHighlight();
+    
     drawString(DrawingWindow::Main, 300, 50, "Coin Weight", defaultFGColor, false);
     drawString(DrawingWindow::Main, 300, 300 + stringHeight, "Play", defaultFGColor,
-        screenHighlight == TitleScreen::Highlight::Play);
-    drawString(DrawingWindow::Main, 300, 300 + 2 * stringHeight, "Instructions", defaultFGColor,
-        screenHighlight == TitleScreen::Highlight::Instruction);
-    drawString(DrawingWindow::Main, 300, 300 + 3 * stringHeight, "Credits", defaultFGColor,
-        screenHighlight == TitleScreen::Highlight::Credit);
+        highlight == TitleScreen::Highlight::Play);
+    drawString(DrawingWindow::Main, 300, 300 + 2 * stringHeight, "Instruction", defaultFGColor,
+        highlight == TitleScreen::Highlight::Instruction);
+    drawString(DrawingWindow::Main, 300, 300 + 3 * stringHeight, "Credit", defaultFGColor,
+        highlight == TitleScreen::Highlight::Credit);
 }
 
-void GameViewX11::drawInstructionScreen() {
+void GameViewX11::drawInstructionScreen(const InstructionScreen &instructionScreen) {
     const int x_pos_page_name = 300;
     int y_pos = 100;
     const int x_pos_page_instr = 320;
@@ -427,16 +430,22 @@ void GameViewX11::drawInstructionScreen() {
     drawReturnButton();
 }
 
-void GameViewX11::drawCreditScreen() {
+void GameViewX11::drawCreditScreen(const CreditScreen &creditScreen) {
     clearScreen(DrawingWindow::Main);
     drawString(DrawingWindow::Main, 300, 300, "---", defaultFGColor, false);
     drawReturnButton();
 }
 
-void GameViewX11::drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight, const GameSettings &currSettings)
+void GameViewX11::drawGameOptionScreen(const GameOptionScreen &gameOptionScreen)
 {
-    const std::string gameLevelStr = [&currSettings]() -> std::string {
-        switch (currSettings.gameLevel()) {
+    const int stringHeight = 20;
+    clearScreen(DrawingWindow::Main);
+    
+    const GameOptionScreen::Highlight highlight = gameOptionScreen.currHighlight();
+    const  GameSettings &settings = gameOptionScreen.currSettings();
+    
+    const std::string gameLevelStr = [&settings]() -> std::string {
+        switch (settings.gameLevel()) {
             case GameLevel::Easy:
                 return "Easy";
                 break;
@@ -448,21 +457,20 @@ void GameViewX11::drawGameOptionScreen(const GameOptionScreen::Highlight screenH
                 break;
             }
     }();
-
-    const int stringHeight = 20;
-    clearScreen(DrawingWindow::Main);
     
     drawString(DrawingWindow::Main, 300, 50, "Coin Weight", defaultFGColor, false);
     drawString(DrawingWindow::Main, 300, 300 + stringHeight, "Number of Coins:", defaultFGColor, false);
     drawString(DrawingWindow::Main, 300, 300 + 2 * stringHeight, "Level:", defaultFGColor, false);
     drawString(DrawingWindow::Main, 300, 300 + 3 * stringHeight, "Mode:", defaultFGColor, false);
     
-    drawString(DrawingWindow::Main, 405, 300 + stringHeight, std::to_string(currSettings.numOfCoins()),
-        defaultFGColor, screenHighlight == GameOptionScreen::Highlight::NumOfCoins);
+    drawString(DrawingWindow::Main, 405, 300 + stringHeight,
+        std::to_string(settings.numOfCoins()),
+        defaultFGColor, highlight == GameOptionScreen::Highlight::NumOfCoins);
     drawString(DrawingWindow::Main, 405, 300 + 2 * stringHeight, gameLevelStr,
-        defaultFGColor, screenHighlight == GameOptionScreen::Highlight::Level);
-    drawString(DrawingWindow::Main, 405, 300 + 3 * stringHeight, currSettings.isHumanMode() ? "Human" : "Computer",
-        defaultFGColor, screenHighlight == GameOptionScreen::Highlight::Mode);
+        defaultFGColor, highlight == GameOptionScreen::Highlight::Level);
+    drawString(DrawingWindow::Main, 405, 300 + 3 * stringHeight,
+        settings.isHumanMode() ? "Human" : "Computer",
+        defaultFGColor, highlight == GameOptionScreen::Highlight::Mode);
 }
 
 void GameViewX11::receiveInput() {

@@ -55,10 +55,10 @@ public:
     virtual ~GameView() = 0;
     
     // Drawing functions
-    virtual void drawTitleScreen(const TitleScreen::Highlight screenHighlight) = 0;
-    virtual void drawInstructionScreen() = 0;
-    virtual void drawCreditScreen() = 0;
-    virtual void drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight, const GameSettings &currSettings) = 0;
+    virtual void drawTitleScreen(const TitleScreen &screen) = 0;
+    virtual void drawInstructionScreen(const InstructionScreen &screen) = 0;
+    virtual void drawCreditScreen(const CreditScreen &screen) = 0;
+    virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
         
     void drawGamePlayHumanScreen(const CoinStates &coinStates, const GamePlayHumanScreen::ScreenHighlight screenHighlight,
         const size_t coinHighlight, const size_t numOfWeighsLeft, const size_t numOfWeighsMax, const WeighResult lastWeighResult);

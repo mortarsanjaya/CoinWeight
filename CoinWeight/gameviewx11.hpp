@@ -84,11 +84,10 @@ class GameViewX11 : public GameView {
 public:
     GameViewX11();
     // Main drawing functions
-    void drawTitleScreen(const TitleScreen::Highlight screenHighlight) override;
-    void drawInstructionScreen() override;
-    void drawCreditScreen() override;
-    void drawGameOptionScreen(const GameOptionScreen::Highlight screenHighlight,
-        const GameSettings &currSettings) override;
+    void drawTitleScreen(const TitleScreen &titleScreen) override;
+    void drawInstructionScreen(const InstructionScreen &instructionScreen) override;
+    void drawCreditScreen(const CreditScreen &creditScreen) override;
+    void drawGameOptionScreen(const GameOptionScreen &gameOptionScreen) override;
     
     void receiveInput() override;
     const Input lastInput() override;

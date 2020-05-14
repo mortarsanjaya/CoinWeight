@@ -248,19 +248,19 @@ void GameModel::historyScreenOnRightButton() {
 //************************** View update functions
 //**** Helper
 void GameModel::updateViewTitleScreen(GameView *view) {
-    view->drawTitleScreen(screen.titleScreen().currHighlight());
+    view->drawTitleScreen(screen.titleScreen());
 }
 
 void GameModel::updateViewInstructionScreen(GameView *view) {
-    view->drawInstructionScreen();
+    view->drawInstructionScreen(screen.instructionScreen());
 }
 
 void GameModel::updateViewCreditScreen(GameView *view) {
-    view->drawCreditScreen();
+    view->drawCreditScreen(screen.creditScreen());
 }
 
 void GameModel::updateViewGameOptionScreen(GameView *view) {
-    view->drawGameOptionScreen(screen.gameOptionScreen().currHighlight(), screen.gameOptionScreen().currSettings());
+    view->drawGameOptionScreen(screen.gameOptionScreen());
 }
 
 void GameModel::updateViewGamePlayHumanScreen(GameView *view) {
