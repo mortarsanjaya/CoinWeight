@@ -12,11 +12,15 @@
 
 //************************** Register model
 void GameController::registerModel(const std::shared_ptr<GameModel> model) {
-    this->model = model;
+    if (model == nullptr) {
+        this->model = model;
+    }
 }
 
-void GameController::registerUI(std::unique_ptr<GameUI> &ui) {
-    std::swap(this->view, ui);
+void GameController::registerUI(std::unique_ptr<GameUI> ui) {
+    if (view == nullptr) {
+        std::swap(view, ui);
+    }
 }
 
 

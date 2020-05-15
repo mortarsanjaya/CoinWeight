@@ -21,27 +21,9 @@
 void play() {
     GameController controller;
     
-    do {
+    controller.registerUI(std::make_unique<GameUI_X11>());
+    controller.registerModel(std::make_shared<GameModel>());
     
-        std::shared_ptr<GameModel> model;
-        std::unique_ptr<GameUI> view;
-        
-        model = std::make_shared<GameModel>();
-        if (model == nullptr) {
-            std::cout << "Oops. Cannot initialize model." << std::endl;
-            return;
-        } else {
-            controller.registerModel(model);
-        }
-    
-        view = std::make_unique<GameUI_X11>();
-        if (view == nullptr) {
-            std::cout << "Oops. Cannot open display." << std::endl;
-            return;
-        }
-    
-        controller.registerUI(view);
-    } while (false);
     
     sleep(1);
     controller.updateView();
@@ -55,7 +37,7 @@ void play() {
 using namespace std;
 
 int main() {
-    computerTest(50, GameLevel::Easy);
-    computerTest(75, GameLevel::Medium);
-    // play();
+    // computerTest(50, GameLevel::Easy);
+    // computerTest(75, GameLevel::Medium);
+    play();
 }
