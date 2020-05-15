@@ -110,25 +110,33 @@ void GameModel::gameCleanUp() {
 //************************** Coin states manipulation
 void GameModel::deselectCoin() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->deselectCoin(screen.gamePlayHumanScreen().currCoinHighlight());
+        player->setSelectionGroup(
+            screen.gamePlayHumanScreen().currCoinHighlight(),
+            CoinGroup::NoSelect);
     }
 }
 
 void GameModel::moveCoinToLeftGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToLeftGroup(screen.gamePlayHumanScreen().currCoinHighlight());
+        player->setSelectionGroup(
+            screen.gamePlayHumanScreen().currCoinHighlight(),
+            CoinGroup::LeftWeigh);
     }
 }
 
 void GameModel::moveCoinToRightGroup() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToRightGroup(screen.gamePlayHumanScreen().currCoinHighlight());
+        player->setSelectionGroup(
+            screen.gamePlayHumanScreen().currCoinHighlight(),
+            CoinGroup::RightWeigh);
     }
 }
 
 void GameModel::selectCoinToGuess() {
     if (screen.currentScreen() == GameScreen::Page::GamePlayHuman) {
-        player->selectCoinToGuess(screen.gamePlayHumanScreen().currCoinHighlight());
+        player->setSelectionGroup(
+            screen.gamePlayHumanScreen().currCoinHighlight(),
+            CoinGroup::Guess);
     }
 }
 

@@ -29,18 +29,18 @@ Computer{numOfCoins, numOfMovesMax}, state{State::Type::FirstMove}, testIndex{1}
 //************************** Overriding functions
 void ComputerEasy1::setSelection() {
     if (!isAbleToWeigh() && state.type != State::Type::Finish) {
-        selectCoinToGuess(0);
+        setSelectionGroup(0, CoinGroup::Guess);
         return;
     }
     
     if (state.type == State::Type::Finish) {
-        selectCoinToGuess(state.fakeCoin1);
-        selectCoinToGuess(state.fakeCoin2);
+        setSelectionGroup(state.fakeCoin1, CoinGroup::Guess);
+        setSelectionGroup(state.fakeCoin2, CoinGroup::Guess);
     } else if (testIndex == numOfCoins()) {
         throw Exception<ComputerEasy1>("Invalid handling.");
     } else {
-        selectCoinToLeftGroup(0);
-        selectCoinToRightGroup(testIndex);
+        setSelectionGroup(0, CoinGroup::LeftWeigh);
+        setSelectionGroup(testIndex, CoinGroup::RightWeigh);
     }
 }
 
