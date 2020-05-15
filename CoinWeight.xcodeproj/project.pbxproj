@@ -99,8 +99,6 @@
 		865B16352457AFCF005DE924 /* computerfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerfactory.hpp; sourceTree = "<group>"; };
 		865B16382457BB18005DE924 /* computerfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerfactory.cpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
-		867EFB2424160820004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = "../../../Library/Developer/Xcode/DerivedData/SDL-cyidnwupktihwaebkqkofaryvuoh/Build/Products/Debug/SDL2.framework"; sourceTree = "<group>"; };
-		867EFB2624160B46004C43A3 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		869BBCD12424182D0002CDED /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
 		869BBCD424241BDD0002CDED /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		869C4BD62401BDCD00C3DE84 /* gamecore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecore.cpp; sourceTree = "<group>"; };
@@ -397,8 +395,6 @@
 		867EFB2324160820004C43A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				867EFB2624160B46004C43A3 /* SDL2.framework */,
-				867EFB2424160820004C43A3 /* SDL2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
