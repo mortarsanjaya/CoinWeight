@@ -90,6 +90,7 @@
 		8626C2A6246DD88F003B99D4 /* humanstd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = humanstd.cpp; sourceTree = "<group>"; };
 		8626C2A9246E00E6003B99D4 /* gameview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameview.cpp; sourceTree = "<group>"; };
 		8626C2AA246E00E6003B99D4 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
+		8626C2B8246F39D3003B99D4 /* coingroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coingroup.hpp; sourceTree = SOURCE_ROOT; };
 		864467BC245A743900442BD8 /* computereasy1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computereasy1.cpp; sourceTree = "<group>"; };
 		864467BD245A743900442BD8 /* computereasy1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computereasy1.hpp; sourceTree = "<group>"; };
 		864467BF245AB0C100442BD8 /* computermedium1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computermedium1.cpp; sourceTree = "<group>"; };
@@ -432,6 +433,7 @@
 		86A78CCF244578AE000DF706 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				8626C2B8246F39D3003B99D4 /* coingroup.hpp */,
 				86C1C65E24324A3D007E5B64 /* gamelevel.hpp */,
 				86A78CCD24457899000DF706 /* guessresult.hpp */,
 				86E55A82242C390B00053F2E /* weighresult.hpp */,

@@ -233,20 +233,20 @@ void GameUI_X11::drawWeighResultText(const WeighResult weighResult) {
 }
 
 //**** Coin
-const int GameUI_X11::coinColor(CoinSelection::Group coinState) const {
+const int GameUI_X11::coinColor(CoinGroup coinState) const {
     switch (coinState) {
-        case CoinSelection::Group::NoSelect:
+        case CoinGroup::NoSelect:
             return GameUI_X11::Gold;
-        case CoinSelection::Group::LeftWeigh:
+        case CoinGroup::LeftWeigh:
             return GameUI_X11::Red;
-        case CoinSelection::Group::RightWeigh:
+        case CoinGroup::RightWeigh:
             return GameUI_X11::Blue;
-        case CoinSelection::Group::Guess:
+        case CoinGroup::Guess:
             return GameUI_X11::Green;
     }
 }
 
-void GameUI_X11::drawCoin(const CoinSelection::Group coinState, const size_t coinIndex) {
+void GameUI_X11::drawCoin(const CoinGroup coinState, const size_t coinIndex) {
 
     const int x_pos = coin0XPos + coinDist * (coinIndex % coinsPerRow);
     const int y_pos = coin0YPos + coinDist * (coinIndex / coinsPerRow);

@@ -11,7 +11,7 @@
 
 //************************** Constructor
 CoinSelection::CoinSelection(const size_t numOfCoins) :
-content(numOfCoins, Group::NoSelect), groupSizeLeft(0),
+content(numOfCoins, CoinGroup::NoSelect), groupSizeLeft(0),
     groupSizeRight(0), groupSizeGuess(0)
 {}
 
@@ -22,15 +22,15 @@ const size_t CoinSelection::totalSize() const {
     return content.size();
 }
 
-const size_t CoinSelection::groupSize(const Group group) const {
+const size_t CoinSelection::groupSize(const CoinGroup group) const {
     switch (group) {
-        case Group::NoSelect:
+        case CoinGroup::NoSelect:
             return content.size() - groupSizeLeft - groupSizeRight - groupSizeGuess;
-        case Group::LeftWeigh:
+        case CoinGroup::LeftWeigh:
             return groupSizeLeft;
-        case Group::RightWeigh:
+        case CoinGroup::RightWeigh:
             return groupSizeRight;
-        case Group::Guess:
+        case CoinGroup::Guess:
             return groupSizeGuess;
     }
 }
@@ -47,7 +47,7 @@ const size_t CoinSelection::sizeOfGuessGroup() const {
     return groupSizeGuess;
 }
 
-const CoinSelection::Group CoinSelection::at(const size_t index) const {
+const CoinGroup CoinSelection::at(const size_t index) const {
     if (content.size() <= index) {
         throw Exception<CoinSelection>("Out of range exception.");
     } else {
@@ -59,19 +59,19 @@ const CoinSelection::Group CoinSelection::at(const size_t index) const {
 
 //************************** Content manipulators
 //**** Public
-void CoinSelection::setGroup(const size_t index, const Group group) {
+void CoinSelection::setGroup(const size_t index, const CoinGroup group) {
     deselect(index);
     content[index] = group;
     switch (group) {
-        case Group::NoSelect:
+        case CoinGroup::NoSelect:
             break;
-        case Group::LeftWeigh:
+        case CoinGroup::LeftWeigh:
             ++groupSizeLeft;
             break;
-        case Group::RightWeigh:
+        case CoinGroup::RightWeigh:
             ++groupSizeRight;
             break;
-        case Group::Guess:
+        case CoinGroup::Guess:
             ++groupSizeGuess;
             break;
     }
@@ -79,7 +79,7 @@ void CoinSelection::setGroup(const size_t index, const Group group) {
 
 void CoinSelection::reset() {
     for (size_t i = 0; i < content.size(); ++i) {
-        content[i] = Group::NoSelect;
+        content[i] = CoinGroup::NoSelect;
     }
     
     groupSizeLeft = 0;
@@ -90,19 +90,19 @@ void CoinSelection::reset() {
 //**** Private
 void CoinSelection::deselect(const size_t index) {
     switch (content.at(index)) {
-        case Group::NoSelect:
+        case CoinGroup::NoSelect:
             break;
-        case Group::LeftWeigh:
+        case CoinGroup::LeftWeigh:
             --groupSizeLeft;
             break;
-        case Group::RightWeigh:
+        case CoinGroup::RightWeigh:
             --groupSizeRight;
             break;
-        case Group::Guess:
+        case CoinGroup::Guess:
             --groupSizeGuess;
             break;
     }
-    content[index] = Group::NoSelect;
+    content[index] = CoinGroup::NoSelect;
 }
 
 

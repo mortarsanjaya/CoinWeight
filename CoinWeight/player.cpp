@@ -31,23 +31,23 @@ const size_t Player::numOfCoins() const {
 
 //************************** Coin states manipulation
 void Player::deselectCoin(const size_t coinIndex) {
-    selection.setGroup(coinIndex, CoinSelection::Group::NoSelect);
+    selection.setGroup(coinIndex, CoinGroup::NoSelect);
 }
 
 void Player::selectCoinToLeftGroup(const size_t coinIndex) {
     if (isAbleToWeigh()) {
-        selection.setGroup(coinIndex, CoinSelection::Group::LeftWeigh);
+        selection.setGroup(coinIndex, CoinGroup::LeftWeigh);
     }
 }
 
 void Player::selectCoinToRightGroup(const size_t coinIndex) {
     if (isAbleToWeigh()) {
-        selection.setGroup(coinIndex, CoinSelection::Group::RightWeigh);
+        selection.setGroup(coinIndex, CoinGroup::RightWeigh);
     }
 }
 
 void Player::selectCoinToGuess(const size_t coinIndex) {
-    selection.setGroup(coinIndex, CoinSelection::Group::Guess);
+    selection.setGroup(coinIndex, CoinGroup::Guess);
 }
 
 

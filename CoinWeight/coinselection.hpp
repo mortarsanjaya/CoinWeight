@@ -10,31 +10,25 @@
 #define coinselection_hpp
 
 #include <vector>
+#include "coingroup.hpp"
 
 class CoinSelection final {
 public:
-    enum class Group {
-        NoSelect,
-        LeftWeigh,
-        RightWeigh,
-        Guess
-    };
-
     CoinSelection(const size_t numOfCoins);
     
     const size_t totalSize() const;
-    const size_t groupSize(const Group group) const;
+    const size_t groupSize(const CoinGroup group) const;
     const size_t sizeOfLeftWeighGroup() const;
     const size_t sizeOfRightWeighGroup() const;
     const size_t sizeOfGuessGroup() const;
-    const Group at(const size_t index) const;
+    const CoinGroup at(const size_t index) const;
     
     // Content manipulators
-    void setGroup(const size_t index, const Group group);
+    void setGroup(const size_t index, const CoinGroup group);
     void reset();
     
 private:
-    std::vector<Group> content;
+    std::vector<CoinGroup> content;
     size_t groupSizeLeft;
     size_t groupSizeRight;
     size_t groupSizeGuess;

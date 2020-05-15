@@ -23,7 +23,7 @@ private:
 //**** Virtual hook methods
     // General
     virtual void drawWeighResultText(const WeighResult weighResult) = 0;
-    virtual void drawCoin(const CoinSelection::Group group, const size_t index) = 0;
+    virtual void drawCoin(const CoinGroup group, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
     // Game Play screen

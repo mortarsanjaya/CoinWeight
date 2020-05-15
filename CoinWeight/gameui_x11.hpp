@@ -55,8 +55,8 @@ class GameUI_X11 : public GameUI {
     void drawWeighResultText(const WeighResult weighResult) override;
     
     // Draw coin
-    const int coinColor(const CoinSelection::Group group) const;
-    void drawCoin(const CoinSelection::Group group, const size_t coinIndex) override;
+    const int coinColor(const CoinGroup group) const;
+    void drawCoin(const CoinGroup group, const size_t coinIndex) override;
     
     // Draw return button
     void drawReturnButton() override;
