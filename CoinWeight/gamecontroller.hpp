@@ -13,14 +13,14 @@
 #include "input.hpp"
 
 class GameModel;
-class GameUI;
+class GameView;
 
 class GameController {
 public:
     GameController() = default;
     void registerModel(const std::shared_ptr<GameModel> &gameModel);
     // Note: INVALIDATES THE ORIGINAL POINTER
-    void registerUI(std::unique_ptr<GameUI> &gameView);
+    void registerView(std::unique_ptr<GameView> &gameView);
     
     void onReceivingInput(const Input &inp);
     
@@ -31,7 +31,7 @@ public:
     
 private:
     std::shared_ptr<GameModel> model;
-    std::unique_ptr<GameUI> view;
+    std::unique_ptr<GameView> view;
 
     // Arrow input handling
     void onButtonUp();

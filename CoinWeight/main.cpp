@@ -14,6 +14,7 @@
 #include <chrono>
 #include "gamemodel.hpp"
 #include "gameui_x11.hpp"
+#include "gameview.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
 #include "computertest.hpp"
@@ -24,7 +25,7 @@ void play() {
     do {
     
         std::shared_ptr<GameModel> model;
-        std::unique_ptr<GameUI> view;
+        std::unique_ptr<GameView> view;
         
         model = std::make_shared<GameModel>();
         if (model == nullptr) {
@@ -34,13 +35,13 @@ void play() {
             controller.registerModel(model);
         }
     
-        view = std::make_unique<GameUI_X11>();
+        view = std::make_unique<GameView>(std::make_unique<GameUI_X11>());
         if (view == nullptr) {
             std::cout << "Oops. Cannot open display." << std::endl;
             return;
         }
     
-        controller.registerUI(view);
+        controller.registerView(view);
     } while (false);
     
     sleep(1);

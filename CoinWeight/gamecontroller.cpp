@@ -8,7 +8,7 @@
 
 #include "gamecontroller.hpp"
 #include "gamemodel.hpp"
-#include "gameui.hpp"
+#include "gameview.hpp"
 
 //************************** Register model
 void GameController::registerModel(const std::shared_ptr<GameModel> &gameModel) {
@@ -17,7 +17,7 @@ void GameController::registerModel(const std::shared_ptr<GameModel> &gameModel) 
     }
 }
 
-void GameController::registerUI(std::unique_ptr<GameUI> &gameView) {
+void GameController::registerView(std::unique_ptr<GameView> &gameView) {
     if (view == nullptr) {
         std::swap(view, gameView);
     }

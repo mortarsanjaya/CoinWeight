@@ -13,7 +13,7 @@
 
 class GameView {
 public:
-    GameView(std::unique_ptr<GameUI> &ui);
+    GameView(std::unique_ptr<GameUI> ui);
     
     // Note: This [needs to] AND [will] be simplified
     void drawTitleScreen(const TitleScreen &screen);

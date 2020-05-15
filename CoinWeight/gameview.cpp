@@ -9,7 +9,7 @@
 #include "gameview.hpp"
 
 //************************** Constructor
-GameView::GameView(std::unique_ptr<GameUI> &ui) :
+GameView::GameView(std::unique_ptr<GameUI>ui) :
 ui{std::move(ui)} {}
 
 
