@@ -28,7 +28,7 @@ void play() {
         std::unique_ptr<GameView> view;
         
         model = std::make_shared<GameModel>();
-        if (model == nullptr) {
+        if (!model) {
             std::cout << "Oops. Cannot initialize model." << std::endl;
             return;
         } else {
@@ -36,7 +36,7 @@ void play() {
         }
     
         view = std::make_unique<GameView>(std::make_unique<GameUI_X11>());
-        if (view == nullptr) {
+        if (!view) {
             std::cout << "Oops. Cannot open display." << std::endl;
             return;
         }
