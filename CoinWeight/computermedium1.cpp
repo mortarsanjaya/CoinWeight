@@ -35,7 +35,7 @@ type{Type::OneRange}, range1{0, numOfCoins}, range2{0, 0} {}
 //************************** Overriding functions
 void ComputerMedium1::setSelection() {
     if (!isAbleToWeigh() && !readyToGuess()) {
-        selectCoinToGuess(0);
+        setSelectionGroup(0, CoinGroup::Guess);
         return;
     }
 
@@ -88,11 +88,11 @@ void ComputerMedium1::setSelectionOneRange() {
     const size_t rangeEnd = state.range1.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        selectCoinToLeftGroup(i);
+        setSelectionGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        selectCoinToRightGroup(i);
+        setSelectionGroup(i, CoinGroup::RightWeigh);
     }
 }
 
@@ -102,11 +102,11 @@ void ComputerMedium1::setSelectionTwoRanges0() {
     const size_t rangeEnd = state.range1.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        selectCoinToLeftGroup(i);
+        setSelectionGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        selectCoinToRightGroup(i);
+        setSelectionGroup(i, CoinGroup::RightWeigh);
     }
 }
 
@@ -116,22 +116,22 @@ void ComputerMedium1::setSelectionTwoRanges1() {
     const size_t rangeEnd = state.range2.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        selectCoinToLeftGroup(i);
+        setSelectionGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        selectCoinToRightGroup(i);
+        setSelectionGroup(i, CoinGroup::RightWeigh);
     }
 }
 
 void ComputerMedium1::setSelectionFinish1Range() {
-    selectCoinToGuess(state.range1.begin());
-    selectCoinToGuess(state.range1.begin() + 1);
+    setSelectionGroup(state.range1.begin(), CoinGroup::Guess);
+    setSelectionGroup(state.range1.begin() + 1, CoinGroup::Guess);
 }
 
 void ComputerMedium1::setSelectionFinish2Ranges() {
-    selectCoinToGuess(state.range1.begin());
-    selectCoinToGuess(state.range2.begin());
+    setSelectionGroup(state.range1.begin(), CoinGroup::Guess);
+    setSelectionGroup(state.range2.begin(), CoinGroup::Guess);
 }
 
 

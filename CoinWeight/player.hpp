@@ -22,11 +22,7 @@ public:
     const CoinSelection &currSelection() const;
     const History &currHistory() const;
     
-    // Coin selection manipulation
-    void deselectCoin(const size_t coinIndex);
-    void selectCoinToLeftGroup(const size_t coinIndex);
-    void selectCoinToRightGroup(const size_t coinIndex);
-    void selectCoinToGuess(const size_t coinIndex);
+    void setSelectionGroup(const size_t coinIndex, const CoinGroup group);
     
     void receiveWeighResult(const WeighResult weighResult);
 
