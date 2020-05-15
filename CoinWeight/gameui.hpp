@@ -26,6 +26,9 @@ private:
     virtual void drawCoin(const CoinSelection::Group group, const size_t index) = 0;
     virtual void drawReturnButton() = 0;
     
+    // Game Play screen
+    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
+    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
         
     // Game Over screen
     virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
@@ -54,10 +57,6 @@ public:
     virtual void drawInstructionScreen(const InstructionScreen &screen) = 0;
     virtual void drawCreditScreen(const CreditScreen &screen) = 0;
     virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
-    
-    // Game Play screen
-    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
-    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
         
     void drawGamePlayHumanScreen(const CoinSelection &selection, const GamePlayHumanScreen &screen,
         const WeighCounter &counter, const WeighResult lastWeighResult);

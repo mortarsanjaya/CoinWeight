@@ -11,15 +11,15 @@
 #include "gameui.hpp"
 
 //************************** Register model
-void GameController::registerModel(const std::shared_ptr<GameModel> model) {
+void GameController::registerModel(const std::shared_ptr<GameModel> &gameModel) {
     if (model == nullptr) {
-        this->model = model;
+        model = gameModel;
     }
 }
 
-void GameController::registerUI(std::unique_ptr<GameUI> ui) {
+void GameController::registerUI(std::unique_ptr<GameUI> &gameView) {
     if (view == nullptr) {
-        std::swap(view, ui);
+        std::swap(view, gameView);
     }
 }
 

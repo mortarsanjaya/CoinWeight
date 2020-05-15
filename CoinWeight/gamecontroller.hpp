@@ -18,9 +18,9 @@ class GameUI;
 class GameController {
 public:
     GameController() = default;
-    void registerModel(const std::shared_ptr<GameModel> model);
+    void registerModel(const std::shared_ptr<GameModel> &other);
     // Note: INVALIDATES THE ORIGINAL POINTER
-    void registerUI(std::unique_ptr<GameUI> ui);
+    void registerUI(std::unique_ptr<GameUI> &ui);
     
     void onReceivingInput(const Input &inp);
     

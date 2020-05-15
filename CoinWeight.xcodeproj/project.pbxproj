@@ -29,6 +29,7 @@
 		8626C29F246DD7CC003B99D4 /* playerfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C29D246DD7CB003B99D4 /* playerfactory.cpp */; };
 		8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A1246DD813003B99D4 /* computertest.cpp */; };
 		8626C2A7246DD890003B99D4 /* humanstd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A6246DD88F003B99D4 /* humanstd.cpp */; };
+		8626C2AB246E00E6003B99D4 /* gameview.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A9246E00E6003B99D4 /* gameview.cpp */; };
 		864467BE245A743900442BD8 /* computereasy1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BC245A743900442BD8 /* computereasy1.cpp */; };
 		864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BF245AB0C100442BD8 /* computermedium1.cpp */; };
 		865B163224579966005DE924 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B163024579966005DE924 /* player.cpp */; };
@@ -87,6 +88,8 @@
 		8626C2A2246DD813003B99D4 /* computertest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = computertest.hpp; sourceTree = "<group>"; };
 		8626C2A5246DD88F003B99D4 /* humanstd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = humanstd.hpp; sourceTree = "<group>"; };
 		8626C2A6246DD88F003B99D4 /* humanstd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = humanstd.cpp; sourceTree = "<group>"; };
+		8626C2A9246E00E6003B99D4 /* gameview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gameview.cpp; sourceTree = "<group>"; };
+		8626C2AA246E00E6003B99D4 /* gameview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gameview.hpp; sourceTree = "<group>"; };
 		864467BC245A743900442BD8 /* computereasy1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computereasy1.cpp; sourceTree = "<group>"; };
 		864467BD245A743900442BD8 /* computereasy1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computereasy1.hpp; sourceTree = "<group>"; };
 		864467BF245AB0C100442BD8 /* computermedium1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computermedium1.cpp; sourceTree = "<group>"; };
@@ -136,9 +139,9 @@
 		8607519F240F0EBE007A96E5 /* Game View */ = {
 			isa = PBXGroup;
 			children = (
-				86C1C66E2437A83F007E5B64 /* gameui.cpp */,
-				860751A1240F2844007A96E5 /* gameui.hpp */,
-				86980C062425E101001C8481 /* X11 */,
+				8626C2A9246E00E6003B99D4 /* gameview.cpp */,
+				8626C2AA246E00E6003B99D4 /* gameview.hpp */,
+				8626C2AC246E00F1003B99D4 /* UI */,
 			);
 			name = "Game View";
 			sourceTree = "<group>";
@@ -294,6 +297,16 @@
 			name = "Human Standard Mode";
 			sourceTree = "<group>";
 		};
+		8626C2AC246E00F1003B99D4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				86C1C66E2437A83F007E5B64 /* gameui.cpp */,
+				860751A1240F2844007A96E5 /* gameui.hpp */,
+				86980C062425E101001C8481 /* X11 UI */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		864467C2245BF6A000442BD8 /* Easy Level */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,13 +403,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		86980C062425E101001C8481 /* X11 */ = {
+		86980C062425E101001C8481 /* X11 UI */ = {
 			isa = PBXGroup;
 			children = (
 				8607519C240F0EAE007A96E5 /* gameui_x11.cpp */,
 				8607519D240F0EAE007A96E5 /* gameui_x11.hpp */,
 			);
-			name = X11;
+			name = "X11 UI";
 			sourceTree = "<group>";
 		};
 		869BBCD624241CD90002CDED /* Input */ = {
@@ -569,6 +582,7 @@
 				86219BE62450105A005E4F93 /* gameoverscreen.cpp in Sources */,
 				861B50DE243094AA00262336 /* gamecontroller.cpp in Sources */,
 				861E647F242AD81E00AA6FD7 /* gamemodel.cpp in Sources */,
+				8626C2AB246E00E6003B99D4 /* gameview.cpp in Sources */,
 				861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */,
 				861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */,
 				8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */,
