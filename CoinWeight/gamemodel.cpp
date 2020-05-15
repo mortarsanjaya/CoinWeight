@@ -25,7 +25,7 @@ const GameScreen &GameModel::currScreen() const {
     return screen;
 }
 
-const CoinSelection &GameModel::currentCoinStates() const {
+const CoinSelection &GameModel::currentSelection() const {
     return player->currSelection();
 }
 
@@ -183,19 +183,6 @@ void GameModel::computerGameMove() {
         compareWeight();
     }
 }
-
-
-
-//************************** History index manipulation
-/*
-void GameModel::historyIncrementIndex() {
-    player->historyIncrementIndex();
-}
-
-void GameModel::historyDecrementIndex() {
-    player->historyDecrementIndex();
-}
-*/
 
 
 

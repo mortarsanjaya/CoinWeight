@@ -27,7 +27,7 @@ public:
     GameModel();
     
     const GameScreen &currScreen() const;
-    const CoinSelection &currentCoinStates() const;
+    const CoinSelection &currentSelection() const;
     const History &currentHistory() const;
     
     // PLEASE CLEAN THIS FUNCTION
@@ -73,12 +73,6 @@ private:
     void guessFakeCoins();
     void humanGameMove();
     void computerGameMove();
-    
-    /*
-    // History index manipulation
-    void historyIncrementIndex();
-    void historyDecrementIndex();
-    */
 };
 
 #endif
