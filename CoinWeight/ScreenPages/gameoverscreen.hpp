@@ -9,32 +9,25 @@
 #ifndef gameoverscreen_hpp
 #define gameoverscreen_hpp
 
-class GameOverScreen {
+#include "gamescreen.hpp"
+
+class GameOverScreen final : public GameScreen {
 public:
-    enum class Highlight {
-        BackToTitle
-    };
     
-    GameOverScreen();
+    GameOverScreen(const bool doesPlayerWin);
     
-    const Highlight currHighlight() const;
+    const bool doesPlayerWin() const;
     
-    // Manual highlight switch
-    void highlightSwitch(const Highlight highlight);
-    
-    // Reset highlight
-    void resetHighlight();
-    
-    // Arrow button highlight switch
-    void highlightUp();
-    void highlightDown();
-    void highlightLeft();
-    void highlightRight();
+    void highlightUp(GameView &view) override;
+    void highlightDown(GameView &view) override;
+    void highlightLeft(GameView &view) override;
+    void highlightRight(GameView &view) override;
+    void onCharInput(GameView &view, const char inputChar) override;
+    void onReturnButton(GameView &view) override;
+    void triggerDisplay(GameUI &interface) override;
     
 private:
-    Highlight highlight;
-    
-    static constexpr Highlight defaultHighlight = Highlight::BackToTitle;
+    bool playerWin;
 };
 
 #endif

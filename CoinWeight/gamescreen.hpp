@@ -10,60 +10,30 @@
 #define gamescreen_hpp
 
 #include <memory>
-#include "ScreenPages/allinclude.hpp"
+
+class GameView;
+class GameUI;
 
 class GameScreen {
 public:
-    enum class Page {
-        Title,               // Play, Instruction, Credit
-        Instruction,
-        Credit,
-        GameOption,         // Number of coins, Difficulty, Human/Computer mode
-        GamePlayHuman,      // Coins, Weigh, Guess
-        GamePlayComputer,   // Next Step Only
-        GameOver            // Lose, Win
-    };
-    
-    GameScreen();
-    
-    const Page currentScreen() const;
-    const TitleScreen &titleScreen() const;
-    const InstructionScreen &instructionScreen() const;
-    const CreditScreen &creditScreen() const;
-    const GameOptionScreen &gameOptionScreen() const;
-    const GamePlayHumanScreen &gamePlayHumanScreen() const;
-    const GamePlayComputerScreen &gamePlayComputerScreen() const;
-    const GameOverScreen &gameOverScreen() const;
-    
-    // Arrow button highlight switch
-    void highlightUp();
-    void highlightDown();
-    void highlightLeft();
-    void highlightRight();
-    
-    // Reset highlight
-    void resetHighlight();
-    
-    // Screen switch
-    void goToTitleScreen();
-    void goToInstructionScreen();
-    void goToCreditScreen();
-    void goToGameOptionScreen();
-    void goToGamePlayHumanScreen(const size_t numOfCoins, const size_t coinsPerRow);
-    void goToGamePlayComputerScreen();
-    void goToGameOverScreen();
+    virtual ~GameScreen() = default;
 
-private:
-    Page page;
-    union {
-        TitleScreen title;
-        InstructionScreen instruction;
-        CreditScreen credit;
-        GameOptionScreen gameOption;
-        GamePlayHumanScreen gamePlayHuman;
-        GamePlayComputerScreen gamePlayComputer;
-        GameOverScreen gameOver;
-    };
+    // Action on arrow button press
+    // Generally, does not change the view itself other than the screen
+    virtual void highlightUp(GameView &view) = 0;
+    virtual void highlightDown(GameView &view) = 0;
+    virtual void highlightLeft(GameView &view) = 0;
+    virtual void highlightRight(GameView &view) = 0;
+    
+    // Action on character input press
+    virtual void onCharInput(GameView &view, const char inputChar) = 0;
+    
+    // Action on return button press (most certainly screen switching)
+    virtual void onReturnButton(GameView &view) = 0;
+    
+    // Accepts a UI for displaying the current screen
+    virtual void triggerDisplay(GameUI &interface) = 0;
+    
 };
 
 #endif

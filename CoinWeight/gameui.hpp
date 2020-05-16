@@ -9,64 +9,46 @@
 #ifndef gameui_hpp
 #define gameui_hpp
 
-#include "gamelevel.hpp"
-#include "weighresult.hpp"
-#include "guessresult.hpp"
+#include "titlescreen.hpp"
+#include "instructionscreen.hpp"
+#include "creditscreen.hpp"
+#include "gamesettingsscreen.hpp"
+#include "gameplayhumanscreen.hpp"
+#include "gameplaycomputerscreen.hpp"
+#include "gameoverscreen.hpp"
+
+#include "gamesettings.hpp"
 #include "coinselection.hpp"
-#include "history.hpp"
-#include "input.hpp"
+#include "weighresult.hpp"
 #include "weighcounter.hpp"
-#include "ScreenPages/allinclude.hpp"
+
+#include "input.hpp"
 
 class GameUI {
-private:
-//**** Virtual hook methods
-    // General
-    virtual void drawWeighResultText(const WeighResult weighResult) = 0;
-    virtual void drawCoin(const CoinGroup group, const size_t index) = 0;
-    virtual void drawReturnButton() = 0;
-    
-    // Game Play screen
-    virtual void drawGamePlayNumOfWeighs(const WeighCounter &counter) = 0;
-    virtual void drawGamePlayHumanHighlight(const GamePlayHumanScreen &screen) = 0;
-        
-    // Game Over screen
-    virtual void drawGameOverEndMessage(const GuessResult guessResult) = 0;
-    virtual void drawGameOverNumOfWeighs(const WeighCounter &counter) = 0;
-    
-    /*
-    // History screen
-    virtual void drawHistoryIndexText(const size_t index, const size_t numOfWeighs) = 0;
-    virtual void drawEmptyHistoryScreen() = 0;
-    */
-    
-    // Screen clearing
-    virtual void clearScreen() = 0;
-    
-//**** Private non-virtual methods
-    void drawCoins(const CoinSelection &coinStates);
-    // void drawRecord(const Record &record);
-    // void drawHistoryScreen(const Record &record, const size_t index, const size_t numOfWeighs);
-    
 public:
-    GameUI() = default;
-    virtual ~GameUI() = 0;
+    virtual ~GameUI() = default;
     
-    // Drawing functions
-    virtual void drawTitleScreen(const TitleScreen &screen) = 0;
-    virtual void drawInstructionScreen(const InstructionScreen &screen) = 0;
-    virtual void drawCreditScreen(const CreditScreen &screen) = 0;
-    virtual void drawGameOptionScreen(const GameOptionScreen &screen) = 0;
-        
-    void drawGamePlayHumanScreen(const CoinSelection &selection, const GamePlayHumanScreen &screen,
-        const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGamePlayComputerScreen(const CoinSelection &selection, const GamePlayComputerScreen &screen,
-        const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter);
+    // Screen displaying
+    virtual void displayScreen(const TitleScreen &screen) = 0;
+    virtual void displayScreen(const InstructionScreen &screen) = 0;
+    virtual void displayScreen(const CreditScreen &screen) = 0;
+    virtual void displayScreen(const GameSettingsScreen &screen) = 0;
+    virtual void displayScreen(const GamePlayHumanScreen &screen) = 0;
+    virtual void displayScreen(const GamePlayComputerScreen &screen) = 0;
+    virtual void displayScreen(const GameOverScreen &screen) = 0;
+    
+    // Displaying functions for other elements
+    virtual void displaySettings(const GameSettings &settings) = 0;
+    virtual void displayCoinSelection(const CoinSelection &selection) = 0;
+    virtual void displayWeighResult(const WeighResult weighResult) = 0;
+    virtual void displayWeighCounter(const WeighCounter &weighCounter) = 0;
+    
+    // Information for coin displaying
+    virtual const size_t numOfCoinsPerRow() const = 0;
+    virtual const size_t numOfRowsPerDisplay() const = 0;
     
     // Input handling functions
-    virtual void receiveInput() = 0;
-    virtual const Input lastInput() = 0;
+    virtual const Input nextInput() = 0;
 };
 
 #endif

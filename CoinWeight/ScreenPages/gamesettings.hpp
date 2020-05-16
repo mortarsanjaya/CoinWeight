@@ -19,7 +19,7 @@ class GameSettings {
     
     // Number of coins bound
     static constexpr size_t numOfCoinsLowerBound = 3;
-    static constexpr size_t numOfCoinsUpperBound = 100;
+    static constexpr size_t numOfCoinsUpperBound = 200;
     
     static constexpr size_t defaultNumOfCoins = numOfCoinsLowerBound;
     static constexpr GameLevel defaultLevel = GameLevel::Hard;

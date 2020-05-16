@@ -9,32 +9,52 @@
 #ifndef gameplaycomputerscreen_hpp
 #define gameplaycomputerscreen_hpp
 
-class GamePlayComputerScreen {
+#include "gamescreen.hpp"
+#include "tablenavigator.hpp"
+
+class GamePlayComputerScreen final : public GameScreen {
 public:
-    enum class Highlight {
+    enum class ButtonHighlight {
         NextMove
     };
     
-    GamePlayComputerScreen();
+    GamePlayComputerScreen(const size_t nCoinsTotal,
+                           const size_t nRowsDisplay,
+                           const size_t nCoinsPerRow);
+                           
+    const ButtonHighlight currButtonHighlight() const;
+    const size_t coinDisplayTopRowIndex() const;
+    const size_t coinHighlightIndex() const;
+    const size_t coinHighlightRow() const;
+    const size_t coinHighlightColumn() const;
+    const bool onButtonHighlight() const;
     
-    const Highlight currHighlight() const;
-    
-    // Manual highlight switch
-    void highlightSwitch(const Highlight highlight);
-    
-    // Reset highlight
-    void resetHighlight();
-    
-    // Arrow button highlight switch
-    void highlightUp();
-    void highlightDown();
-    void highlightLeft();
-    void highlightRight();
+    void highlightUp(GameView &view) override;
+    void highlightDown(GameView &view) override;
+    void highlightLeft(GameView &view) override;
+    void highlightRight(GameView &view) override;
+    void onCharInput(GameView &view, const char inputChar) override;
+    void onReturnButton(GameView &view) override;
+    void triggerDisplay(GameUI &interface) override;
     
 private:
-    Highlight highlight;
+    ButtonHighlight buttonHighlight;
+    TableNavigator coinNavigator;
     
-    static constexpr Highlight defaultHighlight = Highlight::NextMove;
+    bool isOnButtonHighlight;
+    
+    void buttonHighlightUp();
+    void buttonHighlightDown();
+    void buttonHighlightLeft();
+    void buttonHighlightRight();
+    
+    void coinHighlightUp();
+    void coinHighlightDown();
+    void coinHighlightLeft();
+    void coinHighlightRight();
+    
+    void transitionToButtonHighlight();
+    void transitionToCoinHighlight();
 };
 
 #endif

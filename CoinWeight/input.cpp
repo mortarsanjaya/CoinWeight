@@ -10,7 +10,12 @@
 #include "exception.hpp"
 
 //************************** Constructor
-Input::Input(char inp) : type{Type::Char}, charInp{inp} {}
+Input::Input(char inp) : type{Type::Char}, charInp{inp} {
+    if (inp == '\n') {
+        type = Type::Return;
+    }
+}
+
 Input::Input(Arrow inp) : type{Type::Arrow}, arrowInp{inp} {}
 Input::Input() : type{Type::Unknown} {}
 

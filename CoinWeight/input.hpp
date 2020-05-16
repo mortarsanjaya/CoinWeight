@@ -16,7 +16,7 @@
 */
 class Input {
 public:
-    enum class Type { Unknown, Char, Arrow };
+    enum class Type { Unknown, Char, Arrow, Return };
     enum class Arrow { Up, Down, Left, Right };
     
 private:

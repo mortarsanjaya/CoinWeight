@@ -7,49 +7,38 @@
 //
 
 #include "instructionscreen.hpp"
+#include "gameui.hpp"
+#include "gameview.hpp"
 
 //************************** Constructor
-InstructionScreen::InstructionScreen() : highlight(defaultHighlight) {}
+InstructionScreen::InstructionScreen() {}
 
 
 
-//************************** Field accessors
-const InstructionScreen::Highlight InstructionScreen::currHighlight() const {
-    return highlight;
+//************************** Arrow button handling
+void InstructionScreen::highlightUp(GameView &view) {}
+
+void InstructionScreen::highlightDown(GameView &view) {}
+
+void InstructionScreen::highlightLeft(GameView &view) {}
+
+void InstructionScreen::highlightRight(GameView &view) {}
+
+
+
+//************************** Character input handling
+void InstructionScreen::onCharInput(GameView &view, const char inputChar) {}
+
+
+
+//************************** Return button handling
+void InstructionScreen::onReturnButton(GameView &view) {
+    view.switchToTitle();
 }
 
 
 
-//************************** Manual highlight switch
-void InstructionScreen::highlightSwitch(const Highlight highlight) {
-    this->highlight = highlight;
+//************************** UI display
+void InstructionScreen::triggerDisplay(GameUI &interface) {
+    interface.displayScreen(*this);
 }
-
-
-
-//************************** Reset highlight
-void InstructionScreen::resetHighlight() {
-    highlight = defaultHighlight;
-}
-
-
-
-//************************** Arrow button highlight switch
-void InstructionScreen::highlightUp() {
-    switch (highlight) {
-        case Highlight::Return:
-            highlight = Highlight::Return;
-            break;
-    }
-}
-
-void InstructionScreen::highlightDown() {
-    switch (highlight) {
-        case Highlight::Return:
-            highlight = Highlight::Return;
-            break;
-    }
-}
-
-void InstructionScreen::highlightLeft() {}
-void InstructionScreen::highlightRight() {}

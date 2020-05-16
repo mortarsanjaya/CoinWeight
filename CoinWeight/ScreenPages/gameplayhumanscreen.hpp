@@ -9,49 +9,54 @@
 #ifndef gameplayhumanscreen_hpp
 #define gameplayhumanscreen_hpp
 
-#include <utility>
+#include "gamescreen.hpp"
+#include "tablenavigator.hpp"
+#include "coingroup.hpp"
 
-class GamePlayHumanScreen {
+class GamePlayHumanScreen final : public GameScreen {
 public:
-    enum class ScreenHighlight {
-        WeighButton,
-        GuessButton,
-        Coins
+    enum class ButtonHighlight {
+        Weigh,
+        Guess
     };
     
-    GamePlayHumanScreen(size_t numOfCoins, size_t coinsPerRow);
-    GamePlayHumanScreen &operator=(GamePlayHumanScreen &&other);
+    GamePlayHumanScreen(const size_t nCoinsTotal,
+                        const size_t nRowsDisplay,
+                        const size_t nCoinsPerRow);
+                        
+    const ButtonHighlight currButtonHighlight() const;
+    const size_t coinDisplayTopRowIndex() const;
+    const size_t coinHighlightIndex() const;
+    const size_t coinHighlightRow() const;
+    const size_t coinHighlightColumn() const;
+    const bool onButtonHighlight() const;
     
-    const ScreenHighlight currScreenHighlight() const;
-    const size_t currCoinHighlight() const;
-    
-    // Manual highlight switch
-    void screenHighlightSwitch(const ScreenHighlight screenHighlight);
-    void coinHighlightSwitch(const size_t coinHighlight);
-    
-    // Reset highlight
-    void resetHighlight();
-    
-    // Arrow button highlight switch
-    void highlightUp();
-    void highlightDown();
-    void highlightLeft();
-    void highlightRight();
+    void highlightUp(GameView &view) override;
+    void highlightDown(GameView &view) override;
+    void highlightLeft(GameView &view) override;
+    void highlightRight(GameView &view) override;
+    void onCharInput(GameView &view, const char inputChar) override;
+    void onReturnButton(GameView &view) override;
+    void triggerDisplay(GameUI &interface) override;
     
 private:
-    ScreenHighlight screenHighlight;
-    const size_t numOfCoins;
-    const size_t coinsPerRow;
-    size_t coinHighlight;
+    ButtonHighlight buttonHighlight;
+    TableNavigator coinNavigator;
     
-    static constexpr ScreenHighlight defaultScreenHighlight = ScreenHighlight::Coins;
-    static constexpr size_t defaultCoinHighlight = 0;
+    bool isOnButtonHighlight;
     
-    // Arrow button highlight switch at Coins
-    void highlightUpAtCoins();
-    void highlightDownAtCoins();
-    void highlightLeftAtCoins();
-    void highlightRightAtCoins();
+    void buttonHighlightUp();
+    void buttonHighlightDown();
+    void buttonHighlightLeft();
+    void buttonHighlightRight();
+    
+    void coinHighlightUp();
+    void coinHighlightDown();
+    void coinHighlightLeft();
+    void coinHighlightRight();
+    
+    void transitionToButtonHighlight();
+    void transitionToCoinHighlight();
 };
 
 #endif

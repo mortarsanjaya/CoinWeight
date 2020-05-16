@@ -11,7 +11,7 @@
 #include <utility>
 #include <cmath>
 
-//************************** Constructor
+//************************** Constructor and Destructor
 GameUI_X11::GameUI_X11() {
     const int width = 800;
     const int height = 800;
@@ -40,12 +40,12 @@ GameUI_X11::GameUI_X11() {
     
     cmap = DefaultColormap(display, DefaultScreen(display));
     
-    for (unsigned int i = 0; i < colorVals.size(); ++i) {
+    for (unsigned int i = 0; i <= Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
             throw Exception<GameUI_X11>("Cannot parse color");
         }
         XAllocColor(display, cmap, &xcolor);
-        colors.emplace_back(xcolor.pixel);
+        colors[i] = xcolor.pixel;
     }
 
     XSetForeground(display, gc, colors[defaultFGColor]);
@@ -66,74 +66,412 @@ GameUI_X11::GameUI_X11() {
     sleep(1);
 }
 
+GameUI_X11::~GameUI_X11() {
+    XFreeGC(display, gc);
+	XDestroyWindow(display, window);
+	XCloseDisplay(display);
+}
 
 
-//************************** Private methods
-//******************** Basic drawing functions
-void GameUI_X11::drawString(int x_pos, int y_pos, const std::string &msg, int color, bool boxed) {
-    XSetForeground(display, gc, colors[color]);
-    XDrawString(display, window, gc, x_pos, y_pos, msg.c_str(), msg.length());
-    XSetForeground(display, gc, colors[defaultFGColor]);
-    if (boxed) {
-        const int border_dist = font_width;
-        drawRectangle(x_pos - font_width, y_pos - font_height - font_width,
-            font_width * msg.length() + 2 * border_dist, font_height + 2 * font_width);
+
+//************************** Display screen
+void GameUI_X11::displayScreen(const TitleScreen &screen) {
+    clearWindow();
+    
+    const TitleScreen::Highlight highlight = screen.currHighlight();
+    
+    setForeground(defaultFGColor);
+    
+    constexpr int text_x_pos = 300;
+    constexpr int top_button_y_pos = 300;
+    
+    const std::string &playStr = "Play";
+    const std::string &instrStr = "Instruction";
+    const std::string &creditStr = "Credit";
+    
+    drawString(text_x_pos + border, 50, "Coin Weight");
+    drawString(text_x_pos + border, top_button_y_pos + total_string_height - border, playStr);
+    drawString(text_x_pos + border, top_button_y_pos + 2 * total_string_height - border, instrStr);
+    drawString(text_x_pos + border, top_button_y_pos + 3 * total_string_height - border, creditStr);
+    
+    switch (highlight) {
+        case TitleScreen::Highlight::Play:
+            drawRectangle(text_x_pos, top_button_y_pos, total_string_width(playStr.length()), total_string_height);
+            break;
+        case TitleScreen::Highlight::Instruction:
+            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, total_string_width(instrStr.length()), total_string_height);
+            break;
+        case TitleScreen::Highlight::Credit:
+            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, total_string_width(creditStr.length()), total_string_height);
+            break;
     }
-    XFlush(display);
+    
+    flushDisplay();
 }
 
-void GameUI_X11::drawCircle(int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw Exception<GameUI_X11>("Invalid color");
-    XSetForeground(display, gc, colors[color]);
-    XDrawArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
-    XSetForeground(display, gc, colors[defaultFGColor]);
-    XFlush(display);
+void GameUI_X11::displayScreen(const InstructionScreen &instructionScreen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+
+    const int x_pos_page_name = 300;
+    int y_pos = 100;
+    const int x_pos_page_instr = 320;
+    const int y_pos_incr = 20;
+    
+    
+    std::vector<std::vector<std::string>> displayStrings;
+    
+    displayStrings.emplace_back(std::vector<std::string>{
+        "Main Page:",
+        "Press Up/Down to select buttons.",
+        "Press Enter/Return to switch page."
+    });
+    
+    displayStrings.emplace_back(std::vector<std::string>{
+        "Option Page:",
+        "Press Left/Right to change selected option.",
+        "Press Enter/Return to start game."
+    });
+    
+    displayStrings.emplace_back(std::vector<std::string>{
+        "Game Play Page (Human play):",
+        "Press arrow keys to select coins.",
+        "Press '1' to move selected coin to the red (left) set.",
+        "Press '2' to move selected coin to the blue (right) set.",
+        "Press '3' to move selected coin to the green (guess) set.",
+        "Press 'w' to weigh.",
+        "Press 'g' to guess.",
+        "Press 'h' to switch to history."
+    });
+    
+    displayStrings.emplace_back(std::vector<std::string>{
+        "Game Play Page (Computer play):",
+        "Press Enter/Return to trigger the computer's move.",
+        "Press 'h' to switch to history."
+    });
+    
+    displayStrings.emplace_back(std::vector<std::string>{
+        "Game History Page:",
+        "Press Enter/Return to go back to the game play page.",
+        "Press Left/Right to switch between previous moves."
+    });
+    
+        
+    for (auto pageStrList : displayStrings) {
+        for (int i = 0; i < pageStrList.size(); ++i) {
+            drawString(i == 0 ? x_pos_page_name : x_pos_page_instr, y_pos,
+                pageStrList[i]);
+            y_pos += y_pos_incr;
+        }
+    }
+    
+    const std::string &returnStr = "Return";
+    drawString(300 + border, 500 + total_string_height - border, returnStr);
+    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
+    
+    flushDisplay();
 }
 
-void GameUI_X11::fillCircle(int x_pos, int y_pos, unsigned int radius, int color) {
-    if (color > colors.size()) throw Exception<GameUI_X11>("Invalid color");
-    XSetForeground(display, gc, colors[color]);
-    XFillArc(display, window, gc, x_pos, y_pos, radius, radius, 0, circle_full_arc);
-    XSetForeground(display, gc, colors[defaultFGColor]);
-    XFlush(display);
+void GameUI_X11::displayScreen(const CreditScreen &screen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    drawString(300, 300, "---");
+    
+    const std::string &returnStr = "Return";
+    drawString(300 + border, 500 + total_string_height - border, returnStr);
+    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
+    
+    flushDisplay();
 }
 
-void GameUI_X11::drawRectangle(int x_pos, int y_pos, int width, int height) {
-    XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);
-    XDrawLine(display, window, gc, x_pos, y_pos, x_pos, y_pos + height);
-    XDrawLine(display, window, gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
-    XDrawLine(display, window, gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
-    XFlush(display);
+void GameUI_X11::displayScreen(const GameSettingsScreen &screen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    const GameSettingsScreen::Highlight highlight = screen.currHighlight();
+    
+    drawString(300, 50, "Coin Weight");
+    drawString(300, 300 + total_string_height - border, "Number of Coins:");
+    drawString(300, 300 + 2 * total_string_height - border, "Level:");
+    drawString(300, 300 + 3 * total_string_height - border, "Mode:");
+    
+    const std::string &startGameStr = "Start Game";
+    const std::string &goBackStr = "Go Back";
+    
+    
+    drawString(350 + border, 400 + total_string_height - border, startGameStr);
+    drawString(350 + border, 400 + 2 * total_string_height - border, goBackStr);
+    
+    switch (highlight) {
+        case GameSettingsScreen::Highlight::NumOfCoins:
+            drawRectangle(400, 300, 100, total_string_height);
+            break;
+        case GameSettingsScreen::Highlight::Level:
+            drawRectangle(400, 300 + total_string_height, 100, total_string_height);
+            break;
+        case GameSettingsScreen::Highlight::Mode:
+            drawRectangle(400, 300 + 2 * total_string_height, 100, total_string_height);
+            break;
+        case GameSettingsScreen::Highlight::StartGame:
+            drawRectangle(350, 400, total_string_width(startGameStr.size()),
+                total_string_height);
+            break;
+        case GameSettingsScreen::Highlight::GoBack:
+            drawRectangle(350, 400 + total_string_height,
+                total_string_width(goBackStr.size()), total_string_height);
+            break;
+    }
+    
+    flushDisplay();
 }
 
-//******************** Tons of helper functions
-//**** Number of weighings
-const std::string GameUI_X11::numOfWeighsText(const WeighCounter &counter) const {
+void GameUI_X11::displayScreen(const GamePlayHumanScreen &screen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    coinTopRow = screen.coinDisplayTopRowIndex();
+
+    const std::string &weighStr = "Weigh";
+    const std::string &guessStr = "Guess";
+    
+    drawString(50 + border, 300 + total_string_height - border, weighStr);
+    drawString(50 + border, 300 + 2 * total_string_height - border, guessStr);
+
+    if (screen.onButtonHighlight()) {
+        switch (screen.currButtonHighlight()) {
+            case GamePlayHumanScreen::ButtonHighlight::Weigh:
+                drawRectangle(50, 300, total_string_width(weighStr.size()),
+                    total_string_height);
+                break;
+            case GamePlayHumanScreen::ButtonHighlight::Guess:
+                drawRectangle(50, 300 + total_string_height, total_string_width(guessStr.size()),
+                    total_string_height);
+                break;
+        }
+    } else {
+        drawRectangle(coin0XPos + screen.coinHighlightRow() * coinDist,
+                      coin0YPos + screen.coinHighlightRow() * coinDist,
+                      coinDist, coinDist);
+    }
+    
+    flushDisplay();
+}
+
+void GameUI_X11::displayScreen(const GamePlayComputerScreen &screen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    coinTopRow = screen.coinDisplayTopRowIndex();
+
+    const std::string &nextMoveStr = "Next Move";
+    
+    drawString(50 + border, 300 + total_string_height - border, nextMoveStr);
+
+    if (screen.onButtonHighlight()) {
+        switch (screen.currButtonHighlight()) {
+            case GamePlayComputerScreen::ButtonHighlight::NextMove:
+                drawRectangle(50, 300, total_string_width(nextMoveStr.size()),
+                    total_string_height);
+                break;
+        }
+    } else {
+        drawRectangle(coin0XPos + screen.coinHighlightRow() * coinDist,
+                      coin0YPos + screen.coinHighlightRow() * coinDist,
+                      coinDist, coinDist);
+    }
+    
+    flushDisplay();
+}
+
+void GameUI_X11::displayScreen(const GameOverScreen &screen) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    if (screen.doesPlayerWin()) {
+        drawString(300, 200, "You Win!");
+    } else {
+        drawString(300, 200, "You Lose!");
+    }
+    
+    const std::string &returnStr = "Return";
+    
+    drawString(300 + border, 500 + total_string_height - border, returnStr);
+    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
+    
+    flushDisplay();
+}
+
+
+
+//************************** Display for other elements
+void GameUI_X11::displayCoinSelection(const CoinSelection &selection) {
+    for (size_t row = coinTopRow; row < coinTopRow + numOfRowsPerDisplay(); ++row) {
+        bool coinExhausted = false;
+        for (size_t column = 0; column < numOfCoinsPerRow(); ++column) {
+            const size_t coinIndex = row * numOfCoinsPerRow() + column;
+            if (coinIndex >= selection.totalSize()) {
+                coinExhausted = true;
+                break;
+            }
+            drawCoin(selection.at(coinIndex), coinIndex, row, column);
+        }
+        
+        if (coinExhausted) break;
+    }
+}
+
+void GameUI_X11::displaySettings(const GameSettings &settings) {
+    const std::string gameLevelStr = [&settings]() -> std::string {
+        switch (settings.gameLevel()) {
+            case GameLevel::Easy:
+                return "Easy";
+                break;
+            case GameLevel::Medium:
+                return "Medium";
+                break;
+            case GameLevel::Hard:
+                return "Hard";
+                break;
+            }
+    }();
+    
+    drawString(400 + border, 300 + total_string_height - border,
+        std::to_string(settings.numOfCoins()));
+    drawString(400 + border, 300 + 2 * total_string_height - border,
+        gameLevelStr);
+    drawString(400 + border, 300 + 3 * total_string_height - border,
+        settings.isHumanMode() ? "Human" : "Computer");
+}
+
+void GameUI_X11::displayWeighResult(const WeighResult weighResult) {
+    drawWeighResultText(weighResult);
+    drawWeighingScale(weighResult);
+}
+
+void GameUI_X11::displayWeighCounter(const WeighCounter &counter) {
+    setForeground(Black);
     std::string numOfWeighsStr = "Number of comparisons remaining: ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsLeft());
     numOfWeighsStr += " out of ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
-    return numOfWeighsStr;
+    drawString(30, 60, numOfWeighsStr);
 }
 
-//**** Weigh result
+
+
+//************************** Information for coin display
+const size_t GameUI_X11::numOfCoinsPerRow() const {
+    return coinsPerRow;
+}
+
+const size_t GameUI_X11::numOfRowsPerDisplay() const {
+    return rowsDisplay;
+}
+
+
+
+//************************** Set foreground
+void GameUI_X11::setForeground(const unsigned int colorIndex) {
+    if (colorIndex >= colors.size()) throw Exception<GameUI_X11>("Invalid color");
+    XSetForeground(display, gc, colors[colorIndex]);
+}
+
+
+
+//******************** Basic drawing functions
+void GameUI_X11::drawString(const int x_pos, const int y_pos, const std::string &str) {
+    XDrawString(display, window, gc, x_pos, y_pos, str.c_str(), str.length());
+}
+
+void GameUI_X11::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
+}
+
+void GameUI_X11::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
+}
+
+void GameUI_X11::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
+    XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);
+    XDrawLine(display, window, gc, x_pos, y_pos, x_pos, y_pos + height);
+    XDrawLine(display, window, gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
+    XDrawLine(display, window, gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
+}
+
+
+
+//******************** Clear window
+void GameUI_X11::clearWindow() {
+    XClearWindow(display, window);
+}
+
+
+
+//******************** Flush display
+void GameUI_X11::flushDisplay() {
+    XFlush(display);
+}
+
+
+
+//******************** Draw coin
+void GameUI_X11::drawCoin(const CoinGroup group, const size_t coinIndex,
+                          const size_t row, const size_t column)
+{
+    const int x_pos = coin0XPos + coinDist * row;
+    const int y_pos = coin0YPos + coinDist * column;
+    setForeground(coinColor(group));
+    fillFullCircle(x_pos, y_pos, coinDiameter);
+    setForeground(Black);
+    drawFullCircle(x_pos, y_pos, coinDiameter);
+    setForeground(defaultFGColor);
+    drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
+}
+
+const int GameUI_X11::coinColor(const CoinGroup group) {
+    switch (group) {
+        case CoinGroup::NoSelect:
+            return GameUI_X11::Gold;
+        case CoinGroup::LeftWeigh:
+            return GameUI_X11::Red;
+        case CoinGroup::RightWeigh:
+            return GameUI_X11::Blue;
+        case CoinGroup::Guess:
+            return GameUI_X11::Green;
+    }
+}
+
+
+
+//******************** Helper functions for drawing weigh result
 void GameUI_X11::drawWeighResultText(const WeighResult weighResult) {
-    const std::pair<std::string, int> weighResultText = [&weighResult]() {
-        switch (weighResult) {
-            case WeighResult::Start:
-                return std::pair<std::string, int>("", Black);
-            case WeighResult::Balance:
-                return std::pair<std::string, int>("The two groups are balanced.", Black);
-            case WeighResult::LeftHeavy:
-                return std::pair<std::string, int>("The left group is heavier.", Black);
-            case WeighResult::RightHeavy:
-                return std::pair<std::string, int>("The right group is heavier.", Black);
-            case WeighResult::Invalid:
-                return std::pair<std::string, int>("Invalid move!", Red);
-        }
-    }();
+    const int x_pos = 30;
+    const int y_pos = 90;
+    setForeground(Black);
+    switch (weighResult) {
+        case WeighResult::Start:
+            drawString(x_pos, y_pos, "");
+            break;
+        case WeighResult::Balance:
+            drawString(x_pos, y_pos, "The two groups are balanced.");
+            break;
+        case WeighResult::LeftHeavy:
+            drawString(x_pos, y_pos, "The left group is heavier.");
+            break;
+        case WeighResult::RightHeavy:
+            drawString(x_pos, y_pos, "The right group is heavier.");
+            break;
+        case WeighResult::Invalid:
+            setForeground(Red);
+            drawString(x_pos, y_pos, "Invalid move!");
+            break;
+    }
     
-    // Hack: Draw scale as well, lol
+    setForeground(defaultFGColor);
+}
+
+void GameUI_X11::drawWeighingScale(const WeighResult weighResult) {
     {
         
         std::vector<XPoint> xpoints {
@@ -226,11 +564,24 @@ void GameUI_X11::drawWeighResultText(const WeighResult weighResult) {
         XDrawArc(display, window, gc, left_center.x - radius, left_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
         XDrawArc(display, window, gc, right_center.x - radius, right_center.y - radius, 2 * radius, 2 * radius, angle1, angle2);
     }
-        
-    XSetForeground(display, gc, colors[defaultFGColor]);
-    
-    drawString(30, 90, weighResultText.first, weighResultText.second, false);
 }
+
+
+
+
+
+/*
+//******************** Tons of helper functions
+//**** Number of weighings
+const std::string GameUI_X11::numOfWeighsText(const WeighCounter &counter) const {
+    std::string numOfWeighsStr = "Number of comparisons remaining: ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsLeft());
+    numOfWeighsStr += " out of ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
+    return numOfWeighsStr;
+}
+
+
 
 //**** Coin
 const int GameUI_X11::coinColor(CoinGroup coinState) const {
@@ -253,11 +604,6 @@ void GameUI_X11::drawCoin(const CoinGroup coinState, const size_t coinIndex) {
     fillCircle(x_pos, y_pos, coinRadius, coinColor(coinState));
     drawCircle(x_pos, y_pos, coinRadius, GameUI_X11::Black);
     drawString(x_pos, y_pos, std::to_string(coinIndex + 1), defaultFGColor, false);
-}
-
-//**** Return button
-void GameUI_X11::drawReturnButton() {
-    drawString(305, 515, "Return", defaultFGColor, true);
 }
 
 //**** Game Play screen
@@ -388,12 +734,12 @@ void GameUI_X11::drawCreditScreen(const CreditScreen &creditScreen) {
     drawReturnButton();
 }
 
-void GameUI_X11::drawGameOptionScreen(const GameOptionScreen &gameOptionScreen)
+void GameUI_X11::drawGameOptionScreen(const GameSettingsScreen &gameOptionScreen)
 {
     const int stringHeight = 20;
     clearScreen();
     
-    const GameOptionScreen::Highlight highlight = gameOptionScreen.currHighlight();
+    const GameSettingsScreen::Highlight highlight = gameOptionScreen.currHighlight();
     const  GameSettings &settings = gameOptionScreen.currSettings();
     
     const std::string gameLevelStr = [&settings]() -> std::string {
@@ -417,19 +763,24 @@ void GameUI_X11::drawGameOptionScreen(const GameOptionScreen &gameOptionScreen)
     
     drawString(405, 300 + stringHeight,
         std::to_string(settings.numOfCoins()),
-        defaultFGColor, highlight == GameOptionScreen::Highlight::NumOfCoins);
+        defaultFGColor, highlight == GameSettingsScreen::Highlight::NumOfCoins);
     drawString(405, 300 + 2 * stringHeight, gameLevelStr,
-        defaultFGColor, highlight == GameOptionScreen::Highlight::Level);
+        defaultFGColor, highlight == GameSettingsScreen::Highlight::Level);
     drawString(405, 300 + 3 * stringHeight,
         settings.isHumanMode() ? "Human" : "Computer",
         defaultFGColor, highlight == GameOptionScreen::Highlight::Mode);
 }
+*/
 
-void GameUI_X11::receiveInput() {
-    XNextEvent(display, &event);
-}
 
-const Input GameUI_X11::lastInput() {
+
+
+const Input GameUI_X11::nextInput() {
+    
+    if (XCheckWindowEvent(display, window, KeyPressMask, &event) == 0) {
+        return Input();
+    }
+    
     if (event.type == KeyPress) {
         switch (XLookupKeysym(&(event.xkey), 0)) {
             case XK_0:          return Input('0');
@@ -447,6 +798,8 @@ const Input GameUI_X11::lastInput() {
         return Input();
     }
 }
+
+
 
 
 

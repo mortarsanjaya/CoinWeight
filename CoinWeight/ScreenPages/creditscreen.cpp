@@ -7,34 +7,38 @@
 //
 
 #include "creditscreen.hpp"
+#include "gameui.hpp"
+#include "gameview.hpp"
 
 //************************** Constructor
-CreditScreen::CreditScreen() : highlight(defaultHighlight) {}
+CreditScreen::CreditScreen() {}
 
 
 
-//************************** Field accessors
-const CreditScreen::Highlight CreditScreen::currHighlight() const {
-    return highlight;
+//************************** Arrow button handling
+void CreditScreen::highlightUp(GameView &view) {}
+
+void CreditScreen::highlightDown(GameView &view) {}
+
+void CreditScreen::highlightLeft(GameView &view) {}
+
+void CreditScreen::highlightRight(GameView &view) {}
+
+
+
+//************************** Character input handling
+void CreditScreen::onCharInput(GameView &view, const char inputChar) {}
+
+
+
+//************************** Return button handling
+void CreditScreen::onReturnButton(GameView &view) {
+    view.switchToTitle();
 }
 
 
 
-//************************** Manual highlight switch
-void CreditScreen::highlightSwitch(const Highlight highlight) {
-    this->highlight = highlight;
+//************************** UI display
+void CreditScreen::triggerDisplay(GameUI &interface) {
+    interface.displayScreen(*this);
 }
-
-
-
-//************************** Reset highlight
-void CreditScreen::resetHighlight() {
-    highlight = defaultHighlight;
-}
-
-
-//************************** Arrow button highlight switch
-void CreditScreen::highlightUp() {}
-void CreditScreen::highlightDown() {}
-void CreditScreen::highlightLeft() {}
-void CreditScreen::highlightRight() {}

@@ -7,122 +7,182 @@
 //
 
 #include "gameplayhumanscreen.hpp"
+#include "gameview.hpp"
+#include "gameui.hpp"
 
 //************************** Constructor
-GamePlayHumanScreen::GamePlayHumanScreen(size_t numOfCoins, size_t coinsPerRow) :
-    screenHighlight(defaultScreenHighlight), numOfCoins(numOfCoins),
-    coinsPerRow(coinsPerRow), coinHighlight(defaultCoinHighlight)
+GamePlayHumanScreen::GamePlayHumanScreen(const size_t nCoinsTotal,
+    const size_t nRowsDisplay, const size_t nCoinsPerRow) :
+buttonHighlight(ButtonHighlight::Weigh),
+coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
+isOnButtonHighlight(false)
 {}
 
 
 
-//************************** Move assignment operator have to be defined
-GamePlayHumanScreen &GamePlayHumanScreen::operator=(GamePlayHumanScreen &&other) {
-    screenHighlight = other.screenHighlight;
-    const_cast<size_t &>(numOfCoins) = other.numOfCoins;
-    const_cast<size_t &>(coinsPerRow) = other.coinsPerRow;
-    coinHighlight = other.coinHighlight;
-    return *this;
-}
-    
-
-
 //************************** Field accessors
-const GamePlayHumanScreen::ScreenHighlight GamePlayHumanScreen::currScreenHighlight() const {
-    return screenHighlight;
+const GamePlayHumanScreen::ButtonHighlight
+GamePlayHumanScreen::currButtonHighlight() const {
+    return buttonHighlight;
 }
 
-const size_t GamePlayHumanScreen::currCoinHighlight() const {
-    return coinHighlight;
+const size_t GamePlayHumanScreen::coinDisplayTopRowIndex() const {
+    return coinNavigator.currTopRow();
 }
 
-
-
-//************************** Manual highlight switch
-void GamePlayHumanScreen::screenHighlightSwitch(const ScreenHighlight screenHighlight) {
-    this->screenHighlight = screenHighlight;
+const size_t GamePlayHumanScreen::coinHighlightIndex() const {
+    return coinNavigator.currIndex();
 }
 
-void GamePlayHumanScreen::coinHighlightSwitch(const size_t coinHighlight) {
-    this->coinHighlight = coinHighlight;
+const size_t GamePlayHumanScreen::coinHighlightRow() const {
+    return coinNavigator.currRow();
 }
 
-
-
-//************************** Reset highlight
-void GamePlayHumanScreen::resetHighlight() {
-    screenHighlight = defaultScreenHighlight;
-    coinHighlight = defaultCoinHighlight;
+const size_t GamePlayHumanScreen::coinHighlightColumn() const {
+    return coinNavigator.currColumn();
 }
 
-
-
-//************************** Arrow button highlight switch
-void GamePlayHumanScreen::highlightUp() {
-     switch (screenHighlight) {
-         case ScreenHighlight::WeighButton:
-             screenHighlightSwitch(ScreenHighlight::WeighButton);
-             break;
-         case ScreenHighlight::GuessButton:
-             screenHighlightSwitch(ScreenHighlight::WeighButton);
-             break;
-         case ScreenHighlight::Coins:
-             highlightUpAtCoins();
-             break;
-     }
-}
-
-void GamePlayHumanScreen::highlightDown() {
-     switch (screenHighlight) {
-         case ScreenHighlight::WeighButton:
-             screenHighlightSwitch(ScreenHighlight::GuessButton);
-             break;
-         case ScreenHighlight::GuessButton:
-             screenHighlightSwitch(ScreenHighlight::Coins);
-             break;
-         case ScreenHighlight::Coins:
-             highlightDownAtCoins();
-             break;
-     }
-}
-
-void GamePlayHumanScreen::highlightLeft() {
-     if (screenHighlight == ScreenHighlight::Coins) {
-        highlightLeftAtCoins();
-     }
-}
-
-void GamePlayHumanScreen::highlightRight() {
-     if (screenHighlight == ScreenHighlight::Coins) {
-        highlightRightAtCoins();
-     }
+const bool GamePlayHumanScreen::onButtonHighlight() const {
+    return isOnButtonHighlight;
 }
 
 
 
-//************************** Arrow button highlight switch at Coins
-void GamePlayHumanScreen::highlightUpAtCoins() {
-    if (coinHighlight < coinsPerRow) {
-        screenHighlightSwitch(ScreenHighlight::GuessButton);
+//************************** Arrow button handling
+//**** Main
+void GamePlayHumanScreen::highlightUp(GameView &view) {
+    if (isOnButtonHighlight) {
+        buttonHighlightUp();
     } else {
-        coinHighlight -= coinsPerRow;
+        coinHighlightUp();
     }
 }
 
-void GamePlayHumanScreen::highlightDownAtCoins() {
-    if (coinHighlight + coinsPerRow < numOfCoins) {
-        coinHighlight += coinsPerRow;
+void GamePlayHumanScreen::highlightDown(GameView &view) {
+    if (isOnButtonHighlight) {
+        buttonHighlightDown();
+    } else {
+        coinHighlightDown();
     }
 }
 
-void GamePlayHumanScreen::highlightLeftAtCoins() {
-    if (coinHighlight % coinsPerRow != 0) {
-        --coinHighlight;
+void GamePlayHumanScreen::highlightLeft(GameView &view) {
+    if (isOnButtonHighlight) {
+        buttonHighlightLeft();
+    } else {
+        coinHighlightLeft();
     }
 }
 
-void GamePlayHumanScreen::highlightRightAtCoins() {
-    if ((coinHighlight % coinsPerRow < coinsPerRow - 1) && (coinHighlight < numOfCoins - 1)) {
-        ++coinHighlight;
+void GamePlayHumanScreen::highlightRight(GameView &view) {
+    if (isOnButtonHighlight) {
+        buttonHighlightRight();
+    } else {
+        coinHighlightRight();
     }
+}
+
+//**** Helper (button highlight)
+void GamePlayHumanScreen::buttonHighlightUp() {
+    switch (buttonHighlight) {
+        case ButtonHighlight::Weigh:
+            break;
+        case ButtonHighlight::Guess:
+            buttonHighlight = ButtonHighlight::Weigh;
+            break;
+    }
+}
+
+void GamePlayHumanScreen::buttonHighlightDown() {
+    switch (buttonHighlight) {
+        case ButtonHighlight::Weigh:
+            buttonHighlight = ButtonHighlight::Guess;
+            break;
+        case ButtonHighlight::Guess:
+            break;
+    }
+}
+
+void GamePlayHumanScreen::buttonHighlightLeft() {}
+
+void GamePlayHumanScreen::buttonHighlightRight() {
+    transitionToCoinHighlight();
+}
+
+
+//**** Helper (coin highlight)
+void GamePlayHumanScreen::coinHighlightUp() {
+    coinNavigator.scrollUp();
+}
+
+void GamePlayHumanScreen::coinHighlightDown() {
+    coinNavigator.scrollDown();
+}
+
+void GamePlayHumanScreen::coinHighlightLeft() {
+    if (coinNavigator.currRow() == 0) {
+        transitionToButtonHighlight();
+    } else {
+        coinNavigator.scrollLeft();
+    }
+}
+
+void GamePlayHumanScreen::coinHighlightRight() {
+    coinNavigator.scrollRight();
+}
+
+//**** Helper (transition)
+void GamePlayHumanScreen::transitionToButtonHighlight() {
+    isOnButtonHighlight = true;
+}
+
+void GamePlayHumanScreen::transitionToCoinHighlight() {
+    isOnButtonHighlight = false;
+}
+
+
+
+//************************** Character input handling
+void GamePlayHumanScreen::onCharInput(GameView &view, const char inputChar) {
+    if (!isOnButtonHighlight) {
+        switch (inputChar) {
+            case '0':
+                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::NoSelect);
+                break;
+            case '1':
+                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
+                break;
+            case '2':
+                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
+                break;
+            case '3':
+                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::Guess);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+
+
+//************************** Return button handling
+void GamePlayHumanScreen::onReturnButton(GameView &view) {
+    if (isOnButtonHighlight) {
+        switch (buttonHighlight) {
+            case ButtonHighlight::Weigh:
+                view.compareWeight();
+                break;
+            case ButtonHighlight::Guess:
+                view.guessFakeCoins();
+                break;
+        }
+    }
+}
+
+
+
+//************************** UI display
+void GamePlayHumanScreen::triggerDisplay(GameUI &interface) {
+    interface.displayScreen(*this);
 }

@@ -7,6 +7,7 @@
 //
 
 #include "coinset.hpp"
+/*
 #include "computer.hpp"
 #include <iostream>
 #include <memory>
@@ -17,8 +18,14 @@
 #include "gameview.hpp"
 #include "gamecontroller.hpp"
 #include "input.hpp"
+*/
 #include "computertest.hpp"
+#include "gameview.hpp"
+#include "gameui_x11.hpp"
 
+#include <chrono>
+
+/*
 void play() {
     GameController controller;
     
@@ -52,11 +59,22 @@ void play() {
         controller.updateView();
     }
 }
+*/
+
+#include <thread>
 
 using namespace std;
 
 int main() {
-    // computerTest(50, GameLevel::Easy);
-    // computerTest(75, GameLevel::Medium);
-    play();
+    computerTest(50, GameLevel::Easy);
+    computerTest(75, GameLevel::Medium);
+    
+    auto view = std::make_unique<GameView>(std::make_unique<GameUI_X11>());
+    while (true) {
+        view->updateDisplay();
+        std::this_thread::sleep_for(std::chrono::milliseconds(16));
+        
+        
+        view->processInput();
+    }
 }

@@ -7,35 +7,46 @@
 //
 
 #include "gameoverscreen.hpp"
+#include "gameview.hpp"
+#include "gameui.hpp"
 
 //************************** Constructor
-GameOverScreen::GameOverScreen() : highlight(defaultHighlight) {}
+GameOverScreen::GameOverScreen(const bool doesPlayerWin) :
+playerWin(doesPlayerWin) {}
 
 
 
-//************************** Field accessors
-const GameOverScreen::Highlight GameOverScreen::currHighlight() const {
-    return highlight;
+//************************** Field accessor
+const bool GameOverScreen::doesPlayerWin() const {
+    return playerWin;
 }
 
 
 
-//************************** Manual highlight switch
-void GameOverScreen::highlightSwitch(const Highlight highlight) {
-    this->highlight = highlight;
+//************************** Arrow button handling
+void GameOverScreen::highlightUp(GameView &view) {}
+
+void GameOverScreen::highlightDown(GameView &view) {}
+
+void GameOverScreen::highlightLeft(GameView &view) {}
+
+void GameOverScreen::highlightRight(GameView &view) {}
+
+
+
+//************************** Character input handling
+void GameOverScreen::onCharInput(GameView &view, const char inputChar) {}
+
+
+
+//************************** Return button handling
+void GameOverScreen::onReturnButton(GameView &view) {
+    view.switchToTitle();
 }
 
 
 
-//************************** Reset highlight
-void GameOverScreen::resetHighlight() {
-    highlight = defaultHighlight;
+//************************** UI display
+void GameOverScreen::triggerDisplay(GameUI &interface) {
+    interface.displayScreen(*this);
 }
-
-
-
-//************************** Arrow button highlight switch
-void GameOverScreen::highlightUp() {}
-void GameOverScreen::highlightDown() {}
-void GameOverScreen::highlightLeft() {}
-void GameOverScreen::highlightRight() {}

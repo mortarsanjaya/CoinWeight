@@ -10,31 +10,49 @@
 #define gameview_hpp
 
 #include "gameui.hpp"
+#include "gamescreen.hpp"
 
-class GameView {
+#include "gamesettings.hpp"
+#include "coingroup.hpp"
+#include "weighresult.hpp"
+
+class GameView final {
 public:
     GameView(std::unique_ptr<GameUI> ui);
     
-    // Note: This [needs to] AND [will] be simplified
-    void drawTitleScreen(const TitleScreen &screen);
-    void drawInstructionScreen(const InstructionScreen &screen);
-    void drawCreditScreen(const CreditScreen &screen);
-    void drawGameOptionScreen(const GameOptionScreen &screen);
-        
-    void drawGamePlayHumanScreen(const CoinSelection &selection, const GamePlayHumanScreen &screen,
-        const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGamePlayComputerScreen(const CoinSelection &selection, const GamePlayComputerScreen &screen,
-        const WeighCounter &counter, const WeighResult lastWeighResult);
-    void drawGameOverScreen(const GuessResult guessResult, const WeighCounter &counter);
+    // Screen switch
+    void switchToTitle();
+    void switchToInstruction();
+    void switchToCredit();
+    void switchToGameSettings();
+    void switchToGamePlay();
+    void switchToGameOver(const bool isWin);
     
-    // Input handling functions
-    void receiveInput();
-    const Input lastInput();
+    // Settings manipulation
+    void decreaseNumOfCoins();
+    void increaseNumOfCoins();
+    void decreaseLevel();
+    void increaseLevel();
+    void switchMode();
+    
+    // Game-related operations
+    void changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup);
+    void compareWeight();
+    void guessFakeCoins();
+    void sendMove();
+    
+    // Input processing
+    void processInput();
+    
+    // Display update
+    void updateDisplay();
+    
 
 private:
     std::unique_ptr<GameUI> ui;
-    
-    
+    std::unique_ptr<GameScreen> screen;
+
+    GameSettings settings;
 };
 
 #endif

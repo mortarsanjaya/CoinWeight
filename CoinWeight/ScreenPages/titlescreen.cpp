@@ -7,6 +7,8 @@
 //
 
 #include "titlescreen.hpp"
+#include "gameui.hpp"
+#include "gameview.hpp"
 
 //************************** Constructor
 TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
@@ -20,22 +22,8 @@ const TitleScreen::Highlight TitleScreen::currHighlight() const {
 
 
 
-//************************** Manual highlight switch
-void TitleScreen::highlightSwitch(const Highlight highlight) {
-    this->highlight = highlight;
-}
-
-
-
-//************************** Reset highlight
-void TitleScreen::resetHighlight() {
-    highlight = defaultHighlight;
-}
-
-
-
-//************************** Arrow button highlight switch
-void TitleScreen::highlightUp() {
+//************************** Arrow button handling
+void TitleScreen::highlightUp(GameView &view) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -49,7 +37,7 @@ void TitleScreen::highlightUp() {
     }
 }
 
-void TitleScreen::highlightDown() {
+void TitleScreen::highlightDown(GameView &view) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -63,5 +51,35 @@ void TitleScreen::highlightDown() {
     }
 }
 
-void TitleScreen::highlightLeft() {}
-void TitleScreen::highlightRight() {}
+void TitleScreen::highlightLeft(GameView &view) {}
+
+void TitleScreen::highlightRight(GameView &view) {}
+
+
+
+//************************** Character input handling
+void TitleScreen::onCharInput(GameView &view, const char inputChar) {}
+
+
+
+//************************** Return button handling
+void TitleScreen::onReturnButton(GameView &view) {
+    switch (highlight) {
+        case Highlight::Play:
+            view.switchToGameSettings();
+            break;
+        case Highlight::Instruction:
+            view.switchToInstruction();
+            break;
+        case Highlight::Credit:
+            view.switchToCredit();
+            break;
+    }
+}
+
+
+
+//************************** UI display
+void TitleScreen::triggerDisplay(GameUI &interface) {
+    interface.displayScreen(*this);
+}

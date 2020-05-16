@@ -1,19 +1,29 @@
 //
-//  creditscreen.hpp
+//  gamesettingsscreen.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef creditscreen_hpp
-#define creditscreen_hpp
+#ifndef gamesettingsscreen_hpp
+#define gamesettingsscreen_hpp
 
 #include "gamescreen.hpp"
 
-class CreditScreen final : public GameScreen {
+class GameSettingsScreen final : public GameScreen {
 public:
-    CreditScreen();
+    enum class Highlight {
+        NumOfCoins,
+        Level,
+        Mode,
+        StartGame,
+        GoBack
+    };
+    
+    GameSettingsScreen();
+    
+    const Highlight currHighlight() const;
     
     void highlightUp(GameView &view) override;
     void highlightDown(GameView &view) override;
@@ -22,6 +32,11 @@ public:
     void onCharInput(GameView &view, const char inputChar) override;
     void onReturnButton(GameView &view) override;
     void triggerDisplay(GameUI &interface) override;
+    
+private:
+    Highlight highlight;
+    
+    static constexpr Highlight defaultHighlight = Highlight::NumOfCoins;
 };
 
 #endif
