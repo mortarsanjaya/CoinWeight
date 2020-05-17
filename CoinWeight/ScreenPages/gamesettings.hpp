@@ -22,7 +22,7 @@ class GameSettings {
     static constexpr size_t numOfCoinsUpperBound = 200;
     
     static constexpr size_t defaultNumOfCoins = numOfCoinsLowerBound;
-    static constexpr GameLevel defaultLevel = GameLevel::Hard;
+    static constexpr GameLevel defaultLevel = GameLevel::Easy;
     static constexpr bool defaultIsHuman = true;
     
 public:

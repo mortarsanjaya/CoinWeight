@@ -31,7 +31,7 @@ public:
     void highlightRight(GameView &view) override;
     void onCharInput(GameView &view, const char inputChar) override;
     void onReturnButton(GameView &view) override;
-    void triggerDisplay(GameUI &interface) override;
+    void triggerDisplay(GameView &view, GameUI &interface) override;
     
 private:
     Highlight highlight;

@@ -183,6 +183,6 @@ void GamePlayHumanScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void GamePlayHumanScreen::triggerDisplay(GameUI &interface) {
+void GamePlayHumanScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

@@ -44,9 +44,11 @@ public:
     // Input processing
     void processInput();
     
-    // Display update
+    // Update display
     void updateDisplay();
     
+    // Display other elements
+    void displaySettings();
 
 private:
     std::unique_ptr<GameUI> ui;

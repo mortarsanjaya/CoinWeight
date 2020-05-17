@@ -47,6 +47,6 @@ void GameOverScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void GameOverScreen::triggerDisplay(GameUI &interface) {
+void GameOverScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

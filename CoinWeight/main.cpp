@@ -66,8 +66,8 @@ void play() {
 using namespace std;
 
 int main() {
-    computerTest(50, GameLevel::Easy);
-    computerTest(75, GameLevel::Medium);
+    // computerTest(50, GameLevel::Easy);
+    // computerTest(75, GameLevel::Medium);
     
     auto view = std::make_unique<GameView>(std::make_unique<GameUI_X11>());
     while (true) {

@@ -39,6 +39,6 @@ void InstructionScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void InstructionScreen::triggerDisplay(GameUI &interface) {
+void InstructionScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

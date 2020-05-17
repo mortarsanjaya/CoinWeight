@@ -80,6 +80,6 @@ void TitleScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void TitleScreen::triggerDisplay(GameUI &interface) {
+void TitleScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

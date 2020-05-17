@@ -39,6 +39,6 @@ void CreditScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void CreditScreen::triggerDisplay(GameUI &interface) {
+void CreditScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

@@ -31,8 +31,8 @@ public:
     // Action on return button press (most certainly screen switching)
     virtual void onReturnButton(GameView &view) = 0;
     
-    // Accepts a UI for displaying the current screen
-    virtual void triggerDisplay(GameUI &interface) = 0;
+    // Triggers View and UI for displaying the current screen
+    virtual void triggerDisplay(GameView &view, GameUI &interface) = 0;
     
 };
 

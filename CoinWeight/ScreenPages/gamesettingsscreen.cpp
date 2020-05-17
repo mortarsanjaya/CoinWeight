@@ -121,8 +121,10 @@ void GameSettingsScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void GameSettingsScreen::triggerDisplay(GameUI &interface) {
+void GameSettingsScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
+    view.displaySettings();
+    
 }
 
 

@@ -28,7 +28,9 @@ class GameUI {
 public:
     virtual ~GameUI() = default;
     
-    // Screen displaying
+    // Base screen display
+    
+    
     virtual void displayScreen(const TitleScreen &screen) = 0;
     virtual void displayScreen(const InstructionScreen &screen) = 0;
     virtual void displayScreen(const CreditScreen &screen) = 0;

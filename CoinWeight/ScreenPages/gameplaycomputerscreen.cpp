@@ -143,6 +143,6 @@ void GamePlayComputerScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void GamePlayComputerScreen::triggerDisplay(GameUI &interface) {
+void GamePlayComputerScreen::triggerDisplay(GameView &view, GameUI &interface) {
     interface.displayScreen(*this);
 }

@@ -121,5 +121,12 @@ void GameView::processInput() {
 
 //************************** Display updating
 void GameView::updateDisplay() {
-    screen->triggerDisplay(*ui);
+    screen->triggerDisplay(*this, *ui);
+}
+
+
+
+//************************** Elements display
+void GameView::displaySettings() {
+    ui->displaySettings(settings);
 }

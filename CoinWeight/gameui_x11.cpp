@@ -342,6 +342,8 @@ void GameUI_X11::displaySettings(const GameSettings &settings) {
         gameLevelStr);
     drawString(400 + border, 300 + 3 * total_string_height - border,
         settings.isHumanMode() ? "Human" : "Computer");
+        
+    flushDisplay();
 }
 
 void GameUI_X11::displayWeighResult(const WeighResult weighResult) {
