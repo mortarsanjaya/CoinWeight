@@ -130,13 +130,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8607519F240F0EBE007A96E5 /* Game Controller */ = {
+		8607519F240F0EBE007A96E5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				8626C2A9246E00E6003B99D4 /* gamecontroller.cpp */,
 				8626C2AA246E00E6003B99D4 /* gamecontroller.hpp */,
 			);
-			name = "Game Controller";
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		86219BE92450D5F0005E4F93 /* Title */ = {
@@ -273,13 +273,13 @@
 			name = "Human Standard Mode";
 			sourceTree = "<group>";
 		};
-		8626C2AC246E00F1003B99D4 /* Game View */ = {
+		8626C2AC246E00F1003B99D4 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				860751A1240F2844007A96E5 /* gameui.hpp */,
 				86980C062425E101001C8481 /* X11 UI */,
 			);
-			name = "Game View";
+			name = View;
 			sourceTree = "<group>";
 		};
 		8626C2AD246E4EC1003B99D4 /* Screen Types */ = {
@@ -363,12 +363,12 @@
 			name = "Computer Factory";
 			sourceTree = "<group>";
 		};
-		866BE31B241DE1A800DDD242 /* Exceptions */ = {
+		866BE31B241DE1A800DDD242 /* Exception */ = {
 			isa = PBXGroup;
 			children = (
 				866BE319241DE19D00DDD242 /* exception.hpp */,
 			);
-			name = Exceptions;
+			name = Exception;
 			sourceTree = "<group>";
 		};
 		866FC8302409F74D00B3740D /* Coin Set */ = {
@@ -470,17 +470,10 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
-				86A78CCF244578AE000DF706 /* Enums */,
-				86219BF02450D8EE005E4F93 /* Game Settings */,
-				865B16332457996C005DE924 /* Player */,
-				866FC8302409F74D00B3740D /* Coin Set */,
-				8626C298246DD6A7003B99D4 /* Weigh Counter */,
-				866FC8312409F75A00B3740D /* Game Core */,
-				869BBCD624241CD90002CDED /* Input */,
-				86C1C6582432480C007E5B64 /* Game Screen */,
-				8607519F240F0EBE007A96E5 /* Game Controller */,
-				8626C2AC246E00F1003B99D4 /* Game View */,
-				866BE31B241DE1A800DDD242 /* Exceptions */,
+				86EA23E224731D640028AD2D /* Model */,
+				8607519F240F0EBE007A96E5 /* Controller */,
+				8626C2AC246E00F1003B99D4 /* View */,
+				866BE31B241DE1A800DDD242 /* Exception */,
 			);
 			path = CoinWeight;
 			sourceTree = "<group>";
@@ -489,9 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				86C1C65624324806007E5B64 /* gamescreen.hpp */,
-				8626C2AD246E4EC1003B99D4 /* Screen Types */,
 				8626C2B1246EE78E003B99D4 /* Screen Factory */,
-				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
 			name = "Game Screen";
 			sourceTree = "<group>";
@@ -503,6 +494,23 @@
 				86C1C6622432D6A7007E5B64 /* history.hpp */,
 			);
 			name = History;
+			sourceTree = "<group>";
+		};
+		86EA23E224731D640028AD2D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86A78CCF244578AE000DF706 /* Enums */,
+				86219BF02450D8EE005E4F93 /* Game Settings */,
+				865B16332457996C005DE924 /* Player */,
+				866FC8302409F74D00B3740D /* Coin Set */,
+				8626C298246DD6A7003B99D4 /* Weigh Counter */,
+				866FC8312409F75A00B3740D /* Game Core */,
+				869BBCD624241CD90002CDED /* Input */,
+				86C1C6582432480C007E5B64 /* Game Screen */,
+				8626C2AD246E4EC1003B99D4 /* Screen Types */,
+				8626C2B6246F28A3003B99D4 /* Table Navigator */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
