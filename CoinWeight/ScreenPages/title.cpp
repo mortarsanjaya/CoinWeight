@@ -1,12 +1,12 @@
 //
-//  titlescreen.cpp
+//  title.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-21.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "titlescreen.hpp"
+#include "title.hpp"
 #include "view.hpp"
 #include "controller.hpp"
 

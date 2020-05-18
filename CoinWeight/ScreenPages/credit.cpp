@@ -1,12 +1,12 @@
 //
-//  creditscreen.cpp
+//  credit.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "creditscreen.hpp"
+#include "credit.hpp"
 #include "controller.hpp"
 #include "view.hpp"
 

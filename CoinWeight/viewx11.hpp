@@ -18,12 +18,12 @@
 
 #include "view.hpp"
 
-#include "titlescreen.hpp"
-#include "instructionscreen.hpp"
-#include "creditscreen.hpp"
-#include "gamesettingsscreen.hpp"
-#include "gameplayhumanscreen.hpp"
-#include "gameplaycomputerscreen.hpp"
+#include "title.hpp"
+#include "instruction.hpp"
+#include "credit.hpp"
+#include "gamesettings.hpp"
+#include "gameplayhuman.hpp"
+#include "gameplaycomputer.hpp"
 
 #include "coinselection.hpp"
 #include "weighresult.hpp"

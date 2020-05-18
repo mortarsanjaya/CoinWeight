@@ -1,12 +1,12 @@
 //
-//  instructionscreen.cpp
+//  instruction.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-21.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "instructionscreen.hpp"
+#include "instruction.hpp"
 #include "view.hpp"
 #include "controller.hpp"
 

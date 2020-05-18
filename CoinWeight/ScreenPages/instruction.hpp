@@ -1,19 +1,19 @@
 //
-//  creditscreen.hpp
+//  instruction.hpp
 //  CoinWeight
 //
-//  Created by Gian Cordana Sanjaya on 2020-04-22.
+//  Created by Gian Cordana Sanjaya on 2020-04-21.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef creditscreen_hpp
-#define creditscreen_hpp
+#ifndef instruction_hpp
+#define instruction_hpp
 
 #include "modelstate.hpp"
 
-class Credit final : public ModelState {
+class Instruction final : public ModelState {
 public:
-    Credit();
+    Instruction();
     
     void highlightUp() override;
     void highlightDown() override;

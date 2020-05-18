@@ -1,13 +1,13 @@
 //
-//  gamesettingsscreen.hpp
+//  gamesettings.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gamesettingsscreen_hpp
-#define gamesettingsscreen_hpp
+#ifndef gamesettings_hpp
+#define gamesettings_hpp
 
 #include "modelstate.hpp"
 #include "gamelevel.hpp"

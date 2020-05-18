@@ -1,29 +1,27 @@
 //
-//  gameplayhumanscreen.hpp
+//  gameplaycomputer.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameplayhumanscreen_hpp
-#define gameplayhumanscreen_hpp
+#ifndef gameplaycomputer_hpp
+#define gameplaycomputer_hpp
 
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
-#include "coingroup.hpp"
 
-class GamePlayHuman final : public ModelState {
+class GamePlayComputer final : public ModelState {
 public:
     enum class ButtonHighlight {
-        Weigh,
-        Guess
+        NextMove
     };
     
-    GamePlayHuman(const size_t nCoinsTotal,
-                        const size_t nRowsDisplay,
-                        const size_t nCoinsPerRow);
-                        
+    GamePlayComputer(const size_t nCoinsTotal,
+                           const size_t nRowsDisplay,
+                           const size_t nCoinsPerRow);
+                           
     const ButtonHighlight currButtonHighlight() const;
     const size_t coinDisplayTopRowIndex() const;
     const size_t coinHighlightIndex() const;

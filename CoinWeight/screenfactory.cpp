@@ -8,13 +8,13 @@
 
 #include "screenfactory.hpp"
 
-#include "titlescreen.hpp"
-#include "instructionscreen.hpp"
-#include "creditscreen.hpp"
-#include "gamesettingsscreen.hpp"
-#include "gameplayhumanscreen.hpp"
-#include "gameplaycomputerscreen.hpp"
-#include "gameoverscreen.hpp"
+#include "title.hpp"
+#include "instruction.hpp"
+#include "credit.hpp"
+#include "gamesettings.hpp"
+#include "gameplayhuman.hpp"
+#include "gameplaycomputer.hpp"
+#include "gameover.hpp"
 
 //************************** Factory methods
 std::unique_ptr<ModelState>

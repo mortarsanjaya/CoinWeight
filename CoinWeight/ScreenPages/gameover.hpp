@@ -1,19 +1,22 @@
 //
-//  instructionscreen.hpp
+//  gameover.hpp
 //  CoinWeight
 //
-//  Created by Gian Cordana Sanjaya on 2020-04-21.
+//  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef instructionscreen_hpp
-#define instructionscreen_hpp
+#ifndef gameover_hpp
+#define gameover_hpp
 
 #include "modelstate.hpp"
 
-class Instruction final : public ModelState {
+class GameOver final : public ModelState {
 public:
-    Instruction();
+    
+    GameOver(const bool doesPlayerWin);
+    
+    const bool doesPlayerWin() const;
     
     void highlightUp() override;
     void highlightDown() override;
@@ -22,6 +25,9 @@ public:
     void onCharInput(const char inputChar) override;
     void onReturnButton(Controller &controller) override;
     void triggerDisplay(View &view) override;
+    
+private:
+    bool playerWin;
 };
 
 #endif

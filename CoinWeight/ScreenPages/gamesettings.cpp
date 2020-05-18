@@ -1,12 +1,12 @@
 //
-//  gamesettingsscreen.cpp
+//  gamesettings.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-04-22.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "gamesettingsscreen.hpp"
+#include "gamesettings.hpp"
 #include "controller.hpp"
 #include "view.hpp"
 

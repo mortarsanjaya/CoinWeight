@@ -1,22 +1,27 @@
 //
-//  gameoverscreen.hpp
+//  title.hpp
 //  CoinWeight
 //
-//  Created by Gian Cordana Sanjaya on 2020-04-22.
+//  Created by Gian Cordana Sanjaya on 2020-04-21.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameoverscreen_hpp
-#define gameoverscreen_hpp
+#ifndef title_hpp
+#define title_hpp
 
 #include "modelstate.hpp"
 
-class GameOver final : public ModelState {
+class Title final : public ModelState {
 public:
+    enum class Highlight {
+        Play,
+        Instruction,
+        Credit
+    };
     
-    GameOver(const bool doesPlayerWin);
+    Title();
     
-    const bool doesPlayerWin() const;
+    const Highlight currHighlight() const;
     
     void highlightUp() override;
     void highlightDown() override;
@@ -27,7 +32,9 @@ public:
     void triggerDisplay(View &view) override;
     
 private:
-    bool playerWin;
+    Highlight highlight;
+    
+    static constexpr Highlight defaultHighlight = Highlight::Play;
 };
 
 #endif
