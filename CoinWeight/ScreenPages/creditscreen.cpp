@@ -16,18 +16,18 @@ CreditScreen::CreditScreen() {}
 
 
 //************************** Arrow button handling
-void CreditScreen::highlightUp(Controller &controller) {}
+void CreditScreen::highlightUp() {}
 
-void CreditScreen::highlightDown(Controller &controller) {}
+void CreditScreen::highlightDown() {}
 
-void CreditScreen::highlightLeft(Controller &controller) {}
+void CreditScreen::highlightLeft() {}
 
-void CreditScreen::highlightRight(Controller &controller) {}
+void CreditScreen::highlightRight() {}
 
 
 
 //************************** Character input handling
-void CreditScreen::onCharInput(Controller &controller, const char inputChar) {}
+void CreditScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -39,6 +39,6 @@ void CreditScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void CreditScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void CreditScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }

@@ -70,21 +70,21 @@ void Controller::processInput() {
         case Input::Type::Unknown:
             break;
         case Input::Type::Char:
-            screen->onCharInput(*this, input.whatChar());
+            screen->onCharInput(input.whatChar());
             break;
         case Input::Type::Arrow:
             switch (input.whatArrow()) {
                 case Input::Arrow::Up:
-                    screen->highlightUp(*this);
+                    screen->highlightUp();
                     break;
                 case Input::Arrow::Down:
-                    screen->highlightDown(*this);
+                    screen->highlightDown();
                     break;
                 case Input::Arrow::Left:
-                    screen->highlightLeft(*this);
+                    screen->highlightLeft();
                     break;
                 case Input::Arrow::Right:
-                    screen->highlightRight(*this);
+                    screen->highlightRight();
                     break;
             }
             break;
@@ -98,5 +98,5 @@ void Controller::processInput() {
 
 //************************** Display updating
 void Controller::updateDisplay() {
-    screen->triggerDisplay(*this, *ui);
+    screen->triggerDisplay(*ui);
 }

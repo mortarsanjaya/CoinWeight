@@ -50,7 +50,7 @@ const bool GamePlayHumanScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayHumanScreen::highlightUp(Controller &controller) {
+void GamePlayHumanScreen::highlightUp() {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayHumanScreen::highlightUp(Controller &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightDown(Controller &controller) {
+void GamePlayHumanScreen::highlightDown() {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayHumanScreen::highlightDown(Controller &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightLeft(Controller &controller) {
+void GamePlayHumanScreen::highlightLeft() {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayHumanScreen::highlightLeft(Controller &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightRight(Controller &controller) {
+void GamePlayHumanScreen::highlightRight() {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -143,7 +143,8 @@ void GamePlayHumanScreen::transitionToCoinHighlight() {
 
 
 //************************** Character input handling
-void GamePlayHumanScreen::onCharInput(Controller &controller, const char inputChar) {
+void GamePlayHumanScreen::onCharInput(const char inputChar) {
+/*
     if (!isOnButtonHighlight) {
         switch (inputChar) {
             case '0':
@@ -162,6 +163,7 @@ void GamePlayHumanScreen::onCharInput(Controller &controller, const char inputCh
                 break;
         }
     }
+    */
 }
 
 
@@ -183,6 +185,6 @@ void GamePlayHumanScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GamePlayHumanScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void GamePlayHumanScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }

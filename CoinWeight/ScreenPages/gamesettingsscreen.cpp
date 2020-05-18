@@ -28,7 +28,7 @@ const GameSettingsScreen::Highlight GameSettingsScreen::currHighlight() const {
 
 
 //************************** Arrow button handling
-void GameSettingsScreen::highlightUp(Controller &controller) {
+void GameSettingsScreen::highlightUp() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             break;
@@ -47,7 +47,7 @@ void GameSettingsScreen::highlightUp(Controller &controller) {
     }
 }
 
-void GameSettingsScreen::highlightDown(Controller &controller) {
+void GameSettingsScreen::highlightDown() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             highlight = Highlight::Level;
@@ -66,7 +66,7 @@ void GameSettingsScreen::highlightDown(Controller &controller) {
     }
 }
 
-void GameSettingsScreen::highlightLeft(Controller &controller) {
+void GameSettingsScreen::highlightLeft() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             settings.decreaseNumOfCoins();
@@ -84,7 +84,7 @@ void GameSettingsScreen::highlightLeft(Controller &controller) {
     }
 }
 
-void GameSettingsScreen::highlightRight(Controller &controller) {
+void GameSettingsScreen::highlightRight() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             settings.increaseNumOfCoins();
@@ -105,7 +105,7 @@ void GameSettingsScreen::highlightRight(Controller &controller) {
 
 
 //************************** Character input handling
-void GameSettingsScreen::onCharInput(Controller &controller, const char inputChar) {}
+void GameSettingsScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -126,9 +126,9 @@ void GameSettingsScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GameSettingsScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
-    interface.displaySettings(settings);
+void GameSettingsScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
+    view.displaySettings(settings);
 }
 
 

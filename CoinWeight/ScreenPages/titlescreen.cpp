@@ -23,7 +23,7 @@ const TitleScreen::Highlight TitleScreen::currHighlight() const {
 
 
 //************************** Arrow button handling
-void TitleScreen::highlightUp(Controller &controller) {
+void TitleScreen::highlightUp() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -37,7 +37,7 @@ void TitleScreen::highlightUp(Controller &controller) {
     }
 }
 
-void TitleScreen::highlightDown(Controller &controller) {
+void TitleScreen::highlightDown() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -51,14 +51,14 @@ void TitleScreen::highlightDown(Controller &controller) {
     }
 }
 
-void TitleScreen::highlightLeft(Controller &controller) {}
+void TitleScreen::highlightLeft() {}
 
-void TitleScreen::highlightRight(Controller &controller) {}
+void TitleScreen::highlightRight() {}
 
 
 
 //************************** Character input handling
-void TitleScreen::onCharInput(Controller &controller, const char inputChar) {}
+void TitleScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -80,6 +80,6 @@ void TitleScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void TitleScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void TitleScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }

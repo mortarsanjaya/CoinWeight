@@ -16,18 +16,18 @@ InstructionScreen::InstructionScreen() {}
 
 
 //************************** Arrow button handling
-void InstructionScreen::highlightUp(Controller &controller) {}
+void InstructionScreen::highlightUp() {}
 
-void InstructionScreen::highlightDown(Controller &controller) {}
+void InstructionScreen::highlightDown() {}
 
-void InstructionScreen::highlightLeft(Controller &controller) {}
+void InstructionScreen::highlightLeft() {}
 
-void InstructionScreen::highlightRight(Controller &controller) {}
+void InstructionScreen::highlightRight() {}
 
 
 
 //************************** Character input handling
-void InstructionScreen::onCharInput(Controller &controller, const char inputChar) {}
+void InstructionScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -39,6 +39,6 @@ void InstructionScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void InstructionScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void InstructionScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }

@@ -50,7 +50,7 @@ const bool GamePlayComputerScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayComputerScreen::highlightUp(Controller &controller) {
+void GamePlayComputerScreen::highlightUp() {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayComputerScreen::highlightUp(Controller &controller) {
     }
 }
 
-void GamePlayComputerScreen::highlightDown(Controller &controller) {
+void GamePlayComputerScreen::highlightDown() {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayComputerScreen::highlightDown(Controller &controller) {
     }
 }
 
-void GamePlayComputerScreen::highlightLeft(Controller &controller) {
+void GamePlayComputerScreen::highlightLeft() {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayComputerScreen::highlightLeft(Controller &controller) {
     }
 }
 
-void GamePlayComputerScreen::highlightRight(Controller &controller) {
+void GamePlayComputerScreen::highlightRight() {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -129,7 +129,7 @@ void GamePlayComputerScreen::transitionToCoinHighlight() {
 
 
 //************************** Character input handling
-void GamePlayComputerScreen::onCharInput(Controller &controller, const char inputChar) {}
+void GamePlayComputerScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -143,6 +143,6 @@ void GamePlayComputerScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GamePlayComputerScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void GamePlayComputerScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }

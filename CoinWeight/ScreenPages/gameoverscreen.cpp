@@ -24,18 +24,18 @@ const bool GameOverScreen::doesPlayerWin() const {
 
 
 //************************** Arrow button handling
-void GameOverScreen::highlightUp(Controller &controller) {}
+void GameOverScreen::highlightUp() {}
 
-void GameOverScreen::highlightDown(Controller &controller) {}
+void GameOverScreen::highlightDown() {}
 
-void GameOverScreen::highlightLeft(Controller &controller) {}
+void GameOverScreen::highlightLeft() {}
 
-void GameOverScreen::highlightRight(Controller &controller) {}
+void GameOverScreen::highlightRight() {}
 
 
 
 //************************** Character input handling
-void GameOverScreen::onCharInput(Controller &controller, const char inputChar) {}
+void GameOverScreen::onCharInput(const char inputChar) {}
 
 
 
@@ -47,6 +47,6 @@ void GameOverScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GameOverScreen::triggerDisplay(Controller &controller, View &interface) {
-    interface.displayScreen(*this);
+void GameOverScreen::triggerDisplay(View &view) {
+    view.displayScreen(*this);
 }
