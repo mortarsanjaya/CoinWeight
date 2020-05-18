@@ -19,7 +19,7 @@ public:
     virtual ~GameScreen() = default;
 
     // Action on arrow button press
-    // Generally, does not change the controller itself other than the screen
+    // Generally, does not change the controller itself
     virtual void highlightUp(GameController &controller) = 0;
     virtual void highlightDown(GameController &controller) = 0;
     virtual void highlightLeft(GameController &controller) = 0;
