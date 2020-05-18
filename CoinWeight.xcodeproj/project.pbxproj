@@ -478,13 +478,13 @@
 			path = CoinWeight;
 			sourceTree = "<group>";
 		};
-		86C1C6582432480C007E5B64 /* Game Screen */ = {
+		86C1C6582432480C007E5B64 /* Model State */ = {
 			isa = PBXGroup;
 			children = (
 				86C1C65624324806007E5B64 /* modelstate.hpp */,
 				8626C2B1246EE78E003B99D4 /* Screen Factory */,
 			);
-			name = "Game Screen";
+			name = "Model State";
 			sourceTree = "<group>";
 		};
 		86C1C6642432D6AC007E5B64 /* History */ = {
@@ -506,7 +506,7 @@
 				8626C298246DD6A7003B99D4 /* Weigh Counter */,
 				866FC8312409F75A00B3740D /* Game Core */,
 				869BBCD624241CD90002CDED /* Input */,
-				86C1C6582432480C007E5B64 /* Game Screen */,
+				86C1C6582432480C007E5B64 /* Model State */,
 				8626C2AD246E4EC1003B99D4 /* Screen Types */,
 				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
