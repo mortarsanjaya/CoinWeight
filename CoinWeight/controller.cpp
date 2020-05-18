@@ -44,29 +44,6 @@ void Controller::switchToGameOver(const bool isWin) {
 
 
 
-//************************** Settings manipulation
-void Controller::decreaseNumOfCoins() {
-    settings.decreaseGameSize();
-}
-
-void Controller::increaseNumOfCoins() {
-    settings.increaseGameSize();
-}
-
-void Controller::decreaseLevel() {
-    settings.decreaseDifficulty();
-}
-
-void Controller::increaseLevel() {
-    settings.increaseDifficulty();
-}
-
-void Controller::switchMode() {
-    settings.switchMode();
-}
-
-
-
 //************************** Game-related operations
 void Controller::changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup) {
     // ...
@@ -122,11 +99,4 @@ void Controller::processInput() {
 //************************** Display updating
 void Controller::updateDisplay() {
     screen->triggerDisplay(*this, *ui);
-}
-
-
-
-//************************** Elements display
-void Controller::displaySettings() {
-    ui->displaySettings(settings);
 }

@@ -30,19 +30,19 @@ const bool GameSettings::isHumanMode() const {
 
 
 //***************************************************** Modifier functions
-void GameSettings::increaseGameSize() {
+void GameSettings::increaseNumOfCoins() {
     if (gameSize < numOfCoinsUpperBound) {
         ++gameSize;
     }
 }
 
-void GameSettings::decreaseGameSize() {
+void GameSettings::decreaseNumOfCoins() {
     if (gameSize > numOfCoinsLowerBound) {
         --gameSize;
     }
 }
 
-void GameSettings::increaseDifficulty() {
+void GameSettings::increaseLevel() {
     switch (level) {
         case GameLevel::Easy:
             level = GameLevel::Medium;
@@ -56,7 +56,7 @@ void GameSettings::increaseDifficulty() {
     }
 }
 
-void GameSettings::decreaseDifficulty() {
+void GameSettings::decreaseLevel() {
     switch (level) {
         case GameLevel::Easy:
             level = GameLevel::Easy;

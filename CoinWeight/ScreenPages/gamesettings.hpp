@@ -32,10 +32,10 @@ public:
     const GameLevel gameLevel() const;
     const bool isHumanMode() const;
     
-    void increaseGameSize();
-    void decreaseGameSize();
-    void increaseDifficulty();
-    void decreaseDifficulty();
+    void increaseNumOfCoins();
+    void decreaseNumOfCoins();
+    void increaseLevel();
+    void decreaseLevel();
     void switchMode();
 };
 

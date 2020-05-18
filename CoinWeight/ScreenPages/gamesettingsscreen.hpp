@@ -10,6 +10,7 @@
 #define gamesettingsscreen_hpp
 
 #include "modelstate.hpp"
+#include "gamesettings.hpp"
 
 class GameSettingsScreen final : public ModelState {
 public:
@@ -35,6 +36,8 @@ public:
     
 private:
     Highlight highlight;
+
+    static GameSettings settings;
     
     static constexpr Highlight defaultHighlight = Highlight::NumOfCoins;
 };

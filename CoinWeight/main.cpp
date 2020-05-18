@@ -32,8 +32,7 @@ int main() {
     // computerTest(50, GameLevel::Easy);
     // computerTest(75, GameLevel::Medium);
     
-    /*
-    auto view = std::make_unique<GameView>(std::make_unique<GameUI_X11>());
+    auto view = std::make_unique<Controller>(std::make_unique<ViewX11>());
     while (true) {
         view->updateDisplay();
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
@@ -41,7 +40,6 @@ int main() {
         
         view->processInput();
     }
-    */
     /*
     auto ui = std::make_unique<ViewX11>();
     GamePlayHumanScreen screen{34, 10, 10};

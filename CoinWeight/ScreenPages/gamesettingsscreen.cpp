@@ -10,6 +10,11 @@
 #include "controller.hpp"
 #include "view.hpp"
 
+//************************** Settings
+GameSettings GameSettingsScreen::settings {};
+
+
+
 //************************** Constructor
 GameSettingsScreen::GameSettingsScreen() : highlight(defaultHighlight) {}
 
@@ -64,13 +69,13 @@ void GameSettingsScreen::highlightDown(Controller &controller) {
 void GameSettingsScreen::highlightLeft(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
-            controller.decreaseNumOfCoins();
+            settings.decreaseNumOfCoins();
             break;
         case Highlight::Level:
-            controller.decreaseLevel();
+            settings.decreaseLevel();
             break;
         case Highlight::Mode:
-            controller.switchMode();
+            settings.switchMode();
             break;
         case Highlight::StartGame:
             break;
@@ -82,13 +87,13 @@ void GameSettingsScreen::highlightLeft(Controller &controller) {
 void GameSettingsScreen::highlightRight(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
-            controller.increaseNumOfCoins();
+            settings.increaseNumOfCoins();
             break;
         case Highlight::Level:
-            controller.increaseLevel();
+            settings.increaseLevel();
             break;
         case Highlight::Mode:
-            controller.switchMode();
+            settings.switchMode();
             break;
         case Highlight::StartGame:
             break;
@@ -123,8 +128,7 @@ void GameSettingsScreen::onReturnButton(Controller &controller) {
 //************************** UI display
 void GameSettingsScreen::triggerDisplay(Controller &controller, View &interface) {
     interface.displayScreen(*this);
-    controller.displaySettings();
-    
+    interface.displaySettings(settings);
 }
 
 

@@ -28,13 +28,6 @@ public:
     void switchToGamePlay();
     void switchToGameOver(const bool isWin);
     
-    // Settings manipulation
-    void decreaseNumOfCoins();
-    void increaseNumOfCoins();
-    void decreaseLevel();
-    void increaseLevel();
-    void switchMode();
-    
     // Game-related operations
     void changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup);
     void compareWeight();
@@ -46,15 +39,10 @@ public:
     
     // Update display
     void updateDisplay();
-    
-    // Display other elements
-    void displaySettings();
 
 private:
     std::unique_ptr<View> ui;
     std::unique_ptr<ModelState> screen;
-
-    GameSettings settings;
 };
 
 #endif
