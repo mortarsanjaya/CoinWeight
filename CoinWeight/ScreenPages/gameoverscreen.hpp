@@ -9,7 +9,7 @@
 #ifndef gameoverscreen_hpp
 #define gameoverscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class GameOverScreen final : public ModelState {
 public:

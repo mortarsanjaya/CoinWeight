@@ -110,7 +110,7 @@
 		86A9AB9B2400B26D002AB0CF /* coinset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinset.hpp; sourceTree = "<group>"; };
 		86A9AB9D2400E0CF002AB0CF /* computer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computer.cpp; sourceTree = "<group>"; };
 		86A9AB9E2400E0CF002AB0CF /* computer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computer.hpp; sourceTree = "<group>"; };
-		86C1C65624324806007E5B64 /* gamescreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamescreen.hpp; sourceTree = "<group>"; };
+		86C1C65624324806007E5B64 /* modelstate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modelstate.hpp; sourceTree = "<group>"; };
 		86C1C659243249E7007E5B64 /* gamesettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamesettings.cpp; sourceTree = "<group>"; };
 		86C1C65A243249E7007E5B64 /* gamesettings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamesettings.hpp; sourceTree = "<group>"; };
 		86C1C65E24324A3D007E5B64 /* gamelevel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamelevel.hpp; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 		86C1C6582432480C007E5B64 /* Game Screen */ = {
 			isa = PBXGroup;
 			children = (
-				86C1C65624324806007E5B64 /* gamescreen.hpp */,
+				86C1C65624324806007E5B64 /* modelstate.hpp */,
 				8626C2B1246EE78E003B99D4 /* Screen Factory */,
 			);
 			name = "Game Screen";

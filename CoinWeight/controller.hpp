@@ -10,7 +10,7 @@
 #define controller_hpp
 
 #include "view.hpp"
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 #include "gamesettings.hpp"
 #include "coingroup.hpp"

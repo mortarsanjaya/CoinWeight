@@ -1,13 +1,13 @@
 //
-//  gamescreen.hpp
+//  modelstate.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-30.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gamescreen_hpp
-#define gamescreen_hpp
+#ifndef modelstate_hpp
+#define modelstate_hpp
 
 #include <memory>
 

@@ -9,7 +9,7 @@
 #ifndef creditscreen_hpp
 #define creditscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class CreditScreen final : public ModelState {
 public:

@@ -42,7 +42,7 @@ int main() {
         view->processInput();
     }
     */
-    
+    /*
     auto ui = std::make_unique<ViewX11>();
     GamePlayHumanScreen screen{34, 10, 10};
     while (true) {
@@ -51,4 +51,5 @@ int main() {
         CoinSelection selection{34};
         ui->displayCoinSelection(selection);
     }
+    */
 }

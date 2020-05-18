@@ -9,7 +9,7 @@
 #ifndef titlescreen_hpp
 #define titlescreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class TitleScreen final : public ModelState {
 public:

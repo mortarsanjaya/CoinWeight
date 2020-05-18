@@ -9,7 +9,7 @@
 #ifndef instructionscreen_hpp
 #define instructionscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class InstructionScreen final : public ModelState {
 public:

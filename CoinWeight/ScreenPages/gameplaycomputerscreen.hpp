@@ -9,7 +9,7 @@
 #ifndef gameplaycomputerscreen_hpp
 #define gameplaycomputerscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 #include "tablenavigator.hpp"
 
 class GamePlayComputerScreen final : public ModelState {

@@ -10,7 +10,7 @@
 #define screenfactory_hpp
 
 #include <memory>
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class ScreenFactory final {
 public:

@@ -9,7 +9,7 @@
 #ifndef gamesettingsscreen_hpp
 #define gamesettingsscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 
 class GameSettingsScreen final : public ModelState {
 public:

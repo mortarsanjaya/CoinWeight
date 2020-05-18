@@ -9,7 +9,7 @@
 #ifndef gameplayhumanscreen_hpp
 #define gameplayhumanscreen_hpp
 
-#include "gamescreen.hpp"
+#include "modelstate.hpp"
 #include "tablenavigator.hpp"
 #include "coingroup.hpp"
 
