@@ -20,7 +20,7 @@
 #include "input.hpp"
 */
 #include "computertest.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 #include "gameui_x11.hpp"
 
 #include <chrono>

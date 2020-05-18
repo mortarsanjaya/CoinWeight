@@ -8,7 +8,7 @@
 
 #include "titlescreen.hpp"
 #include "gameui.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 
 //************************** Constructor
 TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
@@ -23,7 +23,7 @@ const TitleScreen::Highlight TitleScreen::currHighlight() const {
 
 
 //************************** Arrow button handling
-void TitleScreen::highlightUp(GameView &view) {
+void TitleScreen::highlightUp(GameController &controller) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -37,7 +37,7 @@ void TitleScreen::highlightUp(GameView &view) {
     }
 }
 
-void TitleScreen::highlightDown(GameView &view) {
+void TitleScreen::highlightDown(GameController &controller) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -51,28 +51,28 @@ void TitleScreen::highlightDown(GameView &view) {
     }
 }
 
-void TitleScreen::highlightLeft(GameView &view) {}
+void TitleScreen::highlightLeft(GameController &controller) {}
 
-void TitleScreen::highlightRight(GameView &view) {}
+void TitleScreen::highlightRight(GameController &controller) {}
 
 
 
 //************************** Character input handling
-void TitleScreen::onCharInput(GameView &view, const char inputChar) {}
+void TitleScreen::onCharInput(GameController &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void TitleScreen::onReturnButton(GameView &view) {
+void TitleScreen::onReturnButton(GameController &controller) {
     switch (highlight) {
         case Highlight::Play:
-            view.switchToGameSettings();
+            controller.switchToGameSettings();
             break;
         case Highlight::Instruction:
-            view.switchToInstruction();
+            controller.switchToInstruction();
             break;
         case Highlight::Credit:
-            view.switchToCredit();
+            controller.switchToCredit();
             break;
     }
 }
@@ -80,6 +80,6 @@ void TitleScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void TitleScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void TitleScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }

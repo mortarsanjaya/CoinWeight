@@ -1,16 +1,16 @@
 //
-//  gameview.cpp
+//  gamecontroller.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-05-14.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 #include "screenfactory.hpp"
 
 //************************** Constructor
-GameView::GameView(std::unique_ptr<GameUI> ui) :
+GameController::GameController(std::unique_ptr<GameUI> ui) :
 ui(std::move(ui)), screen() {
     switchToTitle();
 }
@@ -18,76 +18,76 @@ ui(std::move(ui)), screen() {
 
 
 //************************** Screen switching
-void GameView::switchToTitle() {
+void GameController::switchToTitle() {
     screen = ScreenFactory::createTitleScreen();
 }
 
-void GameView::switchToInstruction() {
+void GameController::switchToInstruction() {
     screen = ScreenFactory::createInstructionScreen();
 }
 
-void GameView::switchToCredit() {
+void GameController::switchToCredit() {
     screen = ScreenFactory::createCreditScreen();
 }
 
-void GameView::switchToGameSettings() {
+void GameController::switchToGameSettings() {
     screen = ScreenFactory::createGameSettingsScreen();
 }
 
-void GameView::switchToGamePlay() {
+void GameController::switchToGamePlay() {
     // ...
 }
 
-void GameView::switchToGameOver(const bool isWin) {
+void GameController::switchToGameOver(const bool isWin) {
     screen = ScreenFactory::createGameOverScreen(isWin);
 }
 
 
 
 //************************** Settings manipulation
-void GameView::decreaseNumOfCoins() {
+void GameController::decreaseNumOfCoins() {
     settings.decreaseGameSize();
 }
 
-void GameView::increaseNumOfCoins() {
+void GameController::increaseNumOfCoins() {
     settings.increaseGameSize();
 }
 
-void GameView::decreaseLevel() {
+void GameController::decreaseLevel() {
     settings.decreaseDifficulty();
 }
 
-void GameView::increaseLevel() {
+void GameController::increaseLevel() {
     settings.increaseDifficulty();
 }
 
-void GameView::switchMode() {
+void GameController::switchMode() {
     settings.switchMode();
 }
 
 
 
 //************************** Game-related operations
-void GameView::changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup) {
+void GameController::changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup) {
     // ...
 }
 
-void GameView::compareWeight() {
+void GameController::compareWeight() {
     // ...
 }
 
-void GameView::guessFakeCoins() {
+void GameController::guessFakeCoins() {
     // ...
 }
 
-void GameView::sendMove() {
+void GameController::sendMove() {
     // ...
 }
 
 
 
 //************************** Input processing
-void GameView::processInput() {
+void GameController::processInput() {
     const Input input = ui->nextInput();
     switch (input.inputType()) {
         case Input::Type::Unknown:
@@ -120,13 +120,13 @@ void GameView::processInput() {
 
 
 //************************** Display updating
-void GameView::updateDisplay() {
+void GameController::updateDisplay() {
     screen->triggerDisplay(*this, *ui);
 }
 
 
 
 //************************** Elements display
-void GameView::displaySettings() {
+void GameController::displaySettings() {
     ui->displaySettings(settings);
 }

@@ -8,7 +8,7 @@
 
 #include "instructionscreen.hpp"
 #include "gameui.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 
 //************************** Constructor
 InstructionScreen::InstructionScreen() {}
@@ -16,29 +16,29 @@ InstructionScreen::InstructionScreen() {}
 
 
 //************************** Arrow button handling
-void InstructionScreen::highlightUp(GameView &view) {}
+void InstructionScreen::highlightUp(GameController &controller) {}
 
-void InstructionScreen::highlightDown(GameView &view) {}
+void InstructionScreen::highlightDown(GameController &controller) {}
 
-void InstructionScreen::highlightLeft(GameView &view) {}
+void InstructionScreen::highlightLeft(GameController &controller) {}
 
-void InstructionScreen::highlightRight(GameView &view) {}
+void InstructionScreen::highlightRight(GameController &controller) {}
 
 
 
 //************************** Character input handling
-void InstructionScreen::onCharInput(GameView &view, const char inputChar) {}
+void InstructionScreen::onCharInput(GameController &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void InstructionScreen::onReturnButton(GameView &view) {
-    view.switchToTitle();
+void InstructionScreen::onReturnButton(GameController &controller) {
+    controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void InstructionScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void InstructionScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }

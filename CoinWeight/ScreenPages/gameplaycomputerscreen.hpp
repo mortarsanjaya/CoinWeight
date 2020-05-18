@@ -29,13 +29,13 @@ public:
     const size_t coinHighlightColumn() const;
     const bool onButtonHighlight() const;
     
-    void highlightUp(GameView &view) override;
-    void highlightDown(GameView &view) override;
-    void highlightLeft(GameView &view) override;
-    void highlightRight(GameView &view) override;
-    void onCharInput(GameView &view, const char inputChar) override;
-    void onReturnButton(GameView &view) override;
-    void triggerDisplay(GameView &view, GameUI &interface) override;
+    void highlightUp(GameController &controller) override;
+    void highlightDown(GameController &controller) override;
+    void highlightLeft(GameController &controller) override;
+    void highlightRight(GameController &controller) override;
+    void onCharInput(GameController &controller, const char inputChar) override;
+    void onReturnButton(GameController &controller) override;
+    void triggerDisplay(GameController &controller, GameUI &interface) override;
     
 private:
     ButtonHighlight buttonHighlight;

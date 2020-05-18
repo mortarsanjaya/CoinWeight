@@ -11,7 +11,7 @@
 
 #include <memory>
 
-class GameView;
+class GameController;
 class GameUI;
 
 class GameScreen {
@@ -20,19 +20,19 @@ public:
 
     // Action on arrow button press
     // Generally, does not change the view itself other than the screen
-    virtual void highlightUp(GameView &view) = 0;
-    virtual void highlightDown(GameView &view) = 0;
-    virtual void highlightLeft(GameView &view) = 0;
-    virtual void highlightRight(GameView &view) = 0;
+    virtual void highlightUp(GameController &view) = 0;
+    virtual void highlightDown(GameController &view) = 0;
+    virtual void highlightLeft(GameController &view) = 0;
+    virtual void highlightRight(GameController &view) = 0;
     
     // Action on character input press
-    virtual void onCharInput(GameView &view, const char inputChar) = 0;
+    virtual void onCharInput(GameController &view, const char inputChar) = 0;
     
     // Action on return button press (most certainly screen switching)
-    virtual void onReturnButton(GameView &view) = 0;
+    virtual void onReturnButton(GameController &view) = 0;
     
     // Triggers View and UI for displaying the current screen
-    virtual void triggerDisplay(GameView &view, GameUI &interface) = 0;
+    virtual void triggerDisplay(GameController &view, GameUI &interface) = 0;
     
 };
 

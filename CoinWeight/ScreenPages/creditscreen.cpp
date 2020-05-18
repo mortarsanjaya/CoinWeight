@@ -8,7 +8,7 @@
 
 #include "creditscreen.hpp"
 #include "gameui.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 
 //************************** Constructor
 CreditScreen::CreditScreen() {}
@@ -16,29 +16,29 @@ CreditScreen::CreditScreen() {}
 
 
 //************************** Arrow button handling
-void CreditScreen::highlightUp(GameView &view) {}
+void CreditScreen::highlightUp(GameController &controller) {}
 
-void CreditScreen::highlightDown(GameView &view) {}
+void CreditScreen::highlightDown(GameController &controller) {}
 
-void CreditScreen::highlightLeft(GameView &view) {}
+void CreditScreen::highlightLeft(GameController &controller) {}
 
-void CreditScreen::highlightRight(GameView &view) {}
+void CreditScreen::highlightRight(GameController &controller) {}
 
 
 
 //************************** Character input handling
-void CreditScreen::onCharInput(GameView &view, const char inputChar) {}
+void CreditScreen::onCharInput(GameController &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void CreditScreen::onReturnButton(GameView &view) {
-    view.switchToTitle();
+void CreditScreen::onReturnButton(GameController &controller) {
+    controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void CreditScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void CreditScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }

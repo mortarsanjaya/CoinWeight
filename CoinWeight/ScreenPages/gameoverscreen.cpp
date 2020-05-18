@@ -7,7 +7,7 @@
 //
 
 #include "gameoverscreen.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 #include "gameui.hpp"
 
 //************************** Constructor
@@ -24,29 +24,29 @@ const bool GameOverScreen::doesPlayerWin() const {
 
 
 //************************** Arrow button handling
-void GameOverScreen::highlightUp(GameView &view) {}
+void GameOverScreen::highlightUp(GameController &controller) {}
 
-void GameOverScreen::highlightDown(GameView &view) {}
+void GameOverScreen::highlightDown(GameController &controller) {}
 
-void GameOverScreen::highlightLeft(GameView &view) {}
+void GameOverScreen::highlightLeft(GameController &controller) {}
 
-void GameOverScreen::highlightRight(GameView &view) {}
+void GameOverScreen::highlightRight(GameController &controller) {}
 
 
 
 //************************** Character input handling
-void GameOverScreen::onCharInput(GameView &view, const char inputChar) {}
+void GameOverScreen::onCharInput(GameController &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void GameOverScreen::onReturnButton(GameView &view) {
-    view.switchToTitle();
+void GameOverScreen::onReturnButton(GameController &controller) {
+    controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void GameOverScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void GameOverScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }

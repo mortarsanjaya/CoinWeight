@@ -7,7 +7,7 @@
 //
 
 #include "gameplaycomputerscreen.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 #include "gameui.hpp"
 
 //************************** Constructor
@@ -50,7 +50,7 @@ const bool GamePlayComputerScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayComputerScreen::highlightUp(GameView &view) {
+void GamePlayComputerScreen::highlightUp(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayComputerScreen::highlightUp(GameView &view) {
     }
 }
 
-void GamePlayComputerScreen::highlightDown(GameView &view) {
+void GamePlayComputerScreen::highlightDown(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayComputerScreen::highlightDown(GameView &view) {
     }
 }
 
-void GamePlayComputerScreen::highlightLeft(GameView &view) {
+void GamePlayComputerScreen::highlightLeft(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayComputerScreen::highlightLeft(GameView &view) {
     }
 }
 
-void GamePlayComputerScreen::highlightRight(GameView &view) {
+void GamePlayComputerScreen::highlightRight(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -129,20 +129,20 @@ void GamePlayComputerScreen::transitionToCoinHighlight() {
 
 
 //************************** Character input handling
-void GamePlayComputerScreen::onCharInput(GameView &view, const char inputChar) {}
+void GamePlayComputerScreen::onCharInput(GameController &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void GamePlayComputerScreen::onReturnButton(GameView &view) {
+void GamePlayComputerScreen::onReturnButton(GameController &controller) {
     if (isOnButtonHighlight) {
-        view.sendMove();
+        controller.sendMove();
     }
 }
 
 
 
 //************************** UI display
-void GamePlayComputerScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void GamePlayComputerScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }

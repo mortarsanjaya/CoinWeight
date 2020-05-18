@@ -16,9 +16,9 @@
 #include "coingroup.hpp"
 #include "weighresult.hpp"
 
-class GameView final {
+class GameController final {
 public:
-    GameView(std::unique_ptr<GameUI> ui);
+    GameController(std::unique_ptr<GameUI> ui);
     
     // Screen switch
     void switchToTitle();

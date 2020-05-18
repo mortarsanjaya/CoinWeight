@@ -7,7 +7,7 @@
 //
 
 #include "gameplayhumanscreen.hpp"
-#include "gameview.hpp"
+#include "gamecontroller.hpp"
 #include "gameui.hpp"
 
 //************************** Constructor
@@ -50,7 +50,7 @@ const bool GamePlayHumanScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayHumanScreen::highlightUp(GameView &view) {
+void GamePlayHumanScreen::highlightUp(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayHumanScreen::highlightUp(GameView &view) {
     }
 }
 
-void GamePlayHumanScreen::highlightDown(GameView &view) {
+void GamePlayHumanScreen::highlightDown(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayHumanScreen::highlightDown(GameView &view) {
     }
 }
 
-void GamePlayHumanScreen::highlightLeft(GameView &view) {
+void GamePlayHumanScreen::highlightLeft(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayHumanScreen::highlightLeft(GameView &view) {
     }
 }
 
-void GamePlayHumanScreen::highlightRight(GameView &view) {
+void GamePlayHumanScreen::highlightRight(GameController &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -143,20 +143,20 @@ void GamePlayHumanScreen::transitionToCoinHighlight() {
 
 
 //************************** Character input handling
-void GamePlayHumanScreen::onCharInput(GameView &view, const char inputChar) {
+void GamePlayHumanScreen::onCharInput(GameController &controller, const char inputChar) {
     if (!isOnButtonHighlight) {
         switch (inputChar) {
             case '0':
-                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::NoSelect);
+                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::NoSelect);
                 break;
             case '1':
-                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
+                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
                 break;
             case '2':
-                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
+                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
                 break;
             case '3':
-                view.changeCoinGroup(coinHighlightIndex(), CoinGroup::Guess);
+                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::Guess);
                 break;
             default:
                 break;
@@ -167,14 +167,14 @@ void GamePlayHumanScreen::onCharInput(GameView &view, const char inputChar) {
 
 
 //************************** Return button handling
-void GamePlayHumanScreen::onReturnButton(GameView &view) {
+void GamePlayHumanScreen::onReturnButton(GameController &controller) {
     if (isOnButtonHighlight) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
-                view.compareWeight();
+                controller.compareWeight();
                 break;
             case ButtonHighlight::Guess:
-                view.guessFakeCoins();
+                controller.guessFakeCoins();
                 break;
         }
     }
@@ -183,6 +183,6 @@ void GamePlayHumanScreen::onReturnButton(GameView &view) {
 
 
 //************************** UI display
-void GamePlayHumanScreen::triggerDisplay(GameView &view, GameUI &interface) {
+void GamePlayHumanScreen::triggerDisplay(GameController &controller, GameUI &interface) {
     interface.displayScreen(*this);
 }
