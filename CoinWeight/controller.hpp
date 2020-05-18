@@ -1,24 +1,24 @@
 //
-//  gameview.hpp
+//  controller.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-05-14.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameview_hpp
-#define gameview_hpp
+#ifndef controller_hpp
+#define controller_hpp
 
-#include "gameui.hpp"
+#include "view.hpp"
 #include "gamescreen.hpp"
 
 #include "gamesettings.hpp"
 #include "coingroup.hpp"
 #include "weighresult.hpp"
 
-class GameController final {
+class Controller final {
 public:
-    GameController(std::unique_ptr<GameUI> ui);
+    Controller(std::unique_ptr<View> ui);
     
     // Screen switch
     void switchToTitle();
@@ -51,8 +51,8 @@ public:
     void displaySettings();
 
 private:
-    std::unique_ptr<GameUI> ui;
-    std::unique_ptr<GameScreen> screen;
+    std::unique_ptr<View> ui;
+    std::unique_ptr<ModelState> screen;
 
     GameSettings settings;
 };

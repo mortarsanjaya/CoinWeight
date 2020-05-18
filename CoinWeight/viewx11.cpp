@@ -1,24 +1,24 @@
 //
-//  gameui_x11.cpp
+//  viewx11_x11.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#include "gameui_x11.hpp"
+#include "viewx11.hpp"
 #include "exception.hpp"
 #include <utility>
 #include <cmath>
 
 //************************** Constructor and Destructor
-GameUI_X11::GameUI_X11() {
+ViewX11::ViewX11() {
     const int width = 800;
     const int height = 800;
 
     display = XOpenDisplay(nullptr);
     if (display == nullptr) {
-        throw Exception<GameUI_X11>("Cannot open display");
+        throw Exception<ViewX11>("Cannot open display");
     }
     
     screen = XDefaultScreen(display);
@@ -42,7 +42,7 @@ GameUI_X11::GameUI_X11() {
     
     for (unsigned int i = 0; i <= Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
-            throw Exception<GameUI_X11>("Cannot parse color");
+            throw Exception<ViewX11>("Cannot parse color");
         }
         XAllocColor(display, cmap, &xcolor);
         colors[i] = xcolor.pixel;
@@ -66,7 +66,7 @@ GameUI_X11::GameUI_X11() {
     sleep(1);
 }
 
-GameUI_X11::~GameUI_X11() {
+ViewX11::~ViewX11() {
     XFreeGC(display, gc);
 	XDestroyWindow(display, window);
 	XCloseDisplay(display);
@@ -75,7 +75,7 @@ GameUI_X11::~GameUI_X11() {
 
 
 //************************** Display screen
-void GameUI_X11::displayScreen(const TitleScreen &screen) {
+void ViewX11::displayScreen(const TitleScreen &screen) {
     clearWindow();
     
     const TitleScreen::Highlight highlight = screen.currHighlight();
@@ -109,7 +109,7 @@ void GameUI_X11::displayScreen(const TitleScreen &screen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const InstructionScreen &instructionScreen) {
+void ViewX11::displayScreen(const InstructionScreen &instructionScreen) {
     clearWindow();
     setForeground(defaultFGColor);
 
@@ -172,7 +172,7 @@ void GameUI_X11::displayScreen(const InstructionScreen &instructionScreen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const CreditScreen &screen) {
+void ViewX11::displayScreen(const CreditScreen &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -185,7 +185,7 @@ void GameUI_X11::displayScreen(const CreditScreen &screen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const GameSettingsScreen &screen) {
+void ViewX11::displayScreen(const GameSettingsScreen &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -226,7 +226,7 @@ void GameUI_X11::displayScreen(const GameSettingsScreen &screen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const GamePlayHumanScreen &screen) {
+void ViewX11::displayScreen(const GamePlayHumanScreen &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -258,7 +258,7 @@ void GameUI_X11::displayScreen(const GamePlayHumanScreen &screen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const GamePlayComputerScreen &screen) {
+void ViewX11::displayScreen(const GamePlayComputerScreen &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -284,7 +284,7 @@ void GameUI_X11::displayScreen(const GamePlayComputerScreen &screen) {
     flushDisplay();
 }
 
-void GameUI_X11::displayScreen(const GameOverScreen &screen) {
+void ViewX11::displayScreen(const GameOverScreen &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -305,7 +305,7 @@ void GameUI_X11::displayScreen(const GameOverScreen &screen) {
 
 
 //************************** Display for other elements
-void GameUI_X11::displayCoinSelection(const CoinSelection &selection) {
+void ViewX11::displayCoinSelection(const CoinSelection &selection) {
     for (size_t row = coinTopRow; row < coinTopRow + numOfRowsPerDisplay(); ++row) {
         bool coinExhausted = false;
         for (size_t column = 0; column < numOfCoinsPerRow(); ++column) {
@@ -323,7 +323,7 @@ void GameUI_X11::displayCoinSelection(const CoinSelection &selection) {
     flushDisplay();
 }
 
-void GameUI_X11::displaySettings(const GameSettings &settings) {
+void ViewX11::displaySettings(const GameSettings &settings) {
     const std::string gameLevelStr = [&settings]() -> std::string {
         switch (settings.gameLevel()) {
             case GameLevel::Easy:
@@ -348,14 +348,14 @@ void GameUI_X11::displaySettings(const GameSettings &settings) {
     flushDisplay();
 }
 
-void GameUI_X11::displayWeighResult(const WeighResult weighResult) {
+void ViewX11::displayWeighResult(const WeighResult weighResult) {
     drawWeighResultText(weighResult);
     drawWeighingScale(weighResult);
     
     flushDisplay();
 }
 
-void GameUI_X11::displayWeighCounter(const WeighCounter &counter) {
+void ViewX11::displayWeighCounter(const WeighCounter &counter) {
     setForeground(Black);
     std::string numOfWeighsStr = "Number of comparisons remaining: ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsLeft());
@@ -369,38 +369,38 @@ void GameUI_X11::displayWeighCounter(const WeighCounter &counter) {
 
 
 //************************** Information for coin display
-const size_t GameUI_X11::numOfCoinsPerRow() const {
+const size_t ViewX11::numOfCoinsPerRow() const {
     return coinsPerRow;
 }
 
-const size_t GameUI_X11::numOfRowsPerDisplay() const {
+const size_t ViewX11::numOfRowsPerDisplay() const {
     return rowsDisplay;
 }
 
 
 
 //************************** Set foreground
-void GameUI_X11::setForeground(const unsigned int colorIndex) {
-    if (colorIndex >= colors.size()) throw Exception<GameUI_X11>("Invalid color");
+void ViewX11::setForeground(const unsigned int colorIndex) {
+    if (colorIndex >= colors.size()) throw Exception<ViewX11>("Invalid color");
     XSetForeground(display, gc, colors[colorIndex]);
 }
 
 
 
 //******************** Basic drawing functions
-void GameUI_X11::drawString(const int x_pos, const int y_pos, const std::string &str) {
+void ViewX11::drawString(const int x_pos, const int y_pos, const std::string &str) {
     XDrawString(display, window, gc, x_pos, y_pos, str.c_str(), str.length());
 }
 
-void GameUI_X11::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+void ViewX11::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
     XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
 }
 
-void GameUI_X11::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+void ViewX11::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
     XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
 }
 
-void GameUI_X11::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
+void ViewX11::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
     XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);
     XDrawLine(display, window, gc, x_pos, y_pos, x_pos, y_pos + height);
     XDrawLine(display, window, gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
@@ -410,21 +410,21 @@ void GameUI_X11::drawRectangle(const int x_pos, const int y_pos, const int width
 
 
 //******************** Clear window
-void GameUI_X11::clearWindow() {
+void ViewX11::clearWindow() {
     XClearWindow(display, window);
 }
 
 
 
 //******************** Flush display
-void GameUI_X11::flushDisplay() {
+void ViewX11::flushDisplay() {
     XFlush(display);
 }
 
 
 
 //******************** Draw coin
-void GameUI_X11::drawCoin(const CoinGroup group, const size_t coinIndex,
+void ViewX11::drawCoin(const CoinGroup group, const size_t coinIndex,
                           const size_t row, const size_t column)
 {
     const int x_pos = coin0XPos + coinDist * row;
@@ -437,23 +437,23 @@ void GameUI_X11::drawCoin(const CoinGroup group, const size_t coinIndex,
     drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
 
-const int GameUI_X11::coinColor(const CoinGroup group) {
+const int ViewX11::coinColor(const CoinGroup group) {
     switch (group) {
         case CoinGroup::NoSelect:
-            return GameUI_X11::Gold;
+            return ViewX11::Gold;
         case CoinGroup::LeftWeigh:
-            return GameUI_X11::Red;
+            return ViewX11::Red;
         case CoinGroup::RightWeigh:
-            return GameUI_X11::Blue;
+            return ViewX11::Blue;
         case CoinGroup::Guess:
-            return GameUI_X11::Green;
+            return ViewX11::Green;
     }
 }
 
 
 
 //******************** Helper functions for drawing weigh result
-void GameUI_X11::drawWeighResultText(const WeighResult weighResult) {
+void ViewX11::drawWeighResultText(const WeighResult weighResult) {
     const int x_pos = 30;
     const int y_pos = 90;
     setForeground(Black);
@@ -479,7 +479,7 @@ void GameUI_X11::drawWeighResultText(const WeighResult weighResult) {
     setForeground(defaultFGColor);
 }
 
-void GameUI_X11::drawWeighingScale(const WeighResult weighResult) {
+void ViewX11::drawWeighingScale(const WeighResult weighResult) {
     {
         
         std::vector<XPoint> xpoints {
@@ -783,7 +783,7 @@ void GameUI_X11::drawGameOptionScreen(const GameSettingsScreen &gameOptionScreen
 
 
 
-const Input GameUI_X11::nextInput() {
+const Input ViewX11::nextInput() {
     
     if (XCheckWindowEvent(display, window, KeyPressMask, &event) == 0) {
         return Input();
@@ -812,6 +812,6 @@ const Input GameUI_X11::nextInput() {
 
 
 //************************** Game View X11 Exception header message
-template<> const std::string Exception<GameUI_X11>::headerMessage() const {
+template<> const std::string Exception<ViewX11>::headerMessage() const {
     return "Game View X11 Failure: ";
 }

@@ -12,7 +12,7 @@
 #include "gamescreen.hpp"
 #include "tablenavigator.hpp"
 
-class GamePlayComputerScreen final : public GameScreen {
+class GamePlayComputerScreen final : public ModelState {
 public:
     enum class ButtonHighlight {
         NextMove
@@ -29,13 +29,13 @@ public:
     const size_t coinHighlightColumn() const;
     const bool onButtonHighlight() const;
     
-    void highlightUp(GameController &controller) override;
-    void highlightDown(GameController &controller) override;
-    void highlightLeft(GameController &controller) override;
-    void highlightRight(GameController &controller) override;
-    void onCharInput(GameController &controller, const char inputChar) override;
-    void onReturnButton(GameController &controller) override;
-    void triggerDisplay(GameController &controller, GameUI &interface) override;
+    void highlightUp(Controller &controller) override;
+    void highlightDown(Controller &controller) override;
+    void highlightLeft(Controller &controller) override;
+    void highlightRight(Controller &controller) override;
+    void onCharInput(Controller &controller, const char inputChar) override;
+    void onReturnButton(Controller &controller) override;
+    void triggerDisplay(Controller &controller, View &interface) override;
     
 private:
     ButtonHighlight buttonHighlight;

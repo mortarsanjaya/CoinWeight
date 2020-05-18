@@ -1,13 +1,13 @@
 //
-//  gameui.hpp
+//  view.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameui_hpp
-#define gameui_hpp
+#ifndef view_hpp
+#define view_hpp
 
 #include "titlescreen.hpp"
 #include "instructionscreen.hpp"
@@ -24,13 +24,11 @@
 
 #include "input.hpp"
 
-class GameUI {
+class View {
 public:
-    virtual ~GameUI() = default;
+    virtual ~View() = default;
     
     // Base screen display
-    
-    
     virtual void displayScreen(const TitleScreen &screen) = 0;
     virtual void displayScreen(const InstructionScreen &screen) = 0;
     virtual void displayScreen(const CreditScreen &screen) = 0;

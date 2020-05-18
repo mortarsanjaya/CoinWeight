@@ -17,27 +17,27 @@
 #include "gameoverscreen.hpp"
 
 //************************** Factory methods
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createTitleScreen() {
     return std::make_unique<TitleScreen>();
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createInstructionScreen() {
     return std::make_unique<InstructionScreen>();
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createCreditScreen() {
     return std::make_unique<CreditScreen>();
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createGameSettingsScreen() {
     return std::make_unique<GameSettingsScreen>();
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal,
     const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
@@ -45,7 +45,7 @@ ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal,
         nCoinsTotal, nRowsDisplay, nCoinsPerRow);
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
     const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
@@ -53,7 +53,7 @@ ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
         nRowsDisplay, nCoinsPerRow);
 }
 
-std::unique_ptr<GameScreen>
+std::unique_ptr<ModelState>
 ScreenFactory::createGameOverScreen(const bool isWin) {
     return std::make_unique<GameOverScreen>(isWin);
 }

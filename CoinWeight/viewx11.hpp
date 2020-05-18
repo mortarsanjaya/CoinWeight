@@ -1,13 +1,13 @@
 //
-//  gameui_x11.hpp
+//  viewx11.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameui_x11_hpp
-#define gameui_x11_hpp
+#ifndef viewx11_hpp
+#define viewx11_hpp
 
 #include <memory>
 #include <string>
@@ -16,7 +16,7 @@
 #include <X11/Xos.h>
 #include <X11/Xutil.h>
 
-#include "gameui.hpp"
+#include "view.hpp"
 
 #include "titlescreen.hpp"
 #include "instructionscreen.hpp"
@@ -32,10 +32,10 @@
 
 #include "exception.hpp"
 
-class GameUI_X11 : public GameUI {
+class ViewX11 : public View {
 public:
-    GameUI_X11();
-    ~GameUI_X11();
+    ViewX11();
+    ~ViewX11();
     
     // Screen displaying
     void displayScreen(const TitleScreen &screen) final;

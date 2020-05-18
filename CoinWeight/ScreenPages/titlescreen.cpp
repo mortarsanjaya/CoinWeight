@@ -7,8 +7,8 @@
 //
 
 #include "titlescreen.hpp"
-#include "gameui.hpp"
-#include "gamecontroller.hpp"
+#include "view.hpp"
+#include "controller.hpp"
 
 //************************** Constructor
 TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
@@ -23,7 +23,7 @@ const TitleScreen::Highlight TitleScreen::currHighlight() const {
 
 
 //************************** Arrow button handling
-void TitleScreen::highlightUp(GameController &controller) {
+void TitleScreen::highlightUp(Controller &controller) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -37,7 +37,7 @@ void TitleScreen::highlightUp(GameController &controller) {
     }
 }
 
-void TitleScreen::highlightDown(GameController &controller) {
+void TitleScreen::highlightDown(Controller &controller) {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -51,19 +51,19 @@ void TitleScreen::highlightDown(GameController &controller) {
     }
 }
 
-void TitleScreen::highlightLeft(GameController &controller) {}
+void TitleScreen::highlightLeft(Controller &controller) {}
 
-void TitleScreen::highlightRight(GameController &controller) {}
+void TitleScreen::highlightRight(Controller &controller) {}
 
 
 
 //************************** Character input handling
-void TitleScreen::onCharInput(GameController &controller, const char inputChar) {}
+void TitleScreen::onCharInput(Controller &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void TitleScreen::onReturnButton(GameController &controller) {
+void TitleScreen::onReturnButton(Controller &controller) {
     switch (highlight) {
         case Highlight::Play:
             controller.switchToGameSettings();
@@ -80,6 +80,6 @@ void TitleScreen::onReturnButton(GameController &controller) {
 
 
 //************************** UI display
-void TitleScreen::triggerDisplay(GameController &controller, GameUI &interface) {
+void TitleScreen::triggerDisplay(Controller &controller, View &interface) {
     interface.displayScreen(*this);
 }

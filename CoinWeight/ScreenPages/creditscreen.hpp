@@ -11,17 +11,17 @@
 
 #include "gamescreen.hpp"
 
-class CreditScreen final : public GameScreen {
+class CreditScreen final : public ModelState {
 public:
     CreditScreen();
     
-    void highlightUp(GameController &view) override;
-    void highlightDown(GameController &view) override;
-    void highlightLeft(GameController &view) override;
-    void highlightRight(GameController &view) override;
-    void onCharInput(GameController &view, const char inputChar) override;
-    void onReturnButton(GameController &view) override;
-    void triggerDisplay(GameController &view, GameUI &interface) override;
+    void highlightUp(Controller &view) override;
+    void highlightDown(Controller &view) override;
+    void highlightLeft(Controller &view) override;
+    void highlightRight(Controller &view) override;
+    void onCharInput(Controller &view, const char inputChar) override;
+    void onReturnButton(Controller &view) override;
+    void triggerDisplay(Controller &view, View &interface) override;
 };
 
 #endif

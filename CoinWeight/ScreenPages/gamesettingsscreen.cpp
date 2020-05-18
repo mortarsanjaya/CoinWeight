@@ -7,8 +7,8 @@
 //
 
 #include "gamesettingsscreen.hpp"
-#include "gamecontroller.hpp"
-#include "gameui.hpp"
+#include "controller.hpp"
+#include "view.hpp"
 
 //************************** Constructor
 GameSettingsScreen::GameSettingsScreen() : highlight(defaultHighlight) {}
@@ -23,7 +23,7 @@ const GameSettingsScreen::Highlight GameSettingsScreen::currHighlight() const {
 
 
 //************************** Arrow button handling
-void GameSettingsScreen::highlightUp(GameController &controller) {
+void GameSettingsScreen::highlightUp(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
             break;
@@ -42,7 +42,7 @@ void GameSettingsScreen::highlightUp(GameController &controller) {
     }
 }
 
-void GameSettingsScreen::highlightDown(GameController &controller) {
+void GameSettingsScreen::highlightDown(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
             highlight = Highlight::Level;
@@ -61,7 +61,7 @@ void GameSettingsScreen::highlightDown(GameController &controller) {
     }
 }
 
-void GameSettingsScreen::highlightLeft(GameController &controller) {
+void GameSettingsScreen::highlightLeft(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
             controller.decreaseNumOfCoins();
@@ -79,7 +79,7 @@ void GameSettingsScreen::highlightLeft(GameController &controller) {
     }
 }
 
-void GameSettingsScreen::highlightRight(GameController &controller) {
+void GameSettingsScreen::highlightRight(Controller &controller) {
     switch (highlight) {
         case Highlight::NumOfCoins:
             controller.increaseNumOfCoins();
@@ -100,12 +100,12 @@ void GameSettingsScreen::highlightRight(GameController &controller) {
 
 
 //************************** Character input handling
-void GameSettingsScreen::onCharInput(GameController &controller, const char inputChar) {}
+void GameSettingsScreen::onCharInput(Controller &controller, const char inputChar) {}
 
 
 
 //************************** Return button handling
-void GameSettingsScreen::onReturnButton(GameController &controller) {
+void GameSettingsScreen::onReturnButton(Controller &controller) {
     switch (highlight) {
         case Highlight::StartGame:
             controller.switchToGamePlay();
@@ -121,7 +121,7 @@ void GameSettingsScreen::onReturnButton(GameController &controller) {
 
 
 //************************** UI display
-void GameSettingsScreen::triggerDisplay(GameController &controller, GameUI &interface) {
+void GameSettingsScreen::triggerDisplay(Controller &controller, View &interface) {
     interface.displayScreen(*this);
     controller.displaySettings();
     

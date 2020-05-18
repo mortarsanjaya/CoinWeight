@@ -11,28 +11,28 @@
 
 #include <memory>
 
-class GameController;
-class GameUI;
+class Controller;
+class View;
 
-class GameScreen {
+class ModelState {
 public:
-    virtual ~GameScreen() = default;
+    virtual ~ModelState() = default;
 
     // Action on arrow button press
     // Generally, does not change the controller itself
-    virtual void highlightUp(GameController &controller) = 0;
-    virtual void highlightDown(GameController &controller) = 0;
-    virtual void highlightLeft(GameController &controller) = 0;
-    virtual void highlightRight(GameController &controller) = 0;
+    virtual void highlightUp(Controller &controller) = 0;
+    virtual void highlightDown(Controller &controller) = 0;
+    virtual void highlightLeft(Controller &controller) = 0;
+    virtual void highlightRight(Controller &controller) = 0;
     
     // Action on character input press
-    virtual void onCharInput(GameController &controller, const char inputChar) = 0;
+    virtual void onCharInput(Controller &controller, const char inputChar) = 0;
     
     // Action on return button press (most certainly screen switching)
-    virtual void onReturnButton(GameController &controller) = 0;
+    virtual void onReturnButton(Controller &controller) = 0;
     
     // Triggers View and UI for displaying the current screen
-    virtual void triggerDisplay(GameController &controller, GameUI &interface) = 0;
+    virtual void triggerDisplay(Controller &controller, View &view) = 0;
     
 };
 

@@ -7,8 +7,8 @@
 //
 
 #include "gameplayhumanscreen.hpp"
-#include "gamecontroller.hpp"
-#include "gameui.hpp"
+#include "controller.hpp"
+#include "view.hpp"
 
 //************************** Constructor
 GamePlayHumanScreen::GamePlayHumanScreen(const size_t nCoinsTotal,
@@ -50,7 +50,7 @@ const bool GamePlayHumanScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayHumanScreen::highlightUp(GameController &controller) {
+void GamePlayHumanScreen::highlightUp(Controller &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayHumanScreen::highlightUp(GameController &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightDown(GameController &controller) {
+void GamePlayHumanScreen::highlightDown(Controller &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayHumanScreen::highlightDown(GameController &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightLeft(GameController &controller) {
+void GamePlayHumanScreen::highlightLeft(Controller &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayHumanScreen::highlightLeft(GameController &controller) {
     }
 }
 
-void GamePlayHumanScreen::highlightRight(GameController &controller) {
+void GamePlayHumanScreen::highlightRight(Controller &controller) {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -143,7 +143,7 @@ void GamePlayHumanScreen::transitionToCoinHighlight() {
 
 
 //************************** Character input handling
-void GamePlayHumanScreen::onCharInput(GameController &controller, const char inputChar) {
+void GamePlayHumanScreen::onCharInput(Controller &controller, const char inputChar) {
     if (!isOnButtonHighlight) {
         switch (inputChar) {
             case '0':
@@ -167,7 +167,7 @@ void GamePlayHumanScreen::onCharInput(GameController &controller, const char inp
 
 
 //************************** Return button handling
-void GamePlayHumanScreen::onReturnButton(GameController &controller) {
+void GamePlayHumanScreen::onReturnButton(Controller &controller) {
     if (isOnButtonHighlight) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
@@ -183,6 +183,6 @@ void GamePlayHumanScreen::onReturnButton(GameController &controller) {
 
 
 //************************** UI display
-void GamePlayHumanScreen::triggerDisplay(GameController &controller, GameUI &interface) {
+void GamePlayHumanScreen::triggerDisplay(Controller &controller, View &interface) {
     interface.displayScreen(*this);
 }

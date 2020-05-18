@@ -20,8 +20,8 @@
 #include "input.hpp"
 */
 #include "computertest.hpp"
-#include "gamecontroller.hpp"
-#include "gameui_x11.hpp"
+#include "controller.hpp"
+#include "viewx11.hpp"
 
 #include <chrono>
 #include <thread>
@@ -43,7 +43,7 @@ int main() {
     }
     */
     
-    auto ui = std::make_unique<GameUI_X11>();
+    auto ui = std::make_unique<ViewX11>();
     GamePlayHumanScreen screen{34, 10, 10};
     while (true) {
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
