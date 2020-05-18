@@ -10,9 +10,10 @@
 #include "controller.hpp"
 #include "view.hpp"
 
-//************************** Settings
-GameSettings GameSettingsScreen::settings {};
-
+//************************** Static members
+size_t GameSettingsScreen::nCoins = defaultNumOfCoins;
+GameLevel GameSettingsScreen::level = defaultLevel;
+bool GameSettingsScreen::isHuman = defaultIsHuman;
 
 
 //************************** Constructor
@@ -23,6 +24,18 @@ GameSettingsScreen::GameSettingsScreen() : highlight(defaultHighlight) {}
 //************************** Field accessors
 const GameSettingsScreen::Highlight GameSettingsScreen::currHighlight() const {
     return highlight;
+}
+
+const size_t GameSettingsScreen::numOfCoins() const {
+    return nCoins;
+}
+
+const GameLevel GameSettingsScreen::gameLevel() const {
+    return level;
+}
+
+const bool GameSettingsScreen::isHumanMode() const {
+    return isHuman;
 }
 
 
@@ -69,13 +82,13 @@ void GameSettingsScreen::highlightDown() {
 void GameSettingsScreen::highlightLeft() {
     switch (highlight) {
         case Highlight::NumOfCoins:
-            settings.decreaseNumOfCoins();
+            decreaseNumOfCoins();
             break;
         case Highlight::Level:
-            settings.decreaseLevel();
+            decreaseLevel();
             break;
         case Highlight::Mode:
-            settings.switchMode();
+            switchMode();
             break;
         case Highlight::StartGame:
             break;
@@ -87,13 +100,13 @@ void GameSettingsScreen::highlightLeft() {
 void GameSettingsScreen::highlightRight() {
     switch (highlight) {
         case Highlight::NumOfCoins:
-            settings.increaseNumOfCoins();
+            increaseNumOfCoins();
             break;
         case Highlight::Level:
-            settings.increaseLevel();
+            increaseLevel();
             break;
         case Highlight::Mode:
-            settings.switchMode();
+            switchMode();
             break;
         case Highlight::StartGame:
             break;
@@ -128,9 +141,52 @@ void GameSettingsScreen::onReturnButton(Controller &controller) {
 //************************** UI display
 void GameSettingsScreen::triggerDisplay(View &view) {
     view.displayScreen(*this);
-    view.displaySettings(settings);
+    // view.displaySettings(settings);
 }
 
 
 
+//************************** Member modifier functions
+void GameSettingsScreen::increaseNumOfCoins() {
+    if (nCoins < numOfCoinsUpperBound) {
+        ++nCoins;
+    }
+}
 
+void GameSettingsScreen::decreaseNumOfCoins() {
+    if (nCoins > numOfCoinsLowerBound) {
+        --nCoins;
+    }
+}
+
+void GameSettingsScreen::increaseLevel() {
+    switch (level) {
+        case GameLevel::Easy:
+            level = GameLevel::Medium;
+            break;
+        case GameLevel::Medium:
+            level = GameLevel::Hard;
+            break;
+        case GameLevel::Hard:
+            level = GameLevel::Hard;
+            break;
+    }
+}
+
+void GameSettingsScreen::decreaseLevel() {
+    switch (level) {
+        case GameLevel::Easy:
+            level = GameLevel::Easy;
+            break;
+        case GameLevel::Medium:
+            level = GameLevel::Easy;
+            break;
+        case GameLevel::Hard:
+            level = GameLevel::Medium;
+            break;
+    }
+}
+
+void GameSettingsScreen::switchMode() {
+    isHuman = !isHuman;
+}

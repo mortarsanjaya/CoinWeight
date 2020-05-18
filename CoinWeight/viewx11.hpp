@@ -25,7 +25,6 @@
 #include "gameplayhumanscreen.hpp"
 #include "gameplaycomputerscreen.hpp"
 
-#include "gamesettings.hpp"
 #include "coinselection.hpp"
 #include "weighresult.hpp"
 #include "weighcounter.hpp"
@@ -47,7 +46,7 @@ public:
     void displayScreen(const GameOverScreen &screen) final;
     
     // Displaying functions for other elements
-    void displaySettings(const GameSettings &settings) final;
+    void displaySettings(const GameSettingsScreen &settings);
     void displayCoinSelection(const CoinSelection &selection) final;
     void displayWeighResult(const WeighResult weighResult) final;
     void displayWeighCounter(const WeighCounter &weighCounter) final;

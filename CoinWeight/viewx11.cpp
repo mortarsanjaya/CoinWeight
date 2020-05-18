@@ -223,8 +223,31 @@ void ViewX11::displayScreen(const GameSettingsScreen &screen) {
             break;
     }
     
+    const std::string gameLevelStr = [&screen]() -> std::string {
+        switch (screen.gameLevel()) {
+            case GameLevel::Easy:
+                return "Easy";
+                break;
+            case GameLevel::Medium:
+                return "Medium";
+                break;
+            case GameLevel::Hard:
+                return "Hard";
+                break;
+            }
+    }();
+    
+    drawString(400 + border, 300 + total_string_height - border,
+        std::to_string(screen.numOfCoins()));
+    drawString(400 + border, 300 + 2 * total_string_height - border,
+        gameLevelStr);
+    drawString(400 + border, 300 + 3 * total_string_height - border,
+        screen.isHumanMode() ? "Human" : "Computer");
+    
     flushDisplay();
 }
+
+
 
 void ViewX11::displayScreen(const GamePlayHumanScreen &screen) {
     clearWindow();
@@ -320,31 +343,6 @@ void ViewX11::displayCoinSelection(const CoinSelection &selection) {
         if (coinExhausted) break;
     }
     
-    flushDisplay();
-}
-
-void ViewX11::displaySettings(const GameSettings &settings) {
-    const std::string gameLevelStr = [&settings]() -> std::string {
-        switch (settings.gameLevel()) {
-            case GameLevel::Easy:
-                return "Easy";
-                break;
-            case GameLevel::Medium:
-                return "Medium";
-                break;
-            case GameLevel::Hard:
-                return "Hard";
-                break;
-            }
-    }();
-    
-    drawString(400 + border, 300 + total_string_height - border,
-        std::to_string(settings.numOfCoins()));
-    drawString(400 + border, 300 + 2 * total_string_height - border,
-        gameLevelStr);
-    drawString(400 + border, 300 + 3 * total_string_height - border,
-        settings.isHumanMode() ? "Human" : "Computer");
-        
     flushDisplay();
 }
 

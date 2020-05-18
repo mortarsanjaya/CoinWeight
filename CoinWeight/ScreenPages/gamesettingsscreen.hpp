@@ -10,7 +10,7 @@
 #define gamesettingsscreen_hpp
 
 #include "modelstate.hpp"
-#include "gamesettings.hpp"
+#include "gamelevel.hpp"
 
 class GameSettingsScreen final : public ModelState {
 public:
@@ -26,6 +26,10 @@ public:
     
     const Highlight currHighlight() const;
     
+    const size_t numOfCoins() const;
+    const GameLevel gameLevel() const;
+    const bool isHumanMode() const;
+    
     void highlightUp() override;
     void highlightDown() override;
     void highlightLeft() override;
@@ -37,9 +41,22 @@ public:
 private:
     Highlight highlight;
 
-    static GameSettings settings;
+    static size_t nCoins;
+    static GameLevel level;
+    static bool isHuman;
     
     static constexpr Highlight defaultHighlight = Highlight::NumOfCoins;
+    static constexpr size_t numOfCoinsLowerBound = 3;
+    static constexpr size_t numOfCoinsUpperBound = 200;
+    static constexpr size_t defaultNumOfCoins = numOfCoinsLowerBound;
+    static constexpr GameLevel defaultLevel = GameLevel::Easy;
+    static constexpr bool defaultIsHuman = true;
+    
+    void increaseNumOfCoins();
+    void decreaseNumOfCoins();
+    void increaseLevel();
+    void decreaseLevel();
+    void switchMode();
 };
 
 #endif

@@ -12,7 +12,6 @@
 #include "view.hpp"
 #include "modelstate.hpp"
 
-#include "gamesettings.hpp"
 #include "coingroup.hpp"
 #include "weighresult.hpp"
 
