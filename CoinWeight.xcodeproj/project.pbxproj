@@ -28,7 +28,7 @@
 		8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A1246DD813003B99D4 /* computertest.cpp */; };
 		8626C2A7246DD890003B99D4 /* humanstd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A6246DD88F003B99D4 /* humanstd.cpp */; };
 		8626C2AB246E00E6003B99D4 /* controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A9246E00E6003B99D4 /* controller.cpp */; };
-		8626C2B0246EE787003B99D4 /* screenfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2AE246EE786003B99D4 /* screenfactory.cpp */; };
+		8626C2B0246EE787003B99D4 /* modelstatefactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2AE246EE786003B99D4 /* modelstatefactory.cpp */; };
 		8626C2B4246F27AE003B99D4 /* tablenavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2B3246F27AE003B99D4 /* tablenavigator.cpp */; };
 		864467BE245A743900442BD8 /* computereasy1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BC245A743900442BD8 /* computereasy1.cpp */; };
 		864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BF245AB0C100442BD8 /* computermedium1.cpp */; };
@@ -84,8 +84,8 @@
 		8626C2A6246DD88F003B99D4 /* humanstd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = humanstd.cpp; sourceTree = "<group>"; };
 		8626C2A9246E00E6003B99D4 /* controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = controller.cpp; sourceTree = "<group>"; };
 		8626C2AA246E00E6003B99D4 /* controller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = controller.hpp; sourceTree = "<group>"; };
-		8626C2AE246EE786003B99D4 /* screenfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = screenfactory.cpp; sourceTree = "<group>"; };
-		8626C2AF246EE787003B99D4 /* screenfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = screenfactory.hpp; sourceTree = "<group>"; };
+		8626C2AE246EE786003B99D4 /* modelstatefactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = modelstatefactory.cpp; sourceTree = "<group>"; };
+		8626C2AF246EE787003B99D4 /* modelstatefactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = modelstatefactory.hpp; sourceTree = "<group>"; };
 		8626C2B2246F27AE003B99D4 /* tablenavigator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tablenavigator.hpp; sourceTree = "<group>"; };
 		8626C2B3246F27AE003B99D4 /* tablenavigator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tablenavigator.cpp; sourceTree = "<group>"; };
 		8626C2B7246F387C003B99D4 /* coingroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coingroup.hpp; sourceTree = "<group>"; };
@@ -287,8 +287,8 @@
 		8626C2B1246EE78E003B99D4 /* Model State Factory */ = {
 			isa = PBXGroup;
 			children = (
-				8626C2AE246EE786003B99D4 /* screenfactory.cpp */,
-				8626C2AF246EE787003B99D4 /* screenfactory.hpp */,
+				8626C2AE246EE786003B99D4 /* modelstatefactory.cpp */,
+				8626C2AF246EE787003B99D4 /* modelstatefactory.hpp */,
 			);
 			name = "Model State Factory";
 			sourceTree = "<group>";
@@ -579,7 +579,7 @@
 				86C1C6632432D6A7007E5B64 /* history.cpp in Sources */,
 				861E6482242AD81E00AA6FD7 /* computer.cpp in Sources */,
 				86219BDD244FFDBA005E4F93 /* gamesettings.cpp in Sources */,
-				8626C2B0246EE787003B99D4 /* screenfactory.cpp in Sources */,
+				8626C2B0246EE787003B99D4 /* modelstatefactory.cpp in Sources */,
 				8626C294246CD735003B99D4 /* weighcounter.cpp in Sources */,
 				865B16392457BB18005DE924 /* computerfactory.cpp in Sources */,
 				861E6484242AD81E00AA6FD7 /* viewx11.cpp in Sources */,

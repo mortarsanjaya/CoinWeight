@@ -1,13 +1,13 @@
 //
-//  screenfactory.hpp
+//  modelstatefactory.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-05-15.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef screenfactory_hpp
-#define screenfactory_hpp
+#ifndef modelstatefactory_hpp
+#define modelstatefactory_hpp
 
 #include <memory>
 #include "modelstate.hpp"

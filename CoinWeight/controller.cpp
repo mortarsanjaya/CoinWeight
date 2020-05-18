@@ -7,7 +7,7 @@
 //
 
 #include "controller.hpp"
-#include "screenfactory.hpp"
+#include "modelstatefactory.hpp"
 
 //************************** Constructor
 Controller::Controller(std::unique_ptr<View> ui) :
