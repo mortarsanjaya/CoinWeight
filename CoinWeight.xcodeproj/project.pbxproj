@@ -282,7 +282,7 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		8626C2AD246E4EC1003B99D4 /* Screen Types */ = {
+		8626C2AD246E4EC1003B99D4 /* State Types */ = {
 			isa = PBXGroup;
 			children = (
 				86219BE92450D5F0005E4F93 /* Title */,
@@ -293,16 +293,16 @@
 				86219BEE2450D60F005E4F93 /* Game Play Computer */,
 				86219BEF2450D617005E4F93 /* Game Over */,
 			);
-			name = "Screen Types";
+			name = "State Types";
 			sourceTree = "<group>";
 		};
-		8626C2B1246EE78E003B99D4 /* Screen Factory */ = {
+		8626C2B1246EE78E003B99D4 /* Model State Factory */ = {
 			isa = PBXGroup;
 			children = (
 				8626C2AE246EE786003B99D4 /* screenfactory.cpp */,
 				8626C2AF246EE787003B99D4 /* screenfactory.hpp */,
 			);
-			name = "Screen Factory";
+			name = "Model State Factory";
 			sourceTree = "<group>";
 		};
 		8626C2B6246F28A3003B99D4 /* Table Navigator */ = {
@@ -482,7 +482,8 @@
 			isa = PBXGroup;
 			children = (
 				86C1C65624324806007E5B64 /* modelstate.hpp */,
-				8626C2B1246EE78E003B99D4 /* Screen Factory */,
+				8626C2AD246E4EC1003B99D4 /* State Types */,
+				8626C2B1246EE78E003B99D4 /* Model State Factory */,
 			);
 			name = "Model State";
 			sourceTree = "<group>";
@@ -507,7 +508,6 @@
 				866FC8312409F75A00B3740D /* Game Core */,
 				869BBCD624241CD90002CDED /* Input */,
 				86C1C6582432480C007E5B64 /* Model State */,
-				8626C2AD246E4EC1003B99D4 /* Screen Types */,
 				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
 			name = Model;

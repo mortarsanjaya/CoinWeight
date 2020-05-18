@@ -23,13 +23,13 @@ public:
     
     const Highlight currHighlight() const;
     
-    void highlightUp(Controller &view) override;
-    void highlightDown(Controller &view) override;
-    void highlightLeft(Controller &view) override;
-    void highlightRight(Controller &view) override;
-    void onCharInput(Controller &view, const char inputChar) override;
-    void onReturnButton(Controller &view) override;
-    void triggerDisplay(Controller &view, View &interface) override;
+    void highlightUp(Controller &controller) override;
+    void highlightDown(Controller &controller) override;
+    void highlightLeft(Controller &controller) override;
+    void highlightRight(Controller &controller) override;
+    void onCharInput(Controller &controller, const char inputChar) override;
+    void onReturnButton(Controller &controller) override;
+    void triggerDisplay(Controller &controller, View &interface) override;
     
 private:
     Highlight highlight;
