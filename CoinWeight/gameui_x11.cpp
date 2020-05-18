@@ -319,6 +319,8 @@ void GameUI_X11::displayCoinSelection(const CoinSelection &selection) {
         
         if (coinExhausted) break;
     }
+    
+    flushDisplay();
 }
 
 void GameUI_X11::displaySettings(const GameSettings &settings) {
@@ -349,6 +351,8 @@ void GameUI_X11::displaySettings(const GameSettings &settings) {
 void GameUI_X11::displayWeighResult(const WeighResult weighResult) {
     drawWeighResultText(weighResult);
     drawWeighingScale(weighResult);
+    
+    flushDisplay();
 }
 
 void GameUI_X11::displayWeighCounter(const WeighCounter &counter) {
@@ -358,6 +362,8 @@ void GameUI_X11::displayWeighCounter(const WeighCounter &counter) {
     numOfWeighsStr += " out of ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
     drawString(30, 60, numOfWeighsStr);
+    
+    flushDisplay();
 }
 
 
@@ -387,7 +393,7 @@ void GameUI_X11::drawString(const int x_pos, const int y_pos, const std::string 
 }
 
 void GameUI_X11::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
+    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
 }
 
 void GameUI_X11::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
