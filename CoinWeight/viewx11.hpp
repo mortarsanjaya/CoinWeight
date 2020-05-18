@@ -37,16 +37,16 @@ public:
     ~ViewX11();
     
     // Screen displaying
-    void displayScreen(const TitleScreen &screen) final;
-    void displayScreen(const InstructionScreen &screen) final;
-    void displayScreen(const CreditScreen &screen) final;
-    void displayScreen(const GameSettingsScreen &screen) final;
-    void displayScreen(const GamePlayHumanScreen &screen) final;
-    void displayScreen(const GamePlayComputerScreen &screen) final;
-    void displayScreen(const GameOverScreen &screen) final;
+    void displayScreen(const Title &screen) final;
+    void displayScreen(const Instruction &screen) final;
+    void displayScreen(const Credit &screen) final;
+    void displayScreen(const GameSettings &screen) final;
+    void displayScreen(const GamePlayHuman &screen) final;
+    void displayScreen(const GamePlayComputer &screen) final;
+    void displayScreen(const GameOver &screen) final;
     
     // Displaying functions for other elements
-    void displaySettings(const GameSettingsScreen &settings);
+    void displaySettings(const GameSettings &settings);
     void displayCoinSelection(const CoinSelection &selection) final;
     void displayWeighResult(const WeighResult weighResult) final;
     void displayWeighCounter(const WeighCounter &weighCounter) final;

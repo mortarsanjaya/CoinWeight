@@ -11,34 +11,34 @@
 #include "view.hpp"
 
 //************************** Constructor
-CreditScreen::CreditScreen() {}
+Credit::Credit() {}
 
 
 
 //************************** Arrow button handling
-void CreditScreen::highlightUp() {}
+void Credit::highlightUp() {}
 
-void CreditScreen::highlightDown() {}
+void Credit::highlightDown() {}
 
-void CreditScreen::highlightLeft() {}
+void Credit::highlightLeft() {}
 
-void CreditScreen::highlightRight() {}
+void Credit::highlightRight() {}
 
 
 
 //************************** Character input handling
-void CreditScreen::onCharInput(const char inputChar) {}
+void Credit::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void CreditScreen::onReturnButton(Controller &controller) {
+void Credit::onReturnButton(Controller &controller) {
     controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void CreditScreen::triggerDisplay(View &view) {
+void Credit::triggerDisplay(View &view) {
     view.displayScreen(*this);
 }

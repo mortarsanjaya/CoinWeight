@@ -28,13 +28,13 @@ public:
     virtual ~View() = default;
     
     // Base screen display
-    virtual void displayScreen(const TitleScreen &screen) = 0;
-    virtual void displayScreen(const InstructionScreen &screen) = 0;
-    virtual void displayScreen(const CreditScreen &screen) = 0;
-    virtual void displayScreen(const GameSettingsScreen &screen) = 0;
-    virtual void displayScreen(const GamePlayHumanScreen &screen) = 0;
-    virtual void displayScreen(const GamePlayComputerScreen &screen) = 0;
-    virtual void displayScreen(const GameOverScreen &screen) = 0;
+    virtual void displayScreen(const Title &screen) = 0;
+    virtual void displayScreen(const Instruction &screen) = 0;
+    virtual void displayScreen(const Credit &screen) = 0;
+    virtual void displayScreen(const GameSettings &screen) = 0;
+    virtual void displayScreen(const GamePlayHuman &screen) = 0;
+    virtual void displayScreen(const GamePlayComputer &screen) = 0;
+    virtual void displayScreen(const GameOver &screen) = 0;
     
     // Displaying functions for other elements
     virtual void displayCoinSelection(const CoinSelection &selection) = 0;

@@ -11,37 +11,37 @@
 #include "view.hpp"
 
 //************************** Static members
-size_t GameSettingsScreen::nCoins = defaultNumOfCoins;
-GameLevel GameSettingsScreen::level = defaultLevel;
-bool GameSettingsScreen::isHuman = defaultIsHuman;
+size_t GameSettings::nCoins = defaultNumOfCoins;
+GameLevel GameSettings::level = defaultLevel;
+bool GameSettings::isHuman = defaultIsHuman;
 
 
 //************************** Constructor
-GameSettingsScreen::GameSettingsScreen() : highlight(defaultHighlight) {}
+GameSettings::GameSettings() : highlight(defaultHighlight) {}
 
 
 
 //************************** Field accessors
-const GameSettingsScreen::Highlight GameSettingsScreen::currHighlight() const {
+const GameSettings::Highlight GameSettings::currHighlight() const {
     return highlight;
 }
 
-const size_t GameSettingsScreen::numOfCoins() const {
+const size_t GameSettings::numOfCoins() const {
     return nCoins;
 }
 
-const GameLevel GameSettingsScreen::gameLevel() const {
+const GameLevel GameSettings::gameLevel() const {
     return level;
 }
 
-const bool GameSettingsScreen::isHumanMode() const {
+const bool GameSettings::isHumanMode() const {
     return isHuman;
 }
 
 
 
 //************************** Arrow button handling
-void GameSettingsScreen::highlightUp() {
+void GameSettings::highlightUp() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             break;
@@ -60,7 +60,7 @@ void GameSettingsScreen::highlightUp() {
     }
 }
 
-void GameSettingsScreen::highlightDown() {
+void GameSettings::highlightDown() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             highlight = Highlight::Level;
@@ -79,7 +79,7 @@ void GameSettingsScreen::highlightDown() {
     }
 }
 
-void GameSettingsScreen::highlightLeft() {
+void GameSettings::highlightLeft() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             decreaseNumOfCoins();
@@ -97,7 +97,7 @@ void GameSettingsScreen::highlightLeft() {
     }
 }
 
-void GameSettingsScreen::highlightRight() {
+void GameSettings::highlightRight() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             increaseNumOfCoins();
@@ -118,12 +118,12 @@ void GameSettingsScreen::highlightRight() {
 
 
 //************************** Character input handling
-void GameSettingsScreen::onCharInput(const char inputChar) {}
+void GameSettings::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void GameSettingsScreen::onReturnButton(Controller &controller) {
+void GameSettings::onReturnButton(Controller &controller) {
     switch (highlight) {
         case Highlight::StartGame:
             controller.switchToGamePlay();
@@ -139,7 +139,7 @@ void GameSettingsScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GameSettingsScreen::triggerDisplay(View &view) {
+void GameSettings::triggerDisplay(View &view) {
     view.displayScreen(*this);
     // view.displaySettings(settings);
 }
@@ -147,19 +147,19 @@ void GameSettingsScreen::triggerDisplay(View &view) {
 
 
 //************************** Member modifier functions
-void GameSettingsScreen::increaseNumOfCoins() {
+void GameSettings::increaseNumOfCoins() {
     if (nCoins < numOfCoinsUpperBound) {
         ++nCoins;
     }
 }
 
-void GameSettingsScreen::decreaseNumOfCoins() {
+void GameSettings::decreaseNumOfCoins() {
     if (nCoins > numOfCoinsLowerBound) {
         --nCoins;
     }
 }
 
-void GameSettingsScreen::increaseLevel() {
+void GameSettings::increaseLevel() {
     switch (level) {
         case GameLevel::Easy:
             level = GameLevel::Medium;
@@ -173,7 +173,7 @@ void GameSettingsScreen::increaseLevel() {
     }
 }
 
-void GameSettingsScreen::decreaseLevel() {
+void GameSettings::decreaseLevel() {
     switch (level) {
         case GameLevel::Easy:
             level = GameLevel::Easy;
@@ -187,6 +187,6 @@ void GameSettingsScreen::decreaseLevel() {
     }
 }
 
-void GameSettingsScreen::switchMode() {
+void GameSettings::switchMode() {
     isHuman = !isHuman;
 }

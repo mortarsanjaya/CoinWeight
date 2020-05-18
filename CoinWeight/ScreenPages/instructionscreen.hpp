@@ -11,9 +11,9 @@
 
 #include "modelstate.hpp"
 
-class InstructionScreen final : public ModelState {
+class Instruction final : public ModelState {
 public:
-    InstructionScreen();
+    Instruction();
     
     void highlightUp() override;
     void highlightDown() override;

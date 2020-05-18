@@ -11,34 +11,34 @@
 #include "controller.hpp"
 
 //************************** Constructor
-InstructionScreen::InstructionScreen() {}
+Instruction::Instruction() {}
 
 
 
 //************************** Arrow button handling
-void InstructionScreen::highlightUp() {}
+void Instruction::highlightUp() {}
 
-void InstructionScreen::highlightDown() {}
+void Instruction::highlightDown() {}
 
-void InstructionScreen::highlightLeft() {}
+void Instruction::highlightLeft() {}
 
-void InstructionScreen::highlightRight() {}
+void Instruction::highlightRight() {}
 
 
 
 //************************** Character input handling
-void InstructionScreen::onCharInput(const char inputChar) {}
+void Instruction::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void InstructionScreen::onReturnButton(Controller &controller) {
+void Instruction::onReturnButton(Controller &controller) {
     controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void InstructionScreen::triggerDisplay(View &view) {
+void Instruction::triggerDisplay(View &view) {
     view.displayScreen(*this);
 }

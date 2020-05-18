@@ -11,9 +11,9 @@
 
 #include "modelstate.hpp"
 
-class CreditScreen final : public ModelState {
+class Credit final : public ModelState {
 public:
-    CreditScreen();
+    Credit();
     
     void highlightUp() override;
     void highlightDown() override;

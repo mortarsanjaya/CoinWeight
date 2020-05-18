@@ -11,7 +11,7 @@
 #include "view.hpp"
 
 //************************** Constructor
-GamePlayHumanScreen::GamePlayHumanScreen(const size_t nCoinsTotal,
+GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal,
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :
 buttonHighlight(ButtonHighlight::Weigh),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
@@ -21,28 +21,28 @@ isOnButtonHighlight(false)
 
 
 //************************** Field accessors
-const GamePlayHumanScreen::ButtonHighlight
-GamePlayHumanScreen::currButtonHighlight() const {
+const GamePlayHuman::ButtonHighlight
+GamePlayHuman::currButtonHighlight() const {
     return buttonHighlight;
 }
 
-const size_t GamePlayHumanScreen::coinDisplayTopRowIndex() const {
+const size_t GamePlayHuman::coinDisplayTopRowIndex() const {
     return coinNavigator.currTopRow();
 }
 
-const size_t GamePlayHumanScreen::coinHighlightIndex() const {
+const size_t GamePlayHuman::coinHighlightIndex() const {
     return coinNavigator.currIndex();
 }
 
-const size_t GamePlayHumanScreen::coinHighlightRow() const {
+const size_t GamePlayHuman::coinHighlightRow() const {
     return coinNavigator.currRow();
 }
 
-const size_t GamePlayHumanScreen::coinHighlightColumn() const {
+const size_t GamePlayHuman::coinHighlightColumn() const {
     return coinNavigator.currColumn();
 }
 
-const bool GamePlayHumanScreen::onButtonHighlight() const {
+const bool GamePlayHuman::onButtonHighlight() const {
     return isOnButtonHighlight;
 }
 
@@ -50,7 +50,7 @@ const bool GamePlayHumanScreen::onButtonHighlight() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayHumanScreen::highlightUp() {
+void GamePlayHuman::highlightUp() {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -58,7 +58,7 @@ void GamePlayHumanScreen::highlightUp() {
     }
 }
 
-void GamePlayHumanScreen::highlightDown() {
+void GamePlayHuman::highlightDown() {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -66,7 +66,7 @@ void GamePlayHumanScreen::highlightDown() {
     }
 }
 
-void GamePlayHumanScreen::highlightLeft() {
+void GamePlayHuman::highlightLeft() {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -74,7 +74,7 @@ void GamePlayHumanScreen::highlightLeft() {
     }
 }
 
-void GamePlayHumanScreen::highlightRight() {
+void GamePlayHuman::highlightRight() {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {
@@ -83,7 +83,7 @@ void GamePlayHumanScreen::highlightRight() {
 }
 
 //**** Helper (button highlight)
-void GamePlayHumanScreen::buttonHighlightUp() {
+void GamePlayHuman::buttonHighlightUp() {
     switch (buttonHighlight) {
         case ButtonHighlight::Weigh:
             break;
@@ -93,7 +93,7 @@ void GamePlayHumanScreen::buttonHighlightUp() {
     }
 }
 
-void GamePlayHumanScreen::buttonHighlightDown() {
+void GamePlayHuman::buttonHighlightDown() {
     switch (buttonHighlight) {
         case ButtonHighlight::Weigh:
             buttonHighlight = ButtonHighlight::Guess;
@@ -103,23 +103,23 @@ void GamePlayHumanScreen::buttonHighlightDown() {
     }
 }
 
-void GamePlayHumanScreen::buttonHighlightLeft() {}
+void GamePlayHuman::buttonHighlightLeft() {}
 
-void GamePlayHumanScreen::buttonHighlightRight() {
+void GamePlayHuman::buttonHighlightRight() {
     transitionToCoinHighlight();
 }
 
 
 //**** Helper (coin highlight)
-void GamePlayHumanScreen::coinHighlightUp() {
+void GamePlayHuman::coinHighlightUp() {
     coinNavigator.scrollUp();
 }
 
-void GamePlayHumanScreen::coinHighlightDown() {
+void GamePlayHuman::coinHighlightDown() {
     coinNavigator.scrollDown();
 }
 
-void GamePlayHumanScreen::coinHighlightLeft() {
+void GamePlayHuman::coinHighlightLeft() {
     if (coinNavigator.currRow() == 0) {
         transitionToButtonHighlight();
     } else {
@@ -127,23 +127,23 @@ void GamePlayHumanScreen::coinHighlightLeft() {
     }
 }
 
-void GamePlayHumanScreen::coinHighlightRight() {
+void GamePlayHuman::coinHighlightRight() {
     coinNavigator.scrollRight();
 }
 
 //**** Helper (transition)
-void GamePlayHumanScreen::transitionToButtonHighlight() {
+void GamePlayHuman::transitionToButtonHighlight() {
     isOnButtonHighlight = true;
 }
 
-void GamePlayHumanScreen::transitionToCoinHighlight() {
+void GamePlayHuman::transitionToCoinHighlight() {
     isOnButtonHighlight = false;
 }
 
 
 
 //************************** Character input handling
-void GamePlayHumanScreen::onCharInput(const char inputChar) {
+void GamePlayHuman::onCharInput(const char inputChar) {
 /*
     if (!isOnButtonHighlight) {
         switch (inputChar) {
@@ -169,7 +169,7 @@ void GamePlayHumanScreen::onCharInput(const char inputChar) {
 
 
 //************************** Return button handling
-void GamePlayHumanScreen::onReturnButton(Controller &controller) {
+void GamePlayHuman::onReturnButton(Controller &controller) {
     if (isOnButtonHighlight) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
@@ -185,6 +185,6 @@ void GamePlayHumanScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void GamePlayHumanScreen::triggerDisplay(View &view) {
+void GamePlayHuman::triggerDisplay(View &view) {
     view.displayScreen(*this);
 }

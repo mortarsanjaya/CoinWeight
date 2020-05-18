@@ -11,10 +11,10 @@
 
 #include "modelstate.hpp"
 
-class GameOverScreen final : public ModelState {
+class GameOver final : public ModelState {
 public:
     
-    GameOverScreen(const bool doesPlayerWin);
+    GameOver(const bool doesPlayerWin);
     
     const bool doesPlayerWin() const;
     

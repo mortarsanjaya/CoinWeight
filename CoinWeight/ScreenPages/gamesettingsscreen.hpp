@@ -12,7 +12,7 @@
 #include "modelstate.hpp"
 #include "gamelevel.hpp"
 
-class GameSettingsScreen final : public ModelState {
+class GameSettings final : public ModelState {
 public:
     enum class Highlight {
         NumOfCoins,
@@ -22,7 +22,7 @@ public:
         GoBack
     };
     
-    GameSettingsScreen();
+    GameSettings();
     
     const Highlight currHighlight() const;
     

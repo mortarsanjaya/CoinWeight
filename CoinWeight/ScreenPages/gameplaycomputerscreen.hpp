@@ -12,13 +12,13 @@
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
 
-class GamePlayComputerScreen final : public ModelState {
+class GamePlayComputer final : public ModelState {
 public:
     enum class ButtonHighlight {
         NextMove
     };
     
-    GamePlayComputerScreen(const size_t nCoinsTotal,
+    GamePlayComputer(const size_t nCoinsTotal,
                            const size_t nRowsDisplay,
                            const size_t nCoinsPerRow);
                            

@@ -19,29 +19,29 @@
 //************************** Factory methods
 std::unique_ptr<ModelState>
 ScreenFactory::createTitleScreen() {
-    return std::make_unique<TitleScreen>();
+    return std::make_unique<Title>();
 }
 
 std::unique_ptr<ModelState>
 ScreenFactory::createInstructionScreen() {
-    return std::make_unique<InstructionScreen>();
+    return std::make_unique<Instruction>();
 }
 
 std::unique_ptr<ModelState>
 ScreenFactory::createCreditScreen() {
-    return std::make_unique<CreditScreen>();
+    return std::make_unique<Credit>();
 }
 
 std::unique_ptr<ModelState>
 ScreenFactory::createGameSettingsScreen() {
-    return std::make_unique<GameSettingsScreen>();
+    return std::make_unique<GameSettings>();
 }
 
 std::unique_ptr<ModelState>
 ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal,
     const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
-    return std::make_unique<GamePlayHumanScreen>(
+    return std::make_unique<GamePlayHuman>(
         nCoinsTotal, nRowsDisplay, nCoinsPerRow);
 }
 
@@ -49,12 +49,12 @@ std::unique_ptr<ModelState>
 ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
     const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
-    return std::make_unique<GamePlayComputerScreen>(nCoinsTotal,
+    return std::make_unique<GamePlayComputer>(nCoinsTotal,
         nRowsDisplay, nCoinsPerRow);
 }
 
 std::unique_ptr<ModelState>
 ScreenFactory::createGameOverScreen(const bool isWin) {
-    return std::make_unique<GameOverScreen>(isWin);
+    return std::make_unique<GameOver>(isWin);
 }
 

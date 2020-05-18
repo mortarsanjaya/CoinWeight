@@ -13,14 +13,14 @@
 #include "tablenavigator.hpp"
 #include "coingroup.hpp"
 
-class GamePlayHumanScreen final : public ModelState {
+class GamePlayHuman final : public ModelState {
 public:
     enum class ButtonHighlight {
         Weigh,
         Guess
     };
     
-    GamePlayHumanScreen(const size_t nCoinsTotal,
+    GamePlayHuman(const size_t nCoinsTotal,
                         const size_t nRowsDisplay,
                         const size_t nCoinsPerRow);
                         

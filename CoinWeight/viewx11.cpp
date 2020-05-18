@@ -75,10 +75,10 @@ ViewX11::~ViewX11() {
 
 
 //************************** Display screen
-void ViewX11::displayScreen(const TitleScreen &screen) {
+void ViewX11::displayScreen(const Title &screen) {
     clearWindow();
     
-    const TitleScreen::Highlight highlight = screen.currHighlight();
+    const Title::Highlight highlight = screen.currHighlight();
     
     setForeground(defaultFGColor);
     
@@ -95,13 +95,13 @@ void ViewX11::displayScreen(const TitleScreen &screen) {
     drawString(text_x_pos + border, top_button_y_pos + 3 * total_string_height - border, creditStr);
     
     switch (highlight) {
-        case TitleScreen::Highlight::Play:
+        case Title::Highlight::Play:
             drawRectangle(text_x_pos, top_button_y_pos, total_string_width(playStr.length()), total_string_height);
             break;
-        case TitleScreen::Highlight::Instruction:
+        case Title::Highlight::Instruction:
             drawRectangle(text_x_pos, top_button_y_pos + total_string_height, total_string_width(instrStr.length()), total_string_height);
             break;
-        case TitleScreen::Highlight::Credit:
+        case Title::Highlight::Credit:
             drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, total_string_width(creditStr.length()), total_string_height);
             break;
     }
@@ -109,7 +109,7 @@ void ViewX11::displayScreen(const TitleScreen &screen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const InstructionScreen &instructionScreen) {
+void ViewX11::displayScreen(const Instruction &instructionScreen) {
     clearWindow();
     setForeground(defaultFGColor);
 
@@ -172,7 +172,7 @@ void ViewX11::displayScreen(const InstructionScreen &instructionScreen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const CreditScreen &screen) {
+void ViewX11::displayScreen(const Credit &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -185,11 +185,11 @@ void ViewX11::displayScreen(const CreditScreen &screen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GameSettingsScreen &screen) {
+void ViewX11::displayScreen(const GameSettings &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
-    const GameSettingsScreen::Highlight highlight = screen.currHighlight();
+    const GameSettings::Highlight highlight = screen.currHighlight();
     
     drawString(300, 50, "Coin Weight");
     drawString(300, 300 + total_string_height - border, "Number of Coins:");
@@ -204,20 +204,20 @@ void ViewX11::displayScreen(const GameSettingsScreen &screen) {
     drawString(350 + border, 400 + 2 * total_string_height - border, goBackStr);
     
     switch (highlight) {
-        case GameSettingsScreen::Highlight::NumOfCoins:
+        case GameSettings::Highlight::NumOfCoins:
             drawRectangle(400, 300, 100, total_string_height);
             break;
-        case GameSettingsScreen::Highlight::Level:
+        case GameSettings::Highlight::Level:
             drawRectangle(400, 300 + total_string_height, 100, total_string_height);
             break;
-        case GameSettingsScreen::Highlight::Mode:
+        case GameSettings::Highlight::Mode:
             drawRectangle(400, 300 + 2 * total_string_height, 100, total_string_height);
             break;
-        case GameSettingsScreen::Highlight::StartGame:
+        case GameSettings::Highlight::StartGame:
             drawRectangle(350, 400, total_string_width(startGameStr.size()),
                 total_string_height);
             break;
-        case GameSettingsScreen::Highlight::GoBack:
+        case GameSettings::Highlight::GoBack:
             drawRectangle(350, 400 + total_string_height,
                 total_string_width(goBackStr.size()), total_string_height);
             break;
@@ -249,7 +249,7 @@ void ViewX11::displayScreen(const GameSettingsScreen &screen) {
 
 
 
-void ViewX11::displayScreen(const GamePlayHumanScreen &screen) {
+void ViewX11::displayScreen(const GamePlayHuman &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -263,11 +263,11 @@ void ViewX11::displayScreen(const GamePlayHumanScreen &screen) {
 
     if (screen.onButtonHighlight()) {
         switch (screen.currButtonHighlight()) {
-            case GamePlayHumanScreen::ButtonHighlight::Weigh:
+            case GamePlayHuman::ButtonHighlight::Weigh:
                 drawRectangle(50, 300, total_string_width(weighStr.size()),
                     total_string_height);
                 break;
-            case GamePlayHumanScreen::ButtonHighlight::Guess:
+            case GamePlayHuman::ButtonHighlight::Guess:
                 drawRectangle(50, 300 + total_string_height, total_string_width(guessStr.size()),
                     total_string_height);
                 break;
@@ -281,7 +281,7 @@ void ViewX11::displayScreen(const GamePlayHumanScreen &screen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GamePlayComputerScreen &screen) {
+void ViewX11::displayScreen(const GamePlayComputer &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -293,7 +293,7 @@ void ViewX11::displayScreen(const GamePlayComputerScreen &screen) {
 
     if (screen.onButtonHighlight()) {
         switch (screen.currButtonHighlight()) {
-            case GamePlayComputerScreen::ButtonHighlight::NextMove:
+            case GamePlayComputer::ButtonHighlight::NextMove:
                 drawRectangle(50, 300, total_string_width(nextMoveStr.size()),
                     total_string_height);
                 break;
@@ -307,7 +307,7 @@ void ViewX11::displayScreen(const GamePlayComputerScreen &screen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GameOverScreen &screen) {
+void ViewX11::displayScreen(const GameOver &screen) {
     clearWindow();
     setForeground(defaultFGColor);
     

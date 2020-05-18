@@ -11,42 +11,42 @@
 #include "view.hpp"
 
 //************************** Constructor
-GameOverScreen::GameOverScreen(const bool doesPlayerWin) :
+GameOver::GameOver(const bool doesPlayerWin) :
 playerWin(doesPlayerWin) {}
 
 
 
 //************************** Field accessor
-const bool GameOverScreen::doesPlayerWin() const {
+const bool GameOver::doesPlayerWin() const {
     return playerWin;
 }
 
 
 
 //************************** Arrow button handling
-void GameOverScreen::highlightUp() {}
+void GameOver::highlightUp() {}
 
-void GameOverScreen::highlightDown() {}
+void GameOver::highlightDown() {}
 
-void GameOverScreen::highlightLeft() {}
+void GameOver::highlightLeft() {}
 
-void GameOverScreen::highlightRight() {}
+void GameOver::highlightRight() {}
 
 
 
 //************************** Character input handling
-void GameOverScreen::onCharInput(const char inputChar) {}
+void GameOver::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void GameOverScreen::onReturnButton(Controller &controller) {
+void GameOver::onReturnButton(Controller &controller) {
     controller.switchToTitle();
 }
 
 
 
 //************************** UI display
-void GameOverScreen::triggerDisplay(View &view) {
+void GameOver::triggerDisplay(View &view) {
     view.displayScreen(*this);
 }

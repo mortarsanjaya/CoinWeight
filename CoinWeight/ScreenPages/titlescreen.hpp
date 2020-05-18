@@ -11,7 +11,7 @@
 
 #include "modelstate.hpp"
 
-class TitleScreen final : public ModelState {
+class Title final : public ModelState {
 public:
     enum class Highlight {
         Play,
@@ -19,7 +19,7 @@ public:
         Credit
     };
     
-    TitleScreen();
+    Title();
     
     const Highlight currHighlight() const;
     

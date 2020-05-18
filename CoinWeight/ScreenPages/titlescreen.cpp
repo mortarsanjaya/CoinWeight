@@ -11,19 +11,19 @@
 #include "controller.hpp"
 
 //************************** Constructor
-TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
+Title::Title() : highlight(defaultHighlight) {}
 
 
 
 //************************** Field accessors
-const TitleScreen::Highlight TitleScreen::currHighlight() const {
+const Title::Highlight Title::currHighlight() const {
     return highlight;
 }
 
 
 
 //************************** Arrow button handling
-void TitleScreen::highlightUp() {
+void Title::highlightUp() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -37,7 +37,7 @@ void TitleScreen::highlightUp() {
     }
 }
 
-void TitleScreen::highlightDown() {
+void Title::highlightDown() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -51,19 +51,19 @@ void TitleScreen::highlightDown() {
     }
 }
 
-void TitleScreen::highlightLeft() {}
+void Title::highlightLeft() {}
 
-void TitleScreen::highlightRight() {}
+void Title::highlightRight() {}
 
 
 
 //************************** Character input handling
-void TitleScreen::onCharInput(const char inputChar) {}
+void Title::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void TitleScreen::onReturnButton(Controller &controller) {
+void Title::onReturnButton(Controller &controller) {
     switch (highlight) {
         case Highlight::Play:
             controller.switchToGameSettings();
@@ -80,6 +80,6 @@ void TitleScreen::onReturnButton(Controller &controller) {
 
 
 //************************** UI display
-void TitleScreen::triggerDisplay(View &view) {
+void Title::triggerDisplay(View &view) {
     view.displayScreen(*this);
 }
