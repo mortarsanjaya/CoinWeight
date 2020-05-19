@@ -1,57 +1,48 @@
 //
-//  gameplayhuman.hpp
+//  singleplayergame.hpp
 //  CoinWeight
 //
-//  Created by Gian Cordana Sanjaya on 2020-04-22.
+//  Created by Gian Cordana Sanjaya on 2020-05-19.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef gameplayhuman_hpp
-#define gameplayhuman_hpp
+#ifndef singleplayergame_hpp
+#define singleplayergame_hpp
 
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
-#include "humanstd.hpp"
+#include "coinselection.hpp"
+#include "history.hpp"
 #include "gamelevel.hpp"
 
-class GamePlayHuman final : public ModelState {
+class SinglePlayerGame : public ModelState {
 public:
-    enum class ButtonHighlight {
-        Weigh,
-        Guess
-    };
-    
-    GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
+    SinglePlayerGame(const size_t nCoinsTotal, const GameLevel level,
         const size_t nRowsDisplay, const size_t nCoinsPerRow);
-                        
-    const ButtonHighlight currButtonHighlight() const;
+
     const size_t coinDisplayTopRowIndex() const;
     const size_t coinHighlightIndex() const;
     const size_t coinHighlightRow() const;
     const size_t coinHighlightColumn() const;
     const bool onButtonHighlight() const;
     
-    void highlightUp() override;
-    void highlightDown() override;
-    void highlightLeft() override;
-    void highlightRight() override;
-    void onCharInput(const char inputChar) override;
-    void onReturnButton(Controller &controller) override;
-    void triggerDisplay(View &view) override;
+    void highlightUp() final;
+    void highlightDown() final;
+    void highlightLeft() final;
+    void highlightRight() final;
+    void onCharInput(const char inputChar) final;
+    void onReturnButton(Controller &controller) final;
+    void triggerDisplay(View &view) final;
     
 private:
-    ButtonHighlight buttonHighlight;
     TableNavigator coinNavigator;
     bool isOnButtonHighlight;
     
     CoinSet coinSet;
     CoinSelection selection;
     History history;
-    
     WeighResult lastResult; // Also used to display invalid guess
-    
-    WeighCounter counter;
     
     void buttonHighlightUp();
     void buttonHighlightDown();

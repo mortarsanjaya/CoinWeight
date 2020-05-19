@@ -34,6 +34,7 @@
 		864467C1245AB0C100442BD8 /* computermedium1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 864467BF245AB0C100442BD8 /* computermedium1.cpp */; };
 		865B163224579966005DE924 /* player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B163024579966005DE924 /* player.cpp */; };
 		865B16392457BB18005DE924 /* computerfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 865B16382457BB18005DE924 /* computerfactory.cpp */; };
+		868C8C7024748ABD008AB006 /* singleplayergame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 868C8C6E24748ABD008AB006 /* singleplayergame.cpp */; };
 		86C1C6632432D6A7007E5B64 /* history.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86C1C6612432D6A7007E5B64 /* history.cpp */; };
 		86E55A83242C390B00053F2E /* weighresult.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 86E55A82242C390B00053F2E /* weighresult.hpp */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,8 @@
 		865B16352457AFCF005DE924 /* computerfactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = computerfactory.hpp; sourceTree = "<group>"; };
 		865B16382457BB18005DE924 /* computerfactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = computerfactory.cpp; sourceTree = "<group>"; };
 		866BE319241DE19D00DDD242 /* exception.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = exception.hpp; sourceTree = "<group>"; };
+		868C8C6E24748ABD008AB006 /* singleplayergame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = singleplayergame.cpp; sourceTree = "<group>"; };
+		868C8C6F24748ABD008AB006 /* singleplayergame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = singleplayergame.hpp; sourceTree = "<group>"; };
 		869BBCD12424182D0002CDED /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
 		869BBCD424241BDD0002CDED /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		869C4BD62401BDCD00C3DE84 /* gamecore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecore.cpp; sourceTree = "<group>"; };
@@ -207,7 +210,7 @@
 				868C8C69247461A0008AB006 /* Instruction */,
 				868C8C6A247461A7008AB006 /* Credit */,
 				868C8C6B247461B0008AB006 /* Game Settings */,
-				868C8C6C247461B9008AB006 /* Game Play */,
+				868C8C6C247461B9008AB006 /* Game Play (Single Player) */,
 				868C8C6D247461C2008AB006 /* Game Over */,
 			);
 			name = "State Types";
@@ -359,15 +362,17 @@
 			name = "Game Settings";
 			sourceTree = "<group>";
 		};
-		868C8C6C247461B9008AB006 /* Game Play */ = {
+		868C8C6C247461B9008AB006 /* Game Play (Single Player) */ = {
 			isa = PBXGroup;
 			children = (
+				868C8C6E24748ABD008AB006 /* singleplayergame.cpp */,
+				868C8C6F24748ABD008AB006 /* singleplayergame.hpp */,
 				86219BDE244FFE42005E4F93 /* gameplayhuman.cpp */,
 				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
 				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
 				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
 			);
-			name = "Game Play";
+			name = "Game Play (Single Player)";
 			sourceTree = "<group>";
 		};
 		868C8C6D247461C2008AB006 /* Game Over */ = {
@@ -564,6 +569,7 @@
 				86C1C6632432D6A7007E5B64 /* history.cpp in Sources */,
 				861E6482242AD81E00AA6FD7 /* computer.cpp in Sources */,
 				86219BDD244FFDBA005E4F93 /* gamesettings.cpp in Sources */,
+				868C8C7024748ABD008AB006 /* singleplayergame.cpp in Sources */,
 				8626C2B0246EE787003B99D4 /* modelstatefactory.cpp in Sources */,
 				8626C294246CD735003B99D4 /* weighcounter.cpp in Sources */,
 				865B16392457BB18005DE924 /* computerfactory.cpp in Sources */,

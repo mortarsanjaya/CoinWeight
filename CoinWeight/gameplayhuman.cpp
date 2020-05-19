@@ -18,8 +18,10 @@ buttonHighlight(ButtonHighlight::Weigh),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
 isOnButtonHighlight(false),
 coinSet(nCoinsTotal),
-human(nCoinsTotal, numOfWeighsMax(nCoinsTotal, level)),
-lastResult(WeighResult::Start)
+selection(nCoinsTotal),
+history(),
+lastResult(WeighResult::Start),
+counter(numOfWeighsMax(nCoinsTotal, level))
 {}
 
 
@@ -151,16 +153,16 @@ void GamePlayHuman::onCharInput(const char inputChar) {
     if (!isOnButtonHighlight) {
         switch (inputChar) {
             case '0':
-                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::NoSelect);
+                selection.setGroup(coinHighlightIndex(), CoinGroup::NoSelect);
                 break;
             case '1':
-                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
+                selection.setGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
                 break;
             case '2':
-                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
+                selection.setGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
                 break;
             case '3':
-                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::Guess);
+                selection.setGroup(coinHighlightIndex(), CoinGroup::Guess);
                 break;
             default:
                 break;
@@ -176,10 +178,18 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
             {
-                lastResult = compareWeight();
-                if (lastResult != WeighResult::Invalid) {
-                    human.receiveWeighResult(lastResult);
+                if (counter.isZero()) {
+                    lastResult = WeighResult::Invalid;
+                } else {
+                    lastResult = compareWeight();
                 }
+                
+                if (lastResult != WeighResult::Invalid) {
+                    history.add(selection, lastResult);
+                    selection.reset();
+                    counter.decrement();
+                }
+                
                 break;
             }
             case ButtonHighlight::Guess:
@@ -203,11 +213,11 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
 
 //**** Game operations as helper
 const WeighResult GamePlayHuman::compareWeight() const {
-    return coinSet.compareWeight(human.currSelection());
+    return coinSet.compareWeight(selection);
 }
 
 const GuessResult GamePlayHuman::guessFakeCoins() const {
-    return coinSet.guessFakeCoins(human.currSelection());
+    return coinSet.guessFakeCoins(selection);
 }
 
 
@@ -215,7 +225,7 @@ const GuessResult GamePlayHuman::guessFakeCoins() const {
 //************************** UI display
 void GamePlayHuman::triggerDisplay(View &view) {
     view.displayScreen(*this);
-    view.displayCoinSelection(human.currSelection(), coinNavigator);
+    view.displayCoinSelection(selection, coinNavigator);
     view.displayWeighResult(lastResult);
-    view.displayWeighCounter(human.weighCounter());
+    view.displayWeighCounter(counter);
 }
