@@ -7,18 +7,6 @@
 //
 
 #include "coinset.hpp"
-/*
-#include "computer.hpp"
-#include <iostream>
-#include <memory>
-#include <string>
-#include <chrono>
-#include "gamemodel.hpp"
-#include "gameui_x11.hpp"
-#include "gameview.hpp"
-#include "gamecontroller.hpp"
-#include "input.hpp"
-*/
 #include "computertest.hpp"
 #include "controller.hpp"
 #include "viewx11.hpp"
