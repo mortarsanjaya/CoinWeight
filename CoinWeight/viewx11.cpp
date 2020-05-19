@@ -1,5 +1,5 @@
 //
-//  viewx11_x11.cpp
+//  viewx11.cpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-03.
