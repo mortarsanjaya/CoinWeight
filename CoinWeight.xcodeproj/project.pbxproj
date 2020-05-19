@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		861E647C242AD81E00AA6FD7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86A9AB932400AF50002AB0CF /* main.cpp */; };
 		861E647D242AD81E00AA6FD7 /* coinselection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8625C7D0242AA68F00558B55 /* coinselection.cpp */; };
-		861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869C4BD62401BDCD00C3DE84 /* gamecore.cpp */; };
 		861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86A9AB9A2400B26D002AB0CF /* coinset.cpp */; };
 		861E6484242AD81E00AA6FD7 /* viewx11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8607519C240F0EAE007A96E5 /* viewx11.cpp */; };
 		861E6486242AD81E00AA6FD7 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 869BBCD424241BDD0002CDED /* input.cpp */; };
@@ -93,8 +92,6 @@
 		868C8C6F24748ABD008AB006 /* singleplayergame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = singleplayergame.hpp; sourceTree = "<group>"; };
 		869BBCD12424182D0002CDED /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
 		869BBCD424241BDD0002CDED /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
-		869C4BD62401BDCD00C3DE84 /* gamecore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamecore.cpp; sourceTree = "<group>"; };
-		869C4BD72401BDCD00C3DE84 /* gamecore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamecore.hpp; sourceTree = "<group>"; };
 		86A78CCD24457899000DF706 /* guessresult.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = guessresult.hpp; sourceTree = "<group>"; };
 		86A9AB902400AF50002AB0CF /* CoinWeight */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CoinWeight; sourceTree = BUILT_PRODUCTS_DIR; };
 		86A9AB932400AF50002AB0CF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -265,15 +262,13 @@
 			name = "Coin Set";
 			sourceTree = "<group>";
 		};
-		866FC8312409F75A00B3740D /* Game Core */ = {
+		866FC8312409F75A00B3740D /* Maximum Num of Weigh */ = {
 			isa = PBXGroup;
 			children = (
-				869C4BD62401BDCD00C3DE84 /* gamecore.cpp */,
-				869C4BD72401BDCD00C3DE84 /* gamecore.hpp */,
 				8626C295246CD780003B99D4 /* numofweighsmax.cpp */,
 				8626C296246CD780003B99D4 /* numofweighsmax.hpp */,
 			);
-			name = "Game Core";
+			name = "Maximum Num of Weigh";
 			sourceTree = "<group>";
 		};
 		866FC832240A2A5900B3740D /* Computer Types */ = {
@@ -448,7 +443,7 @@
 				865B16332457996C005DE924 /* Player */,
 				866FC8302409F74D00B3740D /* Coin Set */,
 				8626C298246DD6A7003B99D4 /* Weigh Counter */,
-				866FC8312409F75A00B3740D /* Game Core */,
+				866FC8312409F75A00B3740D /* Maximum Num of Weigh */,
 				86C1C6582432480C007E5B64 /* Model State */,
 				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
@@ -525,7 +520,6 @@
 				86219BD7244FF7E4005E4F93 /* instruction.cpp in Sources */,
 				86219BE62450105A005E4F93 /* gameover.cpp in Sources */,
 				8626C2AB246E00E6003B99D4 /* controller.cpp in Sources */,
-				861E6480242AD81E00AA6FD7 /* gamecore.cpp in Sources */,
 				861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */,
 				8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */,
 				8626C297246CD780003B99D4 /* numofweighsmax.cpp in Sources */,
