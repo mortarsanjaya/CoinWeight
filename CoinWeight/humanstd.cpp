@@ -14,6 +14,12 @@ Player(numOfCoins), counter(numOfMovesMax) {}
 
 
 
+//************************** Field accessor
+const WeighCounter &HumanStd::weighCounter() const {
+    return counter;
+}
+
+
 //************************** Check if able to weigh
 const bool HumanStd::isAbleToWeigh() const {
     return (!counter.isZero());

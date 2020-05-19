@@ -136,6 +136,7 @@ void ViewX11::displayScreen(const Instruction &instructionScreen) {
     displayStrings.emplace_back(std::vector<std::string>{
         "Game Play Page (Human play):",
         "Press arrow keys to select coins.",
+        "Press '0' to deselect a coin.",
         "Press '1' to move selected coin to the red (left) set.",
         "Press '2' to move selected coin to the blue (right) set.",
         "Press '3' to move selected coin to the green (guess) set.",
@@ -480,18 +481,18 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
     {
         
         std::vector<XPoint> xpoints {
-            {95, 180},
-            {95, 280},
-            {90, 280},
-            {60, 300},
-            {50, 320},
-            {50, 340},
-            {150, 340},
-            {150, 320},
-            {140, 300},
-            {110, 280},
-            {105, 280},
-            {105, 180}
+            {695, 20},
+            {695, 120},
+            {690, 120},
+            {660, 140},
+            {650, 160},
+            {650, 180},
+            {750, 180},
+            {750, 160},
+            {740, 140},
+            {710, 120},
+            {705, 120},
+            {705, 20}
         };
         
         XSetForeground(display, gc, colors[Blue]);
@@ -501,14 +502,14 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
     {
         const int radius = 20;
         XSetForeground(display, gc, colors[Green]);
-        XFillArc(display, window, gc, 100 - radius, 181 - 2 * radius, radius * 2, radius * 2, 0, circle_full_arc);
+        XFillArc(display, window, gc, 700 - radius, 21 - 2 * radius, radius * 2, radius * 2, 0, circle_full_arc);
     }
     
     {
         const auto anchors = [&weighResult]() -> std::pair<XPoint, XPoint> {
             const int y_tilt = 20;
-            const int y_base = 180;
-            const int x_base = 100;
+            const int y_base = 20;
+            const int x_base = 700;
             const int x_shift = 50;
             switch (weighResult) {
                 case WeighResult::Start:

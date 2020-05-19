@@ -216,4 +216,5 @@ void GamePlayHuman::triggerDisplay(View &view) {
     view.displayScreen(*this);
     view.displayCoinSelection(human.currSelection(), coinNavigator);
     view.displayWeighResult(lastResult);
+    view.displayWeighCounter(human.weighCounter());
 }

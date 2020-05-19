@@ -18,6 +18,8 @@ class HumanStd final : public Player {
 public:
     HumanStd(const size_t numOfCoins, const size_t numOfMovesMax);
     
+    const WeighCounter &weighCounter() const;
+    
     const bool isAbleToWeigh() const final;
     
 private:
