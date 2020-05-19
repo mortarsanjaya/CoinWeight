@@ -12,7 +12,7 @@
 #include <algorithm>
 
 //************************** Constructor
-CoinSet::CoinSet(size_t numOfCoins) : nCoins(numOfCoins) {
+CoinSet::CoinSet(const size_t numOfCoins) : nCoins(numOfCoins) {
 	if (numOfFakeCoins > numOfCoins) {
 		throw Exception<CoinSet>("Bad number of fake coins.");
 	}

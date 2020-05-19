@@ -17,7 +17,7 @@ enum class GameLevel;
 
 class CoinSet final {
 public:
-	CoinSet(size_t numOfCoins);
+	CoinSet(const size_t numOfCoins);
     
 	const size_t numOfCoins() const;
 	
