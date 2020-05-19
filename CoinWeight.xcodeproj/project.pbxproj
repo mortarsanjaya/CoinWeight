@@ -264,9 +264,7 @@
 				8626C2A8246DD896003B99D4 /* Human Standard Mode */,
 				8626C2A0246DD7E6003B99D4 /* Player Factory */,
 				8626C29C246DD6CA003B99D4 /* Range */,
-				8625C7D3242AA69400558B55 /* Coin Selection */,
 				869C4BE424048E4700C3DE84 /* Computer */,
-				86C1C6642432D6AC007E5B64 /* History */,
 			);
 			name = Player;
 			sourceTree = "<group>";
@@ -474,6 +472,8 @@
 			isa = PBXGroup;
 			children = (
 				86A78CCF244578AE000DF706 /* Enums */,
+				8625C7D3242AA69400558B55 /* Coin Selection */,
+				86C1C6642432D6AC007E5B64 /* History */,
 				865B16332457996C005DE924 /* Player */,
 				866FC8302409F74D00B3740D /* Coin Set */,
 				8626C298246DD6A7003B99D4 /* Weigh Counter */,
