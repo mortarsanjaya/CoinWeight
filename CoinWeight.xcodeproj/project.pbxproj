@@ -136,76 +136,6 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		86219BE92450D5F0005E4F93 /* Title */ = {
-			isa = PBXGroup;
-			children = (
-				86219BD1244FF1BD005E4F93 /* title.cpp */,
-				86219BD2244FF1BD005E4F93 /* title.hpp */,
-			);
-			name = Title;
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BEA2450D5F8005E4F93 /* Instruction */ = {
-			isa = PBXGroup;
-			children = (
-				86219BD5244FF7E4005E4F93 /* instruction.cpp */,
-				86219BD6244FF7E4005E4F93 /* instruction.hpp */,
-			);
-			name = Instruction;
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BEB2450D5FD005E4F93 /* Credit */ = {
-			isa = PBXGroup;
-			children = (
-				86219BD8244FFB07005E4F93 /* credit.cpp */,
-				86219BD9244FFB07005E4F93 /* credit.hpp */,
-			);
-			name = Credit;
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BEC2450D602005E4F93 /* Game Settings */ = {
-			isa = PBXGroup;
-			children = (
-				86219BDB244FFDBA005E4F93 /* gamesettings.cpp */,
-				86219BDC244FFDBA005E4F93 /* gamesettings.hpp */,
-			);
-			name = "Game Settings";
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BED2450D609005E4F93 /* Game Play Human */ = {
-			isa = PBXGroup;
-			children = (
-				86219BDE244FFE42005E4F93 /* gameplayhuman.cpp */,
-				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
-			);
-			name = "Game Play Human";
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BEE2450D60F005E4F93 /* Game Play Computer */ = {
-			isa = PBXGroup;
-			children = (
-				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
-				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
-			);
-			name = "Game Play Computer";
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
-		86219BEF2450D617005E4F93 /* Game Over */ = {
-			isa = PBXGroup;
-			children = (
-				86219BE42450105A005E4F93 /* gameover.cpp */,
-				86219BE52450105A005E4F93 /* gameover.hpp */,
-			);
-			name = "Game Over";
-			path = ScreenPages;
-			sourceTree = "<group>";
-		};
 		8625C7D3242AA69400558B55 /* Coin Selection */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,13 +203,20 @@
 		8626C2AD246E4EC1003B99D4 /* State Types */ = {
 			isa = PBXGroup;
 			children = (
-				86219BE92450D5F0005E4F93 /* Title */,
-				86219BEA2450D5F8005E4F93 /* Instruction */,
-				86219BEB2450D5FD005E4F93 /* Credit */,
-				86219BEC2450D602005E4F93 /* Game Settings */,
-				86219BED2450D609005E4F93 /* Game Play Human */,
-				86219BEE2450D60F005E4F93 /* Game Play Computer */,
-				86219BEF2450D617005E4F93 /* Game Over */,
+				86219BD1244FF1BD005E4F93 /* title.cpp */,
+				86219BD2244FF1BD005E4F93 /* title.hpp */,
+				86219BD5244FF7E4005E4F93 /* instruction.cpp */,
+				86219BD6244FF7E4005E4F93 /* instruction.hpp */,
+				86219BD8244FFB07005E4F93 /* credit.cpp */,
+				86219BD9244FFB07005E4F93 /* credit.hpp */,
+				86219BDB244FFDBA005E4F93 /* gamesettings.cpp */,
+				86219BDC244FFDBA005E4F93 /* gamesettings.hpp */,
+				86219BDE244FFE42005E4F93 /* gameplayhuman.cpp */,
+				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
+				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
+				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
+				86219BE42450105A005E4F93 /* gameover.cpp */,
+				86219BE52450105A005E4F93 /* gameover.hpp */,
 			);
 			name = "State Types";
 			sourceTree = "<group>";
