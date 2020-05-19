@@ -203,20 +203,12 @@
 		8626C2AD246E4EC1003B99D4 /* State Types */ = {
 			isa = PBXGroup;
 			children = (
-				86219BD1244FF1BD005E4F93 /* title.cpp */,
-				86219BD2244FF1BD005E4F93 /* title.hpp */,
-				86219BD5244FF7E4005E4F93 /* instruction.cpp */,
-				86219BD6244FF7E4005E4F93 /* instruction.hpp */,
-				86219BD8244FFB07005E4F93 /* credit.cpp */,
-				86219BD9244FFB07005E4F93 /* credit.hpp */,
-				86219BDB244FFDBA005E4F93 /* gamesettings.cpp */,
-				86219BDC244FFDBA005E4F93 /* gamesettings.hpp */,
-				86219BDE244FFE42005E4F93 /* gameplayhuman.cpp */,
-				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
-				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
-				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
-				86219BE42450105A005E4F93 /* gameover.cpp */,
-				86219BE52450105A005E4F93 /* gameover.hpp */,
+				868C8C6824746195008AB006 /* Title */,
+				868C8C69247461A0008AB006 /* Instruction */,
+				868C8C6A247461A7008AB006 /* Credit */,
+				868C8C6B247461B0008AB006 /* Game Settings */,
+				868C8C6C247461B9008AB006 /* Game Play */,
+				868C8C6D247461C2008AB006 /* Game Over */,
 			);
 			name = "State Types";
 			sourceTree = "<group>";
@@ -331,6 +323,62 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		868C8C6824746195008AB006 /* Title */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD1244FF1BD005E4F93 /* title.cpp */,
+				86219BD2244FF1BD005E4F93 /* title.hpp */,
+			);
+			name = Title;
+			sourceTree = "<group>";
+		};
+		868C8C69247461A0008AB006 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD5244FF7E4005E4F93 /* instruction.cpp */,
+				86219BD6244FF7E4005E4F93 /* instruction.hpp */,
+			);
+			name = Instruction;
+			sourceTree = "<group>";
+		};
+		868C8C6A247461A7008AB006 /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+				86219BD8244FFB07005E4F93 /* credit.cpp */,
+				86219BD9244FFB07005E4F93 /* credit.hpp */,
+			);
+			name = Credit;
+			sourceTree = "<group>";
+		};
+		868C8C6B247461B0008AB006 /* Game Settings */ = {
+			isa = PBXGroup;
+			children = (
+				86219BDB244FFDBA005E4F93 /* gamesettings.cpp */,
+				86219BDC244FFDBA005E4F93 /* gamesettings.hpp */,
+			);
+			name = "Game Settings";
+			sourceTree = "<group>";
+		};
+		868C8C6C247461B9008AB006 /* Game Play */ = {
+			isa = PBXGroup;
+			children = (
+				86219BDE244FFE42005E4F93 /* gameplayhuman.cpp */,
+				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
+				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
+				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
+			);
+			name = "Game Play";
+			sourceTree = "<group>";
+		};
+		868C8C6D247461C2008AB006 /* Game Over */ = {
+			isa = PBXGroup;
+			children = (
+				86219BE42450105A005E4F93 /* gameover.cpp */,
+				86219BE52450105A005E4F93 /* gameover.hpp */,
+			);
+			name = "Game Over";
 			sourceTree = "<group>";
 		};
 		86980C062425E101001C8481 /* X11 UI */ = {
