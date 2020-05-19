@@ -15,10 +15,10 @@
 
 class ComputerMedium1 final : public Computer {
 public:
-	ComputerMedium1(const size_t numOfCoins, const size_t numOfMovesMax);
+	ComputerMedium1(const size_t numOfCoins);
  
     // Overriding functions
-	void setSelection() override;
+	void setSelection(CoinSelection &selection) const override;
 	void changeState(const WeighResult weighResult) override;
  
 private:
@@ -28,7 +28,8 @@ private:
             TwoRanges0,
             TwoRanges1,
             Finish1Range,
-            Finish2Ranges
+            Finish2Ranges,
+            Invalid
         };
         
         Type type;
@@ -38,15 +39,16 @@ private:
         State(const size_t numOfCoins);
     };
     
+    const size_t nCoins;
     State state;
     
     const bool readyToGuess() const;
     
-    void setSelectionOneRange();
-    void setSelectionTwoRanges0();
-    void setSelectionTwoRanges1();
-    void setSelectionFinish1Range();
-    void setSelectionFinish2Ranges();
+    void setSelectionOneRange(CoinSelection &selection) const;
+    void setSelectionTwoRanges0(CoinSelection &selection) const;
+    void setSelectionTwoRanges1(CoinSelection &selection) const;
+    void setSelectionFinish1Range(CoinSelection &selection) const;
+    void setSelectionFinish2Ranges(CoinSelection &selection) const;
 
     void afterWeighLeftHeavy();
     void afterWeighRightHeavy();

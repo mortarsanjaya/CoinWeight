@@ -29,8 +29,8 @@
 using namespace std;
 
 int main() {
-    // computerTest(50, GameLevel::Easy);
-    // computerTest(75, GameLevel::Medium);
+    computerTest(100, GameLevel::Easy);
+    computerTest(75, GameLevel::Medium);
 
     auto view = std::make_unique<Controller>(std::make_unique<ViewX11>());
     while (true) {

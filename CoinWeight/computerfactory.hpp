@@ -17,17 +17,17 @@ class Computer;
 class ComputerFactory final {
 public:
     static std::unique_ptr<Computer>
-    create(const size_t numOfCoins, const size_t numOfMovesMax, const GameLevel level);
+    create(const size_t numOfCoins, const GameLevel level);
 
 private:
     static std::unique_ptr<Computer>
-    createEasy(const size_t numOfCoins, const size_t numOfMovesMax);
+    createEasy(const size_t numOfCoins);
     
     static std::unique_ptr<Computer>
-    createMedium(const size_t numOfCoins, const size_t numOfMovesMax);
+    createMedium(const size_t numOfCoins);
     
     static std::unique_ptr<Computer>
-    createHard(const size_t numOfCoins, const size_t numOfMovesMax);
+    createHard(const size_t numOfCoins);
 };
 
 #endif

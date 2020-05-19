@@ -7,6 +7,7 @@
 //
 
 #include "computermedium1.hpp"
+#include "coinselection.hpp"
 #include "exception.hpp"
 
 /*
@@ -22,10 +23,8 @@ For Finish-type State from OneRange, put the second fake coin into range 2
  */
 
 //************************** Constructor (+ State)
-ComputerMedium1::ComputerMedium1(const size_t numOfCoins, const size_t numOfMovesMax) :
-Computer(numOfCoins, numOfMovesMax), state(numOfCoins) {
-    setSelection();
-}
+ComputerMedium1::ComputerMedium1(const size_t numOfCoins) :
+Computer{}, nCoins{numOfCoins}, state{numOfCoins} {}
 
 ComputerMedium1::State::State(const size_t numOfCoins) :
 type{Type::OneRange}, range1{0, numOfCoins}, range2{0, 0} {}
@@ -33,27 +32,25 @@ type{Type::OneRange}, range1{0, numOfCoins}, range2{0, 0} {}
 
 
 //************************** Overriding functions
-void ComputerMedium1::setSelection() {
-    if (!isAbleToWeigh() && !readyToGuess()) {
-        setSelectionGroup(0, CoinGroup::Guess);
-        return;
-    }
-
+void ComputerMedium1::setSelection(CoinSelection &selection) const {
     switch (state.type) {
         case State::Type::OneRange:
-            setSelectionOneRange();
+            setSelectionOneRange(selection);
             break;
         case State::Type::TwoRanges0:
-            setSelectionTwoRanges0();
+            setSelectionTwoRanges0(selection);
             break;
         case State::Type::TwoRanges1:
-            setSelectionTwoRanges1();
+            setSelectionTwoRanges1(selection);
             break;
         case State::Type::Finish1Range:
-            setSelectionFinish1Range();
+            setSelectionFinish1Range(selection);
             break;
         case State::Type::Finish2Ranges:
-            setSelectionFinish2Ranges();
+            setSelectionFinish2Ranges(selection);
+            break;
+        case State::Type::Invalid:
+            selection.setGroup(0, CoinGroup::Guess);
             break;
     }
 }
@@ -82,56 +79,56 @@ const bool ComputerMedium1::readyToGuess() const {
             state.type == State::Type::Finish2Ranges);
 }
 
-void ComputerMedium1::setSelectionOneRange() {
+void ComputerMedium1::setSelectionOneRange(CoinSelection &selection) const {
     const size_t weighPileSize = splitSize(state.range1);
     const size_t rangeBegin = state.range1.begin();
     const size_t rangeEnd = state.range1.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        setSelectionGroup(i, CoinGroup::LeftWeigh);
+        selection.setGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        setSelectionGroup(i, CoinGroup::RightWeigh);
+        selection.setGroup(i, CoinGroup::RightWeigh);
     }
 }
 
-void ComputerMedium1::setSelectionTwoRanges0() {
+void ComputerMedium1::setSelectionTwoRanges0(CoinSelection &selection) const {
     const size_t weighPileSize = splitSize(state.range1);
     const size_t rangeBegin = state.range1.begin();
     const size_t rangeEnd = state.range1.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        setSelectionGroup(i, CoinGroup::LeftWeigh);
+        selection.setGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        setSelectionGroup(i, CoinGroup::RightWeigh);
+        selection.setGroup(i, CoinGroup::RightWeigh);
     }
 }
 
-void ComputerMedium1::setSelectionTwoRanges1() {
+void ComputerMedium1::setSelectionTwoRanges1(CoinSelection &selection) const {
     const size_t weighPileSize = splitSize(state.range2);
     const size_t rangeBegin = state.range2.begin();
     const size_t rangeEnd = state.range2.end();
     
     for (size_t i = rangeBegin; i < rangeBegin + weighPileSize; ++i) {
-        setSelectionGroup(i, CoinGroup::LeftWeigh);
+        selection.setGroup(i, CoinGroup::LeftWeigh);
     }
     
     for (size_t i = rangeEnd - weighPileSize; i < rangeEnd; ++i) {
-        setSelectionGroup(i, CoinGroup::RightWeigh);
+        selection.setGroup(i, CoinGroup::RightWeigh);
     }
 }
 
-void ComputerMedium1::setSelectionFinish1Range() {
-    setSelectionGroup(state.range1.begin(), CoinGroup::Guess);
-    setSelectionGroup(state.range1.begin() + 1, CoinGroup::Guess);
+void ComputerMedium1::setSelectionFinish1Range(CoinSelection &selection) const {
+    selection.setGroup(state.range1.begin(), CoinGroup::Guess);
+    selection.setGroup(state.range1.begin() + 1, CoinGroup::Guess);
 }
 
-void ComputerMedium1::setSelectionFinish2Ranges() {
-    setSelectionGroup(state.range1.begin(), CoinGroup::Guess);
-    setSelectionGroup(state.range2.begin(), CoinGroup::Guess);
+void ComputerMedium1::setSelectionFinish2Ranges(CoinSelection &selection) const {
+    selection.setGroup(state.range1.begin(), CoinGroup::Guess);
+    selection.setGroup(state.range2.begin(), CoinGroup::Guess);
 }
 
 

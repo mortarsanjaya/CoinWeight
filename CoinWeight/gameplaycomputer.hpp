@@ -15,6 +15,10 @@
 #include "computer.hpp"
 #include "gamelevel.hpp"
 
+#include "coinselection.hpp"
+#include "history.hpp"
+#include "weighcounter.hpp"
+
 class GamePlayComputer final : public ModelState {
 public:
     enum class ButtonHighlight {
@@ -45,8 +49,14 @@ private:
     bool isOnButtonHighlight;
     
     CoinSet coinSet;
+    CoinSelection selection;
+    History history;
+    
     std::unique_ptr<Computer> computer;
+    
     WeighResult lastResult;
+    
+    WeighCounter counter;
     
     void buttonHighlightUp();
     void buttonHighlightDown();
@@ -60,6 +70,12 @@ private:
     
     void transitionToButtonHighlight();
     void transitionToCoinHighlight();
+    
+    // Game operations
+    const WeighResult compareWeight() const;
+    const GuessResult guessFakeCoins() const;
+    
+    void computerSetSelection();
 };
 
 #endif

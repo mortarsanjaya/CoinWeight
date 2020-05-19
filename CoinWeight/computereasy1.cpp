@@ -7,6 +7,7 @@
 //
 
 #include "computereasy1.hpp"
+#include "coinselection.hpp"
 #include "exception.hpp"
 
 /*
@@ -19,28 +20,26 @@ In both cases, after determining if Coin 0 is genuine, all other coins
  */
 
 //************************** Constructor
-ComputerEasy1::ComputerEasy1(const size_t numOfCoins, const size_t numOfMovesMax) :
-Computer{numOfCoins, numOfMovesMax}, state{State::Type::FirstMove}, testIndex{1} {
-    setSelection();
-}
+ComputerEasy1::ComputerEasy1(const size_t numOfCoins) :
+Computer{}, nCoins{numOfCoins}, state{State::Type::FirstMove}, testIndex{1} {}
 
 
 
 //************************** Overriding functions
-void ComputerEasy1::setSelection() {
-    if (!isAbleToWeigh() && state.type != State::Type::Finish) {
-        setSelectionGroup(0, CoinGroup::Guess);
+void ComputerEasy1::setSelection(CoinSelection &selection) const {
+    if (state.type == State::Type::Invalid) {
+        selection.setGroup(0, CoinGroup::Guess);
         return;
     }
     
     if (state.type == State::Type::Finish) {
-        setSelectionGroup(state.fakeCoin1, CoinGroup::Guess);
-        setSelectionGroup(state.fakeCoin2, CoinGroup::Guess);
-    } else if (testIndex == numOfCoins()) {
-        throw Exception<ComputerEasy1>("Invalid handling.");
+        selection.setGroup(state.fakeCoin1, CoinGroup::Guess);
+        selection.setGroup(state.fakeCoin2, CoinGroup::Guess);
+    } else if (testIndex >= nCoins) {
+        selection.setGroup(0, CoinGroup::Guess);
     } else {
-        setSelectionGroup(0, CoinGroup::LeftWeigh);
-        setSelectionGroup(testIndex, CoinGroup::RightWeigh);
+        selection.setGroup(0, CoinGroup::LeftWeigh);
+        selection.setGroup(testIndex, CoinGroup::RightWeigh);
     }
 }
 
@@ -58,6 +57,9 @@ void ComputerEasy1::changeState(const WeighResult weighResult) {
             return afterWeighCoin0IsReal1(weighResult);
         case State::Type::Finish:
             throw Exception<ComputerEasy1>("Should be guessing.");
+        case State::Type::Invalid:
+            throw Exception<ComputerEasy1>("Should be guessing.");
+            break;
     }
 }
 

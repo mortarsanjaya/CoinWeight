@@ -13,10 +13,10 @@
 
 class ComputerEasy1 final : public Computer {
 public:
-	ComputerEasy1(const size_t numOfCoins, const size_t numOfMovesMax);
+	ComputerEasy1(const size_t numOfCoins);
  
     // Overriding functions
-	void setSelection() override;
+	void setSelection(CoinSelection &selection) const override;
 	void changeState(const WeighResult weighResult) override;
  
 private:
@@ -27,7 +27,8 @@ private:
             Coin0IsFake,
             Coin0IsReal0,
             Coin0IsReal1,
-            Finish
+            Finish,
+            Invalid
         };
         
         Type type;
@@ -35,6 +36,7 @@ private:
         size_t fakeCoin2;
     };
     
+    const size_t nCoins;
     State state;
     size_t testIndex;
     

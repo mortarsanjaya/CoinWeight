@@ -37,19 +37,20 @@ void computerTest(const size_t nCoinsCap, const GameLevel level) {
     }
 
     for (size_t numOfCoins = 3; numOfCoins <= nCoinsCap; ++numOfCoins) {
-        auto coinSet = std::make_unique<CoinSet>(numOfCoins);
+        CoinSet coinSet(numOfCoins);
         size_t worstCaseWeigh = 0;
         for (size_t i = 0; i < numOfCoins; ++i) {
             for (size_t j = i + 1; j < numOfCoins; ++j) {
-                coinSet->fakeCoinI1 = i;
-                coinSet->fakeCoinI2 = j;
-                const auto &computer =
-                    ComputerFactory::create(numOfCoins, numOfWeighsMax(numOfCoins, level), level);
+                coinSet.fakeCoinI1 = i;
+                coinSet.fakeCoinI2 = j;
+                const auto &computer = ComputerFactory::create(numOfCoins, level);
                 size_t numOfWeigh = 0;
+                CoinSelection selection(numOfCoins);
                 while (true) {
-                    const CoinSelection &currSelection = computer->currSelection();
-                    if (currSelection.sizeOfGuessGroup() != 0) {
-                        const GuessResult guessResult = coinSet->guessFakeCoins(currSelection);
+                    computer->setSelection(selection);
+                    
+                    if (selection.sizeOfGuessGroup() != 0) {
+                        const GuessResult guessResult = coinSet.guessFakeCoins(selection);
                         if (guessResult == GuessResult::Correct) break;
                         else {
                             std::cout << "Error." << std::endl;
@@ -70,9 +71,10 @@ void computerTest(const size_t nCoinsCap, const GameLevel level) {
                             std::terminate();
                         }
                     } else {
-                        const WeighResult weighResult = coinSet->compareWeight(currSelection);
-                        computer->receiveWeighResult(weighResult);
+                        const WeighResult weighResult = coinSet.compareWeight(selection);
+                        computer->changeState(weighResult);
                         ++numOfWeigh;
+                        selection.reset();
                     }
                 }
                 

@@ -13,16 +13,16 @@
 
 //************************** Main factory method
 std::unique_ptr<Computer>
-ComputerFactory::create(const size_t numOfCoins, const size_t numOfMovesMax, const GameLevel level) {
+ComputerFactory::create(const size_t numOfCoins, const GameLevel level) {
     switch (level) {
         case GameLevel::Easy:
-            return createEasy(numOfCoins, numOfMovesMax);
+            return createEasy(numOfCoins);
             break;
         case GameLevel::Medium:
-            return createMedium(numOfCoins, numOfMovesMax);
+            return createMedium(numOfCoins);
             break;
         case GameLevel::Hard:
-            return createHard(numOfCoins, numOfMovesMax);
+            return createHard(numOfCoins);
             break;
     }
 }
@@ -31,19 +31,19 @@ ComputerFactory::create(const size_t numOfCoins, const size_t numOfMovesMax, con
 
 //************************** Level-based factory methods
 std::unique_ptr<Computer>
-ComputerFactory::createEasy(const size_t numOfCoins, const size_t numOfMovesMax) {
-    return std::make_unique<ComputerEasy1>(numOfCoins, numOfMovesMax);
+ComputerFactory::createEasy(const size_t numOfCoins) {
+    return std::make_unique<ComputerEasy1>(numOfCoins);
 }
 
 std::unique_ptr<Computer>
-ComputerFactory::createMedium(const size_t numOfCoins, const size_t numOfMovesMax) {
-    return std::make_unique<ComputerMedium1>(numOfCoins, numOfMovesMax);
+ComputerFactory::createMedium(const size_t numOfCoins) {
+    return std::make_unique<ComputerMedium1>(numOfCoins);
 }
 
 std::unique_ptr<Computer>
-ComputerFactory::createHard(const size_t numOfCoins, const size_t numOfMovesMax) {
+ComputerFactory::createHard(const size_t numOfCoins) {
     throw Exception<ComputerFactory>("Oops. Hard-level computer NOT IMPLEMENTED YET!");
-    return std::make_unique<ComputerMedium1>(numOfCoins, numOfMovesMax);
+    return std::make_unique<ComputerMedium1>(numOfCoins);
 }
 
 

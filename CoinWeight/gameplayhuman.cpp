@@ -196,7 +196,7 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
             {
                 switch (guessFakeCoins()) {
                     case GuessResult::Invalid:
-                        lastResult =  WeighResult::Invalid;
+                        lastResult = WeighResult::Invalid;
                         break;
                     case GuessResult::Correct:
                         controller.switchToGameOver(true);
@@ -210,6 +210,8 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
         }
     }
 }
+
+
 
 //**** Game operations as helper
 const WeighResult GamePlayHuman::compareWeight() const {

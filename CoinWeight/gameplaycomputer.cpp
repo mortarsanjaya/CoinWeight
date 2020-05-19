@@ -17,13 +17,16 @@ GamePlayComputer::GamePlayComputer(const size_t nCoinsTotal, const GameLevel lev
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :
 buttonHighlight(ButtonHighlight::NextMove),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
-isOnButtonHighlight(false),
+isOnButtonHighlight(true),
 coinSet(nCoinsTotal),
+selection(nCoinsTotal),
+history(),
 computer(),
-lastResult(WeighResult::Start)
+lastResult(WeighResult::Start),
+counter(numOfWeighsMax(nCoinsTotal, level))
 {
-    computer = ComputerFactory::create(nCoinsTotal,
-        numOfWeighsMax(nCoinsTotal, level), level);
+    computer = ComputerFactory::create(nCoinsTotal, level);
+    computerSetSelection();
 }
 
 
@@ -144,11 +147,25 @@ void GamePlayComputer::onCharInput(const char inputChar) {}
 //************************** Return button handling
 void GamePlayComputer::onReturnButton(Controller &controller) {
     if (isOnButtonHighlight) {
-        if (computer->currSelection().sizeOfGuessGroup() == 0) {
-            lastResult = coinSet.compareWeight(computer->currSelection());
-            computer->receiveWeighResult(lastResult);
+        if (selection.sizeOfGuessGroup() == 0) {
+            if (counter.isZero()) {
+                lastResult = WeighResult::Invalid;
+            } else {
+                lastResult = compareWeight();
+            }
+            
+            computer->changeState(lastResult);
+            selection.reset();
+            
+            if (lastResult != WeighResult::Invalid) {
+                history.add(selection, lastResult);
+                counter.decrement();
+            }
+            
+            computerSetSelection();
+            
         } else {
-            const GuessResult result = coinSet.guessFakeCoins(computer->currSelection());
+            const GuessResult result = guessFakeCoins();
             switch (result) {
                 case GuessResult::Invalid:
                     controller.switchToGameOver(false);
@@ -163,13 +180,28 @@ void GamePlayComputer::onReturnButton(Controller &controller) {
         }
     }
 }
+//**** Game operations as helper
+const WeighResult GamePlayComputer::compareWeight() const {
+    return coinSet.compareWeight(selection);
+}
+
+const GuessResult GamePlayComputer::guessFakeCoins() const {
+    return coinSet.guessFakeCoins(selection);
+}
+
+
+
+//************************** Computer sets up selection
+void GamePlayComputer::computerSetSelection() {
+    computer->setSelection(selection);
+}
 
 
 
 //************************** UI display
 void GamePlayComputer::triggerDisplay(View &view) {
     view.displayScreen(*this);
-    view.displayCoinSelection(computer->currSelection(), coinNavigator);
+    view.displayCoinSelection(selection, coinNavigator);
     view.displayWeighResult(lastResult);
-    view.displayWeighCounter(computer->weighCounter());
+    view.displayWeighCounter(counter);
 }

@@ -10,27 +10,18 @@
 #define computer_hpp
 
 #include <memory>
-#include "player.hpp"
-#include "gamelevel.hpp"
-#include "weighcounter.hpp"
+#include "weighresult.hpp"
 
-class Computer : public Player {
+class CoinSelection;
+
+class Computer {
 public:
+    Computer() = default;
 	virtual ~Computer() = default;
- 
-    const WeighCounter &weighCounter() const;   
     
-protected:
-    Computer(const size_t numOfCoins, const size_t numOfMovesMax);
-    
-    const bool isAbleToWeigh() const final;
-    
-private:
-    WeighCounter counter;
-    
-    void afterWeigh(const WeighResult weighResult) final;
-    
-	virtual void setSelection() = 0;
+    // Computer assumes that the coin selection has the same size as the coin set
+    // It also assumes that selection is set at default (all coins NoSelect)
+	virtual void setSelection(CoinSelection &selection) const = 0;
     virtual void changeState(const WeighResult weighResult) = 0;
 };
 
