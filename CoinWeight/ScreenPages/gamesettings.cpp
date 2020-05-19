@@ -126,7 +126,7 @@ void GameSettings::onCharInput(const char inputChar) {}
 void GameSettings::onReturnButton(Controller &controller) {
     switch (highlight) {
         case Highlight::StartGame:
-            controller.switchToGamePlay();
+            controller.switchToGamePlay(nCoins, level, isHuman);
             break;
         case Highlight::GoBack:
             controller.switchToTitle();

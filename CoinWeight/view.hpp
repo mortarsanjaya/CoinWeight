@@ -20,6 +20,7 @@
 #include "coinselection.hpp"
 #include "weighresult.hpp"
 #include "weighcounter.hpp"
+#include "tablenavigator.hpp"
 
 #include "input.hpp"
 
@@ -37,7 +38,8 @@ public:
     virtual void displayScreen(const GameOver &screen) = 0;
     
     // Displaying functions for other elements
-    virtual void displayCoinSelection(const CoinSelection &selection) = 0;
+    virtual void displayCoinSelection(const CoinSelection &selection,
+        const TableNavigator &coinHighlight) = 0;
     virtual void displayWeighResult(const WeighResult weighResult) = 0;
     virtual void displayWeighCounter(const WeighCounter &weighCounter) = 0;
     

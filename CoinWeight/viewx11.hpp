@@ -47,7 +47,8 @@ public:
     
     // Displaying functions for other elements
     void displaySettings(const GameSettings &settings);
-    void displayCoinSelection(const CoinSelection &selection) final;
+    void displayCoinSelection(const CoinSelection &selection,
+        const TableNavigator &coinHighlight) final;
     void displayWeighResult(const WeighResult weighResult) final;
     void displayWeighCounter(const WeighCounter &weighCounter) final;
     
@@ -78,6 +79,7 @@ private:
     static constexpr int coinDist = 50;
     static constexpr int coin0XPos = 200;
     static constexpr int coin0YPos = 200;
+    static constexpr int coinOffset = (coinDist - coinDiameter) / 2;
     static constexpr size_t coinsPerRow = 10;
     static constexpr size_t rowsDisplay = 8;
     static constexpr int defaultFGColor = Black;
@@ -89,8 +91,6 @@ private:
     XEvent event;
     
     std::array<unsigned long, Max + 1> colors;
-    
-    size_t coinTopRow; // Is there a better way to do this?
     
     // Set foreground
     void setForeground(const unsigned int colorIndex);

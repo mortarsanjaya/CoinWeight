@@ -9,13 +9,16 @@
 #include "gameplayhuman.hpp"
 #include "controller.hpp"
 #include "view.hpp"
+#include "numofweighsmax.hpp"
 
 //************************** Constructor
-GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal,
+GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :
 buttonHighlight(ButtonHighlight::Weigh),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
-isOnButtonHighlight(false)
+isOnButtonHighlight(false),
+coinSet(nCoinsTotal),
+human(nCoinsTotal, numOfWeighsMax(nCoinsTotal, level))
 {}
 
 
@@ -35,7 +38,7 @@ const size_t GamePlayHuman::coinHighlightIndex() const {
 }
 
 const size_t GamePlayHuman::coinHighlightRow() const {
-    return coinNavigator.currRow();
+    return coinNavigator.currRowDisplay();
 }
 
 const size_t GamePlayHuman::coinHighlightColumn() const {
@@ -120,7 +123,7 @@ void GamePlayHuman::coinHighlightDown() {
 }
 
 void GamePlayHuman::coinHighlightLeft() {
-    if (coinNavigator.currRow() == 0) {
+    if (coinNavigator.currColumn() == 0) {
         transitionToButtonHighlight();
     } else {
         coinNavigator.scrollLeft();
@@ -144,26 +147,24 @@ void GamePlayHuman::transitionToCoinHighlight() {
 
 //************************** Character input handling
 void GamePlayHuman::onCharInput(const char inputChar) {
-/*
     if (!isOnButtonHighlight) {
         switch (inputChar) {
             case '0':
-                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::NoSelect);
+                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::NoSelect);
                 break;
             case '1':
-                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
+                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::LeftWeigh);
                 break;
             case '2':
-                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
+                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::RightWeigh);
                 break;
             case '3':
-                controller.changeCoinGroup(coinHighlightIndex(), CoinGroup::Guess);
+                human.setSelectionGroup(coinHighlightIndex(), CoinGroup::Guess);
                 break;
             default:
                 break;
         }
     }
-    */
 }
 
 
@@ -173,13 +174,39 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
     if (isOnButtonHighlight) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
-                controller.compareWeight();
+            {
+                lastResult = compareWeight();
+                if (lastResult != WeighResult::Invalid) {
+                    human.receiveWeighResult(lastResult);
+                }
                 break;
+            }
             case ButtonHighlight::Guess:
-                controller.guessFakeCoins();
+            {
+                switch (guessFakeCoins()) {
+                    case GuessResult::Invalid:
+                        lastResult =  WeighResult::Invalid;
+                        break;
+                    case GuessResult::Correct:
+                        controller.switchToGameOver(true);
+                        break;
+                    case GuessResult::Incorrect:
+                        controller.switchToGameOver(false);
+                        break;
+                }
                 break;
+            }
         }
     }
+}
+
+//**** Game operations as helper
+const WeighResult GamePlayHuman::compareWeight() const {
+    return coinSet.compareWeight(human.currSelection());
+}
+
+const GuessResult GamePlayHuman::guessFakeCoins() const {
+    return coinSet.guessFakeCoins(human.currSelection());
 }
 
 
@@ -187,4 +214,6 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
 //************************** UI display
 void GamePlayHuman::triggerDisplay(View &view) {
     view.displayScreen(*this);
+    view.displayCoinSelection(human.currSelection(), coinNavigator);
+    view.displayWeighResult(lastResult);
 }

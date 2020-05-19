@@ -252,8 +252,6 @@ void ViewX11::displayScreen(const GameSettings &screen) {
 void ViewX11::displayScreen(const GamePlayHuman &screen) {
     clearWindow();
     setForeground(defaultFGColor);
-    
-    coinTopRow = screen.coinDisplayTopRowIndex();
 
     const std::string &weighStr = "Weigh";
     const std::string &guessStr = "Guess";
@@ -273,7 +271,7 @@ void ViewX11::displayScreen(const GamePlayHuman &screen) {
                 break;
         }
     } else {
-        drawRectangle(coin0XPos + screen.coinHighlightRow() * coinDist,
+        drawRectangle(coin0XPos + screen.coinHighlightColumn() * coinDist,
                       coin0YPos + screen.coinHighlightRow() * coinDist,
                       coinDist, coinDist);
     }
@@ -284,8 +282,6 @@ void ViewX11::displayScreen(const GamePlayHuman &screen) {
 void ViewX11::displayScreen(const GamePlayComputer &screen) {
     clearWindow();
     setForeground(defaultFGColor);
-    
-    coinTopRow = screen.coinDisplayTopRowIndex();
 
     const std::string &nextMoveStr = "Next Move";
     
@@ -328,11 +324,12 @@ void ViewX11::displayScreen(const GameOver &screen) {
 
 
 //************************** Display for other elements
-void ViewX11::displayCoinSelection(const CoinSelection &selection) {
-    for (size_t row = coinTopRow; row < coinTopRow + numOfRowsPerDisplay(); ++row) {
+void ViewX11::displayCoinSelection(const CoinSelection &selection,
+const TableNavigator &coinHighlight) {
+    for (size_t row = 0; row < numOfRowsPerDisplay(); ++row) {
         bool coinExhausted = false;
         for (size_t column = 0; column < numOfCoinsPerRow(); ++column) {
-            const size_t coinIndex = row * numOfCoinsPerRow() + column;
+            const size_t coinIndex = (row + coinHighlight.currTopRow()) * numOfCoinsPerRow() + column;
             if (coinIndex >= selection.totalSize()) {
                 coinExhausted = true;
                 break;
@@ -342,6 +339,8 @@ void ViewX11::displayCoinSelection(const CoinSelection &selection) {
         
         if (coinExhausted) break;
     }
+    
+    
     
     flushDisplay();
 }
@@ -425,8 +424,8 @@ void ViewX11::flushDisplay() {
 void ViewX11::drawCoin(const CoinGroup group, const size_t coinIndex,
                           const size_t row, const size_t column)
 {
-    const int x_pos = coin0XPos + coinDist * row;
-    const int y_pos = coin0YPos + coinDist * column;
+    const int x_pos = coin0XPos + coinOffset + coinDist * column;
+    const int y_pos = coin0YPos + coinOffset + coinDist * row;
     setForeground(coinColor(group));
     fillFullCircle(x_pos, y_pos, coinDiameter);
     setForeground(Black);

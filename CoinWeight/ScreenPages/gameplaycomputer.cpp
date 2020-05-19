@@ -35,7 +35,7 @@ const size_t GamePlayComputer::coinHighlightIndex() const {
 }
 
 const size_t GamePlayComputer::coinHighlightRow() const {
-    return coinNavigator.currRow();
+    return coinNavigator.currRowActual();
 }
 
 const size_t GamePlayComputer::coinHighlightColumn() const {
@@ -106,7 +106,7 @@ void GamePlayComputer::coinHighlightDown() {
 }
 
 void GamePlayComputer::coinHighlightLeft() {
-    if (coinNavigator.currRow() == 0) {
+    if (coinNavigator.currRowActual() == 0) {
         transitionToButtonHighlight();
     } else {
         coinNavigator.scrollLeft();
@@ -135,9 +135,7 @@ void GamePlayComputer::onCharInput(const char inputChar) {}
 
 //************************** Return button handling
 void GamePlayComputer::onReturnButton(Controller &controller) {
-    if (isOnButtonHighlight) {
-        controller.sendMove();
-    }
+    // ...
 }
 
 

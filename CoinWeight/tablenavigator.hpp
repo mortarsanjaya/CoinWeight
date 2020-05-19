@@ -21,7 +21,8 @@ public:
     const size_t numOfRowsDisplayed() const;
     const size_t numOfColumns() const;
     const size_t currTopRow() const;
-    const size_t currRow() const;
+    const size_t currRowActual() const;
+    const size_t currRowDisplay() const;
     const size_t currColumn() const;
     const size_t currIndex() const;
     
@@ -38,7 +39,8 @@ private:
     const size_t nColumns;
     
     size_t topRowDisplay;
-    size_t currentRow;
+    size_t currentRowActual;
+    size_t currentRowDisplay;
     size_t currentColumn;
 };
 

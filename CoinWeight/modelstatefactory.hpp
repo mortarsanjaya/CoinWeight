@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "modelstate.hpp"
+#include "gamelevel.hpp"
 
 class ScreenFactory final {
 public:
@@ -28,11 +29,12 @@ public:
         
     static std::unique_ptr<ModelState>
         createGamePlayHumanScreen(const size_t nCoinsTotal,
-        const size_t nRowsDisplay, const size_t nCoinsPerRow);
+        const GameLevel level, const size_t nRowsDisplay,
+        const size_t nCoinsPerRow);
         
     static std::unique_ptr<ModelState>
         createGamePlayComputerScreen(const size_t nCoinsTotal,
-        const size_t nRowsDisplay, const size_t nCoinsPerRow);
+        const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow);
         
     static std::unique_ptr<ModelState>
         createGameOverScreen(const bool isWin);

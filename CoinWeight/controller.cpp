@@ -34,31 +34,16 @@ void Controller::switchToGameSettings() {
     screen = ScreenFactory::createGameSettingsScreen();
 }
 
-void Controller::switchToGamePlay() {
-    // ...
+void Controller::switchToGamePlay(const size_t numOfCoins,
+const GameLevel level, const bool isHumanMode) {
+    if (isHumanMode) {
+        screen = ScreenFactory::createGamePlayHumanScreen(numOfCoins,
+            level, ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow());
+    }
 }
 
 void Controller::switchToGameOver(const bool isWin) {
     screen = ScreenFactory::createGameOverScreen(isWin);
-}
-
-
-
-//************************** Game-related operations
-void Controller::changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup) {
-    // ...
-}
-
-void Controller::compareWeight() {
-    // ...
-}
-
-void Controller::guessFakeCoins() {
-    // ...
-}
-
-void Controller::sendMove() {
-    // ...
 }
 
 

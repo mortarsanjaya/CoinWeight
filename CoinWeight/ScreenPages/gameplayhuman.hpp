@@ -11,7 +11,9 @@
 
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
-#include "coingroup.hpp"
+#include "coinset.hpp"
+#include "humanstd.hpp"
+#include "gamelevel.hpp"
 
 class GamePlayHuman final : public ModelState {
 public:
@@ -20,9 +22,8 @@ public:
         Guess
     };
     
-    GamePlayHuman(const size_t nCoinsTotal,
-                        const size_t nRowsDisplay,
-                        const size_t nCoinsPerRow);
+    GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
+        const size_t nRowsDisplay, const size_t nCoinsPerRow);
                         
     const ButtonHighlight currButtonHighlight() const;
     const size_t coinDisplayTopRowIndex() const;
@@ -42,8 +43,11 @@ public:
 private:
     ButtonHighlight buttonHighlight;
     TableNavigator coinNavigator;
-    
     bool isOnButtonHighlight;
+    
+    CoinSet coinSet;
+    HumanStd human;
+    WeighResult lastResult; // Also used to display invalid guess
     
     void buttonHighlightUp();
     void buttonHighlightDown();
@@ -57,6 +61,10 @@ private:
     
     void transitionToButtonHighlight();
     void transitionToCoinHighlight();
+    
+    // Game operations
+    const WeighResult compareWeight() const;
+    const GuessResult guessFakeCoins() const;
 };
 
 #endif

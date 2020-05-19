@@ -14,6 +14,7 @@
 
 #include "coingroup.hpp"
 #include "weighresult.hpp"
+#include "gamelevel.hpp"
 
 class Controller final {
 public:
@@ -24,14 +25,9 @@ public:
     void switchToInstruction();
     void switchToCredit();
     void switchToGameSettings();
-    void switchToGamePlay();
+    void switchToGamePlay(const size_t numOfCoins,
+        const GameLevel level, const bool isHumanMode);
     void switchToGameOver(const bool isWin);
-    
-    // Game-related operations
-    void changeCoinGroup(const size_t coinIndex, const CoinGroup newGroup);
-    void compareWeight();
-    void guessFakeCoins();
-    void sendMove();
     
     // Input processing
     void processInput();
