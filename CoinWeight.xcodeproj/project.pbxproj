@@ -26,7 +26,6 @@
 		8626C29B246DD6C7003B99D4 /* range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C29A246DD6C7003B99D4 /* range.cpp */; };
 		8626C29F246DD7CC003B99D4 /* playerfactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C29D246DD7CB003B99D4 /* playerfactory.cpp */; };
 		8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A1246DD813003B99D4 /* computertest.cpp */; };
-		8626C2A7246DD890003B99D4 /* humanstd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A6246DD88F003B99D4 /* humanstd.cpp */; };
 		8626C2AB246E00E6003B99D4 /* controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A9246E00E6003B99D4 /* controller.cpp */; };
 		8626C2B0246EE787003B99D4 /* modelstatefactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2AE246EE786003B99D4 /* modelstatefactory.cpp */; };
 		8626C2B4246F27AE003B99D4 /* tablenavigator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2B3246F27AE003B99D4 /* tablenavigator.cpp */; };
@@ -81,8 +80,6 @@
 		8626C29E246DD7CC003B99D4 /* playerfactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = playerfactory.hpp; sourceTree = "<group>"; };
 		8626C2A1246DD813003B99D4 /* computertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = computertest.cpp; sourceTree = "<group>"; };
 		8626C2A2246DD813003B99D4 /* computertest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = computertest.hpp; sourceTree = "<group>"; };
-		8626C2A5246DD88F003B99D4 /* humanstd.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = humanstd.hpp; sourceTree = "<group>"; };
-		8626C2A6246DD88F003B99D4 /* humanstd.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = humanstd.cpp; sourceTree = "<group>"; };
 		8626C2A9246E00E6003B99D4 /* controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = controller.cpp; sourceTree = "<group>"; };
 		8626C2AA246E00E6003B99D4 /* controller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = controller.hpp; sourceTree = "<group>"; };
 		8626C2AE246EE786003B99D4 /* modelstatefactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = modelstatefactory.cpp; sourceTree = "<group>"; };
@@ -184,15 +181,6 @@
 			name = "Computer Testing";
 			sourceTree = "<group>";
 		};
-		8626C2A8246DD896003B99D4 /* Human Standard Mode */ = {
-			isa = PBXGroup;
-			children = (
-				8626C2A6246DD88F003B99D4 /* humanstd.cpp */,
-				8626C2A5246DD88F003B99D4 /* humanstd.hpp */,
-			);
-			name = "Human Standard Mode";
-			sourceTree = "<group>";
-		};
 		8626C2AC246E00F1003B99D4 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,7 +252,6 @@
 			children = (
 				865B163024579966005DE924 /* player.cpp */,
 				865B163124579966005DE924 /* player.hpp */,
-				8626C2A8246DD896003B99D4 /* Human Standard Mode */,
 				8626C2A0246DD7E6003B99D4 /* Player Factory */,
 				8626C29C246DD6CA003B99D4 /* Range */,
 				869C4BE424048E4700C3DE84 /* Computer */,
@@ -547,7 +534,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				861E647C242AD81E00AA6FD7 /* main.cpp in Sources */,
-				8626C2A7246DD890003B99D4 /* humanstd.cpp in Sources */,
 				86E55A83242C390B00053F2E /* weighresult.hpp in Sources */,
 				86219BE324500FF9005E4F93 /* gameplaycomputer.cpp in Sources */,
 				8626C2B4246F27AE003B99D4 /* tablenavigator.cpp in Sources */,

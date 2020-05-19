@@ -12,8 +12,11 @@
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
-#include "humanstd.hpp"
 #include "gamelevel.hpp"
+
+#include "coinselection.hpp"
+#include "history.hpp"
+#include "weighcounter.hpp"
 
 class GamePlayHuman final : public ModelState {
 public:
