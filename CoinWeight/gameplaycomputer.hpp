@@ -11,6 +11,9 @@
 
 #include "modelstate.hpp"
 #include "tablenavigator.hpp"
+#include "coinset.hpp"
+#include "computer.hpp"
+#include "gamelevel.hpp"
 
 class GamePlayComputer final : public ModelState {
 public:
@@ -18,9 +21,8 @@ public:
         NextMove
     };
     
-    GamePlayComputer(const size_t nCoinsTotal,
-                           const size_t nRowsDisplay,
-                           const size_t nCoinsPerRow);
+    GamePlayComputer(const size_t nCoinsTotal, const GameLevel level,
+        const size_t nRowsDisplay, const size_t nCoinsPerRow);
                            
     const ButtonHighlight currButtonHighlight() const;
     const size_t coinDisplayTopRowIndex() const;
@@ -40,8 +42,11 @@ public:
 private:
     ButtonHighlight buttonHighlight;
     TableNavigator coinNavigator;
-    
     bool isOnButtonHighlight;
+    
+    CoinSet coinSet;
+    std::unique_ptr<Computer> computer;
+    WeighResult lastResult;
     
     void buttonHighlightUp();
     void buttonHighlightDown();

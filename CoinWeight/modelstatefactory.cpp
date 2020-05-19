@@ -49,8 +49,8 @@ std::unique_ptr<ModelState>
 ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
 const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
-    return std::make_unique<GamePlayComputer>(nCoinsTotal,
-        nRowsDisplay, nCoinsPerRow);
+    return std::make_unique<GamePlayComputer>(
+        nCoinsTotal, level, nRowsDisplay, nCoinsPerRow);
 }
 
 std::unique_ptr<ModelState>

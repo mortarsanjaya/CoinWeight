@@ -9,14 +9,22 @@
 #include "gameplaycomputer.hpp"
 #include "controller.hpp"
 #include "view.hpp"
+#include "computerfactory.hpp"
+#include "numofweighsmax.hpp"
 
 //************************** Constructor
-GamePlayComputer::GamePlayComputer(const size_t nCoinsTotal,
+GamePlayComputer::GamePlayComputer(const size_t nCoinsTotal, const GameLevel level,
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :
 buttonHighlight(ButtonHighlight::NextMove),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
-isOnButtonHighlight(false)
-{}
+isOnButtonHighlight(false),
+coinSet(nCoinsTotal),
+computer(),
+lastResult(WeighResult::Start)
+{
+    computer = ComputerFactory::create(nCoinsTotal,
+        numOfWeighsMax(nCoinsTotal, level), level);
+}
 
 
 
@@ -106,7 +114,7 @@ void GamePlayComputer::coinHighlightDown() {
 }
 
 void GamePlayComputer::coinHighlightLeft() {
-    if (coinNavigator.currRowActual() == 0) {
+    if (coinNavigator.currColumn() == 0) {
         transitionToButtonHighlight();
     } else {
         coinNavigator.scrollLeft();
@@ -135,7 +143,25 @@ void GamePlayComputer::onCharInput(const char inputChar) {}
 
 //************************** Return button handling
 void GamePlayComputer::onReturnButton(Controller &controller) {
-    // ...
+    if (isOnButtonHighlight) {
+        if (computer->currSelection().sizeOfGuessGroup() == 0) {
+            lastResult = coinSet.compareWeight(computer->currSelection());
+            computer->receiveWeighResult(lastResult);
+        } else {
+            const GuessResult result = coinSet.guessFakeCoins(computer->currSelection());
+            switch (result) {
+                case GuessResult::Invalid:
+                    controller.switchToGameOver(false);
+                    break;
+                case GuessResult::Correct:
+                    controller.switchToGameOver(true);
+                    break;
+                case GuessResult::Incorrect:
+                    controller.switchToGameOver(false);
+                    break;
+            }
+        }
+    }
 }
 
 
@@ -143,4 +169,7 @@ void GamePlayComputer::onReturnButton(Controller &controller) {
 //************************** UI display
 void GamePlayComputer::triggerDisplay(View &view) {
     view.displayScreen(*this);
+    view.displayCoinSelection(computer->currSelection(), coinNavigator);
+    view.displayWeighResult(lastResult);
+    view.displayWeighCounter(computer->weighCounter());
 }

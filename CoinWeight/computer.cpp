@@ -14,6 +14,13 @@ Player{numOfCoins}, counter{numOfMovesMax} {}
 
 
 
+//************************** Field accessor
+const WeighCounter &Computer::weighCounter() const {
+    return counter;
+}
+
+
+
 //************************** Non-virtual functions
 const bool Computer::isAbleToWeigh() const {
     return !counter.isZero();

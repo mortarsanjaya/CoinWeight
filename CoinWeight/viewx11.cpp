@@ -296,7 +296,7 @@ void ViewX11::displayScreen(const GamePlayComputer &screen) {
                 break;
         }
     } else {
-        drawRectangle(coin0XPos + screen.coinHighlightRow() * coinDist,
+        drawRectangle(coin0XPos + screen.coinHighlightColumn() * coinDist,
                       coin0YPos + screen.coinHighlightRow() * coinDist,
                       coinDist, coinDist);
     }

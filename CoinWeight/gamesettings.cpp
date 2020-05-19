@@ -141,7 +141,6 @@ void GameSettings::onReturnButton(Controller &controller) {
 //************************** UI display
 void GameSettings::triggerDisplay(View &view) {
     view.displayScreen(*this);
-    // view.displaySettings(settings);
 }
 
 

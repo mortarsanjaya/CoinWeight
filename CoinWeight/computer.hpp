@@ -17,6 +17,8 @@
 class Computer : public Player {
 public:
 	virtual ~Computer() = default;
+ 
+    const WeighCounter &weighCounter() const;   
     
 protected:
     Computer(const size_t numOfCoins, const size_t numOfMovesMax);

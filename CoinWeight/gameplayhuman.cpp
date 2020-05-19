@@ -18,7 +18,8 @@ buttonHighlight(ButtonHighlight::Weigh),
 coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
 isOnButtonHighlight(false),
 coinSet(nCoinsTotal),
-human(nCoinsTotal, numOfWeighsMax(nCoinsTotal, level))
+human(nCoinsTotal, numOfWeighsMax(nCoinsTotal, level)),
+lastResult(WeighResult::Start)
 {}
 
 

@@ -39,6 +39,9 @@ const GameLevel level, const bool isHumanMode) {
     if (isHumanMode) {
         screen = ScreenFactory::createGamePlayHumanScreen(numOfCoins,
             level, ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow());
+    } else {
+        screen = ScreenFactory::createGamePlayComputerScreen(numOfCoins,
+            level, ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow());
     }
 }
 
