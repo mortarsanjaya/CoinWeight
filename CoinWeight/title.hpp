@@ -21,8 +21,6 @@ public:
     
     Title();
     
-    const Highlight currHighlight() const;
-    
     void highlightUp() override;
     void highlightDown() override;
     void highlightLeft() override;

@@ -16,8 +16,6 @@ public:
     
     GameOver(const bool doesPlayerWin);
     
-    const bool doesPlayerWin() const;
-    
     void highlightUp() override;
     void highlightDown() override;
     void highlightLeft() override;

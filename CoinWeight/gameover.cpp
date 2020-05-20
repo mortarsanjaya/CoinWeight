@@ -16,13 +16,6 @@ playerWin(doesPlayerWin) {}
 
 
 
-//************************** Field accessor
-const bool GameOver::doesPlayerWin() const {
-    return playerWin;
-}
-
-
-
 //************************** Arrow button handling
 void GameOver::highlightUp() {}
 

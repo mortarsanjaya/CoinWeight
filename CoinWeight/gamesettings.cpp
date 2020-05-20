@@ -21,25 +21,6 @@ GameSettings::GameSettings() : highlight(defaultHighlight) {}
 
 
 
-//************************** Field accessors
-const GameSettings::Highlight GameSettings::currHighlight() const {
-    return highlight;
-}
-
-const size_t GameSettings::numOfCoins() const {
-    return nCoins;
-}
-
-const GameLevel GameSettings::gameLevel() const {
-    return level;
-}
-
-const bool GameSettings::isHumanMode() const {
-    return isHuman;
-}
-
-
-
 //************************** Arrow button handling
 void GameSettings::highlightUp() {
     switch (highlight) {

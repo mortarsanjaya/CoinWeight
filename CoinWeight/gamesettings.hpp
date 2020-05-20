@@ -24,12 +24,6 @@ public:
     
     GameSettings();
     
-    const Highlight currHighlight() const;
-    
-    const size_t numOfCoins() const;
-    const GameLevel gameLevel() const;
-    const bool isHumanMode() const;
-    
     void highlightUp() override;
     void highlightDown() override;
     void highlightLeft() override;

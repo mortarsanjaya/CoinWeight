@@ -26,30 +26,9 @@ counter(numOfWeighsMax(nCoinsTotal, level))
 
 
 
-//************************** Field accessors
-const GamePlayHuman::ButtonHighlight
-GamePlayHuman::currButtonHighlight() const {
-    return buttonHighlight;
-}
-
-const size_t GamePlayHuman::coinDisplayTopRowIndex() const {
-    return coinNavigator.currTopRow();
-}
-
+//************************** Private accessor
 const size_t GamePlayHuman::coinHighlightIndex() const {
     return coinNavigator.currIndex();
-}
-
-const size_t GamePlayHuman::coinHighlightRow() const {
-    return coinNavigator.currRowDisplay();
-}
-
-const size_t GamePlayHuman::coinHighlightColumn() const {
-    return coinNavigator.currColumn();
-}
-
-const bool GamePlayHuman::onButtonHighlight() const {
-    return isOnButtonHighlight;
 }
 
 

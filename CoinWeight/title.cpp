@@ -15,13 +15,6 @@ Title::Title() : highlight(defaultHighlight) {}
 
 
 
-//************************** Field accessors
-const Title::Highlight Title::currHighlight() const {
-    return highlight;
-}
-
-
-
 //************************** Arrow button handling
 void Title::highlightUp() {
     switch (highlight) {
