@@ -81,5 +81,6 @@ void Title::onReturnButton(Controller &controller) {
 
 //************************** UI display
 void Title::triggerDisplay(View &view) {
-    view.displayScreen(*this);
+    view.displayLayoutTitle();
+    view.displayHighlight(highlight);
 }

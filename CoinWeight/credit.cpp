@@ -40,5 +40,5 @@ void Credit::onReturnButton(Controller &controller) {
 
 //************************** UI display
 void Credit::triggerDisplay(View &view) {
-    view.displayScreen(*this);
+    view.displayLayoutCredit();
 }

@@ -74,12 +74,9 @@ ViewX11::~ViewX11() {
 
 
 
-//************************** Display screen
-void ViewX11::displayScreen(const Title &screen) {
+//************************** Display for Title
+void ViewX11::displayLayoutTitle() {
     clearWindow();
-    
-    const Title::Highlight highlight = screen.currHighlight();
-    
     setForeground(defaultFGColor);
     
     constexpr int text_x_pos = 300;
@@ -94,22 +91,33 @@ void ViewX11::displayScreen(const Title &screen) {
     drawString(text_x_pos + border, top_button_y_pos + 2 * total_string_height - border, instrStr);
     drawString(text_x_pos + border, top_button_y_pos + 3 * total_string_height - border, creditStr);
     
+    flushDisplay();
+}
+
+void ViewX11::displayHighlight(const Title::Highlight highlight) {
+    
+    constexpr int text_x_pos = 300;
+    constexpr int top_button_y_pos = 300;
+    
     switch (highlight) {
         case Title::Highlight::Play:
-            drawRectangle(text_x_pos, top_button_y_pos, total_string_width(playStr.length()), total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos, 50, total_string_height);
             break;
         case Title::Highlight::Instruction:
-            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, total_string_width(instrStr.length()), total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, 50, total_string_height);
             break;
         case Title::Highlight::Credit:
-            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, total_string_width(creditStr.length()), total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, 50, total_string_height);
             break;
     }
     
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const Instruction &instructionScreen) {
+
+
+//************************** Display for Instruction
+void ViewX11::displayLayoutInstruction() {
     clearWindow();
     setForeground(defaultFGColor);
 
@@ -173,7 +181,10 @@ void ViewX11::displayScreen(const Instruction &instructionScreen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const Credit &screen) {
+
+
+//************************** Display for Credit
+void ViewX11::displayLayoutCredit() {
     clearWindow();
     setForeground(defaultFGColor);
     
@@ -186,11 +197,12 @@ void ViewX11::displayScreen(const Credit &screen) {
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GameSettings &screen) {
+
+
+//************************** Display for Game Settings
+void ViewX11::displayLayoutGameSettings() {
     clearWindow();
     setForeground(defaultFGColor);
-    
-    const GameSettings::Highlight highlight = screen.currHighlight();
     
     drawString(300, 50, "Coin Weight");
     drawString(300, 300 + total_string_height - border, "Number of Coins:");
@@ -204,6 +216,29 @@ void ViewX11::displayScreen(const GameSettings &screen) {
     drawString(350 + border, 400 + total_string_height - border, startGameStr);
     drawString(350 + border, 400 + 2 * total_string_height - border, goBackStr);
     
+    flushDisplay();
+}
+
+void ViewX11::displaySettingsValue(const size_t numOfCoins, const GameLevel level, const bool mode) {
+    const std::string gameLevelStr = [&level]() -> std::string {
+        switch (level) {
+            case GameLevel::Easy:
+                return "Easy";
+            case GameLevel::Medium:
+                return "Medium";
+            case GameLevel::Hard:
+                return "Hard";
+            }
+    }();
+    
+    drawString(400 + border, 300 + total_string_height - border, std::to_string(numOfCoins));
+    drawString(400 + border, 300 + 2 * total_string_height - border, gameLevelStr);
+    drawString(400 + border, 300 + 3 * total_string_height - border, mode ? "Human" : "Computer");
+    
+    flushDisplay();
+}
+
+void ViewX11::displayHighlight(const GameSettings::Highlight highlight) {
     switch (highlight) {
         case GameSettings::Highlight::NumOfCoins:
             drawRectangle(400, 300, 100, total_string_height);
@@ -215,42 +250,20 @@ void ViewX11::displayScreen(const GameSettings &screen) {
             drawRectangle(400, 300 + 2 * total_string_height, 100, total_string_height);
             break;
         case GameSettings::Highlight::StartGame:
-            drawRectangle(350, 400, total_string_width(startGameStr.size()),
-                total_string_height);
+            drawRectangle(350, 400, 100, total_string_height);
             break;
         case GameSettings::Highlight::GoBack:
-            drawRectangle(350, 400 + total_string_height,
-                total_string_width(goBackStr.size()), total_string_height);
+            drawRectangle(350, 400 + total_string_height, 100, total_string_height);
             break;
     }
-    
-    const std::string gameLevelStr = [&screen]() -> std::string {
-        switch (screen.gameLevel()) {
-            case GameLevel::Easy:
-                return "Easy";
-                break;
-            case GameLevel::Medium:
-                return "Medium";
-                break;
-            case GameLevel::Hard:
-                return "Hard";
-                break;
-            }
-    }();
-    
-    drawString(400 + border, 300 + total_string_height - border,
-        std::to_string(screen.numOfCoins()));
-    drawString(400 + border, 300 + 2 * total_string_height - border,
-        gameLevelStr);
-    drawString(400 + border, 300 + 3 * total_string_height - border,
-        screen.isHumanMode() ? "Human" : "Computer");
     
     flushDisplay();
 }
 
 
 
-void ViewX11::displayScreen(const GamePlayHuman &screen) {
+//************************** Display for Game Play
+void ViewX11::displayLayoutGamePlayHuman() {
     clearWindow();
     setForeground(defaultFGColor);
 
@@ -259,78 +272,49 @@ void ViewX11::displayScreen(const GamePlayHuman &screen) {
     
     drawString(50 + border, 300 + total_string_height - border, weighStr);
     drawString(50 + border, 300 + 2 * total_string_height - border, guessStr);
-
-    if (screen.onButtonHighlight()) {
-        switch (screen.currButtonHighlight()) {
-            case GamePlayHuman::ButtonHighlight::Weigh:
-                drawRectangle(50, 300, total_string_width(weighStr.size()),
-                    total_string_height);
-                break;
-            case GamePlayHuman::ButtonHighlight::Guess:
-                drawRectangle(50, 300 + total_string_height, total_string_width(guessStr.size()),
-                    total_string_height);
-                break;
-        }
-    } else {
-        drawRectangle(coin0XPos + screen.coinHighlightColumn() * coinDist,
-                      coin0YPos + screen.coinHighlightRow() * coinDist,
-                      coinDist, coinDist);
-    }
     
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GamePlayComputer &screen) {
+void ViewX11::displayLayoutGamePlayComputer() {
     clearWindow();
     setForeground(defaultFGColor);
 
     const std::string &nextMoveStr = "Next Move";
     
     drawString(50 + border, 300 + total_string_height - border, nextMoveStr);
+    
+    flushDisplay();
+}
 
-    if (screen.onButtonHighlight()) {
-        switch (screen.currButtonHighlight()) {
-            case GamePlayComputer::ButtonHighlight::NextMove:
-                drawRectangle(50, 300, total_string_width(nextMoveStr.size()),
-                    total_string_height);
-                break;
-        }
-    } else {
-        drawRectangle(coin0XPos + screen.coinHighlightColumn() * coinDist,
-                      coin0YPos + screen.coinHighlightRow() * coinDist,
-                      coinDist, coinDist);
+void ViewX11::displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight) {
+    switch (highlight) {
+        case GamePlayHuman::ButtonHighlight::Weigh:
+            drawRectangle(50, 300, 50, total_string_height);
+            break;
+        case GamePlayHuman::ButtonHighlight::Guess:
+            drawRectangle(50, 300 + total_string_height, 50, total_string_height);
+            break;
     }
     
     flushDisplay();
 }
 
-void ViewX11::displayScreen(const GameOver &screen) {
-    clearWindow();
-    setForeground(defaultFGColor);
-    
-    if (screen.doesPlayerWin()) {
-        drawString(300, 200, "You Win!");
-    } else {
-        drawString(300, 200, "You Lose!");
+void ViewX11::displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight) {
+    switch (highlight) {
+        case GamePlayComputer::ButtonHighlight::NextMove:
+            drawRectangle(50, 300, 50, total_string_height);
+            break;
     }
-    
-    const std::string &returnStr = "Return";
-    
-    drawString(300 + border, 500 + total_string_height - border, returnStr);
-    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
     
     flushDisplay();
 }
 
-
-
-//************************** Display for other elements
-void ViewX11::displayCoinSelection(const CoinSelection &selection,
-const TableNavigator &coinHighlight) {
+void ViewX11::displayCoinSelection(const CoinSelection &selection, const size_t topRowIndex) {
     for (size_t row = 0; row < numOfRowsPerDisplay(); ++row) {
         bool coinExhausted = false;
         for (size_t column = 0; column < numOfCoinsPerRow(); ++column) {
-            const size_t coinIndex = (row + coinHighlight.currTopRow()) * numOfCoinsPerRow() + column;
+            const size_t coinIndex = (row + topRowIndex) * numOfCoinsPerRow() + column;
             if (coinIndex >= selection.totalSize()) {
                 coinExhausted = true;
                 break;
@@ -340,8 +324,6 @@ const TableNavigator &coinHighlight) {
         
         if (coinExhausted) break;
     }
-    
-    
     
     flushDisplay();
 }
@@ -360,6 +342,33 @@ void ViewX11::displayWeighCounter(const WeighCounter &counter) {
     numOfWeighsStr += " out of ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
     drawString(30, 60, numOfWeighsStr);
+    
+    flushDisplay();
+}
+
+void ViewX11::displayCoinHighlight(const size_t row, const size_t column) {
+    drawRectangle(coin0XPos + coinDist * column, coin0YPos + coinDist * row, coinDist, coinDist);
+    
+    flushDisplay();
+}
+
+
+
+//************************** Display for Game Over
+void ViewX11::displayLayoutGameOver(const bool isWin) {
+    clearWindow();
+    setForeground(defaultFGColor);
+    
+    if (isWin) {
+        drawString(300, 200, "You Win!");
+    } else {
+        drawString(300, 200, "You Lose!");
+    }
+    
+    const std::string &returnStr = "Return";
+    
+    drawString(300 + border, 500 + total_string_height - border, returnStr);
+    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
     
     flushDisplay();
 }

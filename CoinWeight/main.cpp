@@ -17,15 +17,15 @@
 using namespace std;
 
 int main() {
-    computerTest(100, GameLevel::Easy);
-    computerTest(75, GameLevel::Medium);
+    computerTest(75, GameLevel::Easy);
+    computerTest(100, GameLevel::Medium);
 
 /*
-    auto view = std::make_unique<Controller>(std::make_unique<ViewX11>());
+    auto controller = std::make_unique<Controller>(std::make_unique<ViewX11>());
     while (true) {
-        view->updateDisplay();
+        controller->updateDisplay();
         std::this_thread::sleep_for(std::chrono::milliseconds(16));
-        view->processInput();
+        controller->processInput();
     }
 */
 }

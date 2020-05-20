@@ -48,5 +48,5 @@ void GameOver::onReturnButton(Controller &controller) {
 
 //************************** UI display
 void GameOver::triggerDisplay(View &view) {
-    view.displayScreen(*this);
+    view.displayLayoutGameOver(playerWin);
 }

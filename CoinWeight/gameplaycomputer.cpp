@@ -200,8 +200,13 @@ void GamePlayComputer::computerSetSelection() {
 
 //************************** UI display
 void GamePlayComputer::triggerDisplay(View &view) {
-    view.displayScreen(*this);
-    view.displayCoinSelection(selection, coinNavigator);
+    view.displayLayoutGamePlayComputer();
+    view.displayCoinSelection(selection, coinNavigator.currTopRow());
     view.displayWeighResult(lastResult);
     view.displayWeighCounter(counter);
+    if (isOnButtonHighlight) {
+        view.displayButtonHighlight(buttonHighlight);
+    } else {
+        view.displayCoinHighlight(coinNavigator.currRowDisplay(), coinNavigator.currColumn());
+    }
 }

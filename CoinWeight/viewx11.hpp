@@ -31,33 +31,45 @@
 
 #include "exception.hpp"
 
-class ViewX11 : public View {
+class ViewX11 final : public View {
 public:
     ViewX11();
     ~ViewX11();
     
-    // Screen displaying
-    void displayScreen(const Title &screen) final;
-    void displayScreen(const Instruction &screen) final;
-    void displayScreen(const Credit &screen) final;
-    void displayScreen(const GameSettings &screen) final;
-    void displayScreen(const GamePlayHuman &screen) final;
-    void displayScreen(const GamePlayComputer &screen) final;
-    void displayScreen(const GameOver &screen) final;
+    // Display for Title
+    void displayLayoutTitle() final;
+    void displayHighlight(const Title::Highlight highlight) final;
     
-    // Displaying functions for other elements
-    void displaySettings(const GameSettings &settings);
-    void displayCoinSelection(const CoinSelection &selection,
-        const TableNavigator &coinHighlight) final;
+    // Display for Instruction
+    void displayLayoutInstruction() final;
+    
+    // Display for Credit
+    void displayLayoutCredit() final;
+    
+    // Display for Game Settings
+    void displayLayoutGameSettings() final;
+    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const bool mode) final;
+    void displayHighlight(const GameSettings::Highlight highlight) final;
+    
+    // Display for game play
+    void displayLayoutGamePlayHuman() final;
+    void displayLayoutGamePlayComputer() final;
+    void displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight) final;
+    void displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight) final;
+    void displayCoinSelection(const CoinSelection &selection, const size_t topRowIndex) final;
     void displayWeighResult(const WeighResult weighResult) final;
     void displayWeighCounter(const WeighCounter &weighCounter) final;
+    void displayCoinHighlight(const size_t row, const size_t column) final;
+    
+    // Display for Game Over
+    void displayLayoutGameOver(const bool isWin) final;
     
     // Information for coin displaying
-    const size_t numOfCoinsPerRow() const override;
-    const size_t numOfRowsPerDisplay() const override;
+    const size_t numOfCoinsPerRow() const final;
+    const size_t numOfRowsPerDisplay() const final;
     
     // Input handling functions
-    const Input nextInput() override;
+    const Input nextInput() final;
 
 private:
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };

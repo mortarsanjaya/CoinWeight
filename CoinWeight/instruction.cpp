@@ -40,5 +40,5 @@ void Instruction::onReturnButton(Controller &controller) {
 
 //************************** UI display
 void Instruction::triggerDisplay(View &view) {
-    view.displayScreen(*this);
+    view.displayLayoutInstruction();
 }

@@ -140,7 +140,9 @@ void GameSettings::onReturnButton(Controller &controller) {
 
 //************************** UI display
 void GameSettings::triggerDisplay(View &view) {
-    view.displayScreen(*this);
+    view.displayLayoutGameSettings();
+    view.displaySettingsValue(nCoins, level, isHuman);
+    view.displayHighlight(highlight);
 }
 
 
