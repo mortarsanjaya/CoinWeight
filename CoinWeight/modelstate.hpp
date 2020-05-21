@@ -29,7 +29,7 @@ public:
     virtual void onCharInput(const char inputChar) = 0;
 
     // Action on return button press (most certainly screen switching)
-    // Assumes that the controller is the owner of the caller model state
+    // Assumes that the model is the owner of the caller model state
     virtual void onReturnButton(Model &model) = 0;
     
     // Triggers View and UI for displaying the current screen
