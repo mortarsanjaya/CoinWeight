@@ -11,6 +11,10 @@
 
 #include "computer.hpp"
 
+namespace CoinWeight {
+  
+  
+
 class ComputerEasy1 final : public Computer {
 public:
 	ComputerEasy1(const size_t numOfCoins);
@@ -45,6 +49,10 @@ private:
     void afterWeighCoin0IsFake(const WeighResult weighResult);
     void afterWeighCoin0IsReal0(const WeighResult weighResult);
     void afterWeighCoin0IsReal1(const WeighResult weighResult);
+};
+
+
+
 };
 
 #endif

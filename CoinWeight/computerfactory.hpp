@@ -12,6 +12,10 @@
 #include <memory>
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+  
+  
+
 class Computer;
 
 class ComputerFactory final {
@@ -28,6 +32,10 @@ private:
     
     static std::unique_ptr<Computer>
     createHard(const size_t numOfCoins);
+};
+
+
+
 };
 
 #endif

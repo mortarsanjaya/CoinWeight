@@ -11,6 +11,10 @@
 
 #include "modelstate.hpp"
 
+namespace CoinWeight {
+  
+  
+
 class GameOver final : public ModelState {
 public:
     
@@ -26,6 +30,10 @@ public:
     
 private:
     bool playerWin;
+};
+
+
+
 };
 
 #endif

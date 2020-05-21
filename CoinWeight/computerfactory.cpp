@@ -11,6 +11,8 @@
 #include "computereasy1.hpp"
 #include "computermedium1.hpp"
 
+using namespace CoinWeight;
+
 //************************** Main factory method
 std::unique_ptr<Computer>
 ComputerFactory::create(const size_t numOfCoins, const GameLevel level) {

@@ -9,6 +9,8 @@
 #include "weighcounter.hpp"
 #include "exception.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 WeighCounter::WeighCounter(const size_t numOfMovesMax) :
 nMovesMax(numOfMovesMax), nMovesLeft(numOfMovesMax) {}

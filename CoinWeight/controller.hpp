@@ -16,6 +16,10 @@
 #include "weighresult.hpp"
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
+
+
 class Controller final {
 public:
     Controller(std::unique_ptr<View> ui);
@@ -38,6 +42,10 @@ public:
 private:
     std::unique_ptr<View> ui;
     std::unique_ptr<ModelState> screen;
+};
+
+
+
 };
 
 #endif

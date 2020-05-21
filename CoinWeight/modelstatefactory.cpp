@@ -16,6 +16,8 @@
 #include "gameplaycomputer.hpp"
 #include "gameover.hpp"
 
+using namespace CoinWeight;
+
 //************************** Factory methods
 std::unique_ptr<ModelState>
 ScreenFactory::createTitleScreen() {

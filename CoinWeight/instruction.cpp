@@ -10,6 +10,8 @@
 #include "view.hpp"
 #include "controller.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 Instruction::Instruction() {}
 

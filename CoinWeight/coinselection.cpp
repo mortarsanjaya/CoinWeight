@@ -9,6 +9,8 @@
 #include "coinselection.hpp"
 #include "exception.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 CoinSelection::CoinSelection(const size_t numOfCoins) :
 content(numOfCoins, CoinGroup::NoSelect), groupSizeLeft(0),

@@ -11,6 +11,8 @@
 #include <random>
 #include <algorithm>
 
+using namespace CoinWeight;
+
 //************************** Constructor
 CoinSet::CoinSet(const size_t numOfCoins) : nCoins(numOfCoins) {
 	if (numOfFakeCoins > numOfCoins) {

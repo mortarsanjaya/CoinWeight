@@ -9,10 +9,18 @@
 #ifndef guessresult_hpp
 #define guessresult_hpp
 
+namespace CoinWeight {
+
+
+
 enum class GuessResult {
     Invalid,
     Correct,
     Incorrect
+};
+
+
+
 };
 
 #endif

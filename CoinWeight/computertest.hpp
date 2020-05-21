@@ -12,6 +12,10 @@
 #include <utility>
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
 void computerTest(const size_t nCoinsCap, const GameLevel level);
+
+};
 
 #endif

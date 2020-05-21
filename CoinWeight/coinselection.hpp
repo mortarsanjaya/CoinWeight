@@ -12,6 +12,10 @@
 #include <vector>
 #include "coingroup.hpp"
 
+namespace CoinWeight {
+
+
+
 class CoinSelection final {
 public:
     CoinSelection(const size_t numOfCoins);
@@ -34,6 +38,10 @@ private:
     size_t groupSizeGuess;
     
     void deselect(const size_t index);
+};
+
+
+
 };
 
 #endif

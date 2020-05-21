@@ -8,6 +8,8 @@
 
 #include "history.hpp"
 
+using namespace CoinWeight;
+
 //************************** Field accessors
 const size_t History::size() const {
     return listOfRecords.size();

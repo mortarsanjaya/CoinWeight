@@ -18,6 +18,8 @@ In fact, in this case, if the second move is necessary, Coin 0 and 1 are fake
 In both cases, after determining if Coin 0 is genuine, all other coins
     can be determined by comparing against coin 0
  */
+ 
+ using namespace CoinWeight;
 
 //************************** Constructor
 ComputerEasy1::ComputerEasy1(const size_t numOfCoins) :

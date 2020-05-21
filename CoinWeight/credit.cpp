@@ -10,6 +10,8 @@
 #include "controller.hpp"
 #include "view.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 Credit::Credit() {}
 

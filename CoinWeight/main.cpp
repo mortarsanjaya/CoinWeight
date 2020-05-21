@@ -14,7 +14,7 @@
 #include <chrono>
 #include <thread>
 
-using namespace std;
+using namespace CoinWeight;
 
 int main() {
     computerTest(75, GameLevel::Easy);

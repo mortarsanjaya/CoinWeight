@@ -12,6 +12,10 @@
 #include <utility>
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
+
+
 class WeighCounter {
 public:
     WeighCounter(const size_t numOfMovesMax);
@@ -24,6 +28,10 @@ public:
 private:
     const size_t nMovesMax;
     size_t nMovesLeft;
+};
+
+
+
 };
 
 #endif

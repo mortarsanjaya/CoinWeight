@@ -19,6 +19,10 @@
 #include "history.hpp"
 #include "weighcounter.hpp"
 
+namespace CoinWeight {
+
+
+
 class GamePlayComputer final : public ModelState {
 public:
     enum class ButtonHighlight {
@@ -69,6 +73,10 @@ private:
     const GuessResult guessFakeCoins() const;
     
     void computerSetSelection();
+};
+
+
+
 };
 
 #endif

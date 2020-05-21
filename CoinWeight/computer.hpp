@@ -12,6 +12,10 @@
 #include <memory>
 #include "weighresult.hpp"
 
+namespace CoinWeight {
+
+
+
 class CoinSelection;
 
 class Computer {
@@ -23,6 +27,10 @@ public:
     // It also assumes that selection is set at default (all coins NoSelect)
 	virtual void setSelection(CoinSelection &selection) const = 0;
     virtual void changeState(const WeighResult weighResult) = 0;
+};
+
+
+
 };
 
 #endif

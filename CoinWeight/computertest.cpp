@@ -18,7 +18,7 @@
 #include "weighcounter.hpp"
 #include "numofweighsmax.hpp"
 
-void computerTest(const size_t nCoinsCap, const GameLevel level) {
+void CoinWeight::computerTest(const size_t nCoinsCap, const GameLevel level) {
 
     std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 

@@ -11,6 +11,11 @@
 
 #include "modelstate.hpp"
 #include "gamelevel.hpp"
+#include <utility>
+
+namespace CoinWeight {
+
+
 
 class GameSettings final : public ModelState {
 public:
@@ -51,6 +56,10 @@ private:
     void increaseLevel();
     void decreaseLevel();
     void switchMode();
+};
+
+
+
 };
 
 #endif

@@ -12,6 +12,14 @@
 #include <utility>
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
+
+
 const size_t numOfWeighsMax(const size_t numOfCoins, const GameLevel level);
+
+
+
+};
 
 #endif

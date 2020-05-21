@@ -21,6 +21,8 @@ Otherwise, both piles contain one fake coin (and the remaining coin is real, if 
 The State::Range implements the coin index range for each pile
 For Finish-type State from OneRange, put the second fake coin into range 2
  */
+ 
+ using namespace CoinWeight;
 
 //************************** Constructor (+ State)
 ComputerMedium1::ComputerMedium1(const size_t numOfCoins) :

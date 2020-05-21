@@ -10,10 +10,13 @@
 #include "controller.hpp"
 #include "view.hpp"
 
+using namespace CoinWeight;
+
 //************************** Static members
 size_t GameSettings::nCoins = defaultNumOfCoins;
 GameLevel GameSettings::level = defaultLevel;
 bool GameSettings::isHuman = defaultIsHuman;
+
 
 
 //************************** Constructor

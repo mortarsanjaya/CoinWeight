@@ -24,6 +24,10 @@
 
 #include "input.hpp"
 
+namespace CoinWeight {
+
+
+
 class View {
 public:
     virtual ~View() = default;
@@ -62,6 +66,10 @@ public:
     
     // Input handling functions
     virtual const Input nextInput() = 0;
+};
+
+
+
 };
 
 #endif

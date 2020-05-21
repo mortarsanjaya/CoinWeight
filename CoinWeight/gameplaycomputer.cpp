@@ -12,6 +12,8 @@
 #include "computerfactory.hpp"
 #include "numofweighsmax.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 GamePlayComputer::GamePlayComputer(const size_t nCoinsTotal, const GameLevel level,
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :

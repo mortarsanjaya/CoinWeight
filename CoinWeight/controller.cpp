@@ -9,6 +9,8 @@
 #include "controller.hpp"
 #include "modelstatefactory.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 Controller::Controller(std::unique_ptr<View> ui) :
 ui(std::move(ui)), screen() {

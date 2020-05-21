@@ -11,6 +11,10 @@
 
 #include "modelstate.hpp"
 
+namespace CoinWeight {
+
+
+
 class Title final : public ModelState {
 public:
     enum class Highlight {
@@ -20,7 +24,7 @@ public:
     };
     
     Title();
-    
+
     void highlightUp() override;
     void highlightDown() override;
     void highlightLeft() override;
@@ -33,6 +37,10 @@ private:
     Highlight highlight;
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
+};
+
+
+
 };
 
 #endif

@@ -44,7 +44,7 @@ static const size_t nMovesMaxInsane(const size_t numOfCoins) {
 
 
 //************************** Main function
-const size_t numOfWeighsMax(const size_t numOfCoins, const GameLevel level) {
+const size_t CoinWeight::numOfWeighsMax(const size_t numOfCoins, const GameLevel level) {
     switch (level) {
         case GameLevel::Easy:
             return nMovesMaxEasy(numOfCoins);

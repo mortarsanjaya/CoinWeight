@@ -11,6 +11,8 @@
 #include <utility>
 #include <cmath>
 
+using namespace CoinWeight;
+
 //************************** Constructor and Destructor
 ViewX11::ViewX11() {
     const int width = 800;

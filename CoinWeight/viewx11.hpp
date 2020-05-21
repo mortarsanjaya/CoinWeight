@@ -31,6 +31,10 @@
 
 #include "exception.hpp"
 
+namespace CoinWeight {
+
+
+
 class ViewX11 final : public View {
 public:
     ViewX11();
@@ -137,6 +141,10 @@ private:
     // Reverts foreground to default after use
     void drawWeighResultText(const WeighResult weighResult);
     void drawWeighingScale(const WeighResult weighResult); // Need to be revised
+};
+
+
+
 };
 
 #endif

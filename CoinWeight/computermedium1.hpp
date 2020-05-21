@@ -13,6 +13,10 @@
 #include "range.hpp"
 #include "exception.hpp"
 
+namespace CoinWeight {
+
+
+
 class ComputerMedium1 final : public Computer {
 public:
 	ComputerMedium1(const size_t numOfCoins);
@@ -67,6 +71,10 @@ private:
     static const size_t splitSize(const Range &range);
     
     static void internalBug() throw (Exception<ComputerMedium1>);
+};
+
+
+
 };
 
 #endif

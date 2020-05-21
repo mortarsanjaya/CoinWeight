@@ -13,6 +13,10 @@
 #include "modelstate.hpp"
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
+
+
 class ScreenFactory final {
 public:
     static std::unique_ptr<ModelState>
@@ -40,5 +44,8 @@ public:
         createGameOverScreen(const bool isWin);
 };
 
+
+
+};
 
 #endif

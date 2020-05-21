@@ -13,6 +13,10 @@
 #include "coinselection.hpp"
 #include "weighresult.hpp"
 
+namespace CoinWeight {
+
+
+
 class History final {
 public:
     History() = default;
@@ -35,6 +39,10 @@ private:
     };
     
     std::vector<Record> listOfRecords;
+};
+
+
+
 };
 
 #endif

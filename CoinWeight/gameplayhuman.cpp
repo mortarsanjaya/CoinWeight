@@ -11,6 +11,8 @@
 #include "view.hpp"
 #include "numofweighsmax.hpp"
 
+using namespace CoinWeight;
+
 //************************** Constructor
 GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
     const size_t nRowsDisplay, const size_t nCoinsPerRow) :

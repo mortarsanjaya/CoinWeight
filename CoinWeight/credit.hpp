@@ -11,6 +11,10 @@
 
 #include "modelstate.hpp"
 
+namespace CoinWeight {
+
+
+
 class Credit final : public ModelState {
 public:
     Credit();
@@ -22,6 +26,10 @@ public:
     void onCharInput(const char inputChar) override;
     void onReturnButton(Controller &controller) override;
     void triggerDisplay(View &view) override;
+};
+
+
+
 };
 
 #endif

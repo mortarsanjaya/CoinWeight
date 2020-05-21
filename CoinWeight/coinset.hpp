@@ -13,6 +13,10 @@
 #include "weighresult.hpp"
 #include "guessresult.hpp"
 
+namespace CoinWeight {
+
+
+
 enum class GameLevel;
 
 class CoinSet final {
@@ -34,6 +38,10 @@ private:
     
 	static constexpr size_t numOfFakeCoins = 2;
     const bool isFakeCoinIndex(const size_t index) const;
+};
+
+
+
 };
 
 #endif

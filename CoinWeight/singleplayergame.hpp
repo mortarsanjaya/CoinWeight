@@ -16,6 +16,10 @@
 #include "history.hpp"
 #include "gamelevel.hpp"
 
+namespace CoinWeight {
+
+
+
 class SinglePlayerGame : public ModelState {
 public:
     SinglePlayerGame(const size_t nCoinsTotal, const GameLevel level,
@@ -60,6 +64,10 @@ private:
     // Game operations
     const WeighResult compareWeight() const;
     const GuessResult guessFakeCoins() const;
+};
+
+
+
 };
 
 #endif
