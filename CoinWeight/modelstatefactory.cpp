@@ -19,27 +19,27 @@
 using namespace CoinWeight;
 
 //************************** Factory methods
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createTitleScreen() {
     return std::make_unique<Title>();
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createInstructionScreen() {
     return std::make_unique<Instruction>();
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createCreditScreen() {
     return std::make_unique<Credit>();
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createGameSettingsScreen() {
     return std::make_unique<GameSettings>();
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal,
 const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
@@ -47,7 +47,7 @@ const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
         nCoinsTotal, level, nRowsDisplay, nCoinsPerRow);
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
 const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
 {
@@ -55,7 +55,7 @@ const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
         nCoinsTotal, level, nRowsDisplay, nCoinsPerRow);
 }
 
-std::unique_ptr<ModelState>
+std::unique_ptr<GameScreenBase>
 ScreenFactory::createGameOverScreen(const bool isWin) {
     return std::make_unique<GameOver>(isWin);
 }

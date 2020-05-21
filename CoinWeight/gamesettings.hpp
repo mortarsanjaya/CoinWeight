@@ -9,7 +9,7 @@
 #ifndef gamesettings_hpp
 #define gamesettings_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 #include "gamelevel.hpp"
 #include <utility>
 
@@ -17,7 +17,7 @@ namespace CoinWeight {
 
 
 
-class GameSettings final : public ModelState {
+class GameSettings final : public GameScreenBase {
 public:
     enum class Highlight {
         NumOfCoins,

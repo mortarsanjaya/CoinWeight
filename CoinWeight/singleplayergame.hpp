@@ -9,7 +9,7 @@
 #ifndef singleplayergame_hpp
 #define singleplayergame_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
 #include "coinselection.hpp"
@@ -20,7 +20,7 @@ namespace CoinWeight {
 
 
 
-class SinglePlayerGame : public ModelState {
+class SinglePlayerGame : public GameScreenBase {
 public:
     SinglePlayerGame(const size_t nCoinsTotal, const GameLevel level,
         const size_t nRowsDisplay, const size_t nCoinsPerRow);

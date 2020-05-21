@@ -9,7 +9,7 @@
 #ifndef gameplaycomputer_hpp
 #define gameplaycomputer_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
 #include "computer.hpp"
@@ -23,7 +23,7 @@ namespace CoinWeight {
 
 
 
-class GamePlayComputer final : public ModelState {
+class GamePlayComputer final : public GameScreenBase {
 public:
     enum class ButtonHighlight {
         NextMove

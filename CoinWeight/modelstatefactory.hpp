@@ -10,7 +10,7 @@
 #define modelstatefactory_hpp
 
 #include <memory>
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 #include "gamelevel.hpp"
 
 namespace CoinWeight {
@@ -19,28 +19,28 @@ namespace CoinWeight {
 
 class ScreenFactory final {
 public:
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createTitleScreen();
     
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createInstructionScreen();
         
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createCreditScreen();
         
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createGameSettingsScreen();
         
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createGamePlayHumanScreen(const size_t nCoinsTotal,
         const GameLevel level, const size_t nRowsDisplay,
         const size_t nCoinsPerRow);
         
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createGamePlayComputerScreen(const size_t nCoinsTotal,
         const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow);
         
-    static std::unique_ptr<ModelState>
+    static std::unique_ptr<GameScreenBase>
         createGameOverScreen(const bool isWin);
 };
 

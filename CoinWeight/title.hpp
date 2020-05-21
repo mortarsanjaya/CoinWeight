@@ -9,13 +9,13 @@
 #ifndef title_hpp
 #define title_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 
 namespace CoinWeight {
 
 
 
-class Title final : public ModelState {
+class Title final : public GameScreenBase {
 public:
     enum class Highlight {
         Play,

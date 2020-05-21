@@ -9,13 +9,13 @@
 #ifndef credit_hpp
 #define credit_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 
 namespace CoinWeight {
 
 
 
-class Credit final : public ModelState {
+class Credit final : public GameScreenBase {
 public:
     Credit();
     

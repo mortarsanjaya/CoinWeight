@@ -9,13 +9,13 @@
 #ifndef gameover_hpp
 #define gameover_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 
 namespace CoinWeight {
   
   
 
-class GameOver final : public ModelState {
+class GameOver final : public GameScreenBase {
 public:
     
     GameOver(const bool doesPlayerWin);

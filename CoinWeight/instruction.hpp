@@ -9,13 +9,13 @@
 #ifndef instruction_hpp
 #define instruction_hpp
 
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 
 namespace CoinWeight {
 
 
 
-class Instruction final : public ModelState {
+class Instruction final : public GameScreenBase {
 public:
     Instruction();
     

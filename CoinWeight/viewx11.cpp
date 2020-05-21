@@ -40,7 +40,7 @@ ViewX11::ViewX11() {
         "black", "white", "red", "blue", "green", "gold"
     };
     
-    cmap = DefaultColormap(display, DefaultScreen(display));
+    cmap = DefaultColormap(display, screen);
     
     for (unsigned int i = 0; i <= Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {

@@ -1,13 +1,13 @@
 //
-//  modelstate.hpp
+//  gamescreen.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-03-30.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef modelstate_hpp
-#define modelstate_hpp
+#ifndef gamescreen_hpp
+#define gamescreen_hpp
 
 namespace CoinWeight {
 
@@ -15,9 +15,9 @@ namespace CoinWeight {
 class Model;
 class View;
 
-class ModelState {
+class GameScreenBase {
 public:
-    virtual ~ModelState() = default;
+    virtual ~GameScreenBase() = default;
 
     // Action on arrow button press
     virtual void onArrowUp() = 0;

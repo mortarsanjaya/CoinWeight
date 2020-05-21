@@ -11,7 +11,7 @@
 
 #include <memory>
 #include "gamelevel.hpp"
-#include "modelstate.hpp"
+#include "gamescreen.hpp"
 
 namespace CoinWeight {
 
@@ -47,7 +47,7 @@ private:
     const size_t coinDisplayRows;
     const size_t coinDisplayColumns;
 
-    std::unique_ptr<ModelState> screen;
+    std::unique_ptr<GameScreenBase> screen;
 
 };
 
