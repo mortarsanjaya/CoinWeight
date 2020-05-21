@@ -19,13 +19,13 @@ playerWin(doesPlayerWin) {}
 
 
 //************************** Arrow button handling
-void GameOver::highlightUp() {}
+void GameOver::onArrowUp() {}
 
-void GameOver::highlightDown() {}
+void GameOver::onArrowDown() {}
 
-void GameOver::highlightLeft() {}
+void GameOver::onArrowLeft() {}
 
-void GameOver::highlightRight() {}
+void GameOver::onArrowRight() {}
 
 
 

@@ -19,10 +19,10 @@ class Credit final : public ModelState {
 public:
     Credit();
     
-    void highlightUp() override;
-    void highlightDown() override;
-    void highlightLeft() override;
-    void highlightRight() override;
+    void onArrowUp() override;
+    void onArrowDown() override;
+    void onArrowLeft() override;
+    void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
     void triggerDisplay(View &view) override;

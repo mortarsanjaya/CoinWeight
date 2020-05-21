@@ -37,7 +37,7 @@ const size_t GamePlayHuman::coinHighlightIndex() const {
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayHuman::highlightUp() {
+void GamePlayHuman::onArrowUp() {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -45,7 +45,7 @@ void GamePlayHuman::highlightUp() {
     }
 }
 
-void GamePlayHuman::highlightDown() {
+void GamePlayHuman::onArrowDown() {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -53,7 +53,7 @@ void GamePlayHuman::highlightDown() {
     }
 }
 
-void GamePlayHuman::highlightLeft() {
+void GamePlayHuman::onArrowLeft() {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -61,7 +61,7 @@ void GamePlayHuman::highlightLeft() {
     }
 }
 
-void GamePlayHuman::highlightRight() {
+void GamePlayHuman::onArrowRight() {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {

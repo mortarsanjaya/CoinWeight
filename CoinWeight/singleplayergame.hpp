@@ -31,10 +31,10 @@ public:
     const size_t coinHighlightColumn() const;
     const bool onButtonHighlight() const;
     
-    void highlightUp() final;
-    void highlightDown() final;
-    void highlightLeft() final;
-    void highlightRight() final;
+    void onArrowUp() final;
+    void onArrowDown() final;
+    void onArrowLeft() final;
+    void onArrowRight() final;
     void onCharInput(const char inputChar) final;
     void onReturnButton(Model &model) final;
     void triggerDisplay(View &view) final;

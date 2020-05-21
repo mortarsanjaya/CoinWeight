@@ -20,10 +20,10 @@ public:
     virtual ~ModelState() = default;
 
     // Action on arrow button press
-    virtual void highlightUp() = 0;
-    virtual void highlightDown() = 0;
-    virtual void highlightLeft() = 0;
-    virtual void highlightRight() = 0;
+    virtual void onArrowUp() = 0;
+    virtual void onArrowDown() = 0;
+    virtual void onArrowLeft() = 0;
+    virtual void onArrowRight() = 0;
     
     // Action on character input press
     virtual void onCharInput(const char inputChar) = 0;

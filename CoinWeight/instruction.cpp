@@ -18,13 +18,13 @@ Instruction::Instruction() {}
 
 
 //************************** Arrow button handling
-void Instruction::highlightUp() {}
+void Instruction::onArrowUp() {}
 
-void Instruction::highlightDown() {}
+void Instruction::onArrowDown() {}
 
-void Instruction::highlightLeft() {}
+void Instruction::onArrowLeft() {}
 
-void Instruction::highlightRight() {}
+void Instruction::onArrowRight() {}
 
 
 

@@ -35,7 +35,7 @@ counter(numOfWeighsMax(nCoinsTotal, level))
 
 //************************** Arrow button handling
 //**** Main
-void GamePlayComputer::highlightUp() {
+void GamePlayComputer::onArrowUp() {
     if (isOnButtonHighlight) {
         buttonHighlightUp();
     } else {
@@ -43,7 +43,7 @@ void GamePlayComputer::highlightUp() {
     }
 }
 
-void GamePlayComputer::highlightDown() {
+void GamePlayComputer::onArrowDown() {
     if (isOnButtonHighlight) {
         buttonHighlightDown();
     } else {
@@ -51,7 +51,7 @@ void GamePlayComputer::highlightDown() {
     }
 }
 
-void GamePlayComputer::highlightLeft() {
+void GamePlayComputer::onArrowLeft() {
     if (isOnButtonHighlight) {
         buttonHighlightLeft();
     } else {
@@ -59,7 +59,7 @@ void GamePlayComputer::highlightLeft() {
     }
 }
 
-void GamePlayComputer::highlightRight() {
+void GamePlayComputer::onArrowRight() {
     if (isOnButtonHighlight) {
         buttonHighlightRight();
     } else {

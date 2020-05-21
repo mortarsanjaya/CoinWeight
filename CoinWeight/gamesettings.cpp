@@ -25,7 +25,7 @@ GameSettings::GameSettings() : highlight(defaultHighlight) {}
 
 
 //************************** Arrow button handling
-void GameSettings::highlightUp() {
+void GameSettings::onArrowUp() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             break;
@@ -44,7 +44,7 @@ void GameSettings::highlightUp() {
     }
 }
 
-void GameSettings::highlightDown() {
+void GameSettings::onArrowDown() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             highlight = Highlight::Level;
@@ -63,7 +63,7 @@ void GameSettings::highlightDown() {
     }
 }
 
-void GameSettings::highlightLeft() {
+void GameSettings::onArrowLeft() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             decreaseNumOfCoins();
@@ -81,7 +81,7 @@ void GameSettings::highlightLeft() {
     }
 }
 
-void GameSettings::highlightRight() {
+void GameSettings::onArrowRight() {
     switch (highlight) {
         case Highlight::NumOfCoins:
             increaseNumOfCoins();

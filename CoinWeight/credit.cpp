@@ -18,13 +18,13 @@ Credit::Credit() {}
 
 
 //************************** Arrow button handling
-void Credit::highlightUp() {}
+void Credit::onArrowUp() {}
 
-void Credit::highlightDown() {}
+void Credit::onArrowDown() {}
 
-void Credit::highlightLeft() {}
+void Credit::onArrowLeft() {}
 
-void Credit::highlightRight() {}
+void Credit::onArrowRight() {}
 
 
 

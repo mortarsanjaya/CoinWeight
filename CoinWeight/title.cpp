@@ -18,7 +18,7 @@ Title::Title() : highlight(defaultHighlight) {}
 
 
 //************************** Arrow button handling
-void Title::highlightUp() {
+void Title::onArrowUp() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -32,7 +32,7 @@ void Title::highlightUp() {
     }
 }
 
-void Title::highlightDown() {
+void Title::onArrowDown() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -46,9 +46,9 @@ void Title::highlightDown() {
     }
 }
 
-void Title::highlightLeft() {}
+void Title::onArrowLeft() {}
 
-void Title::highlightRight() {}
+void Title::onArrowRight() {}
 
 
 

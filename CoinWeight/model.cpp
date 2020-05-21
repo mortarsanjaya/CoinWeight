@@ -21,19 +21,19 @@ coinDisplayRows(coinDisplayRows), coinDisplayColumns(coinDisplayColumns) {
 
 //************************** Input handling
 void Model::onArrowUp() {
-    screen->highlightUp();
+    screen->onArrowUp();
 }
 
 void Model::onArrowDown() {
-    screen->highlightDown();
+    screen->onArrowDown();
 }
 
 void Model::onArrowLeft() {
-    screen->highlightLeft();
+    screen->onArrowLeft();
 }
 
 void Model::onArrowRight() {
-    screen->highlightRight();
+    screen->onArrowRight();
 }
 
 void Model::onCharInput(const char inputChar) {
