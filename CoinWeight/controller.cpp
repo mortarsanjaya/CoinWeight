@@ -13,43 +13,8 @@ using namespace CoinWeight;
 
 //************************** Constructor
 Controller::Controller(std::unique_ptr<View> ui) :
-ui(std::move(ui)), screen() {
-    switchToTitle();
-}
-
-
-
-//************************** Screen switching
-void Controller::switchToTitle() {
-    screen = ScreenFactory::createTitleScreen();
-}
-
-void Controller::switchToInstruction() {
-    screen = ScreenFactory::createInstructionScreen();
-}
-
-void Controller::switchToCredit() {
-    screen = ScreenFactory::createCreditScreen();
-}
-
-void Controller::switchToGameSettings() {
-    screen = ScreenFactory::createGameSettingsScreen();
-}
-
-void Controller::switchToGamePlay(const size_t numOfCoins,
-const GameLevel level, const bool isHumanMode) {
-    if (isHumanMode) {
-        screen = ScreenFactory::createGamePlayHumanScreen(numOfCoins,
-            level, ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow());
-    } else {
-        screen = ScreenFactory::createGamePlayComputerScreen(numOfCoins,
-            level, ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow());
-    }
-}
-
-void Controller::switchToGameOver(const bool isWin) {
-    screen = ScreenFactory::createGameOverScreen(isWin);
-}
+model(ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow()), ui(std::move(ui))
+{}
 
 
 
@@ -60,26 +25,26 @@ void Controller::processInput() {
         case Input::Type::Unknown:
             break;
         case Input::Type::Char:
-            screen->onCharInput(input.whatChar());
+            model.onCharInput(input.whatChar());
             break;
         case Input::Type::Arrow:
             switch (input.whatArrow()) {
                 case Input::Arrow::Up:
-                    screen->highlightUp();
+                    model.onArrowUp();
                     break;
                 case Input::Arrow::Down:
-                    screen->highlightDown();
+                    model.onArrowDown();
                     break;
                 case Input::Arrow::Left:
-                    screen->highlightLeft();
+                    model.onArrowLeft();
                     break;
                 case Input::Arrow::Right:
-                    screen->highlightRight();
+                    model.onArrowRight();
                     break;
             }
             break;
         case Input::Type::Return:
-            screen->onReturnButton(*this);
+            model.onReturnButton();
             break;
     }
 }
@@ -88,5 +53,5 @@ void Controller::processInput() {
 
 //************************** Display updating
 void Controller::updateDisplay() {
-    screen->triggerDisplay(*ui);
+    model.updateView(*ui);
 }

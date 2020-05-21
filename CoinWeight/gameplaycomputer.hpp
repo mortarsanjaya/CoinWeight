@@ -37,7 +37,7 @@ public:
     void highlightLeft() override;
     void highlightRight() override;
     void onCharInput(const char inputChar) override;
-    void onReturnButton(Controller &controller) override;
+    void onReturnButton(Model &model) override;
     void triggerDisplay(View &view) override;
     
 private:

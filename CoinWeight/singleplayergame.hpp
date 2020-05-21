@@ -36,7 +36,7 @@ public:
     void highlightLeft() final;
     void highlightRight() final;
     void onCharInput(const char inputChar) final;
-    void onReturnButton(Controller &controller) final;
+    void onReturnButton(Model &model) final;
     void triggerDisplay(View &view) final;
     
 private:

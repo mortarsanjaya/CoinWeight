@@ -7,8 +7,8 @@
 //
 
 #include "title.hpp"
+#include "model.hpp"
 #include "view.hpp"
-#include "controller.hpp"
 
 using namespace CoinWeight;
 
@@ -58,16 +58,16 @@ void Title::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void Title::onReturnButton(Controller &controller) {
+void Title::onReturnButton(Model &model) {
     switch (highlight) {
         case Highlight::Play:
-            controller.switchToGameSettings();
+            model.switchToGameSettings();
             break;
         case Highlight::Instruction:
-            controller.switchToInstruction();
+            model.switchToInstruction();
             break;
         case Highlight::Credit:
-            controller.switchToCredit();
+            model.switchToCredit();
             break;
     }
 }

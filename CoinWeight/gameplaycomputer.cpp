@@ -7,7 +7,7 @@
 //
 
 #include "gameplaycomputer.hpp"
-#include "controller.hpp"
+#include "model.hpp"
 #include "view.hpp"
 #include "computerfactory.hpp"
 #include "numofweighsmax.hpp"
@@ -119,7 +119,7 @@ void GamePlayComputer::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void GamePlayComputer::onReturnButton(Controller &controller) {
+void GamePlayComputer::onReturnButton(Model &model) {
     if (isOnButtonHighlight) {
         if (selection.sizeOfGuessGroup() == 0) {
             if (counter.isZero()) {
@@ -142,13 +142,13 @@ void GamePlayComputer::onReturnButton(Controller &controller) {
             const GuessResult result = guessFakeCoins();
             switch (result) {
                 case GuessResult::Invalid:
-                    controller.switchToGameOver(false);
+                    model.switchToGameOver(false);
                     break;
                 case GuessResult::Correct:
-                    controller.switchToGameOver(true);
+                    model.switchToGameOver(true);
                     break;
                 case GuessResult::Incorrect:
-                    controller.switchToGameOver(false);
+                    model.switchToGameOver(false);
                     break;
             }
         }

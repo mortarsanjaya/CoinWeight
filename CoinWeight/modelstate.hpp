@@ -11,7 +11,8 @@
 
 namespace CoinWeight {
 
-class Controller;
+
+class Model;
 class View;
 
 class ModelState {
@@ -29,7 +30,7 @@ public:
 
     // Action on return button press (most certainly screen switching)
     // Assumes that the controller is the owner of the caller model state
-    virtual void onReturnButton(Controller &controller) = 0;
+    virtual void onReturnButton(Model &model) = 0;
     
     // Triggers View and UI for displaying the current screen
     virtual void triggerDisplay(View &view) = 0;

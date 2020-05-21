@@ -7,7 +7,7 @@
 //
 
 #include "gameplayhuman.hpp"
-#include "controller.hpp"
+#include "model.hpp"
 #include "view.hpp"
 #include "numofweighsmax.hpp"
 
@@ -154,7 +154,7 @@ void GamePlayHuman::onCharInput(const char inputChar) {
 
 
 //************************** Return button handling
-void GamePlayHuman::onReturnButton(Controller &controller) {
+void GamePlayHuman::onReturnButton(Model &model) {
     if (isOnButtonHighlight) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
@@ -180,10 +180,10 @@ void GamePlayHuman::onReturnButton(Controller &controller) {
                         lastResult = WeighResult::Invalid;
                         break;
                     case GuessResult::Correct:
-                        controller.switchToGameOver(true);
+                        model.switchToGameOver(true);
                         break;
                     case GuessResult::Incorrect:
-                        controller.switchToGameOver(false);
+                        model.switchToGameOver(false);
                         break;
                 }
                 break;

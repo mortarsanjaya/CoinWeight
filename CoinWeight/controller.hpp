@@ -10,7 +10,7 @@
 #define controller_hpp
 
 #include "view.hpp"
-#include "modelstate.hpp"
+#include "model.hpp"
 
 #include "coingroup.hpp"
 #include "weighresult.hpp"
@@ -24,15 +24,6 @@ class Controller final {
 public:
     Controller(std::unique_ptr<View> ui);
     
-    // Screen switch
-    void switchToTitle();
-    void switchToInstruction();
-    void switchToCredit();
-    void switchToGameSettings();
-    void switchToGamePlay(const size_t numOfCoins,
-        const GameLevel level, const bool isHumanMode);
-    void switchToGameOver(const bool isWin);
-    
     // Input processing
     void processInput();
     
@@ -40,8 +31,8 @@ public:
     void updateDisplay();
 
 private:
+    Model model;
     std::unique_ptr<View> ui;
-    std::unique_ptr<ModelState> screen;
 };
 
 

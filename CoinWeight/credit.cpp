@@ -7,7 +7,7 @@
 //
 
 #include "credit.hpp"
-#include "controller.hpp"
+#include "model.hpp"
 #include "view.hpp"
 
 using namespace CoinWeight;
@@ -34,8 +34,8 @@ void Credit::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void Credit::onReturnButton(Controller &controller) {
-    controller.switchToTitle();
+void Credit::onReturnButton(Model &model) {
+    model.switchToTitle();
 }
 
 

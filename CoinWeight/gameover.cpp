@@ -7,7 +7,7 @@
 //
 
 #include "gameover.hpp"
-#include "controller.hpp"
+#include "model.hpp"
 #include "view.hpp"
 
 using namespace CoinWeight;
@@ -35,8 +35,8 @@ void GameOver::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void GameOver::onReturnButton(Controller &controller) {
-    controller.switchToTitle();
+void GameOver::onReturnButton(Model &model) {
+    model.switchToTitle();
 }
 
 

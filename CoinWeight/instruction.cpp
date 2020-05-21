@@ -7,8 +7,8 @@
 //
 
 #include "instruction.hpp"
+#include "model.hpp"
 #include "view.hpp"
-#include "controller.hpp"
 
 using namespace CoinWeight;
 
@@ -34,8 +34,8 @@ void Instruction::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void Instruction::onReturnButton(Controller &controller) {
-    controller.switchToTitle();
+void Instruction::onReturnButton(Model &model) {
+    model.switchToTitle();
 }
 
 

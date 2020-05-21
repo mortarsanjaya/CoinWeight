@@ -7,7 +7,7 @@
 //
 
 #include "gamesettings.hpp"
-#include "controller.hpp"
+#include "model.hpp"
 #include "view.hpp"
 
 using namespace CoinWeight;
@@ -107,13 +107,13 @@ void GameSettings::onCharInput(const char inputChar) {}
 
 
 //************************** Return button handling
-void GameSettings::onReturnButton(Controller &controller) {
+void GameSettings::onReturnButton(Model &model) {
     switch (highlight) {
         case Highlight::StartGame:
-            controller.switchToGamePlay(nCoins, level, isHuman);
+            model.switchToGamePlay(nCoins, level, isHuman);
             break;
         case Highlight::GoBack:
-            controller.switchToTitle();
+            model.switchToTitle();
             break;
         default:
             break;
