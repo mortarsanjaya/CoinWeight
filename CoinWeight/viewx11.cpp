@@ -103,13 +103,13 @@ void ViewX11::displayHighlight(const Title::Highlight highlight) {
     
     switch (highlight) {
         case Title::Highlight::Play:
-            drawRectangle(text_x_pos, top_button_y_pos, 50, total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos, 34, total_string_height);
             break;
         case Title::Highlight::Instruction:
-            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, 50, total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, 76, total_string_height);
             break;
         case Title::Highlight::Credit:
-            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, 50, total_string_height);
+            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, 46, total_string_height);
             break;
     }
     
@@ -292,10 +292,10 @@ void ViewX11::displayLayoutGamePlayComputer() {
 void ViewX11::displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight) {
     switch (highlight) {
         case GamePlayHuman::ButtonHighlight::Weigh:
-            drawRectangle(50, 300, 50, total_string_height);
+            drawRectangle(50, 300, 40, total_string_height);
             break;
         case GamePlayHuman::ButtonHighlight::Guess:
-            drawRectangle(50, 300 + total_string_height, 50, total_string_height);
+            drawRectangle(50, 300 + total_string_height, 40, total_string_height);
             break;
     }
     
@@ -305,7 +305,7 @@ void ViewX11::displayButtonHighlight(const GamePlayHuman::ButtonHighlight highli
 void ViewX11::displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight) {
     switch (highlight) {
         case GamePlayComputer::ButtonHighlight::NextMove:
-            drawRectangle(50, 300, 50, total_string_height);
+            drawRectangle(50, 300, 64, total_string_height);
             break;
     }
     
