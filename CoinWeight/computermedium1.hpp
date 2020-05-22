@@ -70,6 +70,7 @@ private:
     
     static const size_t splitSize(const Range &range);
     
+    // Throws
     static void internalBug();
 };
 
