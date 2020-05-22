@@ -221,7 +221,8 @@ void ViewX11::displayLayoutGameSettings() {
     flushDisplay();
 }
 
-void ViewX11::displaySettingsValue(const size_t numOfCoins, const GameLevel level, const bool mode) {
+void ViewX11::displaySettingsValue(const size_t numOfCoins,
+const GameLevel level, const GameMode mode) {
     const std::string gameLevelStr = [&level]() -> std::string {
         switch (level) {
             case GameLevel::Easy:
@@ -235,7 +236,14 @@ void ViewX11::displaySettingsValue(const size_t numOfCoins, const GameLevel leve
     
     drawString(400 + border, 300 + total_string_height - border, std::to_string(numOfCoins));
     drawString(400 + border, 300 + 2 * total_string_height - border, gameLevelStr);
-    drawString(400 + border, 300 + 3 * total_string_height - border, mode ? "Human" : "Computer");
+    switch (mode) {
+        case GameMode::Standard:
+            drawString(400 + border, 300 + 3 * total_string_height - border, "Human");
+            break;
+        case GameMode::Computer:
+            drawString(400 + border, 300 + 3 * total_string_height - border, "Computer");
+            break;
+    }
     
     flushDisplay();
 }

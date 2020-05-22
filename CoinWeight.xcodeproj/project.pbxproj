@@ -93,6 +93,7 @@
 		868C8C6F24748ABD008AB006 /* singleplayergame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = singleplayergame.hpp; sourceTree = "<group>"; };
 		868C8C7424770C82008AB006 /* model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = model.cpp; sourceTree = "<group>"; };
 		868C8C7524770C82008AB006 /* model.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = model.hpp; sourceTree = "<group>"; };
+		868C8C7824775A85008AB006 /* gamemode.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamemode.hpp; sourceTree = "<group>"; };
 		869BBCD12424182D0002CDED /* input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
 		869BBCD424241BDD0002CDED /* input.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		86A78CCD24457899000DF706 /* guessresult.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = guessresult.hpp; sourceTree = "<group>"; };
@@ -379,6 +380,7 @@
 		86A78CCF244578AE000DF706 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				868C8C7824775A85008AB006 /* gamemode.hpp */,
 				86C1C65E24324A3D007E5B64 /* gamelevel.hpp */,
 				86A78CCD24457899000DF706 /* guessresult.hpp */,
 				86E55A82242C390B00053F2E /* weighresult.hpp */,

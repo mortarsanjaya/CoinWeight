@@ -44,7 +44,7 @@ public:
     
     // Display for Game Settings
     virtual void displayLayoutGameSettings() = 0;
-    virtual void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const bool mode) = 0;
+    virtual void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const GameMode mode) = 0;
     virtual void displayHighlight(const GameSettings::Highlight highlight) = 0;
     
     // Display for game play

@@ -11,6 +11,7 @@
 
 #include <memory>
 #include "gamelevel.hpp"
+#include "gamemode.hpp"
 #include "gamescreen.hpp"
 
 namespace CoinWeight {
@@ -36,8 +37,7 @@ public:
     void switchToInstruction();
     void switchToCredit();
     void switchToGameSettings();
-    void switchToGamePlay(const size_t numOfCoins,
-        const GameLevel level, const bool isHumanMode);
+    void switchToGamePlay(const size_t numOfCoins, const GameLevel level, const GameMode mode);
     void switchToGameOver(const bool isWin);
     
     // View updating
