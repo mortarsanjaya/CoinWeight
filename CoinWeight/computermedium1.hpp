@@ -70,7 +70,8 @@ private:
     
     static const size_t splitSize(const Range &range);
     
-    static void internalBug() throw (Exception<ComputerMedium1>);
+    // Throws
+    static void internalBug();
 };
 
 
