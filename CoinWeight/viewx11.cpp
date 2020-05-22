@@ -177,8 +177,8 @@ void ViewX11::displayLayoutInstruction() {
     }
     
     const std::string &returnStr = "Return";
-    drawString(300 + border, 500 + total_string_height - border, returnStr);
-    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
+    drawString(300 + border, 550 + total_string_height - border, returnStr);
+    drawRectangle(300, 550, total_string_width(returnStr.size()), total_string_height);
     
     flushDisplay();
 }
