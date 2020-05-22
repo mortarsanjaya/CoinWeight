@@ -11,8 +11,10 @@
 #include <random>
 #include <algorithm>
 
+using namespace CoinWeight;
+
 //************************** Constructor
-CoinSet::CoinSet(size_t numOfCoins) : nCoins(numOfCoins) {
+CoinSet::CoinSet(const size_t numOfCoins) : nCoins(numOfCoins) {
 	if (numOfFakeCoins > numOfCoins) {
 		throw Exception<CoinSet>("Bad number of fake coins.");
 	}
@@ -44,7 +46,7 @@ const bool CoinSet::isFakeCoinIndex(const size_t index) const {
 
 
 //************************** Game operations
-const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
+const WeighResult CoinSet::compareWeight(const CoinSelection &weighing) const {
     if (weighing.sizeOfGuessGroup() != 0) {
         return WeighResult::Invalid;
     } else if (weighing.sizeOfLeftWeighGroup() > weighing.sizeOfRightWeighGroup()) {
@@ -78,7 +80,7 @@ const WeighResult CoinSet::compareWeight(const CoinStates &weighing) const {
     }
 }
 
-const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
+const GuessResult CoinSet::guessFakeCoins(const CoinSelection &guess) const {
     if (guess.sizeOfLeftWeighGroup() != 0 || guess.sizeOfRightWeighGroup() != 0) {
         return GuessResult::Invalid;
     } else if (guess.sizeOfGuessGroup() != numOfFakeCoins) {
@@ -95,6 +97,6 @@ const GuessResult CoinSet::guessFakeCoins(const CoinStates &guess) const {
 
 
 //************************** Exception header message
-template<> const std::string exceptionHeaderMessage<CoinSet>() {
+template<> const std::string Exception<CoinSet>::headerMessage() const {
     return "Coin Set: ";
 }

@@ -9,24 +9,28 @@
 #ifndef computer_hpp
 #define computer_hpp
 
-#include <vector>
-#include "coinstates.hpp"
+#include <memory>
 #include "weighresult.hpp"
+
+namespace CoinWeight {
+
+
+
+class CoinSelection;
 
 class Computer {
 public:
-	Computer(size_t numOfCoins);
+    Computer() = default;
 	virtual ~Computer() = default;
-	
-	// Weighing and guessing process
-    virtual void beforeWeigh() = 0;
-	virtual void pickToWeigh(CoinStates &coinStates) const = 0;
-	virtual void afterWeigh(const WeighResult weighResult) = 0;
-	virtual void pickToGuess(CoinStates &coinStates) const = 0;
-    virtual const bool readyToGuess() const = 0;
     
-protected:
-    const size_t nCoins;
+    // Computer assumes that the coin selection has the same size as the coin set
+    // It also assumes that selection is set at default (all coins NoSelect)
+	virtual void setSelection(CoinSelection &selection) const = 0;
+    virtual void changeState(const WeighResult weighResult) = 0;
+};
+
+
+
 };
 
 #endif

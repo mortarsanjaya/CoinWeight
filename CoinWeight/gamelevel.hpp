@@ -9,10 +9,18 @@
 #ifndef gamelevel_hpp
 #define gamelevel_hpp
 
+namespace CoinWeight {
+
+
+
 enum class GameLevel {
     Easy,
     Medium,
     Hard
+};
+
+
+
 };
 
 #endif

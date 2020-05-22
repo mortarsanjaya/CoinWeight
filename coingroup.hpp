@@ -9,19 +9,12 @@
 #ifndef coingroup_h
 #define coingroup_h
 
-namespace CoinWeight {
-
-
 
 enum class CoinGroup {
-    NoSelect,       // Not selected
-    LeftWeigh,      // Put to left scale
-    RightWeigh,     // Put to right scale
+    NoSelect,       // No selection
+    LeftWeigh,      // Put to the left scale
+    RightWeigh,     // Put to the right scale
     Guess           // Guess as fake coin
-};
-
-
-
 };
 
 #endif

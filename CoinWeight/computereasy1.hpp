@@ -11,16 +11,17 @@
 
 #include "computer.hpp"
 
+namespace CoinWeight {
+  
+  
+
 class ComputerEasy1 final : public Computer {
 public:
 	ComputerEasy1(const size_t numOfCoins);
  
     // Overriding functions
-	void beforeWeigh() override;
-	void pickToWeigh(CoinStates &coinStates) const override;
-	void afterWeigh(const WeighResult weighResult) override;
-	void pickToGuess(CoinStates &coinStates) const override;
-    const bool readyToGuess() const override;
+	void setSelection(CoinSelection &selection) const override;
+	void changeState(const WeighResult weighResult) override;
  
 private:
     struct State {
@@ -30,7 +31,8 @@ private:
             Coin0IsFake,
             Coin0IsReal0,
             Coin0IsReal1,
-            Finish
+            Finish,
+            Invalid
         };
         
         Type type;
@@ -38,6 +40,7 @@ private:
         size_t fakeCoin2;
     };
     
+    const size_t nCoins;
     State state;
     size_t testIndex;
     
@@ -46,6 +49,10 @@ private:
     void afterWeighCoin0IsFake(const WeighResult weighResult);
     void afterWeighCoin0IsReal0(const WeighResult weighResult);
     void afterWeighCoin0IsReal1(const WeighResult weighResult);
+};
+
+
+
 };
 
 #endif

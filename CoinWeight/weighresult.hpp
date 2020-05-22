@@ -9,12 +9,20 @@
 #ifndef weighresult_hpp
 #define weighresult_hpp
 
+namespace CoinWeight {
+
+
+
 enum class WeighResult {
     Start,
     Invalid,
     Balance,
     LeftHeavy,
     RightHeavy
+};
+
+
+
 };
 
 #endif
