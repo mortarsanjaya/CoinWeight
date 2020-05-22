@@ -492,7 +492,7 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
     {
         
         std::vector<XPoint> xpoints {
-            {695, 20},
+            {695, 60},
             {695, 120},
             {690, 120},
             {660, 140},
@@ -503,7 +503,7 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
             {740, 140},
             {710, 120},
             {705, 120},
-            {705, 20}
+            {705, 60}
         };
         
         XSetForeground(display, gc, colors[Blue]);
@@ -513,15 +513,15 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
     {
         const int radius = 20;
         XSetForeground(display, gc, colors[Green]);
-        XFillArc(display, window, gc, 700 - radius, 21 - 2 * radius, radius * 2, radius * 2, 0, circle_full_arc);
+        XFillArc(display, window, gc, 700 - radius, 61 - 2 * radius, radius * 2, radius * 2, 0, circle_full_arc);
     }
     
     {
         const auto anchors = [&weighResult]() -> std::pair<XPoint, XPoint> {
-            const int y_tilt = 20;
-            const int y_base = 20;
             const int x_base = 700;
+            const int y_base = 60;
             const int x_shift = 50;
+            const int y_tilt = 20;
             switch (weighResult) {
                 case WeighResult::Start:
                 case WeighResult::Invalid:
@@ -534,7 +534,7 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
             }
         }();
         
-        const short center_anchor_y_shift = 50;
+        const short center_anchor_y_shift = 20;
         const XPoint left_anchor = anchors.first;
         const XPoint right_anchor = anchors.second;
         const XPoint left_center = {left_anchor.x, static_cast<short>(left_anchor.y + center_anchor_y_shift)};
