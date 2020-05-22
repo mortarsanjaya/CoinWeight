@@ -292,7 +292,7 @@ const size_t ComputerMedium1::splitSize(const Range &range) {
 
 
 //************************** Bug handling
-void ComputerMedium1::internalBug() throw (Exception<ComputerMedium1>) {
+void ComputerMedium1::internalBug() {
     throw Exception<ComputerMedium1>("Internal bug.");
 }
 
