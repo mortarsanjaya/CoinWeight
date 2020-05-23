@@ -19,6 +19,7 @@ using namespace CoinWeight;
 int main() {
     computerTest(75, GameLevel::Easy);
     computerTest(100, GameLevel::Medium);
+    computerTest(100, GameLevel::Hard);
 
     auto controller = std::make_unique<Controller>(std::make_unique<ViewX11>());
     while (true) {

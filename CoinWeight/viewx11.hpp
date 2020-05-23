@@ -52,7 +52,7 @@ public:
     
     // Display for Game Settings
     void displayLayoutGameSettings() final;
-    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const bool mode) final;
+    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const GameMode mode) final;
     void displayHighlight(const GameSettings::Highlight highlight) final;
     
     // Display for game play

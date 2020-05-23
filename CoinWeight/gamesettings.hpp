@@ -11,6 +11,7 @@
 
 #include "gamescreen.hpp"
 #include "gamelevel.hpp"
+#include "gamemode.hpp"
 #include <utility>
 
 namespace CoinWeight {
@@ -42,20 +43,21 @@ private:
 
     static size_t nCoins;
     static GameLevel level;
-    static bool isHuman;
+    static GameMode mode;
     
     static constexpr Highlight defaultHighlight = Highlight::NumOfCoins;
     static constexpr size_t numOfCoinsLowerBound = 3;
     static constexpr size_t numOfCoinsUpperBound = 200;
     static constexpr size_t defaultNumOfCoins = numOfCoinsLowerBound;
     static constexpr GameLevel defaultLevel = GameLevel::Easy;
-    static constexpr bool defaultIsHuman = true;
+    static constexpr GameMode defaultMode = GameMode::Standard;
     
     void increaseNumOfCoins();
     void decreaseNumOfCoins();
     void increaseLevel();
     void decreaseLevel();
-    void switchMode();
+    void nextMode();
+    void prevMode();
 };
 
 

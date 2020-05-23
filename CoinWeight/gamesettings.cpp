@@ -15,7 +15,7 @@ using namespace CoinWeight;
 //************************** Static members
 size_t GameSettings::nCoins = defaultNumOfCoins;
 GameLevel GameSettings::level = defaultLevel;
-bool GameSettings::isHuman = defaultIsHuman;
+GameMode GameSettings::mode = defaultMode;
 
 
 
@@ -72,7 +72,7 @@ void GameSettings::onArrowLeft() {
             decreaseLevel();
             break;
         case Highlight::Mode:
-            switchMode();
+            prevMode();
             break;
         case Highlight::StartGame:
             break;
@@ -90,7 +90,7 @@ void GameSettings::onArrowRight() {
             increaseLevel();
             break;
         case Highlight::Mode:
-            switchMode();
+            nextMode();
             break;
         case Highlight::StartGame:
             break;
@@ -110,7 +110,7 @@ void GameSettings::onCharInput(const char inputChar) {}
 void GameSettings::onReturnButton(Model &model) {
     switch (highlight) {
         case Highlight::StartGame:
-            model.switchToGamePlay(nCoins, level, isHuman);
+            model.switchToGamePlay(nCoins, level, mode);
             break;
         case Highlight::GoBack:
             model.switchToTitle();
@@ -125,7 +125,7 @@ void GameSettings::onReturnButton(Model &model) {
 //************************** UI display
 void GameSettings::triggerDisplay(View &view) {
     view.displayLayoutGameSettings();
-    view.displaySettingsValue(nCoins, level, isHuman);
+    view.displaySettingsValue(nCoins, level, mode);
     view.displayHighlight(highlight);
 }
 
@@ -172,6 +172,24 @@ void GameSettings::decreaseLevel() {
     }
 }
 
-void GameSettings::switchMode() {
-    isHuman = !isHuman;
+void GameSettings::nextMode() {
+    switch (mode) {
+        case GameMode::Standard:
+            mode = GameMode::Computer;
+            break;
+        case GameMode::Computer:
+            mode = GameMode::Computer;
+            break;
+    }
+}
+
+void GameSettings::prevMode() {
+    switch (mode) {
+        case GameMode::Standard:
+            mode = GameMode::Standard;
+            break;
+        case GameMode::Computer:
+            mode = GameMode::Standard;
+            break;
+    }
 }

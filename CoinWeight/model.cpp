@@ -64,13 +64,16 @@ void Model::switchToGameSettings() {
 }
 
 void Model::switchToGamePlay(const size_t numOfCoins,
-const GameLevel level, const bool isHumanMode) {
-    if (isHumanMode) {
-        screen = ScreenFactory::createGamePlayHumanScreen(
-            numOfCoins, level, coinDisplayRows, coinDisplayColumns);
-    } else {
-        screen = ScreenFactory::createGamePlayComputerScreen(
-            numOfCoins, level, coinDisplayRows, coinDisplayColumns);
+const GameLevel level, const GameMode mode) {
+    switch (mode) {
+        case GameMode::Standard:
+            screen = ScreenFactory::createGamePlayHumanScreen(
+                numOfCoins, level, coinDisplayRows, coinDisplayColumns);
+            break;
+        case GameMode::Computer:
+            screen = ScreenFactory::createGamePlayComputerScreen(
+                numOfCoins, level, coinDisplayRows, coinDisplayColumns);
+            break;
     }
 }
 

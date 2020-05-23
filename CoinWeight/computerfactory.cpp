@@ -10,6 +10,7 @@
 #include "computer.hpp"
 #include "computereasy1.hpp"
 #include "computermedium1.hpp"
+#include "computerhard1.hpp"
 
 using namespace CoinWeight;
 
@@ -44,8 +45,7 @@ ComputerFactory::createMedium(const size_t numOfCoins) {
 
 std::unique_ptr<Computer>
 ComputerFactory::createHard(const size_t numOfCoins) {
-    throw Exception<ComputerFactory>("Oops. Hard-level computer NOT IMPLEMENTED YET!");
-    return std::make_unique<ComputerMedium1>(numOfCoins);
+    return std::make_unique<ComputerHard1>(numOfCoins);
 }
 
 
