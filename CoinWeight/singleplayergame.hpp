@@ -24,12 +24,6 @@ class SinglePlayerGame : public GameScreenBase {
 public:
     SinglePlayerGame(const size_t nCoinsTotal, const GameLevel level,
         const size_t nRowsDisplay, const size_t nCoinsPerRow);
-
-    const size_t coinDisplayTopRowIndex() const;
-    const size_t coinHighlightIndex() const;
-    const size_t coinHighlightRow() const;
-    const size_t coinHighlightColumn() const;
-    const bool onButtonHighlight() const;
     
     void onArrowUp() final;
     void onArrowDown() final;
