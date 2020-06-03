@@ -42,10 +42,10 @@ private:
     History history;
     WeighResult lastResult; // Also used to display invalid guess
     
-    void buttonHighlightUp();
-    void buttonHighlightDown();
-    void buttonHighlightLeft();
-    void buttonHighlightRight();
+    virtual void buttonHighlightUp() = 0;
+    virtual void buttonHighlightDown() = 0;
+    virtual void buttonHighlightLeft() = 0;
+    virtual void buttonHighlightRight() = 0;
     
     void coinHighlightUp();
     void coinHighlightDown();
