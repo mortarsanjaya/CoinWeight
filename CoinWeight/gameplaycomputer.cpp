@@ -10,7 +10,6 @@
 #include "model.hpp"
 #include "view.hpp"
 #include "computerfactory.hpp"
-#include "numofweighsmax.hpp"
 
 using namespace CoinWeight;
 
@@ -25,7 +24,7 @@ selection(nCoinsTotal),
 history(),
 computer(),
 lastResult(WeighResult::Start),
-counter(numOfWeighsMax(nCoinsTotal, level))
+counter(nCoinsTotal, level)
 {
     computer = ComputerFactory::create(nCoinsTotal, level);
     computerSetSelection();
@@ -122,7 +121,7 @@ void GamePlayComputer::onCharInput(const char inputChar) {}
 void GamePlayComputer::onReturnButton(Model &model) {
     if (isOnButtonHighlight) {
         if (selection.sizeOfGuessGroup() == 0) {
-            if (counter.isZero()) {
+            if (counter.isCappedOut()) {
                 lastResult = WeighResult::Invalid;
             } else {
                 lastResult = compareWeight();
@@ -133,7 +132,7 @@ void GamePlayComputer::onReturnButton(Model &model) {
             
             if (lastResult != WeighResult::Invalid) {
                 history.add(selection, lastResult);
-                counter.decrement();
+                counter.weighingDone();
             }
             
             computerSetSelection();

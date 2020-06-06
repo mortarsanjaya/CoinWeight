@@ -20,7 +20,6 @@
 		86219BE324500FF9005E4F93 /* gameplaycomputer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */; };
 		86219BE62450105A005E4F93 /* gameover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86219BE42450105A005E4F93 /* gameover.cpp */; };
 		8626C294246CD735003B99D4 /* weighcounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C293246CD735003B99D4 /* weighcounter.cpp */; };
-		8626C297246CD780003B99D4 /* numofweighsmax.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C295246CD780003B99D4 /* numofweighsmax.cpp */; };
 		8626C29B246DD6C7003B99D4 /* range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C29A246DD6C7003B99D4 /* range.cpp */; };
 		8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A1246DD813003B99D4 /* computertest.cpp */; };
 		8626C2AB246E00E6003B99D4 /* controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8626C2A9246E00E6003B99D4 /* controller.cpp */; };
@@ -70,8 +69,6 @@
 		8625C7D1242AA68F00558B55 /* coinselection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coinselection.hpp; sourceTree = "<group>"; };
 		8626C292246CD735003B99D4 /* weighcounter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = weighcounter.hpp; sourceTree = "<group>"; };
 		8626C293246CD735003B99D4 /* weighcounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weighcounter.cpp; sourceTree = "<group>"; };
-		8626C295246CD780003B99D4 /* numofweighsmax.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = numofweighsmax.cpp; sourceTree = "<group>"; };
-		8626C296246CD780003B99D4 /* numofweighsmax.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = numofweighsmax.hpp; sourceTree = "<group>"; };
 		8626C299246DD6C7003B99D4 /* range.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = range.hpp; path = /Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/range.hpp; sourceTree = "<absolute>"; };
 		8626C29A246DD6C7003B99D4 /* range.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = range.cpp; path = /Users/mortarsanjaya/Documents/GitHub/CoinWeight/CoinWeight/range.cpp; sourceTree = "<absolute>"; };
 		8626C2A1246DD813003B99D4 /* computertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = computertest.cpp; sourceTree = "<group>"; };
@@ -209,6 +206,18 @@
 			name = "Table Navigator";
 			sourceTree = "<group>";
 		};
+		863108B8248B94D600F6DB60 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				866FC8302409F74D00B3740D /* Coin Set */,
+				8625C7D3242AA69400558B55 /* Coin Selection */,
+				86C1C6642432D6AC007E5B64 /* History */,
+				8626C298246DD6A7003B99D4 /* Weigh Counter */,
+				869C4BE424048E4700C3DE84 /* Computer */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 		864467C2245BF6A000442BD8 /* Easy Level */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,15 +269,6 @@
 				86A9AB9B2400B26D002AB0CF /* coinset.hpp */,
 			);
 			name = "Coin Set";
-			sourceTree = "<group>";
-		};
-		866FC8312409F75A00B3740D /* Maximum Num of Weigh */ = {
-			isa = PBXGroup;
-			children = (
-				8626C295246CD780003B99D4 /* numofweighsmax.cpp */,
-				8626C296246CD780003B99D4 /* numofweighsmax.hpp */,
-			);
-			name = "Maximum Num of Weigh";
 			sourceTree = "<group>";
 		};
 		866FC832240A2A5900B3740D /* Computer Types */ = {
@@ -333,12 +333,6 @@
 				86219BDF244FFE42005E4F93 /* gameplayhuman.hpp */,
 				86219BE124500FF9005E4F93 /* gameplaycomputer.cpp */,
 				86219BE224500FF9005E4F93 /* gameplaycomputer.hpp */,
-				866FC8302409F74D00B3740D /* Coin Set */,
-				8625C7D3242AA69400558B55 /* Coin Selection */,
-				86C1C6642432D6AC007E5B64 /* History */,
-				8626C298246DD6A7003B99D4 /* Weigh Counter */,
-				866FC8312409F75A00B3740D /* Maximum Num of Weigh */,
-				869C4BE424048E4700C3DE84 /* Computer */,
 			);
 			name = "Game Play (Single Player)";
 			sourceTree = "<group>";
@@ -415,6 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				86A9AB932400AF50002AB0CF /* main.cpp */,
+				86A78CCF244578AE000DF706 /* Enums */,
+				863108B8248B94D600F6DB60 /* Elements */,
 				86EA23E224731D640028AD2D /* Model */,
 				8607519F240F0EBE007A96E5 /* Controller */,
 				8626C2AC246E00F1003B99D4 /* View */,
@@ -447,7 +443,6 @@
 			children = (
 				868C8C7424770C82008AB006 /* model.cpp */,
 				868C8C7524770C82008AB006 /* model.hpp */,
-				86A78CCF244578AE000DF706 /* Enums */,
 				86C1C6582432480C007E5B64 /* Screen */,
 				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
@@ -527,7 +522,6 @@
 				8626C2AB246E00E6003B99D4 /* controller.cpp in Sources */,
 				861E6481242AD81E00AA6FD7 /* coinset.cpp in Sources */,
 				8626C2A3246DD813003B99D4 /* computertest.cpp in Sources */,
-				8626C297246CD780003B99D4 /* numofweighsmax.cpp in Sources */,
 				86C1C6632432D6A7007E5B64 /* history.cpp in Sources */,
 				86219BDD244FFDBA005E4F93 /* gamesettings.cpp in Sources */,
 				868C8C7024748ABD008AB006 /* singleplayergame.cpp in Sources */,

@@ -9,7 +9,6 @@
 #include "gameplayhuman.hpp"
 #include "model.hpp"
 #include "view.hpp"
-#include "numofweighsmax.hpp"
 
 using namespace CoinWeight;
 
@@ -23,7 +22,7 @@ coinSet(nCoinsTotal),
 selection(nCoinsTotal),
 history(),
 lastResult(WeighResult::Start),
-counter(numOfWeighsMax(nCoinsTotal, level))
+counter(nCoinsTotal, level)
 {}
 
 
@@ -159,7 +158,7 @@ void GamePlayHuman::onReturnButton(Model &model) {
         switch (buttonHighlight) {
             case ButtonHighlight::Weigh:
             {
-                if (counter.isZero()) {
+                if (counter.isCappedOut()) {
                     lastResult = WeighResult::Invalid;
                 } else {
                     lastResult = compareWeight();
@@ -168,7 +167,7 @@ void GamePlayHuman::onReturnButton(Model &model) {
                 if (lastResult != WeighResult::Invalid) {
                     history.add(selection, lastResult);
                     selection.reset();
-                    counter.decrement();
+                    counter.weighingDone();
                 }
                 
                 break;

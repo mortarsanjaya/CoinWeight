@@ -347,8 +347,8 @@ void ViewX11::displayWeighResult(const WeighResult weighResult) {
 
 void ViewX11::displayWeighCounter(const WeighCounter &counter) {
     setForeground(Black);
-    std::string numOfWeighsStr = "Number of comparisons remaining: ";
-    numOfWeighsStr += std::to_string(counter.numOfWeighsLeft());
+    std::string numOfWeighsStr = "Number of comparisons done: ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
     numOfWeighsStr += " out of ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
     drawString(30, 60, numOfWeighsStr);

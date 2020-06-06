@@ -18,16 +18,17 @@ namespace CoinWeight {
 
 class WeighCounter {
 public:
-    WeighCounter(const size_t numOfMovesMax);
-    const size_t numOfWeighsLeft() const;
+    WeighCounter(const size_t numOfCoins, const GameLevel level);
+    const size_t numOfWeighsDone() const;
     const size_t numOfWeighsMax() const;
-    const bool isZero() const;
-    void decrement();
+    const bool isCappedOut() const;
+    void weighingDone();
     
+    static const size_t nWeighsCap(const size_t numOfCoins, const GameLevel level);
 
 private:
     const size_t nMovesMax;
-    size_t nMovesLeft;
+    size_t nMovesDone;
 };
 
 

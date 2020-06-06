@@ -16,7 +16,6 @@
 #include "computer.hpp"
 #include "computerfactory.hpp"
 #include "weighcounter.hpp"
-#include "numofweighsmax.hpp"
 
 void CoinWeight::computerTest(const size_t nCoinsCap, const GameLevel level) {
 
@@ -87,7 +86,7 @@ void CoinWeight::computerTest(const size_t nCoinsCap, const GameLevel level) {
         // std::cout << "Computer checking with " << numOfCoins << " coins finished." << std::endl;
         // std::cout << "Worst case comparisons: " << worstCaseWeigh << std::endl;
         std::cout << numOfCoins << " " << worstCaseWeigh << " " <<
-            numOfWeighsMax(numOfCoins, level) << std::endl;
+            WeighCounter::nWeighsCap(numOfCoins, level) << std::endl;
     }
     
     std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
