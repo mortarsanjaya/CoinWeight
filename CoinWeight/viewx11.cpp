@@ -228,6 +228,10 @@ void ViewX11::drawRectangle(const int x_pos, const int y_pos, const int width, c
     XDrawLine(display, window, gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
 }
 
+void ViewX11::fillPolygon(std::vector<XPoint> xpoints, int shape, int mode) {
+    XFillPolygon(display, window, gc, xpoints.begin().base(), xpoints.size(), shape, mode);
+}
+
 
 
 //******************** Clear window
@@ -319,7 +323,7 @@ void ViewX11::drawWeighingScale(const WeighResult weighResult) {
         };
         
         XSetForeground(display, gc, colors[Blue]);
-        XFillPolygon(display, window, gc, xpoints.begin().base(), xpoints.size(), Nonconvex, CoordModeOrigin);
+        fillPolygon(xpoints, Nonconvex, CoordModeOrigin);
     }
     
     {

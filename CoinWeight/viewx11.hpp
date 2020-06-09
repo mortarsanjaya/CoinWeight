@@ -119,6 +119,7 @@ public:
     // x_pos and y_pos for rectangle is in its upper-left corner position
     // Draws with the current foreground color
     void drawRectangle(const int x_pos, const int y_pos, const int width, const int height);
+    void fillPolygon(std::vector<XPoint> xpoints, int shape, int mode);
     
     // Clear window
     void clearWindow();
