@@ -172,7 +172,7 @@ void GamePlayComputer::computerSetSelection() {
 
 
 //************************** UI display
-void GamePlayComputer::triggerDisplay(ViewX11 &view) {
+void GamePlayComputer::triggerDisplay(ViewX11 &view) const {
     view.displayLayoutGamePlayComputer();
     view.displayCoinSelection(selection, coinNavigator.currTopRow());
     view.displayWeighResult(lastResult);

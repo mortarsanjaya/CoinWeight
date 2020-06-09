@@ -205,7 +205,7 @@ const GuessResult GamePlayHuman::guessFakeCoins() const {
 
 
 //************************** UI display
-void GamePlayHuman::triggerDisplay(ViewX11 &view) {
+void GamePlayHuman::triggerDisplay(ViewX11 &view) const {
     view.displayLayoutGamePlayHuman();
     view.displayCoinSelection(selection, coinNavigator.currTopRow());
     view.displayWeighResult(lastResult);

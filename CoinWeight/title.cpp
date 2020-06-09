@@ -75,12 +75,12 @@ void Title::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void Title::triggerDisplay(ViewX11 &view) {
+void Title::triggerDisplay(ViewX11 &view) const {
     displayLayout(view);
     displayHighlight(view);
 }
 
-void Title::displayLayout(ViewX11 &view) {
+void Title::displayLayout(ViewX11 &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
@@ -102,7 +102,7 @@ void Title::displayLayout(ViewX11 &view) {
     view.flushDisplay();
 }
 
-void Title::displayHighlight(ViewX11 &view) {
+void Title::displayHighlight(ViewX11 &view) const {
     
     constexpr int text_x_pos = 300;
     constexpr int top_button_y_pos = 300;

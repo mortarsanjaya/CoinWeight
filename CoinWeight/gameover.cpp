@@ -42,6 +42,6 @@ void GameOver::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void GameOver::triggerDisplay(ViewX11 &view) {
+void GameOver::triggerDisplay(ViewX11 &view) const {
     view.displayLayoutGameOver(playerWin);
 }

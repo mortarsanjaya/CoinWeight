@@ -123,10 +123,77 @@ void GameSettings::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void GameSettings::triggerDisplay(ViewX11 &view) {
-    view.displayLayoutGameSettings();
-    view.displaySettingsValue(nCoins, level, mode);
-    view.displayHighlight(highlight);
+void GameSettings::triggerDisplay(ViewX11 &view) const {
+    displayLayout(view);
+    displaySettingsValue(view);
+    displayHighlight(view);
+}
+
+void GameSettings::displayLayout(ViewX11 &view) const {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+    
+    view.drawString(300, 50, "Coin Weight");
+    view.drawString(300, 300 + view.total_string_height - view.border, "Number of Coins:");
+    view.drawString(300, 300 + 2 * view.total_string_height - view.border, "Level:");
+    view.drawString(300, 300 + 3 * view.total_string_height - view.border, "Mode:");
+    
+    const std::string &startGameStr = "Start Game";
+    const std::string &goBackStr = "Go Back";
+    
+    
+    view.drawString(350 + view.border, 400 + view.total_string_height - view.border, startGameStr);
+    view.drawString(350 + view.border, 400 + 2 * view.total_string_height - view.border, goBackStr);
+    
+    view.flushDisplay();
+}
+
+void GameSettings::displaySettingsValue(ViewX11 &view) const {
+    const std::string gameLevelStr = []() -> std::string {
+        switch (level) {
+            case GameLevel::Easy:
+                return "Easy";
+            case GameLevel::Medium:
+                return "Medium";
+            case GameLevel::Hard:
+                return "Hard";
+            }
+    }();
+    
+    view.drawString(400 + view.border, 300 + view.total_string_height - view.border, std::to_string(nCoins));
+    view.drawString(400 + view.border, 300 + 2 * view.total_string_height - view.border, gameLevelStr);
+    switch (mode) {
+        case GameMode::Standard:
+            view.drawString(400 + view.border, 300 + 3 * view.total_string_height - view.border, "Human");
+            break;
+        case GameMode::Computer:
+            view.drawString(400 + view.border, 300 + 3 * view.total_string_height - view.border, "Computer");
+            break;
+    }
+    
+   view.flushDisplay();
+}
+
+void GameSettings::displayHighlight(ViewX11 &view) const {
+    switch (highlight) {
+        case GameSettings::Highlight::NumOfCoins:
+            view.drawRectangle(400, 300, 100, view.total_string_height);
+            break;
+        case GameSettings::Highlight::Level:
+            view.drawRectangle(400, 300 + view.total_string_height, 100, view.total_string_height);
+            break;
+        case GameSettings::Highlight::Mode:
+            view.drawRectangle(400, 300 + 2 * view.total_string_height, 100, view.total_string_height);
+            break;
+        case GameSettings::Highlight::StartGame:
+            view.drawRectangle(350, 400, 100, view.total_string_height);
+            break;
+        case GameSettings::Highlight::GoBack:
+            view.drawRectangle(350, 400 + view.total_string_height, 100, view.total_string_height);
+            break;
+    }
+    
+    view.flushDisplay();
 }
 
 

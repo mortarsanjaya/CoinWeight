@@ -36,7 +36,7 @@ public:
     void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
-    void triggerDisplay(ViewX11 &view) override;
+    void triggerDisplay(ViewX11 &view) const override;
     
 private:
     Highlight highlight;
@@ -58,6 +58,10 @@ private:
     void decreaseLevel();
     void nextMode();
     void prevMode();
+    
+    void displayLayout(ViewX11 &view) const;
+    void displaySettingsValue(ViewX11 &view) const;
+    void displayHighlight(ViewX11 &view) const;
 };
 
 
