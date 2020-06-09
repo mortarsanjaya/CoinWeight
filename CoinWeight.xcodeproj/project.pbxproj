@@ -246,6 +246,16 @@
 			name = "Hard Level";
 			sourceTree = "<group>";
 		};
+		86538AA1248F9E86004A3DD8 /* X11 */ = {
+			isa = PBXGroup;
+			children = (
+				86EA23E224731D640028AD2D /* Screen */,
+				8607519F240F0EBE007A96E5 /* Controller */,
+				8626C2AC246E00F1003B99D4 /* Renderer */,
+			);
+			name = X11;
+			sourceTree = "<group>";
+		};
 		865B16372457AFD6005DE924 /* Computer Factory */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,9 +422,7 @@
 				86A9AB932400AF50002AB0CF /* main.cpp */,
 				86A78CCF244578AE000DF706 /* Enums */,
 				863108B8248B94D600F6DB60 /* Elements */,
-				86EA23E224731D640028AD2D /* Screen */,
-				8607519F240F0EBE007A96E5 /* Controller */,
-				8626C2AC246E00F1003B99D4 /* Renderer */,
+				86538AA1248F9E86004A3DD8 /* X11 */,
 				866BE31B241DE1A800DDD242 /* Exception */,
 			);
 			path = CoinWeight;
