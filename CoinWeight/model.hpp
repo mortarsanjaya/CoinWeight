@@ -18,7 +18,7 @@ namespace CoinWeight {
 
 
 
-class View;
+class ViewX11;
 
 class Model {
 public:
@@ -41,7 +41,7 @@ public:
     void switchToGameOver(const bool isWin);
     
     // View updating
-    void updateView(View &view);
+    void updateView(ViewX11 &view);
     
 private:
     const size_t coinDisplayRows;

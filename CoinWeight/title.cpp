@@ -8,7 +8,7 @@
 
 #include "title.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -75,7 +75,7 @@ void Title::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void Title::triggerDisplay(View &view) {
+void Title::triggerDisplay(ViewX11 &view) {
     view.displayLayoutTitle();
     view.displayHighlight(highlight);
 }

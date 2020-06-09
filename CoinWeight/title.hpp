@@ -31,7 +31,7 @@ public:
     void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
-    void triggerDisplay(View &view) override;
+    void triggerDisplay(ViewX11 &view) override;
     
 private:
     Highlight highlight;

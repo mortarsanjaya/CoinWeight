@@ -31,7 +31,7 @@ public:
     void onArrowRight() final;
     void onCharInput(const char inputChar) final;
     void onReturnButton(Model &model) final;
-    void triggerDisplay(View &view) final;
+    void triggerDisplay(ViewX11 &view) final;
     
 private:
     TableNavigator coinNavigator;

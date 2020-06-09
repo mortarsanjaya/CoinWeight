@@ -8,7 +8,7 @@
 
 #include "gamesettings.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -123,7 +123,7 @@ void GameSettings::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void GameSettings::triggerDisplay(View &view) {
+void GameSettings::triggerDisplay(ViewX11 &view) {
     view.displayLayoutGameSettings();
     view.displaySettingsValue(nCoins, level, mode);
     view.displayHighlight(highlight);

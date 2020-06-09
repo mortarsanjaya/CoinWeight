@@ -8,7 +8,7 @@
 
 #include "gameover.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -42,6 +42,6 @@ void GameOver::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void GameOver::triggerDisplay(View &view) {
+void GameOver::triggerDisplay(ViewX11 &view) {
     view.displayLayoutGameOver(playerWin);
 }

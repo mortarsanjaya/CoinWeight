@@ -8,7 +8,7 @@
 
 #include "gameplaycomputer.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 #include "computerfactory.hpp"
 
 using namespace CoinWeight;
@@ -172,7 +172,7 @@ void GamePlayComputer::computerSetSelection() {
 
 
 //************************** UI display
-void GamePlayComputer::triggerDisplay(View &view) {
+void GamePlayComputer::triggerDisplay(ViewX11 &view) {
     view.displayLayoutGamePlayComputer();
     view.displayCoinSelection(selection, coinNavigator.currTopRow());
     view.displayWeighResult(lastResult);

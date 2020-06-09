@@ -84,6 +84,6 @@ void Model::switchToGameOver(const bool isWin) {
 
 
 //************************** View updating
-void Model::updateView(View &view) {
+void Model::updateView(ViewX11 &view) {
     screen->triggerDisplay(view);
 }

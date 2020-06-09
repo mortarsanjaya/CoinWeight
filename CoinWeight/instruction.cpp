@@ -8,7 +8,7 @@
 
 #include "instruction.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -41,6 +41,6 @@ void Instruction::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void Instruction::triggerDisplay(View &view) {
+void Instruction::triggerDisplay(ViewX11 &view) {
     view.displayLayoutInstruction();
 }

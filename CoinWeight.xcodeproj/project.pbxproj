@@ -50,7 +50,6 @@
 /* Begin PBXFileReference section */
 		8607519C240F0EAE007A96E5 /* viewx11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = viewx11.cpp; sourceTree = "<group>"; };
 		8607519D240F0EAE007A96E5 /* viewx11.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = viewx11.hpp; sourceTree = "<group>"; };
-		860751A1240F2844007A96E5 /* view.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = view.hpp; sourceTree = "<group>"; };
 		86219BD1244FF1BD005E4F93 /* title.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = title.cpp; sourceTree = "<group>"; };
 		86219BD2244FF1BD005E4F93 /* title.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = title.hpp; sourceTree = "<group>"; };
 		86219BD5244FF7E4005E4F93 /* instruction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = instruction.cpp; sourceTree = "<group>"; };
@@ -168,7 +167,6 @@
 		8626C2AC246E00F1003B99D4 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
-				860751A1240F2844007A96E5 /* view.hpp */,
 				869BBCD624241CD90002CDED /* Input */,
 				86980C062425E101001C8481 /* X11 UI */,
 			);

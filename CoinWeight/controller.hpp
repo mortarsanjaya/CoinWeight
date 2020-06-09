@@ -9,7 +9,7 @@
 #ifndef controller_hpp
 #define controller_hpp
 
-#include "view.hpp"
+#include "viewx11.hpp"
 #include "model.hpp"
 
 #include "coingroup.hpp"
@@ -22,7 +22,7 @@ namespace CoinWeight {
 
 class Controller final {
 public:
-    Controller(std::unique_ptr<View> ui);
+    Controller(std::unique_ptr<ViewX11> ui);
     
     // Input processing
     void processInput();
@@ -32,7 +32,7 @@ public:
 
 private:
     Model model;
-    std::unique_ptr<View> ui;
+    std::unique_ptr<ViewX11> ui;
 };
 
 

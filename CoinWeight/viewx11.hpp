@@ -16,14 +16,14 @@
 #include <X11/Xos.h>
 #include <X11/Xutil.h>
 
-#include "view.hpp"
-
 #include "title.hpp"
 #include "instruction.hpp"
 #include "credit.hpp"
 #include "gamesettings.hpp"
 #include "gameplayhuman.hpp"
 #include "gameplaycomputer.hpp"
+
+#include "input.hpp"
 
 #include "coinselection.hpp"
 #include "weighresult.hpp"
@@ -35,45 +35,45 @@ namespace CoinWeight {
 
 
 
-class ViewX11 final : public View {
+class ViewX11 final {
 public:
     ViewX11();
     ~ViewX11();
     
     // Display for Title
-    void displayLayoutTitle() final;
-    void displayHighlight(const Title::Highlight highlight) final;
+    void displayLayoutTitle();
+    void displayHighlight(const Title::Highlight highlight);
     
     // Display for Instruction
-    void displayLayoutInstruction() final;
+    void displayLayoutInstruction();
     
     // Display for Credit
-    void displayLayoutCredit() final;
+    void displayLayoutCredit();
     
     // Display for Game Settings
-    void displayLayoutGameSettings() final;
-    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const GameMode mode) final;
-    void displayHighlight(const GameSettings::Highlight highlight) final;
+    void displayLayoutGameSettings();
+    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const GameMode mode);
+    void displayHighlight(const GameSettings::Highlight highlight);
     
     // Display for game play
-    void displayLayoutGamePlayHuman() final;
-    void displayLayoutGamePlayComputer() final;
-    void displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight) final;
-    void displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight) final;
-    void displayCoinSelection(const CoinSelection &selection, const size_t topRowIndex) final;
-    void displayWeighResult(const WeighResult weighResult) final;
-    void displayWeighCounter(const WeighCounter &weighCounter) final;
-    void displayCoinHighlight(const size_t row, const size_t column) final;
+    void displayLayoutGamePlayHuman();
+    void displayLayoutGamePlayComputer();
+    void displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight);
+    void displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight);
+    void displayCoinSelection(const CoinSelection &selection, const size_t topRowIndex);
+    void displayWeighResult(const WeighResult weighResult);
+    void displayWeighCounter(const WeighCounter &weighCounter);
+    void displayCoinHighlight(const size_t row, const size_t column);
     
     // Display for Game Over
-    void displayLayoutGameOver(const bool isWin) final;
+    void displayLayoutGameOver(const bool isWin);
     
     // Information for coin displaying
-    const size_t numOfCoinsPerRow() const final;
-    const size_t numOfRowsPerDisplay() const final;
+    const size_t numOfCoinsPerRow() const;
+    const size_t numOfRowsPerDisplay() const;
     
     // Input handling functions
-    const Input nextInput() final;
+    const Input nextInput();
 
 private:
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };

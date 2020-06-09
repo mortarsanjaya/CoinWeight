@@ -13,7 +13,7 @@ namespace CoinWeight {
 
 
 class Model;
-class View;
+class ViewX11;
 
 class GameScreenBase {
 public:
@@ -33,7 +33,7 @@ public:
     virtual void onReturnButton(Model &model) = 0;
     
     // Triggers View and UI for displaying the current screen
-    virtual void triggerDisplay(View &view) = 0;
+    virtual void triggerDisplay(ViewX11 &view) = 0;
 };
 
 

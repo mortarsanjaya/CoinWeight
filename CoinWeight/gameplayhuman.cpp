@@ -8,7 +8,7 @@
 
 #include "gameplayhuman.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -205,7 +205,7 @@ const GuessResult GamePlayHuman::guessFakeCoins() const {
 
 
 //************************** UI display
-void GamePlayHuman::triggerDisplay(View &view) {
+void GamePlayHuman::triggerDisplay(ViewX11 &view) {
     view.displayLayoutGamePlayHuman();
     view.displayCoinSelection(selection, coinNavigator.currTopRow());
     view.displayWeighResult(lastResult);

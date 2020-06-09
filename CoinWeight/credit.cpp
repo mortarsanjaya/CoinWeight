@@ -8,7 +8,7 @@
 
 #include "credit.hpp"
 #include "model.hpp"
-#include "view.hpp"
+#include "viewx11.hpp"
 
 using namespace CoinWeight;
 
@@ -41,6 +41,6 @@ void Credit::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void Credit::triggerDisplay(View &view) {
+void Credit::triggerDisplay(ViewX11 &view) {
     view.displayLayoutCredit();
 }
