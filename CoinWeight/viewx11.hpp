@@ -46,9 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Display for Instruction
-    void displayLayoutInstruction();
-    
     // Display for Credit
     void displayLayoutCredit();
     
