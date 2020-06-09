@@ -76,22 +76,6 @@ ViewX11::~ViewX11() {
 
 
 
-//************************** Display for Credit
-void ViewX11::displayLayoutCredit() {
-    clearWindow();
-    setForeground(defaultFGColor);
-    
-    drawString(300, 300, "---");
-    
-    const std::string &returnStr = "Return";
-    drawString(300 + border, 500 + total_string_height - border, returnStr);
-    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
-    
-    flushDisplay();
-}
-
-
-
 //************************** Display for Game Settings
 void ViewX11::displayLayoutGameSettings() {
     clearWindow();

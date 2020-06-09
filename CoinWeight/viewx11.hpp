@@ -46,8 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Display for Credit
-    void displayLayoutCredit();
     
     // Display for Game Settings
     void displayLayoutGameSettings();

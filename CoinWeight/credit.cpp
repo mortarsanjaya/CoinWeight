@@ -42,5 +42,18 @@ void Credit::onReturnButton(Model &model) {
 
 //************************** UI display
 void Credit::triggerDisplay(ViewX11 &view) {
-    view.displayLayoutCredit();
+    displayLayout(view);
+}
+
+void Credit::displayLayout(ViewX11 &view) {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+    
+    view.drawString(300, 300, "---");
+    
+    const std::string &returnStr = "Return";
+    view.drawString(300 + view.border, 500 + view.total_string_height - view.border, returnStr);
+    view.drawRectangle(300, 500, view.total_string_width(returnStr.size()), view.total_string_height);
+    
+    view.flushDisplay();
 }
