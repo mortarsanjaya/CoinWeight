@@ -76,6 +76,48 @@ void Title::onReturnButton(Model &model) {
 
 //************************** UI display
 void Title::triggerDisplay(ViewX11 &view) {
-    view.displayLayoutTitle();
-    view.displayHighlight(highlight);
+    displayLayout(view);
+    displayHighlight(view);
+}
+
+void Title::displayLayout(ViewX11 &view) {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+    
+    constexpr int text_x_pos = 300;
+    constexpr int top_button_y_pos = 300;
+    
+    const std::string &playStr = "Play";
+    const std::string &instrStr = "Instruction";
+    const std::string &creditStr = "Credit";
+    
+    view.drawString(text_x_pos + view.border, 50, "Coin Weight");
+    view.drawString(text_x_pos + view.border, top_button_y_pos +
+        1 * view.total_string_height - view.border, playStr);
+    view.drawString(text_x_pos + view.border, top_button_y_pos +
+        2 * view.total_string_height - view.border, instrStr);
+    view.drawString(text_x_pos + view.border, top_button_y_pos +
+        3 * view.total_string_height - view.border, creditStr);
+    
+    view.flushDisplay();
+}
+
+void Title::displayHighlight(ViewX11 &view) {
+    
+    constexpr int text_x_pos = 300;
+    constexpr int top_button_y_pos = 300;
+    
+    switch (highlight) {
+        case Title::Highlight::Play:
+            view.drawRectangle(text_x_pos, top_button_y_pos, 34, view.total_string_height);
+            break;
+        case Title::Highlight::Instruction:
+            view.drawRectangle(text_x_pos, top_button_y_pos + view.total_string_height, 76, view.total_string_height);
+            break;
+        case Title::Highlight::Credit:
+            view.drawRectangle(text_x_pos, top_button_y_pos + 2 * view.total_string_height, 46, view.total_string_height);
+            break;
+    }
+    
+    view.flushDisplay();
 }

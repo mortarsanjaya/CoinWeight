@@ -77,44 +77,7 @@ ViewX11::~ViewX11() {
 
 
 //************************** Display for Title
-void ViewX11::displayLayoutTitle() {
-    clearWindow();
-    setForeground(defaultFGColor);
-    
-    constexpr int text_x_pos = 300;
-    constexpr int top_button_y_pos = 300;
-    
-    const std::string &playStr = "Play";
-    const std::string &instrStr = "Instruction";
-    const std::string &creditStr = "Credit";
-    
-    drawString(text_x_pos + border, 50, "Coin Weight");
-    drawString(text_x_pos + border, top_button_y_pos + total_string_height - border, playStr);
-    drawString(text_x_pos + border, top_button_y_pos + 2 * total_string_height - border, instrStr);
-    drawString(text_x_pos + border, top_button_y_pos + 3 * total_string_height - border, creditStr);
-    
-    flushDisplay();
-}
 
-void ViewX11::displayHighlight(const Title::Highlight highlight) {
-    
-    constexpr int text_x_pos = 300;
-    constexpr int top_button_y_pos = 300;
-    
-    switch (highlight) {
-        case Title::Highlight::Play:
-            drawRectangle(text_x_pos, top_button_y_pos, 34, total_string_height);
-            break;
-        case Title::Highlight::Instruction:
-            drawRectangle(text_x_pos, top_button_y_pos + total_string_height, 76, total_string_height);
-            break;
-        case Title::Highlight::Credit:
-            drawRectangle(text_x_pos, top_button_y_pos + 2 * total_string_height, 46, total_string_height);
-            break;
-    }
-    
-    flushDisplay();
-}
 
 
 
