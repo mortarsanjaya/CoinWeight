@@ -46,10 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Display for Title
-    void displayLayoutTitle();
-    void displayHighlight(const Title::Highlight highlight);
-    
     // Display for Instruction
     void displayLayoutInstruction();
     
