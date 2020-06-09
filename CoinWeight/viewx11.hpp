@@ -40,6 +40,12 @@ public:
     ViewX11();
     ~ViewX11();
     
+    
+    
+    //***************************************************************
+    
+    enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
+    
     // Display for Title
     void displayLayoutTitle();
     void displayHighlight(const Title::Highlight highlight);
@@ -68,15 +74,17 @@ public:
     // Display for Game Over
     void displayLayoutGameOver(const bool isWin);
     
-    // Information for coin displaying
-    const size_t numOfCoinsPerRow() const;
-    const size_t numOfRowsPerDisplay() const;
+    // Draw coins
+    // Reverts foreground to default after use
+    // The integer parameters are counted from 0
+    void drawCoin(const CoinGroup group, const size_t coinIndex,
+                  const size_t row, const size_t column);
+    static const int coinColor(const CoinGroup group);
     
-    // Input handling functions
-    const Input nextInput();
-
-private:
-    enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
+    // Draw weigh result, text and scalre
+    // Reverts foreground to default after use
+    void drawWeighResultText(const WeighResult weighResult);
+    void drawWeighingScale(const WeighResult weighResult); // Need to be revised
     
     // Displaying details for text
     static constexpr int border = 5;
@@ -100,13 +108,16 @@ private:
     static constexpr size_t rowsDisplay = 8;
     static constexpr int defaultFGColor = Black;
     
-    Display *display;
-    Window window;
-    int screen;
-    GC gc;
-    XEvent event;
+    //*********************************************
     
-    std::array<unsigned long, Max + 1> colors;
+    
+    
+    // Information for coin displaying
+    const size_t numOfCoinsPerRow() const;
+    const size_t numOfRowsPerDisplay() const;
+    
+    // Input handling functions
+    const Input nextInput();
     
     // Set foreground
     void setForeground(const unsigned int colorIndex);
@@ -130,17 +141,15 @@ private:
     // Flush display
     void flushDisplay();
 
-    // Draw coins
-    // Reverts foreground to default after use
-    // The integer parameters are counted from 0
-    void drawCoin(const CoinGroup group, const size_t coinIndex,
-                  const size_t row, const size_t column);
-    static const int coinColor(const CoinGroup group);
+private:
     
-    // Draw weigh result, text and scalre
-    // Reverts foreground to default after use
-    void drawWeighResultText(const WeighResult weighResult);
-    void drawWeighingScale(const WeighResult weighResult); // Need to be revised
+    Display *display;
+    Window window;
+    int screen;
+    GC gc;
+    XEvent event;
+    
+    std::array<unsigned long, Max + 1> colors;
 };
 
 
