@@ -165,14 +165,14 @@
 			name = "Computer Testing";
 			sourceTree = "<group>";
 		};
-		8626C2AC246E00F1003B99D4 /* View */ = {
+		8626C2AC246E00F1003B99D4 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
 				860751A1240F2844007A96E5 /* view.hpp */,
 				869BBCD624241CD90002CDED /* Input */,
 				86980C062425E101001C8481 /* X11 UI */,
 			);
-			name = View;
+			name = Renderer;
 			sourceTree = "<group>";
 		};
 		8626C2AD246E4EC1003B99D4 /* Screen Types */ = {
@@ -214,6 +214,7 @@
 				86C1C6642432D6AC007E5B64 /* History */,
 				8626C298246DD6A7003B99D4 /* Weigh Counter */,
 				869C4BE424048E4700C3DE84 /* Computer */,
+				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -411,9 +412,9 @@
 				86A9AB932400AF50002AB0CF /* main.cpp */,
 				86A78CCF244578AE000DF706 /* Enums */,
 				863108B8248B94D600F6DB60 /* Elements */,
-				86EA23E224731D640028AD2D /* Model */,
+				86EA23E224731D640028AD2D /* Screen */,
 				8607519F240F0EBE007A96E5 /* Controller */,
-				8626C2AC246E00F1003B99D4 /* View */,
+				8626C2AC246E00F1003B99D4 /* Renderer */,
 				866BE31B241DE1A800DDD242 /* Exception */,
 			);
 			path = CoinWeight;
@@ -438,15 +439,14 @@
 			name = History;
 			sourceTree = "<group>";
 		};
-		86EA23E224731D640028AD2D /* Model */ = {
+		86EA23E224731D640028AD2D /* Screen */ = {
 			isa = PBXGroup;
 			children = (
 				868C8C7424770C82008AB006 /* model.cpp */,
 				868C8C7524770C82008AB006 /* model.hpp */,
 				86C1C6582432480C007E5B64 /* Screen */,
-				8626C2B6246F28A3003B99D4 /* Table Navigator */,
 			);
-			name = Model;
+			name = Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
