@@ -46,12 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    
-    // Display for Game Settings
-    void displayLayoutGameSettings();
-    void displaySettingsValue(const size_t numOfCoins, const GameLevel level, const GameMode mode);
-    void displayHighlight(const GameSettings::Highlight highlight);
-    
     // Display for game play
     void displayLayoutGamePlayHuman();
     void displayLayoutGamePlayComputer();
