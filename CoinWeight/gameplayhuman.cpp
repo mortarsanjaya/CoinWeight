@@ -264,8 +264,8 @@ void GamePlayHuman::displayCoinSelection(ViewX11 &view) const {
 }
 
 void GamePlayHuman::displayWeighResult(ViewX11 &view) const {
-    drawWeighResultText(view, lastResult);
-    drawWeighingScale(view, lastResult);
+    drawWeighResultText(view);
+    drawWeighingScale(view);
     
     view.flushDisplay();
 }
@@ -319,11 +319,11 @@ const int GamePlayHuman::coinColor(const CoinGroup group) {
 
 
 //******************** Helper functions for drawing weigh result
-void GamePlayHuman::drawWeighResultText(ViewX11 &view, const WeighResult weighResult) const {
+void GamePlayHuman::drawWeighResultText(ViewX11 &view) const {
     const int x_pos = 30;
     const int y_pos = 90;
     view.setForeground(view.Black);
-    switch (weighResult) {
+    switch (lastResult) {
         case WeighResult::Start:
             view.drawString(x_pos, y_pos, "");
             break;
@@ -345,7 +345,7 @@ void GamePlayHuman::drawWeighResultText(ViewX11 &view, const WeighResult weighRe
     view.setForeground(view.defaultFGColor);
 }
 
-void GamePlayHuman::drawWeighingScale(ViewX11 &view, const WeighResult weighResult) const {
+void GamePlayHuman::drawWeighingScale(ViewX11 &view) const {
     {
         
         std::vector<XPoint> xpoints {
@@ -374,6 +374,7 @@ void GamePlayHuman::drawWeighingScale(ViewX11 &view, const WeighResult weighResu
     }
     
     {
+        const WeighResult weighResult = lastResult;
         const auto anchors = [&weighResult]() -> std::pair<XPoint, XPoint> {
             const int x_base = 700;
             const int y_base = 60;

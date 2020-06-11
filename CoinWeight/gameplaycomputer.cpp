@@ -226,8 +226,8 @@ void GamePlayComputer::displayCoinSelection(ViewX11 &view) const {
 }
 
 void GamePlayComputer::displayWeighResult(ViewX11 &view) const {
-    drawWeighResultText(view, lastResult);
-    drawWeighingScale(view, lastResult);
+    drawWeighResultText(view);
+    drawWeighingScale(view);
     
     view.flushDisplay();
 }
@@ -281,11 +281,11 @@ const int GamePlayComputer::coinColor(const CoinGroup group) {
 
 
 //******************** Helper functions for drawing weigh result
-void GamePlayComputer::drawWeighResultText(ViewX11 &view, const WeighResult weighResult) const {
+void GamePlayComputer::drawWeighResultText(ViewX11 &view) const {
     const int x_pos = 30;
     const int y_pos = 90;
     view.setForeground(view.Black);
-    switch (weighResult) {
+    switch (lastResult) {
         case WeighResult::Start:
             view.drawString(x_pos, y_pos, "");
             break;
@@ -307,7 +307,7 @@ void GamePlayComputer::drawWeighResultText(ViewX11 &view, const WeighResult weig
     view.setForeground(view.defaultFGColor);
 }
 
-void GamePlayComputer::drawWeighingScale(ViewX11 &view, const WeighResult weighResult) const {
+void GamePlayComputer::drawWeighingScale(ViewX11 &view) const {
     {
         
         std::vector<XPoint> xpoints {
@@ -336,6 +336,7 @@ void GamePlayComputer::drawWeighingScale(ViewX11 &view, const WeighResult weighR
     }
     
     {
+        const WeighResult weighResult = lastResult;
         const auto anchors = [&weighResult]() -> std::pair<XPoint, XPoint> {
             const int x_base = 700;
             const int y_base = 60;
