@@ -17,12 +17,6 @@ namespace CoinWeight {
 
 class Title final : public GameScreenBase {
 public:
-    enum class Highlight {
-        Play,
-        Instruction,
-        Credit
-    };
-    
     Title();
 
     void onArrowUp() override;
@@ -34,6 +28,12 @@ public:
     void triggerDisplay(ViewX11 &view) const override;
     
 private:
+    enum class Highlight {
+        Play,
+        Instruction,
+        Credit
+    };
+
     Highlight highlight;
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
