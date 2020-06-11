@@ -10,6 +10,7 @@
 #include "exception.hpp"
 #include <utility>
 #include <cmath>
+#include <vector>
 
 using namespace CoinWeight;
 

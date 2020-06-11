@@ -10,6 +10,8 @@
 #include "model.hpp"
 #include "viewx11.hpp"
 
+#include <vector>
+
 using namespace CoinWeight;
 
 //************************** Constructor

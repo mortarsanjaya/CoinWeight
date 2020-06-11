@@ -16,18 +16,7 @@
 #include <X11/Xos.h>
 #include <X11/Xutil.h>
 
-#include "title.hpp"
-#include "instruction.hpp"
-#include "credit.hpp"
-#include "gamesettings.hpp"
-#include "gameplayhuman.hpp"
-#include "gameplaycomputer.hpp"
-
 #include "input.hpp"
-
-#include "coinselection.hpp"
-#include "weighresult.hpp"
-#include "weighcounter.hpp"
 
 #include "exception.hpp"
 
