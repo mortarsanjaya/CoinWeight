@@ -173,13 +173,76 @@ void GamePlayComputer::computerSetSelection() {
 
 //************************** UI display
 void GamePlayComputer::triggerDisplay(ViewX11 &view) const {
-    view.displayLayoutGamePlayComputer();
-    view.displayCoinSelection(selection, coinNavigator.currTopRow());
-    view.displayWeighResult(lastResult);
-    view.displayWeighCounter(counter);
+    displayLayoutGamePlayComputer(view);
+    displayCoinSelection(view, selection, coinNavigator.currTopRow());
+    displayWeighResult(view, lastResult);
+    displayWeighCounter(view, counter);
     if (isOnButtonHighlight) {
-        view.displayButtonHighlight(buttonHighlight);
+        displayButtonHighlight(view, buttonHighlight);
     } else {
-        view.displayCoinHighlight(coinNavigator.currRowDisplay(), coinNavigator.currColumn());
+        displayCoinHighlight(view, coinNavigator.currRowDisplay(), coinNavigator.currColumn());
     }
+}
+
+void GamePlayComputer::displayLayoutGamePlayComputer(ViewX11 &view) const {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+
+    const std::string &nextMoveStr = "Next Move";
+    
+    view.drawString(50 + view.border, 300 + view.total_string_height - view.border, nextMoveStr);
+    
+    view.flushDisplay();
+}
+
+void GamePlayComputer::displayButtonHighlight(ViewX11 &view, const GamePlayComputer::ButtonHighlight highlight) const {
+    switch (highlight) {
+        case GamePlayComputer::ButtonHighlight::NextMove:
+            view.drawRectangle(50, 300, 64, view.total_string_height);
+            break;
+    }
+    
+    view.flushDisplay();
+}
+
+void GamePlayComputer::displayCoinSelection(ViewX11 &view, const CoinSelection &selection, const size_t topRowIndex) const {
+    for (size_t row = 0; row < coinNavigator.numOfRowsDisplayed(); ++row) {
+        bool coinExhausted = false;
+        for (size_t column = 0; column < coinNavigator.numOfColumns(); ++column) {
+            const size_t coinIndex = (row + topRowIndex) * coinNavigator.numOfColumns() + column;
+            if (coinIndex >= selection.totalSize()) {
+                coinExhausted = true;
+                break;
+            }
+            view.drawCoin(selection.at(coinIndex), coinIndex, row, column);
+        }
+        
+        if (coinExhausted) break;
+    }
+    
+    view.flushDisplay();
+}
+
+void GamePlayComputer::displayWeighResult(ViewX11 &view, const WeighResult weighResult) const {
+    view.drawWeighResultText(weighResult);
+    view.drawWeighingScale(weighResult);
+    
+    view.flushDisplay();
+}
+
+void GamePlayComputer::displayWeighCounter(ViewX11 &view, const WeighCounter &counter) const {
+    view.setForeground(view.Black);
+    std::string numOfWeighsStr = "Number of comparisons done: ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
+    numOfWeighsStr += " out of ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
+    view.drawString(30, 60, numOfWeighsStr);
+    
+    view.flushDisplay();
+}
+
+void GamePlayComputer::displayCoinHighlight(ViewX11 &view, const size_t row, const size_t column) const {
+    view.drawRectangle(view.coin0XPos + view.coinDist * column, view.coin0YPos + view.coinDist * row, view.coinDist, view.coinDist);
+    
+    view.flushDisplay();
 }

@@ -46,16 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Display for game play
-    void displayLayoutGamePlayHuman();
-    void displayLayoutGamePlayComputer();
-    void displayButtonHighlight(const GamePlayHuman::ButtonHighlight highlight);
-    void displayButtonHighlight(const GamePlayComputer::ButtonHighlight highlight);
-    void displayCoinSelection(const CoinSelection &selection, const size_t topRowIndex);
-    void displayWeighResult(const WeighResult weighResult);
-    void displayWeighCounter(const WeighCounter &weighCounter);
-    void displayCoinHighlight(const size_t row, const size_t column);
-    
     // Display for Game Over
     void displayLayoutGameOver(const bool isWin);
     

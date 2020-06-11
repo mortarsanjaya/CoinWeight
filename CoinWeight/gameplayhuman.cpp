@@ -206,13 +206,81 @@ const GuessResult GamePlayHuman::guessFakeCoins() const {
 
 //************************** UI display
 void GamePlayHuman::triggerDisplay(ViewX11 &view) const {
-    view.displayLayoutGamePlayHuman();
-    view.displayCoinSelection(selection, coinNavigator.currTopRow());
-    view.displayWeighResult(lastResult);
-    view.displayWeighCounter(counter);
+    displayLayoutGamePlayHuman(view);
+    displayCoinSelection(view, selection, coinNavigator.currTopRow());
+    displayWeighResult(view, lastResult);
+    displayWeighCounter(view, counter);
     if (isOnButtonHighlight) {
-        view.displayButtonHighlight(buttonHighlight);
+        displayButtonHighlight(view, buttonHighlight);
     } else {
-        view.displayCoinHighlight(coinNavigator.currRowDisplay(), coinNavigator.currColumn());
+        displayCoinHighlight(view, coinNavigator.currRowDisplay(), coinNavigator.currColumn());
     }
+}
+
+void GamePlayHuman::displayLayoutGamePlayHuman(ViewX11 &view) const {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+
+    const std::string &weighStr = "Weigh";
+    const std::string &guessStr = "Guess";
+    
+    view.drawString(50 + view.border, 300 + view.total_string_height - view.border, weighStr);
+    view.drawString(50 + view.border, 300 + 2 * view.total_string_height - view.border, guessStr);
+    
+    view.flushDisplay();
+}
+
+void GamePlayHuman::displayButtonHighlight(ViewX11 &view, const GamePlayHuman::ButtonHighlight highlight) const {
+    switch (highlight) {
+        case GamePlayHuman::ButtonHighlight::Weigh:
+            view.drawRectangle(50, 300, 40, view.total_string_height);
+            break;
+        case GamePlayHuman::ButtonHighlight::Guess:
+            view.drawRectangle(50, 300 + view.total_string_height, 40, view.total_string_height);
+            break;
+    }
+    
+    view.flushDisplay();
+}
+
+void GamePlayHuman::displayCoinSelection(ViewX11 &view, const CoinSelection &selection, const size_t topRowIndex) const {
+    for (size_t row = 0; row < coinNavigator.numOfRowsDisplayed(); ++row) {
+        bool coinExhausted = false;
+        for (size_t column = 0; column < coinNavigator.numOfColumns(); ++column) {
+            const size_t coinIndex = (row + topRowIndex) * coinNavigator.numOfColumns() + column;
+            if (coinIndex >= selection.totalSize()) {
+                coinExhausted = true;
+                break;
+            }
+            view.drawCoin(selection.at(coinIndex), coinIndex, row, column);
+        }
+        
+        if (coinExhausted) break;
+    }
+    
+    view.flushDisplay();
+}
+
+void GamePlayHuman::displayWeighResult(ViewX11 &view, const WeighResult weighResult) const {
+    view.drawWeighResultText(weighResult);
+    view.drawWeighingScale(weighResult);
+    
+    view.flushDisplay();
+}
+
+void GamePlayHuman::displayWeighCounter(ViewX11 &view, const WeighCounter &counter) const {
+    view.setForeground(view.Black);
+    std::string numOfWeighsStr = "Number of comparisons done: ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
+    numOfWeighsStr += " out of ";
+    numOfWeighsStr += std::to_string(counter.numOfWeighsMax());
+    view.drawString(30, 60, numOfWeighsStr);
+    
+    view.flushDisplay();
+}
+
+void GamePlayHuman::displayCoinHighlight(ViewX11 &view, const size_t row, const size_t column) const {
+    view.drawRectangle(view.coin0XPos + view.coinDist * column, view.coin0YPos + view.coinDist * row, view.coinDist, view.coinDist);
+    
+    view.flushDisplay();
 }
