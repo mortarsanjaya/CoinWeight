@@ -124,15 +124,17 @@ void GameSettings::onReturnButton(Model &model) {
 
 //************************** UI display
 void GameSettings::triggerDisplay(ViewX11 &view) const {
-    displayLayout(view);
-    displaySettingsValue(view);
-    displayHighlight(view);
-}
-
-void GameSettings::displayLayout(ViewX11 &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
+    displayLayout(view);
+    displaySettingsValue(view);
+    displayHighlight(view);
+    
+    view.flushDisplay();
+}
+
+void GameSettings::displayLayout(ViewX11 &view) const {
     view.drawString(300, 50, "Coin Weight");
     view.drawString(300, 300 + view.total_string_height - view.border, "Number of Coins:");
     view.drawString(300, 300 + 2 * view.total_string_height - view.border, "Level:");
@@ -144,8 +146,6 @@ void GameSettings::displayLayout(ViewX11 &view) const {
     
     view.drawString(350 + view.border, 400 + view.total_string_height - view.border, startGameStr);
     view.drawString(350 + view.border, 400 + 2 * view.total_string_height - view.border, goBackStr);
-    
-    view.flushDisplay();
 }
 
 void GameSettings::displaySettingsValue(ViewX11 &view) const {
@@ -170,8 +170,6 @@ void GameSettings::displaySettingsValue(ViewX11 &view) const {
             view.drawString(400 + view.border, 300 + 3 * view.total_string_height - view.border, "Computer");
             break;
     }
-    
-   view.flushDisplay();
 }
 
 void GameSettings::displayHighlight(ViewX11 &view) const {
@@ -192,8 +190,6 @@ void GameSettings::displayHighlight(ViewX11 &view) const {
             view.drawRectangle(350, 400 + view.total_string_height, 100, view.total_string_height);
             break;
     }
-    
-    view.flushDisplay();
 }
 
 
@@ -245,7 +241,7 @@ void GameSettings::nextMode() {
             mode = GameMode::Computer;
             break;
         case GameMode::Computer:
-            mode = GameMode::Computer;
+            mode = GameMode::Standard;
             break;
     }
 }
@@ -253,7 +249,7 @@ void GameSettings::nextMode() {
 void GameSettings::prevMode() {
     switch (mode) {
         case GameMode::Standard:
-            mode = GameMode::Standard;
+            mode = GameMode::Computer;
             break;
         case GameMode::Computer:
             mode = GameMode::Standard;
