@@ -20,14 +20,6 @@ namespace CoinWeight {
 
 class GameSettings final : public GameScreenBase {
 public:
-    enum class Highlight {
-        NumOfCoins,
-        Level,
-        Mode,
-        StartGame,
-        GoBack
-    };
-    
     GameSettings();
     
     void onArrowUp() override;
@@ -39,6 +31,14 @@ public:
     void triggerDisplay(ViewX11 &view) const override;
     
 private:
+    enum class Highlight {
+        NumOfCoins,
+        Level,
+        Mode,
+        StartGame,
+        GoBack
+    };
+
     Highlight highlight;
 
     static size_t nCoins;

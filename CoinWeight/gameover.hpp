@@ -17,7 +17,6 @@ namespace CoinWeight {
 
 class GameOver final : public GameScreenBase {
 public:
-    
     GameOver(const bool doesPlayerWin);
     
     void onArrowUp() override;
@@ -30,8 +29,6 @@ public:
     
 private:
     bool playerWin;
-    
-    void displayLayoutGameOver(ViewX11 &view, const bool isWin) const;
 };
 
 

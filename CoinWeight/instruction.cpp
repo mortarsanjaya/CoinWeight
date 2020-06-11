@@ -44,10 +44,6 @@ void Instruction::onReturnButton(Model &model) {
 
 //************************** UI display
 void Instruction::triggerDisplay(ViewX11 &view) const {
-    displayLayout(view);
-}
-
-void Instruction::displayLayout(ViewX11 &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
 

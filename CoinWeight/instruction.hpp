@@ -26,9 +26,6 @@ public:
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
     void triggerDisplay(ViewX11 &view) const override;
-    
-private:
-    void displayLayout(ViewX11 &view) const;
 };
 
 

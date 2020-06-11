@@ -27,10 +27,6 @@ namespace CoinWeight {
 
 class GamePlayComputer final : public SinglePlayerGame {
 public:
-    enum class ButtonHighlight {
-        NextMove
-    };
-    
     GamePlayComputer(const size_t nCoinsTotal, const GameLevel level,
         const size_t nRowsDisplay, const size_t nCoinsPerRow);
     
@@ -43,6 +39,10 @@ public:
     void triggerDisplay(ViewX11 &view) const override;
     
 private:
+    enum class ButtonHighlight {
+        NextMove
+    };
+    
     ButtonHighlight buttonHighlight;
     TableNavigator coinNavigator;
     bool isOnButtonHighlight;

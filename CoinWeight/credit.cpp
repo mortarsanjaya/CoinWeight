@@ -42,10 +42,6 @@ void Credit::onReturnButton(Model &model) {
 
 //************************** UI display
 void Credit::triggerDisplay(ViewX11 &view) const {
-    displayLayout(view);
-}
-
-void Credit::displayLayout(ViewX11 &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     

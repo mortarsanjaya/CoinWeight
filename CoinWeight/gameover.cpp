@@ -43,14 +43,10 @@ void GameOver::onReturnButton(Model &model) {
 
 //************************** UI display
 void GameOver::triggerDisplay(ViewX11 &view) const {
-    displayLayoutGameOver(view, playerWin);
-}
-
-void GameOver::displayLayoutGameOver(ViewX11 &view, const bool isWin) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
-    if (isWin) {
+    if (playerWin) {
         view.drawString(300, 200, "You Win!");
     } else {
         view.drawString(300, 200, "You Lose!");
