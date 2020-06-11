@@ -57,6 +57,19 @@ private:
     
     WeighCounter counter;
     
+    
+    
+    // Coin configurations
+    static constexpr int coinDiameter = 30;
+    static constexpr int coinDist = 50;
+    static constexpr int coin0XPos = 200;
+    static constexpr int coin0YPos = 200;
+    static constexpr int coinOffset = (coinDist - coinDiameter) / 2;
+    static constexpr size_t coinsPerRow = 10;
+    static constexpr size_t rowsDisplay = 8;
+    
+    
+    
     const size_t coinHighlightIndex() const;
     
     void buttonHighlightUp();

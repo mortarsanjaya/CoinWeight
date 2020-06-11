@@ -244,7 +244,7 @@ void GamePlayComputer::displayWeighCounter(ViewX11 &view) const {
 }
 
 void GamePlayComputer::displayCoinHighlight(ViewX11 &view) const {
-    view.drawRectangle(view.coin0XPos + view.coinDist * coinNavigator.currColumn(), view.coin0YPos + view.coinDist * coinNavigator.currRowDisplay(), view.coinDist, view.coinDist);
+    view.drawRectangle(coin0XPos + coinDist * coinNavigator.currColumn(), coin0YPos + coinDist * coinNavigator.currRowDisplay(), coinDist, coinDist);
     
     view.flushDisplay();
 }
@@ -255,12 +255,12 @@ void GamePlayComputer::displayCoinHighlight(ViewX11 &view) const {
 void GamePlayComputer::drawCoin(ViewX11 &view, const CoinGroup group, const size_t coinIndex,
                           const size_t row, const size_t column) const
 {
-    const int x_pos = view.coin0XPos + view.coinOffset + view.coinDist * column;
-    const int y_pos = view.coin0YPos + view.coinOffset + view.coinDist * row;
+    const int x_pos = coin0XPos + coinOffset + coinDist * column;
+    const int y_pos = coin0YPos + coinOffset + coinDist * row;
     view.setForeground(coinColor(group));
-    view.fillFullCircle(x_pos, y_pos, view.coinDiameter);
+    view.fillFullCircle(x_pos, y_pos, coinDiameter);
     view.setForeground(view.Black);
-    view.drawFullCircle(x_pos, y_pos, view.coinDiameter);
+    view.drawFullCircle(x_pos, y_pos, coinDiameter);
     view.setForeground(view.defaultFGColor);
     view.drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
