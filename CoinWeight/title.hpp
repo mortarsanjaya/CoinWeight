@@ -37,9 +37,6 @@ private:
     Highlight highlight;
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
-    
-    void displayLayout(ViewX11 &view) const;
-    void displayHighlight(ViewX11 &view) const;
 };
 
 

@@ -10,6 +10,9 @@
 #include "model.hpp"
 #include "viewx11.hpp"
 
+#include <vector>
+#include <string>
+
 using namespace CoinWeight;
 
 //************************** Constructor
@@ -76,36 +79,22 @@ void Title::onReturnButton(Model &model) {
 
 //************************** UI display
 void Title::triggerDisplay(ViewX11 &view) const {
-    displayLayout(view);
-    displayHighlight(view);
-}
-
-void Title::displayLayout(ViewX11 &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
     constexpr int text_x_pos = 300;
     constexpr int top_button_y_pos = 300;
     
-    const std::string &playStr = "Play";
-    const std::string &instrStr = "Instruction";
-    const std::string &creditStr = "Credit";
+    const std::string screenName = "Coin Weight";
+    const std::vector<std::string> buttons {
+        "Play", "Instruction", "Credit"
+    };
     
-    view.drawString(text_x_pos + view.border, 50, "Coin Weight");
-    view.drawString(text_x_pos + view.border, top_button_y_pos +
-        1 * view.total_string_height - view.border, playStr);
-    view.drawString(text_x_pos + view.border, top_button_y_pos +
-        2 * view.total_string_height - view.border, instrStr);
-    view.drawString(text_x_pos + view.border, top_button_y_pos +
-        3 * view.total_string_height - view.border, creditStr);
-    
-    view.flushDisplay();
-}
-
-void Title::displayHighlight(ViewX11 &view) const {
-    
-    constexpr int text_x_pos = 300;
-    constexpr int top_button_y_pos = 300;
+    view.drawString(text_x_pos + view.border, 50, screenName);
+    for (size_t i = 0; i < buttons.size(); ++i) {
+        view.drawString(text_x_pos + view.border, top_button_y_pos +
+            (i + 1) * view.total_string_height - view.border, buttons[i]);
+    }
     
     switch (highlight) {
         case Title::Highlight::Play:
