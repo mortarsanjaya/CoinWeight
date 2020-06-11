@@ -12,8 +12,7 @@
 using namespace CoinWeight;
 
 //************************** Constructor
-Model::Model(const size_t coinDisplayRows, const size_t coinDisplayColumns) :
-coinDisplayRows(coinDisplayRows), coinDisplayColumns(coinDisplayColumns) {
+Model::Model() {
     switchToTitle();
 }
 

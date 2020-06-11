@@ -22,7 +22,7 @@ class ViewX11;
 
 class Model {
 public:
-    Model(const size_t coinDisplayRows, const size_t coinDisplayColumns);
+    Model();
 
     // Input handling
     void onArrowUp();
@@ -44,8 +44,8 @@ public:
     void updateView(ViewX11 &view);
     
 private:
-    const size_t coinDisplayRows;
-    const size_t coinDisplayColumns;
+    static constexpr size_t coinDisplayRows = 8;
+    static constexpr size_t coinDisplayColumns = 10;
 
     std::unique_ptr<GameScreenBase> screen;
 

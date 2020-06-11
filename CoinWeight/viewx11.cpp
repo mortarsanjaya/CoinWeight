@@ -97,17 +97,6 @@ void ViewX11::displayLayoutGameOver(const bool isWin) {
 
 
 
-//************************** Information for coin display
-const size_t ViewX11::numOfCoinsPerRow() const {
-    return coinsPerRow;
-}
-
-const size_t ViewX11::numOfRowsPerDisplay() const {
-    return rowsDisplay;
-}
-
-
-
 //************************** Set foreground
 void ViewX11::setForeground(const unsigned int colorIndex) {
     if (colorIndex >= colors.size()) throw Exception<ViewX11>("Invalid color");

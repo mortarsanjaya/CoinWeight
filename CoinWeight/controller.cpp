@@ -13,7 +13,7 @@ using namespace CoinWeight;
 
 //************************** Constructor
 Controller::Controller(std::unique_ptr<ViewX11> ui) :
-model(ui->numOfRowsPerDisplay(), ui->numOfCoinsPerRow()), ui(std::move(ui))
+model(), ui(std::move(ui))
 {}
 
 

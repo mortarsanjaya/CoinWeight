@@ -87,10 +87,6 @@ public:
     
     
     
-    // Information for coin displaying
-    const size_t numOfCoinsPerRow() const;
-    const size_t numOfRowsPerDisplay() const;
-    
     // Input handling functions
     const Input nextInput();
     
