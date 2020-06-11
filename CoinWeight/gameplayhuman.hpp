@@ -77,11 +77,11 @@ private:
     
     // Display for game play
     void displayLayoutGamePlayHuman(ViewX11 &view) const;
-    void displayButtonHighlight(ViewX11 &view, const GamePlayHuman::ButtonHighlight highlight) const;
-    void displayCoinSelection(ViewX11 &view, const CoinSelection &selection, const size_t topRowIndex) const;
-    void displayWeighResult(ViewX11 &view, const WeighResult weighResult) const;
-    void displayWeighCounter(ViewX11 &view, const WeighCounter &weighCounter) const;
-    void displayCoinHighlight(ViewX11 &view, const size_t row, const size_t column) const;
+    void displayButtonHighlight(ViewX11 &view) const;
+    void displayCoinSelection(ViewX11 &view) const;
+    void displayWeighResult(ViewX11 &view) const;
+    void displayWeighCounter(ViewX11 &view) const;
+    void displayCoinHighlight(ViewX11 &view) const;
 };
 
 

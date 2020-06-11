@@ -174,13 +174,13 @@ void GamePlayComputer::computerSetSelection() {
 //************************** UI display
 void GamePlayComputer::triggerDisplay(ViewX11 &view) const {
     displayLayoutGamePlayComputer(view);
-    displayCoinSelection(view, selection, coinNavigator.currTopRow());
-    displayWeighResult(view, lastResult);
-    displayWeighCounter(view, counter);
+    displayCoinSelection(view);
+    displayWeighResult(view);
+    displayWeighCounter(view);
     if (isOnButtonHighlight) {
-        displayButtonHighlight(view, buttonHighlight);
+        displayButtonHighlight(view);
     } else {
-        displayCoinHighlight(view, coinNavigator.currRowDisplay(), coinNavigator.currColumn());
+        displayCoinHighlight(view);
     }
 }
 
@@ -195,8 +195,8 @@ void GamePlayComputer::displayLayoutGamePlayComputer(ViewX11 &view) const {
     view.flushDisplay();
 }
 
-void GamePlayComputer::displayButtonHighlight(ViewX11 &view, const GamePlayComputer::ButtonHighlight highlight) const {
-    switch (highlight) {
+void GamePlayComputer::displayButtonHighlight(ViewX11 &view) const {
+    switch (buttonHighlight) {
         case GamePlayComputer::ButtonHighlight::NextMove:
             view.drawRectangle(50, 300, 64, view.total_string_height);
             break;
@@ -205,11 +205,11 @@ void GamePlayComputer::displayButtonHighlight(ViewX11 &view, const GamePlayCompu
     view.flushDisplay();
 }
 
-void GamePlayComputer::displayCoinSelection(ViewX11 &view, const CoinSelection &selection, const size_t topRowIndex) const {
+void GamePlayComputer::displayCoinSelection(ViewX11 &view) const {
     for (size_t row = 0; row < coinNavigator.numOfRowsDisplayed(); ++row) {
         bool coinExhausted = false;
         for (size_t column = 0; column < coinNavigator.numOfColumns(); ++column) {
-            const size_t coinIndex = (row + topRowIndex) * coinNavigator.numOfColumns() + column;
+            const size_t coinIndex = (row + coinNavigator.currTopRow()) * coinNavigator.numOfColumns() + column;
             if (coinIndex >= selection.totalSize()) {
                 coinExhausted = true;
                 break;
@@ -223,14 +223,14 @@ void GamePlayComputer::displayCoinSelection(ViewX11 &view, const CoinSelection &
     view.flushDisplay();
 }
 
-void GamePlayComputer::displayWeighResult(ViewX11 &view, const WeighResult weighResult) const {
-    view.drawWeighResultText(weighResult);
-    view.drawWeighingScale(weighResult);
+void GamePlayComputer::displayWeighResult(ViewX11 &view) const {
+    view.drawWeighResultText(lastResult);
+    view.drawWeighingScale(lastResult);
     
     view.flushDisplay();
 }
 
-void GamePlayComputer::displayWeighCounter(ViewX11 &view, const WeighCounter &counter) const {
+void GamePlayComputer::displayWeighCounter(ViewX11 &view) const {
     view.setForeground(view.Black);
     std::string numOfWeighsStr = "Number of comparisons done: ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
@@ -241,8 +241,8 @@ void GamePlayComputer::displayWeighCounter(ViewX11 &view, const WeighCounter &co
     view.flushDisplay();
 }
 
-void GamePlayComputer::displayCoinHighlight(ViewX11 &view, const size_t row, const size_t column) const {
-    view.drawRectangle(view.coin0XPos + view.coinDist * column, view.coin0YPos + view.coinDist * row, view.coinDist, view.coinDist);
+void GamePlayComputer::displayCoinHighlight(ViewX11 &view) const {
+    view.drawRectangle(view.coin0XPos + view.coinDist * coinNavigator.currColumn(), view.coin0YPos + view.coinDist * coinNavigator.currRowDisplay(), view.coinDist, view.coinDist);
     
     view.flushDisplay();
 }
