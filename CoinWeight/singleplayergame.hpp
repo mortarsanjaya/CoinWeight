@@ -22,8 +22,11 @@ namespace CoinWeight {
 
 class SinglePlayerGame : public GameScreenBase {
 public:
+
+/*
     SinglePlayerGame(const size_t nCoinsTotal, const GameLevel level,
         const size_t nRowsDisplay, const size_t nCoinsPerRow);
+    
     
     void onArrowUp() final;
     void onArrowDown() final;
@@ -58,6 +61,7 @@ private:
     // Game operations
     const WeighResult compareWeight() const;
     const GuessResult guessFakeCoins() const;
+*/
 };
 
 

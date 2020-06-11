@@ -9,6 +9,8 @@
 #ifndef gameplaycomputer_hpp
 #define gameplaycomputer_hpp
 
+#include "singleplayergame.hpp"
+
 #include "gamescreen.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
@@ -23,7 +25,7 @@ namespace CoinWeight {
 
 
 
-class GamePlayComputer final : public GameScreenBase {
+class GamePlayComputer final : public SinglePlayerGame {
 public:
     enum class ButtonHighlight {
         NextMove

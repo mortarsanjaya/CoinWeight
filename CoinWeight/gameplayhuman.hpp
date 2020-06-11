@@ -9,6 +9,8 @@
 #ifndef gameplayhuman_hpp
 #define gameplayhuman_hpp
 
+#include "singleplayergame.hpp"
+
 #include "gamescreen.hpp"
 #include "tablenavigator.hpp"
 #include "coinset.hpp"
@@ -22,7 +24,7 @@ namespace CoinWeight {
 
 
 
-class GamePlayHuman final : public GameScreenBase {
+class GamePlayHuman final : public SinglePlayerGame {
 public:
     enum class ButtonHighlight {
         Weigh,
