@@ -22,7 +22,7 @@ namespace CoinWeight {
 
 class Controller final {
 public:
-    Controller(std::unique_ptr<ViewX11> ui);
+    Controller();
     
     // Input processing
     void processInput();
@@ -32,7 +32,7 @@ public:
 
 private:
     Model model;
-    std::unique_ptr<ViewX11> ui;
+    ViewX11 ui;
 };
 
 

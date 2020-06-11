@@ -22,7 +22,7 @@ int main() {
     computerTest(100, GameLevel::Hard);
 
 /*
-    auto controller = std::make_unique<Controller>(std::make_unique<ViewX11>());
+    auto controller = std::make_unique<Controller>();
     while (true) {
         controller->updateDisplay();
         std::this_thread::sleep_for(std::chrono::milliseconds(16));

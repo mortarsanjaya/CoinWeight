@@ -12,15 +12,15 @@
 using namespace CoinWeight;
 
 //************************** Constructor
-Controller::Controller(std::unique_ptr<ViewX11> ui) :
-model(), ui(std::move(ui))
+Controller::Controller() :
+model(), ui()
 {}
 
 
 
 //************************** Input processing
 void Controller::processInput() {
-    const Input input = ui->nextInput();
+    const Input input = ui.nextInput();
     switch (input.inputType()) {
         case Input::Type::Unknown:
             break;
@@ -53,5 +53,5 @@ void Controller::processInput() {
 
 //************************** Display updating
 void Controller::updateDisplay() {
-    model.updateView(*ui);
+    model.updateView(ui);
 }
