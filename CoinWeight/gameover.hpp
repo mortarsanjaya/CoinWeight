@@ -30,6 +30,8 @@ public:
     
 private:
     bool playerWin;
+    
+    void displayLayoutGameOver(ViewX11 &view, const bool isWin) const;
 };
 
 

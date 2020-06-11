@@ -76,27 +76,6 @@ ViewX11::~ViewX11() {
 
 
 
-//************************** Display for Game Over
-void ViewX11::displayLayoutGameOver(const bool isWin) {
-    clearWindow();
-    setForeground(defaultFGColor);
-    
-    if (isWin) {
-        drawString(300, 200, "You Win!");
-    } else {
-        drawString(300, 200, "You Lose!");
-    }
-    
-    const std::string &returnStr = "Return";
-    
-    drawString(300 + border, 500 + total_string_height - border, returnStr);
-    drawRectangle(300, 500, total_string_width(returnStr.size()), total_string_height);
-    
-    flushDisplay();
-}
-
-
-
 //************************** Set foreground
 void ViewX11::setForeground(const unsigned int colorIndex) {
     if (colorIndex >= colors.size()) throw Exception<ViewX11>("Invalid color");

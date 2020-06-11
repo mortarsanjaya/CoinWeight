@@ -46,9 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Display for Game Over
-    void displayLayoutGameOver(const bool isWin);
-    
     // Draw coins
     // Reverts foreground to default after use
     // The integer parameters are counted from 0

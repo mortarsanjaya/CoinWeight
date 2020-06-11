@@ -43,5 +43,23 @@ void GameOver::onReturnButton(Model &model) {
 
 //************************** UI display
 void GameOver::triggerDisplay(ViewX11 &view) const {
-    view.displayLayoutGameOver(playerWin);
+    displayLayoutGameOver(view, playerWin);
+}
+
+void GameOver::displayLayoutGameOver(ViewX11 &view, const bool isWin) const {
+    view.clearWindow();
+    view.setForeground(view.defaultFGColor);
+    
+    if (isWin) {
+        view.drawString(300, 200, "You Win!");
+    } else {
+        view.drawString(300, 200, "You Lose!");
+    }
+    
+    const std::string &returnStr = "Return";
+    
+    view.drawString(300 + view.border, 500 + view.total_string_height - view.border, returnStr);
+    view.drawRectangle(300, 500, view.total_string_width(returnStr.size()), view.total_string_height);
+    
+    view.flushDisplay();
 }
