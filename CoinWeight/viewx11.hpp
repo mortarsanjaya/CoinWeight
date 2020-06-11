@@ -46,18 +46,6 @@ public:
     
     enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
     
-    // Draw coins
-    // Reverts foreground to default after use
-    // The integer parameters are counted from 0
-    void drawCoin(const CoinGroup group, const size_t coinIndex,
-                  const size_t row, const size_t column);
-    static const int coinColor(const CoinGroup group);
-    
-    // Draw weigh result, text and scalre
-    // Reverts foreground to default after use
-    void drawWeighResultText(const WeighResult weighResult);
-    void drawWeighingScale(const WeighResult weighResult); // Need to be revised
-    
     // Displaying details for text
     static constexpr int border = 5;
     static constexpr int font_width = 6;
@@ -90,12 +78,15 @@ public:
     // Set foreground
     void setForeground(const unsigned int colorIndex);
     
-    // x_pos and y_pos for string is in its bottom-left corner position
-    // Draws with the current foreground color
+    void drawLine(const int x1, const int y1, const int x2, const int y2);
+    
     void drawString(const int x_pos, const int y_pos, const std::string &str);
     
-    // x_pos and y_pos for circle is in its upper-left dimension corner position
-    // Draws with the current foreground color
+    // Assumption: NEVER DRAW WITH NON-CIRCLE ELLIPSES
+    void drawArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size);
+    void fillArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size);
+    
+    
     void drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter);
     void fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter);
     

@@ -82,6 +82,13 @@ private:
     void displayWeighResult(ViewX11 &view) const;
     void displayWeighCounter(ViewX11 &view) const;
     void displayCoinHighlight(ViewX11 &view) const;
+    
+    void drawCoin(ViewX11 &view, const CoinGroup group, const size_t coinIndex,
+                  const size_t row, const size_t column) const;
+    static const int coinColor(const CoinGroup group);
+    
+    void drawWeighResultText(ViewX11 &view, const WeighResult weighResult) const;
+    void drawWeighingScale(ViewX11 &view, const WeighResult weighResult) const; // Need to be revised
 };
 
 
