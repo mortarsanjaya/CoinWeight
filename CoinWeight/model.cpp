@@ -66,12 +66,10 @@ void Model::switchToGamePlay(const size_t numOfCoins,
 const GameLevel level, const GameMode mode) {
     switch (mode) {
         case GameMode::Standard:
-            screen = ScreenFactory::createGamePlayHumanScreen(
-                numOfCoins, level, coinDisplayRows, coinDisplayColumns);
+            screen = ScreenFactory::createGamePlayHumanScreen(numOfCoins, level);
             break;
         case GameMode::Computer:
-            screen = ScreenFactory::createGamePlayComputerScreen(
-                numOfCoins, level, coinDisplayRows, coinDisplayColumns);
+            screen = ScreenFactory::createGamePlayComputerScreen(numOfCoins, level);
             break;
     }
 }

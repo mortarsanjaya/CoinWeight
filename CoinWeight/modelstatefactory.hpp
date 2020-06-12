@@ -33,12 +33,11 @@ public:
         
     static std::unique_ptr<GameScreenBase>
         createGamePlayHumanScreen(const size_t nCoinsTotal,
-        const GameLevel level, const size_t nRowsDisplay,
-        const size_t nCoinsPerRow);
+        const GameLevel level);
         
     static std::unique_ptr<GameScreenBase>
         createGamePlayComputerScreen(const size_t nCoinsTotal,
-        const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow);
+        const GameLevel level);
         
     static std::unique_ptr<GameScreenBase>
         createGameOverScreen(const bool isWin);

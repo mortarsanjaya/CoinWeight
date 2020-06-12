@@ -15,10 +15,9 @@
 using namespace CoinWeight;
 
 //************************** Constructor
-GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
-    const size_t nRowsDisplay, const size_t nCoinsPerRow) :
+GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal, const GameLevel level) :
 buttonHighlight(ButtonHighlight::Weigh),
-coinNavigator(nCoinsTotal, nRowsDisplay, nCoinsPerRow),
+coinNavigator(nCoinsTotal, rowsDisplay, coinsPerRow),
 isOnButtonHighlight(false),
 coinSet(nCoinsTotal),
 selection(nCoinsTotal),

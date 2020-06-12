@@ -40,19 +40,15 @@ ScreenFactory::createGameSettingsScreen() {
 }
 
 std::unique_ptr<GameScreenBase>
-ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal,
-const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
+ScreenFactory::createGamePlayHumanScreen(const size_t nCoinsTotal, const GameLevel level)
 {
-    return std::make_unique<GamePlayHuman>(
-        nCoinsTotal, level, nRowsDisplay, nCoinsPerRow);
+    return std::make_unique<GamePlayHuman>(nCoinsTotal, level);
 }
 
 std::unique_ptr<GameScreenBase>
-ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal,
-const GameLevel level, const size_t nRowsDisplay, const size_t nCoinsPerRow)
+ScreenFactory::createGamePlayComputerScreen(const size_t nCoinsTotal, const GameLevel level)
 {
-    return std::make_unique<GamePlayComputer>(
-        nCoinsTotal, level, nRowsDisplay, nCoinsPerRow);
+    return std::make_unique<GamePlayComputer>(nCoinsTotal, level);
 }
 
 std::unique_ptr<GameScreenBase>

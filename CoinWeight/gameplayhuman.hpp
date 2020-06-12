@@ -27,8 +27,7 @@ namespace CoinWeight {
 class GamePlayHuman final : public SinglePlayerGame {
 public:
     
-    GamePlayHuman(const size_t nCoinsTotal, const GameLevel level,
-        const size_t nRowsDisplay, const size_t nCoinsPerRow);
+    GamePlayHuman(const size_t nCoinsTotal, const GameLevel level);
 
     
     void onArrowUp() override;
