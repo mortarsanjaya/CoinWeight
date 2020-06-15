@@ -31,11 +31,11 @@ public:
     
 private:
     struct Record {
-        CoinSelection coinStates;
+        CoinSelection selection;
         WeighResult result;
     
-        Record(const CoinSelection &coinStates, const WeighResult result) :
-            coinStates{coinStates}, result{result} {}
+        Record(const CoinSelection &selection, const WeighResult result) :
+            selection{selection}, result{result} {}
     };
     
     std::vector<Record> listOfRecords;

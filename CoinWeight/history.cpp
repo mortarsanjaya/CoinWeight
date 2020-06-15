@@ -20,7 +20,7 @@ const bool History::empty() const {
 }
 
 const CoinSelection &History::getSelectionAt(const size_t index) const {
-    return listOfRecords.at(index).coinStates;
+    return listOfRecords.at(index).selection;
 }
 
 const WeighResult &History::getResultAt(const size_t index) const {
@@ -30,8 +30,8 @@ const WeighResult &History::getResultAt(const size_t index) const {
 
 
 //************************** Modifying functions
-void History::add(const CoinSelection &coinStates, const WeighResult &result) {
-    listOfRecords.emplace_back(coinStates, result);
+void History::add(const CoinSelection &selection, const WeighResult &result) {
+    listOfRecords.emplace_back(selection, result);
 }
 
 void History::clear() {
