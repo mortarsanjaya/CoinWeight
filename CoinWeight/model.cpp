@@ -9,7 +9,7 @@
 #include "model.hpp"
 #include "modelstatefactory.hpp"
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
 Model::Model() {
@@ -81,6 +81,6 @@ void Model::switchToGameOver(const bool isWin) {
 
 
 //************************** View updating
-void Model::updateView(ViewX11 &view) {
+void Model::updateView(Renderer &view) {
     screen->triggerDisplay(view);
 }

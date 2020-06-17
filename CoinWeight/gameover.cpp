@@ -10,7 +10,7 @@
 #include "model.hpp"
 #include "viewx11.hpp"
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
 GameOver::GameOver(const bool doesPlayerWin) :
@@ -42,7 +42,7 @@ void GameOver::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void GameOver::triggerDisplay(ViewX11 &view) const {
+void GameOver::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     

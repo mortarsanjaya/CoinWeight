@@ -12,12 +12,13 @@
 #include "gamescreen.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
-class Credit final : public GameScreenBase {
+class CreditScreen final : public GameScreenBase {
 public:
-    Credit();
+    CreditScreen();
     
     void onArrowUp() override;
     void onArrowDown() override;
@@ -25,11 +26,12 @@ public:
     void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
-    void triggerDisplay(ViewX11 &view) const override;
+    void triggerDisplay(Renderer &view) const override;
 };
 
 
 
-};
+}
+}
 
 #endif

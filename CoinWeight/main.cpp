@@ -15,6 +15,7 @@
 #include <thread>
 
 using namespace CoinWeight;
+using namespace CoinWeight::X11;
 using namespace std::chrono;
 
 int main() {
@@ -22,7 +23,6 @@ int main() {
     computerTest(100, GameLevel::Medium);
     computerTest(100, GameLevel::Hard);
 
-/*
     Controller controller;
     while (true) {
         controller.updateDisplay();
@@ -32,8 +32,7 @@ int main() {
         while (true) {
             auto after_input = steady_clock::now();
             auto duration = duration_cast<milliseconds>(after_input - before_input);
-            if (duration.count() >= 10) break;
+            if (duration.count() >= 16) break;
         }
     }
-*/
 }

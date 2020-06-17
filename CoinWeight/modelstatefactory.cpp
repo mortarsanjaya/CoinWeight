@@ -11,32 +11,32 @@
 #include "title.hpp"
 #include "instruction.hpp"
 #include "credit.hpp"
-#include "gamesettings.hpp"
+#include "settingsscreen.hpp"
 #include "gameplayhuman.hpp"
 #include "gameplaycomputer.hpp"
 #include "gameover.hpp"
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Factory methods
 std::unique_ptr<GameScreenBase>
 ScreenFactory::createTitleScreen() {
-    return std::make_unique<Title>();
+    return std::make_unique<TitleScreen>();
 }
 
 std::unique_ptr<GameScreenBase>
 ScreenFactory::createInstructionScreen() {
-    return std::make_unique<Instruction>();
+    return std::make_unique<InstructionScreen>();
 }
 
 std::unique_ptr<GameScreenBase>
 ScreenFactory::createCreditScreen() {
-    return std::make_unique<Credit>();
+    return std::make_unique<CreditScreen>();
 }
 
 std::unique_ptr<GameScreenBase>
 ScreenFactory::createGameSettingsScreen() {
-    return std::make_unique<GameSettings>();
+    return std::make_unique<SettingsScreen>();
 }
 
 std::unique_ptr<GameScreenBase>

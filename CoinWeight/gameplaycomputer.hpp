@@ -22,6 +22,7 @@
 #include "weighcounter.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
@@ -35,7 +36,7 @@ public:
     void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
-    void triggerDisplay(ViewX11 &view) const override;
+    void triggerDisplay(Renderer &view) const override;
     
 private:
     enum class ButtonHighlight {
@@ -89,23 +90,24 @@ private:
     void computerSetSelection();
     
     // Display for game play
-    void displayLayoutGamePlayComputer(ViewX11 &view) const;
-    void displayButtonHighlight(ViewX11 &view) const;
-    void displayCoinSelection(ViewX11 &view) const;
-    void displayWeighResult(ViewX11 &view) const;
-    void displayWeighCounter(ViewX11 &view) const;
-    void displayCoinHighlight(ViewX11 &view) const;
+    void displayLayoutGamePlayComputer(Renderer &view) const;
+    void displayButtonHighlight(Renderer &view) const;
+    void displayCoinSelection(Renderer &view) const;
+    void displayWeighResult(Renderer &view) const;
+    void displayWeighCounter(Renderer &view) const;
+    void displayCoinHighlight(Renderer &view) const;
     
-    void drawCoin(ViewX11 &view, const CoinGroup group, const size_t coinIndex,
+    void drawCoin(Renderer &view, const CoinGroup group, const size_t coinIndex,
                   const size_t row, const size_t column) const;
     static const int coinColor(const CoinGroup group);
     
-    void drawWeighResultText(ViewX11 &view) const;
-    void drawWeighingScale(ViewX11 &view) const;
+    void drawWeighResultText(Renderer &view) const;
+    void drawWeighingScale(Renderer &view) const;
 };
 
 
 
-};
+}
+}
 
 #endif

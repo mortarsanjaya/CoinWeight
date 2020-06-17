@@ -12,38 +12,38 @@
 
 #include <vector>
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
-Instruction::Instruction() {}
+InstructionScreen::InstructionScreen() {}
 
 
 
 //************************** Arrow button handling
-void Instruction::onArrowUp() {}
+void InstructionScreen::onArrowUp() {}
 
-void Instruction::onArrowDown() {}
+void InstructionScreen::onArrowDown() {}
 
-void Instruction::onArrowLeft() {}
+void InstructionScreen::onArrowLeft() {}
 
-void Instruction::onArrowRight() {}
+void InstructionScreen::onArrowRight() {}
 
 
 
 //************************** Character input handling
-void Instruction::onCharInput(const char inputChar) {}
+void InstructionScreen::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void Instruction::onReturnButton(Model &model) {
+void InstructionScreen::onReturnButton(Model &model) {
     model.switchToTitle();
 }
 
 
 
 //************************** UI display
-void Instruction::triggerDisplay(ViewX11 &view) const {
+void InstructionScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
 

@@ -13,6 +13,7 @@
 #include <cmath>
 
 using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
 GamePlayHuman::GamePlayHuman(const size_t nCoinsTotal, const GameLevel level) :
@@ -206,7 +207,7 @@ const GuessResult GamePlayHuman::guessFakeCoins() const {
 
 
 //************************** UI display
-void GamePlayHuman::triggerDisplay(ViewX11 &view) const {
+void GamePlayHuman::triggerDisplay(Renderer &view) const {
     displayLayoutGamePlayHuman(view);
     displayCoinSelection(view);
     displayWeighResult(view);
@@ -218,7 +219,7 @@ void GamePlayHuman::triggerDisplay(ViewX11 &view) const {
     }
 }
 
-void GamePlayHuman::displayLayoutGamePlayHuman(ViewX11 &view) const {
+void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
 
@@ -231,7 +232,7 @@ void GamePlayHuman::displayLayoutGamePlayHuman(ViewX11 &view) const {
     view.flushDisplay();
 }
 
-void GamePlayHuman::displayButtonHighlight(ViewX11 &view) const {
+void GamePlayHuman::displayButtonHighlight(Renderer &view) const {
     switch (buttonHighlight) {
         case GamePlayHuman::ButtonHighlight::Weigh:
             view.drawRectangle(50, 300, 40, view.total_string_height);
@@ -244,7 +245,7 @@ void GamePlayHuman::displayButtonHighlight(ViewX11 &view) const {
     view.flushDisplay();
 }
 
-void GamePlayHuman::displayCoinSelection(ViewX11 &view) const {
+void GamePlayHuman::displayCoinSelection(Renderer &view) const {
     for (size_t row = 0; row < coinNavigator.numOfRowsDisplayed(); ++row) {
         bool coinExhausted = false;
         for (size_t column = 0; column < coinNavigator.numOfColumns(); ++column) {
@@ -262,14 +263,14 @@ void GamePlayHuman::displayCoinSelection(ViewX11 &view) const {
     view.flushDisplay();
 }
 
-void GamePlayHuman::displayWeighResult(ViewX11 &view) const {
+void GamePlayHuman::displayWeighResult(Renderer &view) const {
     drawWeighResultText(view);
     drawWeighingScale(view);
     
     view.flushDisplay();
 }
 
-void GamePlayHuman::displayWeighCounter(ViewX11 &view) const {
+void GamePlayHuman::displayWeighCounter(Renderer &view) const {
     view.setForeground(view.Black);
     std::string numOfWeighsStr = "Number of comparisons done: ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
@@ -280,7 +281,7 @@ void GamePlayHuman::displayWeighCounter(ViewX11 &view) const {
     view.flushDisplay();
 }
 
-void GamePlayHuman::displayCoinHighlight(ViewX11 &view) const {
+void GamePlayHuman::displayCoinHighlight(Renderer &view) const {
     view.drawRectangle(coin0XPos + coinDist * coinNavigator.currColumn(), coin0YPos + coinDist * coinNavigator.currRowDisplay(), coinDist, coinDist);
     
     view.flushDisplay();
@@ -289,7 +290,7 @@ void GamePlayHuman::displayCoinHighlight(ViewX11 &view) const {
 
 
 //******************** Draw coin
-void GamePlayHuman::drawCoin(ViewX11 &view, const CoinGroup group, const size_t coinIndex,
+void GamePlayHuman::drawCoin(Renderer &view, const CoinGroup group, const size_t coinIndex,
                           const size_t row, const size_t column) const
 {
     const int x_pos = coin0XPos + coinOffset + coinDist * column;
@@ -305,20 +306,20 @@ void GamePlayHuman::drawCoin(ViewX11 &view, const CoinGroup group, const size_t 
 const int GamePlayHuman::coinColor(const CoinGroup group) {
     switch (group) {
         case CoinGroup::NoSelect:
-            return ViewX11::Gold;
+            return Renderer::Gold;
         case CoinGroup::LeftWeigh:
-            return ViewX11::Red;
+            return Renderer::Red;
         case CoinGroup::RightWeigh:
-            return ViewX11::Blue;
+            return Renderer::Blue;
         case CoinGroup::Guess:
-            return ViewX11::Green;
+            return Renderer::Green;
     }
 }
 
 
 
 //******************** Helper functions for drawing weigh result
-void GamePlayHuman::drawWeighResultText(ViewX11 &view) const {
+void GamePlayHuman::drawWeighResultText(Renderer &view) const {
     const int x_pos = 30;
     const int y_pos = 90;
     view.setForeground(view.Black);
@@ -344,7 +345,7 @@ void GamePlayHuman::drawWeighResultText(ViewX11 &view) const {
     view.setForeground(view.defaultFGColor);
 }
 
-void GamePlayHuman::drawWeighingScale(ViewX11 &view) const {
+void GamePlayHuman::drawWeighingScale(Renderer &view) const {
     {
         
         std::vector<XPoint> xpoints {

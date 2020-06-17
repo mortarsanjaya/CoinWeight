@@ -12,16 +12,16 @@
 #include <cmath>
 #include <vector>
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor and Destructor
-ViewX11::ViewX11() {
+Renderer::Renderer() {
     const int width = 800;
     const int height = 800;
 
     display = XOpenDisplay(nullptr);
     if (display == nullptr) {
-        throw Exception<ViewX11>("Cannot open display");
+        throw Exception<Renderer>("Cannot open display");
     }
     
     screen = XDefaultScreen(display);
@@ -45,7 +45,7 @@ ViewX11::ViewX11() {
     
     for (unsigned int i = 0; i <= Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
-            throw Exception<ViewX11>("Cannot parse color");
+            throw Exception<Renderer>("Cannot parse color");
         }
         XAllocColor(display, cmap, &xcolor);
         colors[i] = xcolor.pixel;
@@ -69,7 +69,7 @@ ViewX11::ViewX11() {
     sleep(1);
 }
 
-ViewX11::~ViewX11() {
+Renderer::~Renderer() {
     XFreeGC(display, gc);
 	XDestroyWindow(display, window);
 	XCloseDisplay(display);
@@ -78,60 +78,60 @@ ViewX11::~ViewX11() {
 
 
 //************************** Set foreground
-void ViewX11::setForeground(const unsigned int colorIndex) {
-    if (colorIndex >= colors.size()) throw Exception<ViewX11>("Invalid color");
+void Renderer::setForeground(const unsigned int colorIndex) {
+    if (colorIndex >= colors.size()) throw Exception<Renderer>("Invalid color");
     XSetForeground(display, gc, colors[colorIndex]);
 }
 
 
 
 //******************** Basic drawing functions
-void ViewX11::drawLine(const int x1, const int y1, const int x2, const int y2) {
+void Renderer::drawLine(const int x1, const int y1, const int x2, const int y2) {
     XDrawLine(display, window, gc, x1, y1, x2, y2);
 }
 
-void ViewX11::drawString(const int x_pos, const int y_pos, const std::string &str) {
+void Renderer::drawString(const int x_pos, const int y_pos, const std::string &str) {
     XDrawString(display, window, gc, x_pos, y_pos, str.c_str(), str.length());
 }
 
-void ViewX11::drawArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size) {
+void Renderer::drawArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size) {
     XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, angle_init, angle_size);
 }
 
-void ViewX11::fillArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size) {
+void Renderer::fillArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size) {
     XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, angle_init, angle_size);
 }
 
-void ViewX11::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+void Renderer::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
     XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
 }
 
-void ViewX11::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
+void Renderer::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
     XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, circle_full_arc);
 }
 
-void ViewX11::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
+void Renderer::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
     XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);
     XDrawLine(display, window, gc, x_pos, y_pos, x_pos, y_pos + height);
     XDrawLine(display, window, gc, x_pos + width, y_pos, x_pos + width, y_pos + height);
     XDrawLine(display, window, gc, x_pos, y_pos + height, x_pos + width, y_pos + height);
 }
 
-void ViewX11::fillPolygon(std::vector<XPoint> xpoints, int shape, int mode) {
+void Renderer::fillPolygon(std::vector<XPoint> xpoints, int shape, int mode) {
     XFillPolygon(display, window, gc, xpoints.begin().base(), xpoints.size(), shape, mode);
 }
 
 
 
 //******************** Clear window
-void ViewX11::clearWindow() {
+void Renderer::clearWindow() {
     XClearWindow(display, window);
 }
 
 
 
 //******************** Flush display
-void ViewX11::flushDisplay() {
+void Renderer::flushDisplay() {
     XFlush(display);
 }
 
@@ -140,7 +140,7 @@ void ViewX11::flushDisplay() {
 
 
 //************************** Input producing
-const Input ViewX11::nextInput() {
+const Input Renderer::nextInput() {
     
     if (XCheckWindowEvent(display, window, KeyPressMask, &event) == 0) {
         return Input();
@@ -169,6 +169,6 @@ const Input ViewX11::nextInput() {
 
 
 //************************** Game View X11 Exception header message
-template<> const std::string Exception<ViewX11>::headerMessage() const {
+template<> const std::string Exception<Renderer>::headerMessage() const {
     return "Game View X11 Failure: ";
 }

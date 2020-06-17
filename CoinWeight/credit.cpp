@@ -10,38 +10,38 @@
 #include "model.hpp"
 #include "viewx11.hpp"
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
-Credit::Credit() {}
+CreditScreen::CreditScreen() {}
 
 
 
 //************************** Arrow button handling
-void Credit::onArrowUp() {}
+void CreditScreen::onArrowUp() {}
 
-void Credit::onArrowDown() {}
+void CreditScreen::onArrowDown() {}
 
-void Credit::onArrowLeft() {}
+void CreditScreen::onArrowLeft() {}
 
-void Credit::onArrowRight() {}
+void CreditScreen::onArrowRight() {}
 
 
 
 //************************** Character input handling
-void Credit::onCharInput(const char inputChar) {}
+void CreditScreen::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void Credit::onReturnButton(Model &model) {
+void CreditScreen::onReturnButton(Model &model) {
     model.switchToTitle();
 }
 
 
 
 //************************** UI display
-void Credit::triggerDisplay(ViewX11 &view) const {
+void CreditScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     

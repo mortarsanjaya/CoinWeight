@@ -10,10 +10,12 @@
 #define gamescreen_hpp
 
 namespace CoinWeight {
+namespace X11 {
+
 
 
 class Model;
-class ViewX11;
+class Renderer;
 
 class GameScreenBase {
 public:
@@ -33,11 +35,12 @@ public:
     virtual void onReturnButton(Model &model) = 0;
     
     // Triggers View and UI for displaying the current screen
-    virtual void triggerDisplay(ViewX11 &view) const = 0;
+    virtual void triggerDisplay(Renderer &view) const = 0;
 };
 
 
 
-};
+}
+}
 
 #endif

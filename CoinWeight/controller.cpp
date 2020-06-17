@@ -9,18 +9,18 @@
 #include "controller.hpp"
 #include "modelstatefactory.hpp"
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
 Controller::Controller() :
-model(), ui()
+model(), renderer()
 {}
 
 
 
 //************************** Input processing
 void Controller::processInput() {
-    const Input input = ui.nextInput();
+    const Input input = renderer.nextInput();
     switch (input.inputType()) {
         case Input::Type::Unknown:
             break;
@@ -53,5 +53,5 @@ void Controller::processInput() {
 
 //************************** Display updating
 void Controller::updateDisplay() {
-    model.updateView(ui);
+    model.updateView(renderer);
 }

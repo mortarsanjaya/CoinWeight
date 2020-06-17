@@ -15,10 +15,11 @@
 #include "gamescreen.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
-class ViewX11;
+class Renderer;
 
 class Model {
 public:
@@ -41,7 +42,7 @@ public:
     void switchToGameOver(const bool isWin);
     
     // View updating
-    void updateView(ViewX11 &view);
+    void updateView(Renderer &view);
     
 private:
     static constexpr size_t coinDisplayRows = 8;
@@ -53,6 +54,7 @@ private:
 
 
 
+}
 }
 
 #endif

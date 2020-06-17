@@ -13,15 +13,15 @@
 #include <vector>
 #include <string>
 
-using namespace CoinWeight;
+using namespace CoinWeight::X11;
 
 //************************** Constructor
-Title::Title() : highlight(defaultHighlight) {}
+TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
 
 
 
 //************************** Arrow button handling
-void Title::onArrowUp() {
+void TitleScreen::onArrowUp() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Play;
@@ -35,7 +35,7 @@ void Title::onArrowUp() {
     }
 }
 
-void Title::onArrowDown() {
+void TitleScreen::onArrowDown() {
     switch (highlight) {
         case Highlight::Play:
             highlight = Highlight::Instruction;
@@ -49,19 +49,19 @@ void Title::onArrowDown() {
     }
 }
 
-void Title::onArrowLeft() {}
+void TitleScreen::onArrowLeft() {}
 
-void Title::onArrowRight() {}
+void TitleScreen::onArrowRight() {}
 
 
 
 //************************** Character input handling
-void Title::onCharInput(const char inputChar) {}
+void TitleScreen::onCharInput(const char inputChar) {}
 
 
 
 //************************** Return button handling
-void Title::onReturnButton(Model &model) {
+void TitleScreen::onReturnButton(Model &model) {
     switch (highlight) {
         case Highlight::Play:
             model.switchToGameSettings();
@@ -78,7 +78,7 @@ void Title::onReturnButton(Model &model) {
 
 
 //************************** UI display
-void Title::triggerDisplay(ViewX11 &view) const {
+void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
@@ -97,13 +97,13 @@ void Title::triggerDisplay(ViewX11 &view) const {
     }
     
     switch (highlight) {
-        case Title::Highlight::Play:
+        case TitleScreen::Highlight::Play:
             view.drawRectangle(text_x_pos, top_button_y_pos, 34, view.total_string_height);
             break;
-        case Title::Highlight::Instruction:
+        case TitleScreen::Highlight::Instruction:
             view.drawRectangle(text_x_pos, top_button_y_pos + view.total_string_height, 76, view.total_string_height);
             break;
-        case Title::Highlight::Credit:
+        case TitleScreen::Highlight::Credit:
             view.drawRectangle(text_x_pos, top_button_y_pos + 2 * view.total_string_height, 46, view.total_string_height);
             break;
     }

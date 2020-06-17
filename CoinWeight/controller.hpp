@@ -17,6 +17,7 @@
 #include "gamelevel.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
@@ -32,11 +33,12 @@ public:
 
 private:
     Model model;
-    ViewX11 ui;
+    Renderer renderer;
 };
 
 
 
-};
+}
+}
 
 #endif

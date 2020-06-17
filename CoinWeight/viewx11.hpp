@@ -21,13 +21,14 @@
 #include "exception.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
-class ViewX11 final {
+class Renderer final {
 public:
-    ViewX11();
-    ~ViewX11();
+    Renderer();
+    ~Renderer();
     
     
     
@@ -95,6 +96,8 @@ private:
 
 
 
-};
+}
+}
+
 
 #endif

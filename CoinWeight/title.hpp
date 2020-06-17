@@ -12,12 +12,13 @@
 #include "gamescreen.hpp"
 
 namespace CoinWeight {
+namespace X11 {
 
 
 
-class Title final : public GameScreenBase {
+class TitleScreen final : public GameScreenBase {
 public:
-    Title();
+    TitleScreen();
 
     void onArrowUp() override;
     void onArrowDown() override;
@@ -25,7 +26,7 @@ public:
     void onArrowRight() override;
     void onCharInput(const char inputChar) override;
     void onReturnButton(Model &model) override;
-    void triggerDisplay(ViewX11 &view) const override;
+    void triggerDisplay(Renderer &view) const override;
     
 private:
     enum class Highlight {
@@ -41,6 +42,7 @@ private:
 
 
 
-};
+}
+}
 
 #endif
