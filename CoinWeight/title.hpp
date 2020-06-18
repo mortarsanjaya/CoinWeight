@@ -43,14 +43,12 @@ private:
     
     static constexpr int screen_name_x_pos = 300;
     static constexpr int screen_name_y_pos = 50;
-    inline static const std::string screenName() {
-        return "Coin Weight";
-    }
+    inline static const std::string screenName = "Coin Weight";
     
     static constexpr int text_x_pos = 300;
     static constexpr int top_button_y_pos = 300;
-    inline static const std::vector<std::string> buttons() {
-        return {"Play", "Instruction", "Credit"};
+    inline static const std::vector<std::string> buttons {
+        "Play", "Instruction", "Credit"
     };
 };
 
