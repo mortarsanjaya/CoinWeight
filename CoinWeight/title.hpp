@@ -38,9 +38,6 @@ private:
     Highlight highlight;
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
-    
-    void drawScreenName(Renderer &renderer) const;
-    void drawOptionButtons(Renderer &renderer) const;
 };
 
 

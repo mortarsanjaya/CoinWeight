@@ -43,7 +43,7 @@ Renderer::Renderer() {
     
     cmap = DefaultColormap(display, screen);
     
-    for (unsigned int i = 0; i <= RenderUtil::Max; ++i) {
+    for (unsigned int i = 0; i <= RenderConst::Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
             throw Exception<Renderer>("Cannot parse color");
         }
@@ -51,7 +51,7 @@ Renderer::Renderer() {
         colors[i] = xcolor.pixel;
     }
 
-    XSetForeground(display, gc, colors[RenderUtil::defaultFGColor]);
+    XSetForeground(display, gc, colors[RenderConst::defaultFGColor]);
 
     XSizeHints hints;
     hints.flags = (USPosition | PSize | PMinSize | PMaxSize);
@@ -103,11 +103,11 @@ void Renderer::fillArc(const int x_pos, const int y_pos, const int diameter, con
 }
 
 void Renderer::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
+    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderConst::circle_full_arc);
 }
 
 void Renderer::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
+    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderConst::circle_full_arc);
 }
 
 void Renderer::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
