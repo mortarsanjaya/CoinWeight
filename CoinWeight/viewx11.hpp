@@ -17,7 +17,7 @@
 #include <X11/Xutil.h>
 
 #include "input.hpp"
-#include "renderconst.hpp"
+#include "renderutil.hpp"
 #include "exception.hpp"
 
 namespace CoinWeight {
@@ -67,7 +67,7 @@ private:
     GC gc;
     XEvent event;
     
-    std::array<unsigned long, RenderConst::Max + 1> colors;
+    std::array<unsigned long, RenderUtil::Max + 1> colors;
 };
 
 

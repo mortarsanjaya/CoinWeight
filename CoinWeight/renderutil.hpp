@@ -1,17 +1,17 @@
 //
-//  renderconst.hpp
+//  renderutil.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-06-17.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef renderconst_hpp
-#define renderconst_hpp
+#ifndef renderutil_hpp
+#define renderutil_hpp
 
 namespace CoinWeight {
 namespace X11 {
-namespace RenderConst {
+namespace RenderUtil {
 
     enum Color {
         Black,

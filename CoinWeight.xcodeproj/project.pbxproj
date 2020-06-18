@@ -117,7 +117,7 @@
 		86C1C65E24324A3D007E5B64 /* gamelevel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamelevel.hpp; sourceTree = "<group>"; };
 		86C1C6612432D6A7007E5B64 /* history.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = history.cpp; sourceTree = "<group>"; };
 		86C1C6622432D6A7007E5B64 /* history.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = history.hpp; sourceTree = "<group>"; };
-		86E0B0D8249AE78A00764886 /* renderconst.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = renderconst.hpp; path = CoinWeight/renderconst.hpp; sourceTree = SOURCE_ROOT; };
+		86E0B0D8249AE78A00764886 /* renderutil.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = renderutil.hpp; path = CoinWeight/renderutil.hpp; sourceTree = SOURCE_ROOT; };
 		86E55A82242C390B00053F2E /* weighresult.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = weighresult.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -502,7 +502,7 @@
 		86E0B0DA249AE78D00764886 /* Rendering Constants */ = {
 			isa = PBXGroup;
 			children = (
-				86E0B0D8249AE78A00764886 /* renderconst.hpp */,
+				86E0B0D8249AE78A00764886 /* renderutil.hpp */,
 			);
 			name = "Rendering Constants";
 			sourceTree = "<group>";

@@ -23,7 +23,6 @@ int main() {
     computerTest(100, GameLevel::Medium);
     computerTest(100, GameLevel::Hard);
 
-/*
     Controller controller;
     while (true) {
         controller.updateDisplay();
@@ -36,5 +35,4 @@ int main() {
             if (duration.count() >= 16) break;
         }
     }
-*/
 }
