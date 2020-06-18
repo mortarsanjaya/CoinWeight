@@ -10,6 +10,7 @@
 #define title_hpp
 
 #include "gamescreen.hpp"
+#include <string>
 
 namespace CoinWeight {
 namespace X11 {
@@ -38,6 +39,17 @@ private:
     Highlight highlight;
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
+    
+    inline static const std::string screenName() {
+        return "Coin Weight";
+    }
+    
+    static constexpr int screen_name_x_pos = 300;
+    static constexpr int screen_name_y_pos = 50;
+    
+    
+    static constexpr int text_x_pos = 300;
+    static constexpr int top_button_y_pos = 300;
 };
 
 

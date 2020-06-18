@@ -82,15 +82,11 @@ void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(view.defaultFGColor);
     
-    constexpr int text_x_pos = 300;
-    constexpr int top_button_y_pos = 300;
-    
-    const std::string screenName = "Coin Weight";
     const std::vector<std::string> buttons {
         "Play", "Instruction", "Credit"
     };
     
-    view.drawString(text_x_pos + view.border, 50, screenName);
+    view.drawString(text_x_pos + view.border, screen_name_y_pos, screenName());
     for (size_t i = 0; i < buttons.size(); ++i) {
         view.drawString(text_x_pos + view.border, top_button_y_pos +
             (i + 1) * view.total_string_height - view.border, buttons[i]);
