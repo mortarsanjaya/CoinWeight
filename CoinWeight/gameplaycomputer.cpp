@@ -10,6 +10,7 @@
 #include "model.hpp"
 #include "viewx11.hpp"
 #include "computerfactory.hpp"
+#include "x11renderutil.hpp"
 
 #include <cmath>
 
@@ -192,7 +193,7 @@ void GamePlayComputer::displayLayoutGamePlayComputer(Renderer &view) const {
 
     const std::string &nextMoveStr = "Next Move";
     
-    view.drawString(50 + RenderConst::border, 300 + RenderConst::total_string_height - RenderConst::border, nextMoveStr);
+    view.drawString(50 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, nextMoveStr);
     
     view.flushDisplay();
 }
@@ -200,7 +201,7 @@ void GamePlayComputer::displayLayoutGamePlayComputer(Renderer &view) const {
 void GamePlayComputer::displayButtonHighlight(Renderer &view) const {
     switch (buttonHighlight) {
         case GamePlayComputer::ButtonHighlight::NextMove:
-            view.drawRectangle(50, 300, 64, RenderConst::total_string_height);
+            view.drawRectangle(50, 300, 64, RenderUtil::total_string_height);
             break;
     }
     

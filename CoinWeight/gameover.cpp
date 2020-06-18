@@ -9,7 +9,7 @@
 #include "gameover.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
-#include "renderconst.hpp"
+#include "x11renderutil.hpp"
 
 using namespace CoinWeight::X11;
 
@@ -55,8 +55,8 @@ void GameOver::triggerDisplay(Renderer &view) const {
     
     const std::string &returnStr = "Return";
     
-    view.drawString(300 + RenderConst::border, 500 + RenderConst::total_string_height - RenderConst::border, returnStr);
-    view.drawRectangle(300, 500, RenderConst::total_string_width(returnStr.size()), RenderConst::total_string_height);
+    view.drawString(300 + RenderUtil::border, 500 + RenderUtil::total_string_height - RenderUtil::border, returnStr);
+    view.drawRectangle(300, 500, RenderUtil::total_string_width(returnStr.size()), RenderUtil::total_string_height);
     
     view.flushDisplay();
 }

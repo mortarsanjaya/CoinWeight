@@ -1,17 +1,17 @@
 //
-//  renderconst.hpp
+//  x11renderutil.hpp
 //  CoinWeight
 //
 //  Created by Gian Cordana Sanjaya on 2020-06-17.
 //  Copyright © 2020 -. All rights reserved.
 //
 
-#ifndef renderconst_hpp
-#define renderconst_hpp
+#ifndef x11renderutil_hpp
+#define x11renderutil_hpp
 
 namespace CoinWeight {
 namespace X11 {
-namespace RenderConst {
+namespace RenderUtil {
 
     constexpr int border = 5;
     constexpr int font_width = 6;

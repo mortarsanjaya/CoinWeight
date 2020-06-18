@@ -18,7 +18,6 @@
 
 #include "input.hpp"
 #include "x11color.hpp"
-#include "renderconst.hpp"
 #include "exception.hpp"
 
 namespace CoinWeight {

@@ -10,6 +10,8 @@
 
 #include "model.hpp"
 #include "viewx11.hpp"
+#include "x11renderutil.hpp"
+
 #include <string>
 
 using namespace CoinWeight;
@@ -141,16 +143,16 @@ void SettingsScreen::triggerDisplay(Renderer &view) const {
 
 void SettingsScreen::displayLayout(Renderer &view) const {
     view.drawString(300, 50, "Coin Weight");
-    view.drawString(300, 300 + RenderConst::total_string_height - RenderConst::border, "Number of Coins:");
-    view.drawString(300, 300 + 2 * RenderConst::total_string_height - RenderConst::border, "Level:");
-    view.drawString(300, 300 + 3 * RenderConst::total_string_height - RenderConst::border, "Mode:");
+    view.drawString(300, 300 + RenderUtil::total_string_height - RenderUtil::border, "Number of Coins:");
+    view.drawString(300, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, "Level:");
+    view.drawString(300, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Mode:");
     
     const std::string &startGameStr = "Start Game";
     const std::string &goBackStr = "Go Back";
     
     
-    view.drawString(350 + RenderConst::border, 400 + RenderConst::total_string_height - RenderConst::border, startGameStr);
-    view.drawString(350 + RenderConst::border, 400 + 2 * RenderConst::total_string_height - RenderConst::border, goBackStr);
+    view.drawString(350 + RenderUtil::border, 400 + RenderUtil::total_string_height - RenderUtil::border, startGameStr);
+    view.drawString(350 + RenderUtil::border, 400 + 2 * RenderUtil::total_string_height - RenderUtil::border, goBackStr);
 }
 
 void SettingsScreen::displaySettingsValue(Renderer &view) const {
@@ -165,14 +167,14 @@ void SettingsScreen::displaySettingsValue(Renderer &view) const {
             }
     }();
     
-    view.drawString(400 + RenderConst::border, 300 + RenderConst::total_string_height - RenderConst::border, std::to_string(settings.nCoins));
-    view.drawString(400 + RenderConst::border, 300 + 2 * RenderConst::total_string_height - RenderConst::border, gameLevelStr);
+    view.drawString(400 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, std::to_string(settings.nCoins));
+    view.drawString(400 + RenderUtil::border, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, gameLevelStr);
     switch (settings.mode) {
         case GameMode::Standard:
-            view.drawString(400 + RenderConst::border, 300 + 3 * RenderConst::total_string_height - RenderConst::border, "Human");
+            view.drawString(400 + RenderUtil::border, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Human");
             break;
         case GameMode::Computer:
-            view.drawString(400 + RenderConst::border, 300 + 3 * RenderConst::total_string_height - RenderConst::border, "Computer");
+            view.drawString(400 + RenderUtil::border, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Computer");
             break;
     }
 }
@@ -180,19 +182,19 @@ void SettingsScreen::displaySettingsValue(Renderer &view) const {
 void SettingsScreen::displayHighlight(Renderer &view) const {
     switch (highlight) {
         case Highlight::NumOfCoins:
-            view.drawRectangle(400, 300, 100, RenderConst::total_string_height);
+            view.drawRectangle(400, 300, 100, RenderUtil::total_string_height);
             break;
         case Highlight::Level:
-            view.drawRectangle(400, 300 + RenderConst::total_string_height, 100, RenderConst::total_string_height);
+            view.drawRectangle(400, 300 + RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
             break;
         case Highlight::Mode:
-            view.drawRectangle(400, 300 + 2 * RenderConst::total_string_height, 100, RenderConst::total_string_height);
+            view.drawRectangle(400, 300 + 2 * RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
             break;
         case Highlight::Start:
-            view.drawRectangle(350, 400, 100, RenderConst::total_string_height);
+            view.drawRectangle(350, 400, 100, RenderUtil::total_string_height);
             break;
         case Highlight::GoBack:
-            view.drawRectangle(350, 400 + RenderConst::total_string_height, 100, RenderConst::total_string_height);
+            view.drawRectangle(350, 400 + RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
             break;
     }
 }

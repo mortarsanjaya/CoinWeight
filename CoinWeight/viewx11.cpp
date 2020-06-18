@@ -12,6 +12,8 @@
 #include <cmath>
 #include <vector>
 
+#include "x11renderutil.hpp"
+
 using namespace CoinWeight::X11;
 
 //************************** Constructor and Destructor
@@ -103,11 +105,11 @@ void Renderer::fillArc(const int x_pos, const int y_pos, const int diameter, con
 }
 
 void Renderer::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderConst::circle_full_arc);
+    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
 }
 
 void Renderer::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderConst::circle_full_arc);
+    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
 }
 
 void Renderer::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {

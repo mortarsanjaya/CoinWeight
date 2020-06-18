@@ -9,7 +9,7 @@
 #include "gameplayhuman.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
-#include "renderconst.hpp"
+#include "x11renderutil.hpp"
 
 #include <cmath>
 
@@ -227,8 +227,8 @@ void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
     const std::string &weighStr = "Weigh";
     const std::string &guessStr = "Guess";
     
-    view.drawString(50 + RenderConst::border, 300 + RenderConst::total_string_height - RenderConst::border, weighStr);
-    view.drawString(50 + RenderConst::border, 300 + 2 * RenderConst::total_string_height - RenderConst::border, guessStr);
+    view.drawString(50 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, weighStr);
+    view.drawString(50 + RenderUtil::border, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, guessStr);
     
     view.flushDisplay();
 }
@@ -236,10 +236,10 @@ void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
 void GamePlayHuman::displayButtonHighlight(Renderer &view) const {
     switch (buttonHighlight) {
         case GamePlayHuman::ButtonHighlight::Weigh:
-            view.drawRectangle(50, 300, 40, RenderConst::total_string_height);
+            view.drawRectangle(50, 300, 40, RenderUtil::total_string_height);
             break;
         case GamePlayHuman::ButtonHighlight::Guess:
-            view.drawRectangle(50, 300 + RenderConst::total_string_height, 40, RenderConst::total_string_height);
+            view.drawRectangle(50, 300 + RenderUtil::total_string_height, 40, RenderUtil::total_string_height);
             break;
     }
     

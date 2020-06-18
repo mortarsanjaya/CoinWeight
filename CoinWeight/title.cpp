@@ -9,7 +9,7 @@
 #include "title.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
-#include "renderconst.hpp"
+#include "x11renderutil.hpp"
 
 #include <vector>
 #include <string>
@@ -93,13 +93,13 @@ void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(Color::Default);
     
-    view.drawString(button_x_pos + RenderConst::border, screen_name_y_pos, screenName);
+    view.drawString(button_x_pos + RenderUtil::border, screen_name_y_pos, screenName);
     for (size_t i = 0; i < buttons.size(); ++i) {
-        view.drawString(button_x_pos + RenderConst::border, button_y_pos_top +
-            (i + 1) * RenderConst::total_string_height - RenderConst::border, buttons[i]);
+        view.drawString(button_x_pos + RenderUtil::border, button_y_pos_top +
+            (i + 1) * RenderUtil::total_string_height - RenderUtil::border, buttons[i]);
     }
     
-    view.drawRectangle(button_x_pos, button_y_pos_top + highlight * RenderConst::total_string_height, RenderConst::total_string_width(buttons[highlight].size()), RenderConst::total_string_height);
+    view.drawRectangle(button_x_pos, button_y_pos_top + highlight * RenderUtil::total_string_height, RenderUtil::total_string_width(buttons[highlight].size()), RenderUtil::total_string_height);
     
     view.flushDisplay();
 }
