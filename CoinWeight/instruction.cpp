@@ -12,6 +12,7 @@
 #include "renderconst.hpp"
 
 #include <vector>
+#include <utility>
 
 using namespace CoinWeight::X11;
 
@@ -44,61 +45,53 @@ void InstructionScreen::onReturnButton(Model &model) {
 
 
 //************************** UI display
+static constexpr int x_pos_page_name = 300;
+static constexpr int x_pos_page_instr = 320;
+static constexpr int y_pos_initial = 100;
+static constexpr int y_pos_increment = 20;
 
-
-void InstructionScreen::triggerDisplay(Renderer &view) const {
-    view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
-
-    const int x_pos_page_name = 300;
-    int y_pos = 100;
-    const int x_pos_page_instr = 320;
-    const int y_pos_incr = 20;
-    
-    
-    std::vector<std::vector<std::string>> displayStrings;
-    
-    displayStrings.emplace_back(std::vector<std::string>{
-        "Main Page:",
+static const std::vector<std::pair<std::string, std::vector<std::string>>> displayStrings {
+    {"Main Page:",
+    {
         "Press Up/Down to select buttons.",
         "Press Enter/Return to switch page."
-    });
+    }},
     
-    displayStrings.emplace_back(std::vector<std::string>{
-        "Option Page:",
+    {"Option Page:",
+    {
         "Press Up/Down to select buttons."
         "Press Left/Right to change selected option.",
         "Press Enter/Return to start game."
-    });
+    }},
     
-    displayStrings.emplace_back(std::vector<std::string>{
-        "Game Play Page (Human play):",
+    {"Game Play Page (Human play):",
+    {
         "Press arrow keys to select buttons/select coins.",
         "Press '0' to move selected coin to the none (gold) set.",
         "Press '1' to move selected coin to the red (left) set.",
         "Press '2' to move selected coin to the blue (right) set.",
         "Press '3' to move selected coin to the green (guess) set."
-    });
+    }},
     
-    displayStrings.emplace_back(std::vector<std::string>{
-        "Game Play Page (Computer play):",
+    {"Game Play Page (Computer play):",
+    {
         "Press arrow keys to select buttons/scroll coins."
         "Press Enter/Return at \"Next move\" to trigger the computer's move."
-    });
+    }}
+};
+
+void InstructionScreen::triggerDisplay(Renderer &view) const {
+    view.clearWindow();
+    view.setForeground(RenderConst::defaultFGColor);
     
-    /*
-    displayStrings.emplace_back(std::vector<std::string>{
-        "Game History Page:",
-        "Press Enter/Return to go back to the game play page.",
-        "Press Left/Right to switch between previous moves."
-    });
-    */
+    int y_pos = y_pos_initial;
         
     for (auto pageStrList : displayStrings) {
-        for (int i = 0; i < pageStrList.size(); ++i) {
-            view.drawString(i == 0 ? x_pos_page_name : x_pos_page_instr, y_pos,
-                pageStrList[i]);
-            y_pos += y_pos_incr;
+        view.drawString(x_pos_page_name, y_pos, pageStrList.first);
+        y_pos += y_pos_increment;
+        for (int i = 0; i < pageStrList.second.size(); ++i) {
+            view.drawString(x_pos_page_instr, y_pos, pageStrList.second[i]);
+            y_pos += y_pos_increment;
         }
     }
     
