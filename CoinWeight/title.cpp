@@ -79,6 +79,16 @@ void TitleScreen::onReturnButton(Model &model) {
 
 
 //************************** UI display
+static constexpr int screen_name_x_pos = 300;
+static constexpr int screen_name_y_pos = 50;
+static const std::string screenName = "Coin Weight";
+    
+static constexpr int text_x_pos = 300;
+static constexpr int top_button_y_pos = 300;
+static const std::vector<std::string> buttons {
+    "Play", "Instruction", "Credit"
+};
+
 void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(RenderConst::defaultFGColor);
