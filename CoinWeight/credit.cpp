@@ -9,6 +9,7 @@
 #include "credit.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
+#include "renderconst.hpp"
 
 using namespace CoinWeight::X11;
 
@@ -43,13 +44,13 @@ void CreditScreen::onReturnButton(Model &model) {
 //************************** UI display
 void CreditScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(view.defaultFGColor);
+    view.setForeground(RenderConst::defaultFGColor);
     
     view.drawString(300, 300, "---");
     
     const std::string &returnStr = "Return";
-    view.drawString(300 + view.border, 500 + view.total_string_height - view.border, returnStr);
-    view.drawRectangle(300, 500, view.total_string_width(returnStr.size()), view.total_string_height);
+    view.drawString(300 + RenderConst::border, 500 + RenderConst::total_string_height - RenderConst::border, returnStr);
+    view.drawRectangle(300, 500, RenderConst::total_string_width(returnStr.size()), RenderConst::total_string_height);
     
     view.flushDisplay();
 }

@@ -9,6 +9,7 @@
 #include "title.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
+#include "renderconst.hpp"
 
 #include <vector>
 #include <string>
@@ -80,27 +81,27 @@ void TitleScreen::onReturnButton(Model &model) {
 //************************** UI display
 void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(view.defaultFGColor);
+    view.setForeground(RenderConst::defaultFGColor);
     
     const std::vector<std::string> buttons {
         "Play", "Instruction", "Credit"
     };
     
-    view.drawString(text_x_pos + view.border, screen_name_y_pos, screenName());
+    view.drawString(text_x_pos + RenderConst::border, screen_name_y_pos, screenName());
     for (size_t i = 0; i < buttons.size(); ++i) {
-        view.drawString(text_x_pos + view.border, top_button_y_pos +
-            (i + 1) * view.total_string_height - view.border, buttons[i]);
+        view.drawString(text_x_pos + RenderConst::border, top_button_y_pos +
+            (i + 1) * RenderConst::total_string_height - RenderConst::border, buttons[i]);
     }
     
     switch (highlight) {
         case TitleScreen::Highlight::Play:
-            view.drawRectangle(text_x_pos, top_button_y_pos, 34, view.total_string_height);
+            view.drawRectangle(text_x_pos, top_button_y_pos, 34, RenderConst::total_string_height);
             break;
         case TitleScreen::Highlight::Instruction:
-            view.drawRectangle(text_x_pos, top_button_y_pos + view.total_string_height, 76, view.total_string_height);
+            view.drawRectangle(text_x_pos, top_button_y_pos + RenderConst::total_string_height, 76, RenderConst::total_string_height);
             break;
         case TitleScreen::Highlight::Credit:
-            view.drawRectangle(text_x_pos, top_button_y_pos + 2 * view.total_string_height, 46, view.total_string_height);
+            view.drawRectangle(text_x_pos, top_button_y_pos + 2 * RenderConst::total_string_height, 46, RenderConst::total_string_height);
             break;
     }
     

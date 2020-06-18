@@ -9,6 +9,7 @@
 #include "instruction.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
+#include "renderconst.hpp"
 
 #include <vector>
 
@@ -45,7 +46,7 @@ void InstructionScreen::onReturnButton(Model &model) {
 //************************** UI display
 void InstructionScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(view.defaultFGColor);
+    view.setForeground(RenderConst::defaultFGColor);
 
     const int x_pos_page_name = 300;
     int y_pos = 100;
@@ -101,8 +102,8 @@ void InstructionScreen::triggerDisplay(Renderer &view) const {
     }
     
     const std::string &returnStr = "Return";
-    view.drawString(300 + view.border, 550 + view.total_string_height - view.border, returnStr);
-    view.drawRectangle(300, 550, view.total_string_width(returnStr.size()), view.total_string_height);
+    view.drawString(300 + RenderConst::border, 550 + RenderConst::total_string_height - RenderConst::border, returnStr);
+    view.drawRectangle(300, 550, RenderConst::total_string_width(returnStr.size()), RenderConst::total_string_height);
     
     view.flushDisplay();
 }

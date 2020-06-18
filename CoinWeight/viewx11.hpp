@@ -17,7 +17,7 @@
 #include <X11/Xutil.h>
 
 #include "input.hpp"
-
+#include "renderconst.hpp"
 #include "exception.hpp"
 
 namespace CoinWeight {
@@ -29,30 +29,6 @@ class Renderer final {
 public:
     Renderer();
     ~Renderer();
-    
-    
-    
-    //***************************************************************
-    
-    enum { Black, White, Red, Blue, Green, Gold, Max = Gold };
-    
-    // Displaying details for text
-    static constexpr int border = 5;
-    static constexpr int font_width = 6;
-    static constexpr int font_height = 10;
-    static constexpr int total_string_width(const size_t string_len) {
-        return font_width * string_len + 2 * border;
-    }
-    static constexpr int total_string_height = font_height + 2 * border;
-    
-    static constexpr int one_degree_to_unit = 64;
-    static constexpr int circle_full_arc = 360 * one_degree_to_unit;
-    
-    static constexpr int defaultFGColor = Black;
-    
-    //*********************************************
-    
-    
     
     // Input handling functions
     const Input nextInput();
@@ -91,7 +67,7 @@ private:
     GC gc;
     XEvent event;
     
-    std::array<unsigned long, Max + 1> colors;
+    std::array<unsigned long, RenderConst::Max + 1> colors;
 };
 
 
