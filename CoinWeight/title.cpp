@@ -9,12 +9,13 @@
 #include "title.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
-#include "renderconst.hpp"
+#include "renderutil.hpp"
 
 #include <vector>
 #include <string>
 
 using namespace CoinWeight::X11;
+using namespace RenderUtil;
 
 //************************** Constructor
 TitleScreen::TitleScreen() : highlight(defaultHighlight) {}
@@ -79,27 +80,30 @@ void TitleScreen::onReturnButton(Model &model) {
 
 
 //************************** UI display
-static constexpr int screen_name_x_pos = 300;
-static constexpr int screen_name_y_pos = 50;
-static const std::string screenName = "Coin Weight";
-    
-static constexpr int button_x_pos = 300;
-static constexpr int button_y_pos_top = 300;
-static const std::vector<std::string> buttons {
-    "Play", "Instruction", "Credit"
-};
-
 void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(RenderUtil::defaultFGColor);
     
-    view.drawString(button_x_pos + RenderConst::border, screen_name_y_pos, screenName);
-    for (size_t i = 0; i < buttons.size(); ++i) {
-        view.drawString(button_x_pos + RenderConst::border, button_y_pos_top +
-            (i + 1) * RenderConst::total_string_height - RenderConst::border, buttons[i]);
-    }
-    
-    view.drawRectangle(button_x_pos, button_y_pos_top + highlight * RenderConst::total_string_height, RenderConst::total_string_width(buttons[highlight].size()), RenderConst::total_string_height);
+    drawScreenName(view);
+    drawOptionButtons(view);
     
     view.flushDisplay();
+}
+
+void TitleScreen::drawScreenName(Renderer &renderer) const {
+    renderer.drawString(300, 50, "Coin Weight");
+}
+
+void TitleScreen::drawOptionButtons(Renderer &renderer) const {
+    constexpr int x_pos = 300;
+    constexpr int y_pos_top = 300;
+    const std::vector<std::string> buttons {
+        "Play", "Instruction", "Credit"
+    };
+
+    for (size_t i = 0; i < buttons.size(); ++i) {
+        renderer.drawString(x_pos, y_pos_top + i * total_string_height, buttons[i]);
+    }
+    
+    renderer.drawRectangle(x_pos - border, y_pos_top + (highlight - 1) * total_string_height + border, total_string_width(buttons[highlight].size()), total_string_height);
 }

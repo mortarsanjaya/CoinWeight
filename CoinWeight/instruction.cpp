@@ -9,7 +9,7 @@
 #include "instruction.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
-#include "renderconst.hpp"
+#include "renderutil.hpp"
 
 #include <vector>
 #include <utility>
@@ -82,7 +82,7 @@ static const std::vector<std::pair<std::string, std::vector<std::string>>> displ
 
 void InstructionScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(RenderUtil::defaultFGColor);
     
     int y_pos = y_pos_initial;
         
@@ -96,8 +96,8 @@ void InstructionScreen::triggerDisplay(Renderer &view) const {
     }
     
     const std::string &returnStr = "Return";
-    view.drawString(300 + RenderConst::border, 550 + RenderConst::total_string_height - RenderConst::border, returnStr);
-    view.drawRectangle(300, 550, RenderConst::total_string_width(returnStr.size()), RenderConst::total_string_height);
+    view.drawString(300 + RenderUtil::border, 550 + RenderUtil::total_string_height - RenderUtil::border, returnStr);
+    view.drawRectangle(300, 550, RenderUtil::total_string_width(returnStr.size()), RenderUtil::total_string_height);
     
     view.flushDisplay();
 }
