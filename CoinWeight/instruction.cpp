@@ -44,6 +44,8 @@ void InstructionScreen::onReturnButton(Model &model) {
 
 
 //************************** UI display
+
+
 void InstructionScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(RenderConst::defaultFGColor);
@@ -64,34 +66,33 @@ void InstructionScreen::triggerDisplay(Renderer &view) const {
     
     displayStrings.emplace_back(std::vector<std::string>{
         "Option Page:",
+        "Press Up/Down to select buttons."
         "Press Left/Right to change selected option.",
         "Press Enter/Return to start game."
     });
     
     displayStrings.emplace_back(std::vector<std::string>{
         "Game Play Page (Human play):",
-        "Press arrow keys to select coins.",
-        "Press '0' to deselect a coin.",
+        "Press arrow keys to select buttons/select coins.",
+        "Press '0' to move selected coin to the none (gold) set.",
         "Press '1' to move selected coin to the red (left) set.",
         "Press '2' to move selected coin to the blue (right) set.",
-        "Press '3' to move selected coin to the green (guess) set.",
-        "Press 'w' to weigh.",
-        "Press 'g' to guess.",
-        "Press 'h' to switch to history."
+        "Press '3' to move selected coin to the green (guess) set."
     });
     
     displayStrings.emplace_back(std::vector<std::string>{
         "Game Play Page (Computer play):",
-        "Press Enter/Return to trigger the computer's move.",
-        "Press 'h' to switch to history."
+        "Press arrow keys to select buttons/scroll coins."
+        "Press Enter/Return at \"Next move\" to trigger the computer's move."
     });
     
+    /*
     displayStrings.emplace_back(std::vector<std::string>{
         "Game History Page:",
         "Press Enter/Return to go back to the game play page.",
         "Press Left/Right to switch between previous moves."
     });
-    
+    */
         
     for (auto pageStrList : displayStrings) {
         for (int i = 0; i < pageStrList.size(); ++i) {
