@@ -9,6 +9,7 @@
 #include "credit.hpp"
 #include "model.hpp"
 #include "viewx11.hpp"
+#include "x11color.hpp"
 #include "renderconst.hpp"
 
 using namespace CoinWeight::X11;
@@ -44,7 +45,7 @@ void CreditScreen::onReturnButton(Model &model) {
 //************************** UI display
 void CreditScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     
     view.drawString(300, 300, "---");
     

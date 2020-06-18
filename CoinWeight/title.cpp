@@ -91,7 +91,7 @@ static const std::vector<std::string> buttons {
 
 void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     
     view.drawString(button_x_pos + RenderConst::border, screen_name_y_pos, screenName);
     for (size_t i = 0; i < buttons.size(); ++i) {

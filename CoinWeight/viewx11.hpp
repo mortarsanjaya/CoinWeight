@@ -17,6 +17,7 @@
 #include <X11/Xutil.h>
 
 #include "input.hpp"
+#include "x11color.hpp"
 #include "renderconst.hpp"
 #include "exception.hpp"
 
@@ -67,7 +68,7 @@ private:
     GC gc;
     XEvent event;
     
-    std::array<unsigned long, RenderConst::Max + 1> colors;
+    std::array<unsigned long, Color::Max + 1> colors;
 };
 
 

@@ -45,7 +45,7 @@ void GameOver::onReturnButton(Model &model) {
 //************************** UI display
 void GameOver::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     
     if (playerWin) {
         view.drawString(300, 200, "You Win!");

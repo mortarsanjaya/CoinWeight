@@ -82,7 +82,7 @@ static const std::vector<std::pair<std::string, std::vector<std::string>>> displ
 
 void InstructionScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     
     int y_pos = y_pos_initial;
         

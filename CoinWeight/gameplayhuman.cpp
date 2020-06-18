@@ -222,7 +222,7 @@ void GamePlayHuman::triggerDisplay(Renderer &view) const {
 
 void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
 
     const std::string &weighStr = "Weigh";
     const std::string &guessStr = "Guess";
@@ -272,7 +272,7 @@ void GamePlayHuman::displayWeighResult(Renderer &view) const {
 }
 
 void GamePlayHuman::displayWeighCounter(Renderer &view) const {
-    view.setForeground(RenderConst::Black);
+    view.setForeground(Color::Black);
     std::string numOfWeighsStr = "Number of comparisons done: ";
     numOfWeighsStr += std::to_string(counter.numOfWeighsDone());
     numOfWeighsStr += " out of ";
@@ -298,22 +298,22 @@ void GamePlayHuman::drawCoin(Renderer &view, const CoinGroup group, const size_t
     const int y_pos = coin0YPos + coinOffset + coinDist * row;
     view.setForeground(coinColor(group));
     view.fillFullCircle(x_pos, y_pos, coinDiameter);
-    view.setForeground(RenderConst::Black);
+    view.setForeground(Color::Black);
     view.drawFullCircle(x_pos, y_pos, coinDiameter);
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     view.drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
 
 const int GamePlayHuman::coinColor(const CoinGroup group) {
     switch (group) {
         case CoinGroup::NoSelect:
-            return RenderConst::Gold;
+            return Color::Gold;
         case CoinGroup::LeftWeigh:
-            return RenderConst::Red;
+            return Color::Red;
         case CoinGroup::RightWeigh:
-            return RenderConst::Blue;
+            return Color::Blue;
         case CoinGroup::Guess:
-            return RenderConst::Green;
+            return Color::Green;
     }
 }
 
@@ -323,7 +323,7 @@ const int GamePlayHuman::coinColor(const CoinGroup group) {
 void GamePlayHuman::drawWeighResultText(Renderer &view) const {
     const int x_pos = 30;
     const int y_pos = 90;
-    view.setForeground(RenderConst::Black);
+    view.setForeground(Color::Black);
     switch (lastResult) {
         case WeighResult::Start:
             view.drawString(x_pos, y_pos, "");
@@ -338,12 +338,12 @@ void GamePlayHuman::drawWeighResultText(Renderer &view) const {
             view.drawString(x_pos, y_pos, "The right group is heavier.");
             break;
         case WeighResult::Invalid:
-            view.setForeground(RenderConst::Red);
+            view.setForeground(Color::Red);
             view.drawString(x_pos, y_pos, "Invalid move!");
             break;
     }
     
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
 }
 
 void GamePlayHuman::drawWeighingScale(Renderer &view) const {
@@ -364,13 +364,13 @@ void GamePlayHuman::drawWeighingScale(Renderer &view) const {
             {705, 60}
         };
         
-        view.setForeground(RenderConst::Blue);
+        view.setForeground(Color::Blue);
         view.fillPolygon(xpoints, Nonconvex, CoordModeOrigin);
     }
     
     {
         const int radius = 20;
-        view.setForeground(RenderConst::Green);
+        view.setForeground(Color::Green);
         view.fillFullCircle(700 - radius, 61 - 2 * radius, radius * 2);
     }
     
@@ -418,25 +418,25 @@ void GamePlayHuman::drawWeighingScale(Renderer &view) const {
             };
         }();
         
-        view.setForeground(RenderConst::Black);
+        view.setForeground(Color::Black);
         view.drawLine(left_anchor.x, left_anchor.y, right_anchor.x, right_anchor.y);
         view.drawLine(left_anchor.x, left_anchor.y, weighpoints[0].x, weighpoints[0].y);
         view.drawLine(left_anchor.x, left_anchor.y, weighpoints[1].x, weighpoints[1].y);
         view.drawLine(right_anchor.x, right_anchor.y, weighpoints[2].x, weighpoints[2].y);
         view.drawLine(right_anchor.x, right_anchor.y, weighpoints[3].x, weighpoints[3].y);
         
-        view.setForeground(RenderConst::Red);
+        view.setForeground(Color::Red);
         view.fillArc(left_center.x - radius, left_center.y - radius, 2 * radius, angle1, angle2);
-        view.setForeground(RenderConst::Blue);
+        view.setForeground(Color::Blue);
         view.fillArc(right_center.x - radius, right_center.y - radius, 2 * radius, angle1, angle2);
         
-        view.setForeground(RenderConst::White);
+        view.setForeground(Color::White);
         std::vector<XPoint> leftTrianglePoints{left_center, weighpoints[0], weighpoints[1]};
         view.fillPolygon(leftTrianglePoints, Convex, CoordModeOrigin);
         std::vector<XPoint> rightTrianglePoints{right_center, weighpoints[2], weighpoints[3]};
         view.fillPolygon(rightTrianglePoints, Convex, CoordModeOrigin);
         
-        view.setForeground(RenderConst::Black);
+        view.setForeground(Color::Black);
         view.drawArc(left_center.x - radius, left_center.y - radius, 2 * radius, angle1, angle2);
         view.drawArc(right_center.x - radius, right_center.y - radius, 2 * radius, angle1, angle2);
     }

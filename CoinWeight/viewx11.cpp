@@ -43,7 +43,7 @@ Renderer::Renderer() {
     
     cmap = DefaultColormap(display, screen);
     
-    for (unsigned int i = 0; i <= RenderConst::Max; ++i) {
+    for (unsigned int i = 0; i <= Color::Max; ++i) {
         if (XParseColor(display, cmap, colorVals[i].c_str(), &xcolor) == 0) {
             throw Exception<Renderer>("Cannot parse color");
         }
@@ -51,7 +51,7 @@ Renderer::Renderer() {
         colors[i] = xcolor.pixel;
     }
 
-    XSetForeground(display, gc, colors[RenderConst::defaultFGColor]);
+    XSetForeground(display, gc, colors[Color::Default]);
 
     XSizeHints hints;
     hints.flags = (USPosition | PSize | PMinSize | PMaxSize);

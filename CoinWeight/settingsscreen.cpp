@@ -130,7 +130,7 @@ void SettingsScreen::onReturnButton(Model &model) {
 //************************** UI display
 void SettingsScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
-    view.setForeground(RenderConst::defaultFGColor);
+    view.setForeground(Color::Default);
     
     displayLayout(view);
     displaySettingsValue(view);
