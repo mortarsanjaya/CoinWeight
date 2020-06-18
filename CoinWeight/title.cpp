@@ -83,8 +83,8 @@ static constexpr int screen_name_x_pos = 300;
 static constexpr int screen_name_y_pos = 50;
 static const std::string screenName = "Coin Weight";
     
-static constexpr int text_x_pos = 300;
-static constexpr int top_button_y_pos = 300;
+static constexpr int button_x_pos = 300;
+static constexpr int button_y_pos_top = 300;
 static const std::vector<std::string> buttons {
     "Play", "Instruction", "Credit"
 };
@@ -93,13 +93,13 @@ void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(RenderConst::defaultFGColor);
     
-    view.drawString(text_x_pos + RenderConst::border, screen_name_y_pos, screenName);
+    view.drawString(button_x_pos + RenderConst::border, screen_name_y_pos, screenName);
     for (size_t i = 0; i < buttons.size(); ++i) {
-        view.drawString(text_x_pos + RenderConst::border, top_button_y_pos +
+        view.drawString(button_x_pos + RenderConst::border, button_y_pos_top +
             (i + 1) * RenderConst::total_string_height - RenderConst::border, buttons[i]);
     }
     
-    view.drawRectangle(text_x_pos, top_button_y_pos + highlight * RenderConst::total_string_height, RenderConst::total_string_width(buttons[highlight].size()), RenderConst::total_string_height);
+    view.drawRectangle(button_x_pos, button_y_pos_top + highlight * RenderConst::total_string_height, RenderConst::total_string_width(buttons[highlight].size()), RenderConst::total_string_height);
     
     view.flushDisplay();
 }
