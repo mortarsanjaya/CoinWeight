@@ -11,6 +11,7 @@
 
 #include "gamescreen.hpp"
 #include <string>
+#include <vector>
 
 namespace CoinWeight {
 namespace X11 {
@@ -30,7 +31,7 @@ public:
     void triggerDisplay(Renderer &view) const override;
     
 private:
-    enum class Highlight {
+    enum Highlight {
         Play,
         Instruction,
         Credit
@@ -40,16 +41,17 @@ private:
     
     static constexpr Highlight defaultHighlight = Highlight::Play;
     
+    static constexpr int screen_name_x_pos = 300;
+    static constexpr int screen_name_y_pos = 50;
     inline static const std::string screenName() {
         return "Coin Weight";
     }
     
-    static constexpr int screen_name_x_pos = 300;
-    static constexpr int screen_name_y_pos = 50;
-    
-    
     static constexpr int text_x_pos = 300;
     static constexpr int top_button_y_pos = 300;
+    inline static const std::vector<std::string> buttons() {
+        return {"Play", "Instruction", "Credit"};
+    };
 };
 
 
