@@ -55,6 +55,10 @@ private:
     void decreaseLevel();
     void nextMode();
     void prevMode();
+    
+    void displayLayout(Renderer &view) const;
+    void displaySettingsValue(Renderer &view) const;
+    void displayHighlight(Renderer &view) const;
 };
 
 
