@@ -10,8 +10,6 @@
 #define title_hpp
 
 #include "gamescreen.hpp"
-#include <string>
-#include <vector>
 
 namespace CoinWeight {
 namespace X11 {
