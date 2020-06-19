@@ -18,19 +18,27 @@ namespace RenderUtil {
     constexpr int border = 5;
     constexpr int font_width = 6;
     constexpr int font_height = 10;
-    constexpr int total_string_width(const int string_len) {
+    constexpr int total_string_width(const size_t string_len) {
         return font_width * string_len + 2 * border;
     }
     
     constexpr int total_string_height = font_height + 2 * border;
     constexpr int one_degree_to_unit = 64;
     constexpr int circle_full_arc = 360 * one_degree_to_unit;
+    
+    inline void drawBoxOverString(Renderer &renderer, const int x_pos,
+    const int y_pos, const std::string &str) {
+        renderer.drawRectangle(x_pos - border, y_pos - total_string_height + border,
+            total_string_width(str.size()), total_string_height);
+    }
 
-    inline void drawFullCircle(Renderer &renderer, const int x_pos, const int y_pos, const unsigned int diameter) {
+    inline void drawFullCircle(Renderer &renderer, const int x_pos,
+    const int y_pos, const unsigned int diameter) {
         renderer.drawArc(x_pos, y_pos, diameter, 0, circle_full_arc);
     }
     
-    inline void fillFullCircle(Renderer &renderer, const int x_pos, const int y_pos, const unsigned int diameter) {
+    inline void fillFullCircle(Renderer &renderer, const int x_pos,
+    const int y_pos, const unsigned int diameter) {
         renderer.fillArc(x_pos, y_pos, diameter, 0, circle_full_arc);
     }
 }
