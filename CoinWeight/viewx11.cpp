@@ -104,13 +104,6 @@ void Renderer::fillArc(const int x_pos, const int y_pos, const int diameter, con
     XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, angle_init, angle_size);
 }
 
-void Renderer::drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XDrawArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
-}
-
-void Renderer::fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter) {
-    XFillArc(display, window, gc, x_pos, y_pos, diameter, diameter, 0, RenderUtil::circle_full_arc);
-}
 
 void Renderer::drawRectangle(const int x_pos, const int y_pos, const int width, const int height) {
     XDrawLine(display, window, gc, x_pos, y_pos, x_pos + width, y_pos);

@@ -297,9 +297,9 @@ void GamePlayHuman::drawCoin(Renderer &view, const CoinGroup group, const size_t
     const int x_pos = coin0XPos + coinOffset + coinDist * column;
     const int y_pos = coin0YPos + coinOffset + coinDist * row;
     view.setForeground(coinColor(group));
-    view.fillFullCircle(x_pos, y_pos, coinDiameter);
+    RenderUtil::fillFullCircle(view, x_pos, y_pos, coinDiameter);
     view.setForeground(Color::Black);
-    view.drawFullCircle(x_pos, y_pos, coinDiameter);
+    RenderUtil::drawFullCircle(view, x_pos, y_pos, coinDiameter);
     view.setForeground(Color::Default);
     view.drawString(x_pos, y_pos, std::to_string(coinIndex + 1));
 }
@@ -371,7 +371,7 @@ void GamePlayHuman::drawWeighingScale(Renderer &view) const {
     {
         const int radius = 20;
         view.setForeground(Color::Green);
-        view.fillFullCircle(700 - radius, 61 - 2 * radius, radius * 2);
+        RenderUtil::fillFullCircle(view, 700 - radius, 61 - 2 * radius, radius * 2);
     }
     
     {

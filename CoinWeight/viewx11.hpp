@@ -44,10 +44,6 @@ public:
     void drawArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size);
     void fillArc(const int x_pos, const int y_pos, const int diameter, const int angle_init, const int angle_size);
     
-    
-    void drawFullCircle(const int x_pos, const int y_pos, const unsigned int diameter);
-    void fillFullCircle(const int x_pos, const int y_pos, const unsigned int diameter);
-    
     // x_pos and y_pos for rectangle is in its upper-left corner position
     // Draws with the current foreground color
     void drawRectangle(const int x_pos, const int y_pos, const int width, const int height);
