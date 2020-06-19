@@ -23,8 +23,8 @@ namespace RenderUtil {
     }
     
     constexpr int total_string_height = font_height + 2 * border;
-    constexpr int one_degree_to_unit = 64;
-    constexpr int circle_full_arc = 360 * one_degree_to_unit;
+    constexpr int x11_degree_unit = 64;
+    constexpr int circle_full_arc = 360 * x11_degree_unit;
     
     inline void drawBoxOverString(Renderer &renderer, const int x_pos,
     const int y_pos, const std::string &str) {
