@@ -50,8 +50,8 @@ void CreditScreen::triggerDisplay(Renderer &view) const {
     view.drawString(300, 300, "---");
     
     const std::string &returnStr = "Return";
-    view.drawString(300 + RenderUtil::border, 500 + RenderUtil::total_string_height - RenderUtil::border, returnStr);
-    view.drawRectangle(300, 500, RenderUtil::total_string_width(returnStr.size()), RenderUtil::total_string_height);
+    view.drawString(300, 500 + RenderUtil::total_string_height, returnStr);
+    RenderUtil::drawBoxOverString(view, 300, 500 + RenderUtil::total_string_height, returnStr);
     
     view.flushDisplay();
 }

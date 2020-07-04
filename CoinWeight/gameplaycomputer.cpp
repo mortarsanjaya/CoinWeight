@@ -193,7 +193,7 @@ void GamePlayComputer::displayLayoutGamePlayComputer(Renderer &view) const {
 
     const std::string &nextMoveStr = "Next Move";
     
-    view.drawString(50 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, nextMoveStr);
+    view.drawString(50, 300, nextMoveStr);
     
     view.flushDisplay();
 }
@@ -201,7 +201,7 @@ void GamePlayComputer::displayLayoutGamePlayComputer(Renderer &view) const {
 void GamePlayComputer::displayButtonHighlight(Renderer &view) const {
     switch (buttonHighlight) {
         case GamePlayComputer::ButtonHighlight::NextMove:
-            view.drawRectangle(50, 300, 64, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 50, 300, "Next Move");
             break;
     }
     

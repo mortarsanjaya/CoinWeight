@@ -45,8 +45,8 @@ void InstructionScreen::onReturnButton(Model &model) {
 
 
 //************************** UI display
-static constexpr int x_pos_page_name = 300;
-static constexpr int x_pos_page_instr = 320;
+static constexpr int x_pos_page_name = 200;
+static constexpr int x_pos_page_instr = 220;
 static constexpr int y_pos_initial = 100;
 static constexpr int y_pos_increment = 20;
 
@@ -75,7 +75,7 @@ static const std::vector<std::pair<std::string, std::vector<std::string>>> displ
     
     {"Game Play Page (Computer play):",
     {
-        "Press arrow keys to select buttons/scroll coins."
+        "Press arrow keys to select buttons/scroll coins.",
         "Press Enter/Return at \"Next move\" to trigger the computer's move."
     }}
 };
@@ -96,8 +96,8 @@ void InstructionScreen::triggerDisplay(Renderer &view) const {
     }
     
     const std::string &returnStr = "Return";
-    view.drawString(300 + RenderUtil::border, 550 + RenderUtil::total_string_height - RenderUtil::border, returnStr);
-    view.drawRectangle(300, 550, RenderUtil::total_string_width(returnStr.size()), RenderUtil::total_string_height);
+    view.drawString(300, 550, returnStr);
+    RenderUtil::drawBoxOverString(view, 300, 550, returnStr);
     
     view.flushDisplay();
 }

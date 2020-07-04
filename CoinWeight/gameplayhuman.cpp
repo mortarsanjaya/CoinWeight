@@ -227,8 +227,8 @@ void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
     const std::string &weighStr = "Weigh";
     const std::string &guessStr = "Guess";
     
-    view.drawString(50 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, weighStr);
-    view.drawString(50 + RenderUtil::border, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, guessStr);
+    view.drawString(50, 300, weighStr);
+    view.drawString(50, 300 + RenderUtil::total_string_height, guessStr);
     
     view.flushDisplay();
 }
@@ -236,10 +236,10 @@ void GamePlayHuman::displayLayoutGamePlayHuman(Renderer &view) const {
 void GamePlayHuman::displayButtonHighlight(Renderer &view) const {
     switch (buttonHighlight) {
         case GamePlayHuman::ButtonHighlight::Weigh:
-            view.drawRectangle(50, 300, 40, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 50, 300, "Weigh");
             break;
         case GamePlayHuman::ButtonHighlight::Guess:
-            view.drawRectangle(50, 300 + RenderUtil::total_string_height, 40, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 50, 300 + RenderUtil::total_string_height, "Guess");
             break;
     }
     

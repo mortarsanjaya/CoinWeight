@@ -13,6 +13,7 @@
 #include "x11renderutil.hpp"
 
 #include <string>
+#include <vector>
 
 using namespace CoinWeight;
 using namespace CoinWeight::X11;
@@ -133,29 +134,25 @@ void SettingsScreen::onReturnButton(Model &model) {
 void SettingsScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(Color::Default);
-    
-    displayLayout(view);
-    displaySettingsValue(view);
-    displayHighlight(view);
-    
-    view.flushDisplay();
-}
 
-void SettingsScreen::displayLayout(Renderer &view) const {
     view.drawString(300, 50, "Coin Weight");
-    view.drawString(300, 300 + RenderUtil::total_string_height - RenderUtil::border, "Number of Coins:");
-    view.drawString(300, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, "Level:");
-    view.drawString(300, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Mode:");
     
-    const std::string &startGameStr = "Start Game";
-    const std::string &goBackStr = "Go Back";
+    const std::vector<std::string> options {
+        "Number of Coins:", "Level:", "Mode:"
+    };
     
+    for (size_t i = 0; i < options.size(); ++i) {
+        view.drawString(300, 300 + i * RenderUtil::total_string_height, options[i]);
+    }
     
-    view.drawString(350 + RenderUtil::border, 400 + RenderUtil::total_string_height - RenderUtil::border, startGameStr);
-    view.drawString(350 + RenderUtil::border, 400 + 2 * RenderUtil::total_string_height - RenderUtil::border, goBackStr);
-}
+    const std::vector<std::string> screenSwitches {
+        "Start Game", "Go Back"
+    };
+    
+    for (size_t i = 0; i < screenSwitches.size(); ++i) {
+        view.drawString(350, 400 + i * RenderUtil::total_string_height, screenSwitches[i]);
+    }
 
-void SettingsScreen::displaySettingsValue(Renderer &view) const {
     const std::string gameLevelStr = []() -> std::string {
         switch (settings.level) {
             case GameLevel::Easy:
@@ -164,37 +161,39 @@ void SettingsScreen::displaySettingsValue(Renderer &view) const {
                 return "Medium";
             case GameLevel::Hard:
                 return "Hard";
-            }
+        }
     }();
     
-    view.drawString(400 + RenderUtil::border, 300 + RenderUtil::total_string_height - RenderUtil::border, std::to_string(settings.nCoins));
-    view.drawString(400 + RenderUtil::border, 300 + 2 * RenderUtil::total_string_height - RenderUtil::border, gameLevelStr);
-    switch (settings.mode) {
-        case GameMode::Standard:
-            view.drawString(400 + RenderUtil::border, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Human");
-            break;
-        case GameMode::Computer:
-            view.drawString(400 + RenderUtil::border, 300 + 3 * RenderUtil::total_string_height - RenderUtil::border, "Computer");
-            break;
-    }
-}
-
-void SettingsScreen::displayHighlight(Renderer &view) const {
+    const std::string gameModeStr = []() -> std::string {
+        switch (settings.mode) {
+            case GameMode::Standard:
+                return "Human";
+                break;
+            case GameMode::Computer:
+                return "Computer";
+                break;
+        }
+    }();
+    
+    view.drawString(400, 300, std::to_string(settings.nCoins));
+    view.drawString(400, 300 + RenderUtil::total_string_height, gameLevelStr);
+    view.drawString(400, 300 + 2 * RenderUtil::total_string_height, gameModeStr);
+    
     switch (highlight) {
         case Highlight::NumOfCoins:
-            view.drawRectangle(400, 300, 100, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 400, 300, std::to_string(settings.nCoins));
             break;
         case Highlight::Level:
-            view.drawRectangle(400, 300 + RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 400, 300 + RenderUtil::total_string_height, gameLevelStr);
             break;
         case Highlight::Mode:
-            view.drawRectangle(400, 300 + 2 * RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 400, 300 + 2 * RenderUtil::total_string_height, gameModeStr);
             break;
         case Highlight::Start:
-            view.drawRectangle(350, 400, 100, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 350, 400, screenSwitches[0]);
             break;
         case Highlight::GoBack:
-            view.drawRectangle(350, 400 + RenderUtil::total_string_height, 100, RenderUtil::total_string_height);
+            RenderUtil::drawBoxOverString(view, 350, 400 + RenderUtil::total_string_height, screenSwitches[1]);
             break;
     }
 }

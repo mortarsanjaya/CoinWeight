@@ -93,13 +93,12 @@ void TitleScreen::triggerDisplay(Renderer &view) const {
     view.clearWindow();
     view.setForeground(Color::Default);
     
-    view.drawString(button_x_pos + RenderUtil::border, screen_name_y_pos, screenName);
+    view.drawString(button_x_pos, screen_name_y_pos, screenName);
     for (size_t i = 0; i < buttons.size(); ++i) {
-        view.drawString(button_x_pos + RenderUtil::border, button_y_pos_top +
-            (i + 1) * RenderUtil::total_string_height - RenderUtil::border, buttons[i]);
+        view.drawString(button_x_pos, button_y_pos_top + i * RenderUtil::total_string_height, buttons[i]);
     }
     
-    view.drawRectangle(button_x_pos, button_y_pos_top + highlight * RenderUtil::total_string_height, RenderUtil::total_string_width(buttons[highlight].size()), RenderUtil::total_string_height);
+    RenderUtil::drawBoxOverString(view, button_x_pos, button_y_pos_top + highlight * RenderUtil::total_string_height, buttons[highlight]);
     
     view.flushDisplay();
 }
